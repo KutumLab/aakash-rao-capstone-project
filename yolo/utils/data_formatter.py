@@ -49,7 +49,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
 
                 with open(os.path.join(im_save_dir, image_name.split('.png')[0] + '.txt'), 'a') as f:
                     f.write(yolo_format + '\n')
-                shutil.copy(image_path, im_save_dir)
+                shutil.copy(image_path, mask_save_dir)
                 
 
 
