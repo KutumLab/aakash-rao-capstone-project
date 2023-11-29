@@ -56,7 +56,6 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
                 os.makedirs(im_save_dir)
             if not os.path.exists(mask_save_dir):
                 os.makedirs(mask_save_dir)
-            images = os.listdir(image_dir)
             try:
                 images.remove('.DS_Store')
             except:
@@ -66,18 +65,29 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
             print(len(train_images), len(test_images))
 
             for image in tqdm (train_images, desc="Creating Train...", ascii=False, ncols=75):
+                im_save_path = os.path.join(im_save_dir,'train')
+                mask_save_path = os.path.join(mask_save_dir,'train')
+                if not os.path.exists(im_save_path):
+                    os.makedirs(im_save_path)
+                if not os.path.exists(mask_save_path):
+                    os.makedirs(mask_save_path)
                 time.sleep(0.01)
                 image_path = os.path.join(image_dir, image)
                 mask_path = os.path.join(mask_dir, image.split('.png')[0] + '.txt')
-                shutil.copy(image_path, os.path.join(im_save_dir,'train', image))
-                shutil.copy(mask_path, os.path.join(mask_save_dir,'train', image.split('.png')[0] + '.txt'))
+                shutil.copy(image_path, im_save_path)
+                shutil.copy(mask_path, mask_save_path)
             for image in tqdm (test_images, desc="Creating Test...", ascii=False, ncols=75):
+                im_save_path = os.path.join(im_save_dir,'test')
+                mask_save_path = os.path.join(mask_save_dir,'test')
+                if not os.path.exists(im_save_path):
+                    os.makedirs(im_save_path)
+                if not os.path.exists(mask_save_path):
+                    os.makedirs(mask_save_path)
                 time.sleep(0.01)
                 image_path = os.path.join(image_dir, image)
                 mask_path = os.path.join(mask_dir, image.split('.png')[0] + '.txt')
-                shutil.copy(image_path, os.path.join(im_save_dir,'test', image))
-                shutil.copy(mask_path, os.path.join(mask_save_dir,'test', image.split('.png')[0] + '.txt'))
-            
+                shutil.copy(image_path, im_save_path)
+                shutil.copy(mask_path, mask_save_path)
 
 
 
