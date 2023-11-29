@@ -95,6 +95,8 @@ def image_info(image_dir, mask_dir, save_dir, phase):
     else:
         master_list = []
         save_dir = os.path.join(save_dir, "master")
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
         class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
         num_classes_per_image = np.zeros(len(class_array))
         for i in tqdm (range(len(os.listdir(image_dir))), desc="Creating Master...", ascii=False, ncols=75):
