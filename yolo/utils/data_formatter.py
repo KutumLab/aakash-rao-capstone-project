@@ -4,11 +4,47 @@ import pandas as pd
 import cv2
 import argparse
 import shutil
+import random
 
 
 image_dir = ''
 mask_dir = ''
 phase = 'testing'
+
+def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
+    if folds <=0:
+        raise ValueError("folds must be greater than 0")
+    elif not os.path.exists(image_dir):
+        raise ValueError("image_dir not exist")
+    elif len(os.listdir(image_dir)) == 0:
+        raise ValueError("image_dir is empty")
+    else:
+        images = os.listdir(image_dir)
+        masks = os.listdir(mask_dir)
+        len_of_each_fold = len(images) // folds
+
+        random.seed(seed)
+        random.shuffle(images)
+
+        for i in range(folds):  
+            fold_dir = os.path.join(save_dir, f"fold_{i+1}")
+            im_save_dir = os.path.join(fold_dir, 'images')
+            mask_save_dir = os.path.join(fold_dir, 'masks')
+            if not os.path.exists(im_save_dir):
+                os.makedirs(im_save_dir)
+            if not os.path.exists(mask_save_dir):
+                os.makedirs(mask_save_dir)
+            for image_name in images[i*len_of_each_fold:(i+1)*len_of_each_fold]:
+                image_path = os.path.join(image_dir, image_name)
+                try:
+                    mask_path = os.path.join(mask_dir, image_name.split('.png')[0] + '.txt')
+                except:
+                    print(f"{image_name.split('.png')[0] + '.txt'} not exist")
+                    continue
+                shutil.copy(image_path, im_save_dir)
+                shutil.copy(mask_path, mask_save_dir)
+
+
 
 def image_info(image_dir, mask_dir, save_dir, phase):
     if not os.path.exists(image_dir):
@@ -68,9 +104,12 @@ if __name__ == '__main__':
     argparser.add_argument('-i', '--image_dir', required=True, help='image directory')
     argparser.add_argument('-m', '--mask_dir', required=True, help='mask directory')
     argparser.add_argument('-s', '--save_dir', required=True, help='save directory')
+    argparser.add_argument('-f', '--folds', required=True, help='number of folds')
     argparser.add_argument('-p', '--phase', required=True, help='phase')
+    argparser.add_argument('--seed', required=False, help='Seed for reproducibility')
 
     args = argparser.parse_args()
 
-    result = image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
-    print(result)
+    # result = image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'masks'), args.save_dir, args.folds)
+    # print(result)
