@@ -12,6 +12,8 @@ import time
 from comet_ml import Experiment
 from comet_ml.integration.pytorch import log_model
 
+from utils.MyTrainer import MyTrainer
+
 import sys
 
 
@@ -27,7 +29,6 @@ from detectron2.engine import DefaultTrainer
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset, DatasetEvaluators
 from detectron2.data import build_detection_test_loader
-
 fold = 1
 
 # data_path = f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/capstone_project/object-detection/benchmarking/datasets/NuCLS/folds/fold_1/'
@@ -36,6 +37,7 @@ fold = 1
 # name  = 'exp_1_iters_1'
 # project = 'capstone-project' 
 # version = '1'
+
 
 
 def set_config(config_info, fold, max_iters, data_path, name,save_path):
@@ -125,9 +127,11 @@ def train_detectron2(cfg,fold,data_path):
         # break
         i+=1
 
-    trainer = DefaultTrainer(cfg) 
+    trainer = MyTrainer(cfg) 
     trainer.resume_or_load(resume=False)
     history = trainer.train()
+    evaluator = DefaultTrainer.build_evaluator(trainer)
+
     print(history)
 
     cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
