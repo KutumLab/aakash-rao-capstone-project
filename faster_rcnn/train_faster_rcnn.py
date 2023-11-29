@@ -70,19 +70,19 @@ def train_detectron2(cfg,fold,data_path):
     def data_train():
         data = np.load(os.path.join(data_path, f'fold_{fold}', 'train.npy'), allow_pickle=True)
         data = list(data)
-        print(len(data))
+        print(f'Number of training images: {len(data)}')
         return data
 
     def data_val():
         data = np.load(os.path.join(data_path, f'fold_{fold}', f'test.npy'), allow_pickle=True)
         data = list(data)
-        print(len(data))
+        print(f'Number of validation images: {len(data)}')
         return data
 
     def data_test():
         data = np.load(os.path.join(data_path,f'test.npy'), allow_pickle=True)
         data = list(data)
-        print(len(data))
+        print(f'Number of test images: {len(data)}')
         return data
 
     DatasetCatalog.register(f'fold_{fold}_train', data_train)
