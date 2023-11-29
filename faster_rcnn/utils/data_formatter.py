@@ -139,6 +139,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             loc_img['height'] = im_height
             loc_img['width'] = im_width
             loc_img['image_id'] = image_name.split('.png')[0]
+            loc_img['annotations'] = []
             for index, row in mask.iterrows():
                 loc_ann = master_ann.copy()
                 x_min = row['xmin']
