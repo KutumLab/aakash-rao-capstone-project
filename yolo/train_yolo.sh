@@ -27,7 +27,7 @@ echo $BATCH_SIZE
 echo $DEVICE
 echo $SAVE_PERIOD
 
-# python ./yolov5/train.py --img $IMG_SIZE --epochs $EPOCHS --data $YAML_FOLD_1 --weights yolov5m.pt --device $DEVICE --batch-size $BATCH_SIZE --project $COMET_PROJECT_NAME --save-period $SAVE_PERIOD --name yolov5m-fold_1
+python ./yolov5/train.py --img $IMG_SIZE --epochs $EPOCHS --data $YAML_FOLD_1 --weights yolov5m.pt --device $DEVICE --batch-size $BATCH_SIZE --project $COMET_PROJECT_NAME --save-period $SAVE_PERIOD --name yolov5m-fold_1
 # python ./yolov5/train.py --img $IMG_SIZE --epochs $EPOCHS --data $YAML_FOLD_2 --weights yolov5m.pt --device $DEVICE --batch-size $BATCH_SIZE --project $COMET_PROJECT_NAME --save-period $SAVE_PERIOD --name yolov5m-fold_2
 # python ./yolov5/train.py --img $IMG_SIZE --epochs $EPOCHS --data $YAML_FOLD_3 --weights yolov5m.pt --device $DEVICE --batch-size $BATCH_SIZE --project $COMET_PROJECT_NAME --save-period $SAVE_PERIOD --name yolov5m-fold_3
 
