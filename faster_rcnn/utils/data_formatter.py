@@ -73,7 +73,9 @@ def make_folds(npy_path, save_dir, folds,seed=42):
             if not os.path.exists(fold_dir):
                 os.makedirs(fold_dir)
             fold_test = train[int(i*number_per_fold):int((i+1)*number_per_fold)]
-            # fold_train = train[:int(i*number_per_fold)] + train[int((i+1)*number_per_fold):]
+            fold_train = np.concatenate((train[:int(i*number_per_fold)], train[int((i+1)*number_per_fold):]), axis=0)
+            print(f"Number of images in fold {i+1} test set: {len(fold_test)}")
+            print(f"Number of images in fold {i+1} train set: {len(fold_train)}")
 
                 
             if phase == 'testing' and i == 10:
