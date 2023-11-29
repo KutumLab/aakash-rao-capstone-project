@@ -75,7 +75,7 @@ def data_val(data_path,fold):
     print(len(data))
     return data
 
-def data_test(data_path,fold):
+def data_test(data_path):
     data = np.load(os.path.join(data_path,f'test.npy'), allow_pickle=True)
     data = list(data)
     print(len(data))
@@ -83,18 +83,18 @@ def data_test(data_path,fold):
 
 
 
-def train_detectron2(cfg,fold):
+def train_detectron2(cfg,fold,data_path):
 
-    DatasetCatalog.register(f'fold_{fold}_train', data_train)
+    DatasetCatalog.register(f'fold_{fold}_train', data_train, data_path=data_path,fold=fold)
     MetadataCatalog.get(f'fold_{fold}_train').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other_nucleus']
     MetadataCatalog.get(f'fold_{fold}_train').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
 
 
-    DatasetCatalog.register(f'fold_{fold}_val', data_val)
+    DatasetCatalog.register(f'fold_{fold}_val', data_val, data_path=data_path,fold=fold)
     MetadataCatalog.get(f'fold_{fold}_val').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other_nucleus']
     MetadataCatalog.get(f'fold_{fold}_val').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
 
-    DatasetCatalog.register(f'test', data_test)
+    DatasetCatalog.register(f'test', data_test, data_path=data_path)
     data = DatasetCatalog.get(f'test')
     MetadataCatalog.get(f'test').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other_nucleus']
     MetadataCatalog.get(f'test').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
