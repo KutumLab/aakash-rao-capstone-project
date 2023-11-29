@@ -152,13 +152,7 @@ def train_detectron2(cfg,fold,data_path):
     # print('Predictions: ', predictions)
     # predictions = np.array(predictions)
     # np.save(os.path.join(cfg.OUTPUT_DIR, 'predictions.npy'), predictions)
-
-    evaluator = COCOEvaluator(f'test', cfg, False, output_dir=cfg.OUTPUT_DIR)
-    val_loader = trainer.data_loader_test
-    inference_on_dataset(trainer.model, val_loader, evaluator)
-    # return predictions
-
-
+    
     evaluator = COCOEvaluator("test", cfg, False, output_dir=cfg.OUTPUT_DIR)
     val_loader = build_detection_test_loader(cfg, "test")
     inference_on_dataset(trainer.model, val_loader, evaluator)
