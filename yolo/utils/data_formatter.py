@@ -7,6 +7,9 @@ import shutil
 import random
 import matplotlib.pyplot as plt
 
+from tqdm import tqdm
+import time
+
 
 image_dir = ''
 mask_dir = ''
@@ -25,7 +28,7 @@ def plot_num_classes(info_file):
         plt.ylabel('Number of classes', fontsize=14, fontweight='bold')
         plt.xticks(fontsize=10)
         plt.yticks(fontsize=10)
-        plt.savefig(os.path.join(os.path.dirname(info_file), 'num_classes_per_image.png'))
+        plt.savefig(os.path.join(os.path.dirname(info_file), 'num_classes_per_image.png'), dpi=300)
 
 
 
@@ -79,17 +82,19 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             os.makedirs(mask_save_dir)
         class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
         num_classes_per_image = np.zeros(len(class_array))
-        for image_name in os.listdir(image_dir):
+        for i in tqdm (range(len(os.listdir(image_dir))), desc="Processing...", ascii=False, ncols=75):
+            time.sleep(0.01)
+            image_name = os.listdir(image_dir)[i]
             image_path = os.path.join(image_dir, image_name)
             mask_path = os.path.join(mask_dir, image_name.split('.png')[0] + '.csv')
-            image = cv2.imread(image_path)
+            # image = cv2.imread(image_path)
             try:
                 mask = pd.read_csv(mask_path, header=0)
             except:
                 print(f"{mask_path} not exist")
                 continue
-            print(image.shape)
-            print(mask.keys())
+            # print(image.shape)
+            # print(mask.keys())
             for index, row in mask.iterrows():
                 x_min = row['xmin']
                 y_min = row['ymin']
@@ -106,7 +111,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 
                 # print(x_min, y_min, x_max, y_max, class_name, class_id)
                 yolo_format = f"{class_id} {x_min} {y_min} {x_max} {y_max}"
-                print(yolo_format)
+                # print(yolo_format)
 
                 with open(os.path.join(mask_save_dir, image_name.split('.png')[0] + '.txt'), 'a') as f:
                     f.write(yolo_format + '\n')
@@ -115,6 +120,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 result = "testing complete"
                 return result
         np.save(os.path.join(save_dir, 'num_classes_per_image.npy'), num_classes_per_image)
+        print("Completed")
 
 
 if __name__ == '__main__':
@@ -128,7 +134,7 @@ if __name__ == '__main__':
 
     args = argparser.parse_args()
 
-    # result = image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
-    # make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'masks'), args.save_dir, int(args.folds), int(args.seed))
+    result = image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'masks'), args.save_dir, int(args.folds), int(args.seed))
     plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
-    # print(result)
+    print(result)
