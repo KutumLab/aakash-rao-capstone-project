@@ -23,7 +23,7 @@ from detectron2.config import get_cfg
 from detectron2.utils.visualizer import Visualizer
 from detectron2.data import MetadataCatalog
 from detectron2.data.catalog import DatasetCatalog
-from detectron2.engine import DefaultTraine
+from detectron2.engine import DefaultTrainer
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 
 fold = 1
