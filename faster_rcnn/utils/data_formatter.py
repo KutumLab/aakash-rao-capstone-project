@@ -161,7 +161,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 
             if phase == 'testing' and i == 10:
                 result = "testing complete"
-                printing result in a pretty way
+                # printing result in a pretty way
                 print("\n")
                 print("Result:")
                 print("=======")
