@@ -164,7 +164,15 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 
             if phase == 'testing' and i == 10:
                 result = "testing complete"
-                print(master_list)
+                # printing result in a pretty way
+                print("\n")
+                print("Result:")
+                print("=======")
+                for image in master_list:
+                    print(image)
+                    print("\n")
+                    print("---------------------------------------------------------------------------------------------------------------------------------------")
+                    print("\n")
                 return result
         if phase != 'testing':
             np.save(os.path.join(save_dir, 'num_classes_per_image.npy'), num_classes_per_image)
