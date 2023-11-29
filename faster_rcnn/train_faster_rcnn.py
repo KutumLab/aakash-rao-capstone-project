@@ -156,7 +156,10 @@ def train_detectron2(cfg,fold,data_path):
 
     evaluator = COCOEvaluator("test", cfg, False, output_dir=cfg.OUTPUT_DIR)
     val_loader = build_detection_test_loader(cfg, "test")
-    inference_on_dataset(trainer.model, val_loader, evaluator)
+    results = inference_on_dataset(trainer.model, val_loader, evaluator)
+    print(results)
+    return results
+
 
 
     # experiment.end()
@@ -173,3 +176,4 @@ if __name__ == "__main__":
     args = argparse.parse_args()
     cfg = set_config(args.config_info, args.fold, args.max_iters, args.data_path, args.name, args.save_path)
     results = train_detectron2(cfg, args.fold, args.data_path)
+    print(results)

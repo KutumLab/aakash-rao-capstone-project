@@ -2,7 +2,7 @@
 # SEMI-CONSTANT INFO
 DATA_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/detectron
 SAVE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs
-MAX_ITERS=1500
+MAX_ITERS=15
 
 
 # VARIABLE INFO
