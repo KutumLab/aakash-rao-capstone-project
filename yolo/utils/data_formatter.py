@@ -34,7 +34,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 try:
                     class_id = class_array.index(class_name)
                 except ValueError:
-                    raise ValueError("class_name not in class_array")
+                    raise ValueError(f"{class_name} not in class_array")
                 
                 print(x_min, y_min, x_max, y_max, class_name, class_id)
 
