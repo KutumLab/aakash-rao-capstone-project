@@ -63,6 +63,7 @@ def make_folds(npy_path, save_dir, folds,seed=42):
         train = npy[:train_size]
         test = npy[train_size:]
         npy = train
+        length_of_fold = int(len(npy)/folds)
         for i in tqdm (range(folds), desc="Creating Folds...", ascii=False, ncols=75):
             time.sleep(0.01)
             fold_dir = os.path.join(save_dir, f"fold_{i+1}")
@@ -74,8 +75,8 @@ def make_folds(npy_path, save_dir, folds,seed=42):
             fold_train_dir = os.path.join(fold_dir, 'train.npy')
             fold_val_dir = os.path.join(fold_dir, 'val.npy')
 
-            fold_train = npy[:int((i/folds)*len(npy))] + npy[int(((i+1)/folds)*len(npy)):]
-            fold_val = npy[int((i/folds)*len(npy)):int(((i+1)/folds)*len(npy))]
+            fold_train = npy[:int((i*length_of_fold))] + npy[int(((i+1)*length_of_fold)):]
+            fold_val = npy[int((i*length_of_fold)):int(((i+1)*length_of_fold))]
 
             np.save(fold_train_dir, fold_train)
             np.save(fold_val_dir, fold_val)
