@@ -16,11 +16,12 @@ def image_info(image_dir, mask_dir, phase):
         raise ValueError("image_dir is empty")
     else:
         for image_name in os.listdir(image_dir):
-            print(image_name)
             image_path = os.path.join(image_dir, image_name)
             mask_path = os.path.join(mask_dir, image_name.split('.png')[0] + '.csv')
             image = cv2.imread(image_path)
             mask = pd.read_csv(mask_path, header=None)
+            print(image.shape)
+            print(mask.head())
 
             if phase == 'testing':
                 result = "testing complete"
