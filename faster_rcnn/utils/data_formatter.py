@@ -60,6 +60,10 @@ def make_folds(npy_path, save_dir, folds,seed=42):
         # split into 0.2:0.8
         test_size = int(0.2 * len(npy))
         test = npy[:test_size]
+
+        test = np.array(test)
+        np.save(os.path.join(save_dir, 'test.npy'), test)
+
         train = npy[test_size:]
         print(f"Number of images in test set: {len(test)}")
         print(f"Number of images in train set: {len(train)}")
