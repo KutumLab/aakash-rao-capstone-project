@@ -105,8 +105,8 @@ def train_detectron2(cfg,fold,data_path):
     metadata = MetadataCatalog.get(f'fold_{fold}_train')
 
     i = 0
-    for d in tqdm (range(3), desc="Sample Training Images...", ascii=False, ncols=75):
-        num = random.randint(0, len(dataset_dicts))
+    for d in tqdm (range(10), desc="Sample Training Images...", ascii=False, ncols=75):
+        num = random.randint(i*len(dataset_dicts)//10, (i+1)*len(dataset_dicts)//10)
         d = dataset_dicts[num]
         img = cv2.imread(d["file_name"])
         visualizer = Visualizer(img[:, :, ::-1], metadata=metadata, scale=1)
