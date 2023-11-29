@@ -36,7 +36,9 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 except ValueError:
                     raise ValueError(f"{class_name} not in class_array")
                 
-                print(x_min, y_min, x_max, y_max, class_name, class_id)
+                # print(x_min, y_min, x_max, y_max, class_name, class_id)
+                yolo_format = f"{class_id} {x_min} {y_min} {x_max} {y_max}"
+                print(yolo_format)
 
             if phase == 'testing':
                 result = "testing complete"
