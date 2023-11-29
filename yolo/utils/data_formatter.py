@@ -76,8 +76,8 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
                 shutil.copy(image_path, im_save_path)
                 shutil.copy(mask_path, mask_save_path)
             for image in tqdm (test_images, desc="Creating Test...", ascii=False, ncols=75):
-                im_save_path = os.path.join(im_save_dir,'test', 'images')
-                mask_save_path = os.path.join(mask_save_dir,'test', 'labels')
+                im_save_path = os.path.join(im_save_dir,'val', 'images')
+                mask_save_path = os.path.join(mask_save_dir,'val', 'labels')
                 if not os.path.exists(im_save_path):
                     os.makedirs(im_save_path)
                 if not os.path.exists(mask_save_path):
