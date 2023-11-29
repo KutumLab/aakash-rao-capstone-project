@@ -25,6 +25,8 @@ from detectron2.data import MetadataCatalog
 from detectron2.data.catalog import DatasetCatalog
 from detectron2.engine import DefaultTrainer
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
+from detectron2.evaluation import COCOEvaluator, inference_on_dataset, DatasetEvaluators
+from detectron2.data import build_detection_test_loader
 
 fold = 1
 
@@ -155,6 +157,11 @@ def train_detectron2(cfg,fold,data_path):
     val_loader = trainer.data_loader_test
     inference_on_dataset(trainer.model, val_loader, evaluator)
     # return predictions
+
+
+    evaluator = COCOEvaluator("test", cfg, False, output_dir=cfg.OUTPUT_DIR)
+    val_loader = build_detection_test_loader(cfg, "test")
+    inference_on_dataset(trainer.model, val_loader, evaluator)
 
 
     # experiment.end()
