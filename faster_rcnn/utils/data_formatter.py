@@ -59,29 +59,31 @@ def make_folds(npy_path, save_dir, folds,seed=42):
 
         # split into 0.2:0.8
         test_size = int(0.2 * len(npy))
-        train_size = len(npy) - test_size
-        train = npy[:train_size]
-        test = npy[train_size:]
-        npy = np.array(train)
-        length_of_fold = int(len(npy)/folds)
-        for i in tqdm (range(folds), desc="Creating Folds...", ascii=False, ncols=75):
-            time.sleep(0.01)
+        test = npy[:test_size]
+        train = npy[test_size:]
+        print(f"Number of images in test set: {len(test)}")
+        print(f"Number of images in train set: {len(train)}")
+        number_per_fold = len(train) // folds
+        for i in tqdm (range(folds), desc="Creating Folds...", ascii=False, ncols=75):  
             fold_dir = os.path.join(save_dir, f"fold_{i+1}")
             if not os.path.exists(fold_dir):
                 os.makedirs(fold_dir)
-            else:
-                shutil.rmtree(fold_dir)
-                os.makedirs(fold_dir)
-            fold_train_dir = os.path.join(fold_dir, 'train.npy')
-            fold_val_dir = os.path.join(fold_dir, 'val.npy')
+            fold_test = train[i*number_per_fold:(i+1)*number_per_fold]
+            fold_train = train[:i*number_per_fold] + train[(i+1)*number_per_fold:]
 
-            fold_train = npy[:int((i*length_of_fold))] + npy[int(((i+1)*length_of_fold)):]
-            fold_val = npy[int((i*length_of_fold)):int(((i+1)*length_of_fold))]
-
-            np.save(fold_train_dir, fold_train)
-            np.save(fold_val_dir, fold_val)
-        test_dir = os.path.join(save_dir, 'test.npy')
-        np.save(test_dir, test)
+                
+            if phase == 'testing' and i == 10:
+                result = "testing complete"
+                # printing result in a pretty way
+                print("\n")
+                print("Result:")
+                print("=======")
+                for image in master_list:
+                    print(image)
+                    print("\n")
+                    print("---------------------------------------------------------------------------------------------------------------------------------------")
+                    print("\n")
+                return result
     
 
 
