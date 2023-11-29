@@ -105,11 +105,9 @@ def train_detectron2(cfg,fold,data_path):
     i = 0
     for d in random.sample(dataset_dicts, 10):
         img = cv2.imread(d["file_name"])
-        print(img.shape)
         visualizer = Visualizer(img[:, :, ::-1], metadata=metadata, scale=1)
         vis = visualizer.draw_dataset_dict(d)
         im = vis.get_image()[:, :, ::-1]
-        print(im.shape)
         plt.imshow(im)
         train_img_path = os.path.join(cfg.OUTPUT_DIR, f'train_images')
         if not os.path.exists(train_img_path):
