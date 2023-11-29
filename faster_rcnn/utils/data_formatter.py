@@ -161,15 +161,15 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 
             if phase == 'testing' and i == 10:
                 result = "testing complete"
-                # printing result in a pretty way
-                # print("\n")
-                # print("Result:")
-                # print("=======")
-                # for image in master_list:
-                #     print(image)
-                #     print("\n")
-                #     print("---------------------------------------------------------------------------------------------------------------------------------------")
-                #     print("\n")
+                printing result in a pretty way
+                print("\n")
+                print("Result:")
+                print("=======")
+                for image in master_list:
+                    print(image)
+                    print("\n")
+                    print("---------------------------------------------------------------------------------------------------------------------------------------")
+                    print("\n")
                 return result
             
         
@@ -177,8 +177,9 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             master_list = np.array(master_list)
             np.save(os.path.join(save_dir, 'master.npy'), master_list)
             # saving as json
-            with open(os.path.join(save_dir, 'master.json'), 'w+') as f:
-                json.dump(master_list, f)
+            object = json.dumps(master_list.tolist(), indent = 4)
+            with open(os.path.join(save_dir, 'master.json'), "w+") as outfile:
+                outfile.write(object)
             np.save(os.path.join(save_dir, 'num_classes_per_image.npy'), num_classes_per_image)
             print("Completed")
 
