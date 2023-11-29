@@ -127,6 +127,8 @@ def train_detectron2(cfg,fold,data_path):
     trainer = DefaultTrainer(cfg) 
     trainer.resume_or_load(resume=False)
     trainer.train()
+    model_path = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
+    log_model(model_path, cfg=cfg, project_name='capstone-project', experiment_name=f'fold_{fold}_train', overwrite=True)
 
     predictor = DefaultPredictor(cfg)
     predictions = []
