@@ -48,61 +48,16 @@ def plot_num_classes(info_file):
 
 
 
-def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
-    if folds <=0:
-        raise ValueError("folds must be greater than 0")
-    elif not os.path.exists(image_dir):
-        raise ValueError("image_dir not exist")
-    elif len(os.listdir(image_dir)) == 0:
-        raise ValueError("image_dir is empty")
+def make_folds(npy_path, save_dir, folds,seed=42):
+    if not os.path.exists(npy_path):
+        raise ValueError("npy_path not exist")
     else:
-        images = os.listdir(image_dir)
-        masks = os.listdir(mask_dir)
-        len_of_each_fold = len(images) // folds
+        npy = np.load(npy_path, allow_pickle=True)
+        np.random.seed(seed)
+        np.random.shuffle(npy)
+        print(f"Total number of images: {len(npy)}")
 
-        random.seed(seed)
-        random.shuffle(images)
-
-        for i in tqdm (range(folds), desc="Creating Folds...", ascii=False, ncols=75):  
-            print(f"Creating fold {i+1}")
-            fold_dir = os.path.join(save_dir, f"fold_{i+1}")
-            im_save_dir = os.path.join(fold_dir)
-            mask_save_dir = os.path.join(fold_dir)
-            if not os.path.exists(im_save_dir):
-                os.makedirs(im_save_dir)
-            if not os.path.exists(mask_save_dir):
-                os.makedirs(mask_save_dir)
-            try:
-                images.remove('.DS_Store')
-            except:
-                pass
-            train_images = images[:i*len_of_each_fold] + images[(i+1)*len_of_each_fold:]
-            test_images = images[i*len_of_each_fold:(i+1)*len_of_each_fold]
-
-            for image in tqdm (train_images, desc="Creating Train...", ascii=False, ncols=75):
-                im_save_path = os.path.join(im_save_dir,'train', 'images')
-                mask_save_path = os.path.join(mask_save_dir,'train', 'labels')
-                if not os.path.exists(im_save_path):
-                    os.makedirs(im_save_path)
-                if not os.path.exists(mask_save_path):
-                    os.makedirs(mask_save_path)
-                time.sleep(0.01)
-                image_path = os.path.join(image_dir, image)
-                mask_path = os.path.join(mask_dir, image.split('.png')[0] + '.txt')
-                shutil.copy(image_path, im_save_path)
-                shutil.copy(mask_path, mask_save_path)
-            for image in tqdm (test_images, desc="Creating Test...", ascii=False, ncols=75):
-                im_save_path = os.path.join(im_save_dir,'val', 'images')
-                mask_save_path = os.path.join(mask_save_dir,'val', 'labels')
-                if not os.path.exists(im_save_path):
-                    os.makedirs(im_save_path)
-                if not os.path.exists(mask_save_path):
-                    os.makedirs(mask_save_path)
-                time.sleep(0.01)
-                image_path = os.path.join(image_dir, image)
-                mask_path = os.path.join(mask_dir, image.split('.png')[0] + '.txt')
-                shutil.copy(image_path, im_save_path)
-                shutil.copy(mask_path, mask_save_path)
+    
 
 
 
@@ -195,6 +150,6 @@ if __name__ == '__main__':
 
     args = argparser.parse_args()
 
-    image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
-    # make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'labels'), args.save_dir, int(args.folds), int(args.seed))
+    # image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    make_folds(os.path.join(args.save_dir, 'master', 'master.json'), args.save_dir, int(args.folds), int(args.seed))
     # plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
