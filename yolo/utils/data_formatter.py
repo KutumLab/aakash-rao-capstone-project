@@ -47,9 +47,9 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 yolo_format = f"{class_id} {x_min} {y_min} {x_max} {y_max}"
                 print(yolo_format)
 
-                with open(os.path.join(im_save_dir, image_name.split('.png')[0] + '.txt'), 'a') as f:
+                with open(os.path.join(mask_save_dir, image_name.split('.png')[0] + '.txt'), 'a') as f:
                     f.write(yolo_format + '\n')
-                shutil.copy(image_path, mask_save_dir)
+                shutil.copy(image_path, im_save_dir)
                 
 
 
