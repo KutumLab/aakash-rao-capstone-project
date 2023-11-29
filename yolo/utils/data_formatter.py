@@ -1,15 +1,33 @@
 import os 
-import numpy
+import numpy as np
 import pandas as pd
 import cv2
 import argparse
 import shutil
 import random
+import matplotlib.pyplot as plt
 
 
 image_dir = ''
 mask_dir = ''
 phase = 'testing'
+
+def plot_num_classes(info_file):
+    if not os.path.exists(info_file):
+        raise ValueError("info_file not exist")
+    else:
+        num_classes_per_image = np.load(info_file)
+        plt.figure(figsize=(5, 5))
+        class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
+        plt.bar(class_array, num_classes_per_image)
+        plt.title('Number of classes per image', fontsize=14, fontweight='bold')
+        plt.xlabel('Class', fontsize=14, fontweight='bold')
+        plt.ylabel('Number of classes', fontsize=14, fontweight='bold')
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
+        plt.savefig(os.path.join(os.path.dirname(info_file), 'num_classes_per_image.png'))
+
+
 
 def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
     if folds <=0:
@@ -59,6 +77,8 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             os.makedirs(im_save_dir)
         if not os.path.exists(mask_save_dir):
             os.makedirs(mask_save_dir)
+        class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
+        num_classes_per_image = np.zeros(len(class_array))
         for image_name in os.listdir(image_dir):
             image_path = os.path.join(image_dir, image_name)
             mask_path = os.path.join(mask_dir, image_name.split('.png')[0] + '.csv')
@@ -76,13 +96,13 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 x_max = row['xmax']
                 y_max = row['ymax']
                 class_name = row['super_classification']
-                class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
                 if class_name == 'AMBIGUOUS' or class_name == 'other_nucleus':
                     class_name = 'other'
                 try:
                     class_id = class_array.index(class_name)
                 except ValueError:
                     raise ValueError(f"{class_name} not in class_array")
+                num_classes_per_image[class_id] += 1
                 
                 # print(x_min, y_min, x_max, y_max, class_name, class_id)
                 yolo_format = f"{class_id} {x_min} {y_min} {x_max} {y_max}"
@@ -91,12 +111,10 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 with open(os.path.join(mask_save_dir, image_name.split('.png')[0] + '.txt'), 'a') as f:
                     f.write(yolo_format + '\n')
                 shutil.copy(image_path, im_save_dir)
-                
-
-
             if phase == 'testing':
                 result = "testing complete"
                 return result
+        np.save(os.path.join(save_dir, 'num_classes_per_image.npy'), num_classes_per_image)
 
 
 if __name__ == '__main__':
@@ -110,6 +128,7 @@ if __name__ == '__main__':
 
     args = argparser.parse_args()
 
-    # result = image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    result = image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
     make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'masks'), args.save_dir, int(args.folds), int(args.seed))
-    # print(result)
+    plot_num_classes(os.path.join(args.save_dir, 'num_classes_per_image.npy'))
+    print(result)
