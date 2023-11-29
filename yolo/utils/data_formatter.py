@@ -55,8 +55,13 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
                 os.makedirs(im_save_dir)
             if not os.path.exists(mask_save_dir):
                 os.makedirs(mask_save_dir)
-            train_images = [i*len_of_each_fold:(i+1)*len_of_each_fold]
-            test_images = [i for i in images if i not in train_images]
+            images = os.listdir(image_dir)
+            try:
+                images.remove('.DS_Store')
+            except:
+                pass
+            train_images = images[:i*len_of_each_fold] + images[(i+1)*len_of_each_fold:]
+            test_images = images[i*len_of_each_fold:(i+1)*len_of_each_fold]
             print(len(train_images), len(test_images))
             
 
@@ -129,6 +134,6 @@ if __name__ == '__main__':
 
     args = argparser.parse_args()
 
-    image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    # image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
     make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'masks'), args.save_dir, int(args.folds), int(args.seed))
     plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
