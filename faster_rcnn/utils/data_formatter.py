@@ -73,8 +73,10 @@ def make_folds(npy_path, save_dir, folds,seed=42):
                 os.makedirs(fold_dir)
             fold_train_dir = os.path.join(fold_dir, 'train.npy')
             fold_val_dir = os.path.join(fold_dir, 'val.npy')
-            fold_train = npy[:int((i/10)*len(npy))] + npy[int(((i+1)/10)*len(npy)):]
-            fold_val = npy[int((i/10)*len(npy)):int(((i+1)/10)*len(npy))]
+
+            fold_train = npy[:int((i/folds)*len(npy))] + npy[int(((i+1)/folds)*len(npy)):]
+            fold_val = npy[int((i/folds)*len(npy)):int(((i+1)/folds)*len(npy))]
+
             np.save(fold_train_dir, fold_train)
             np.save(fold_val_dir, fold_val)
         test_dir = os.path.join(save_dir, 'test.npy')
