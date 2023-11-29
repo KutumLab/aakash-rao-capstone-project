@@ -50,7 +50,7 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
         for i in tqdm (range(folds), desc="Creating Folds...", ascii=False, ncols=75):  
             fold_dir = os.path.join(save_dir, f"fold_{i+1}")
             im_save_dir = os.path.join(fold_dir, 'images')
-            mask_save_dir = os.path.join(fold_dir, 'masks')
+            mask_save_dir = os.path.join(fold_dir, 'labels')
             if not os.path.exists(im_save_dir):
                 os.makedirs(im_save_dir)
             if not os.path.exists(mask_save_dir):
