@@ -126,7 +126,8 @@ def train_detectron2(cfg,fold,data_path):
 
     trainer = DefaultTrainer(cfg) 
     trainer.resume_or_load(resume=False)
-    trainer.train()
+    history = trainer.train()
+    print(history)
 
     cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5   # set the testing threshold for this model
