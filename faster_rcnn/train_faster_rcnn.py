@@ -45,7 +45,7 @@ def set_config(config_info, fold, max_iters, data_path, name,save_path):
     cfg.merge_from_file(model_zoo.get_config_file(config_info))
     cfg.DATASETS.TRAIN = (f'fold_{fold}_train',)
     cfg.DATASETS.TEST = (f'fold_{fold}_val',)
-    cfg.TEST.EVAL_PERIOD = 100
+    cfg.TEST.EVAL_PERIOD = 50
     cfg.DATALOADER.NUM_WORKERS = 2
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(config_info)
     cfg.MODEL.LOAD_PROPOSALS = False

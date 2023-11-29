@@ -6,6 +6,8 @@ import detectron2.utils.comm as comm
 from detectron2.engine import DefaultTrainer
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 import os 
+import logging
+import numpy as np
 import torch
 import time
 import datetime
