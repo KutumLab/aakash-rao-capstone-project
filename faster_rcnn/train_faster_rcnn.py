@@ -72,7 +72,7 @@ def train_detectron2(cfg,fold,data_path):
         return data
 
     def data_val():
-        data = np.load(os.path.join(data_path, f'fold_{fold}', f'test.npy'), allow_pickle=True)
+        data = np.load(os.path.join(data_path, f'fold_{fold}', f'val.npy'), allow_pickle=True)
         data = list(data)
         print(f'Number of validation images: {len(data)}')
         return data
@@ -123,7 +123,7 @@ def train_detectron2(cfg,fold,data_path):
     trainer = DefaultTrainer(cfg) 
     trainer.resume_or_load(resume=False)
     trainer.train()
-    
+
     cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5   # set the testing threshold for this model
     cfg.DATASETS.TEST = (f'test',)
