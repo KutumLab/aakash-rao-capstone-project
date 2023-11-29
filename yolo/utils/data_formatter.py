@@ -21,7 +21,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             image = cv2.imread(image_path)
             mask = pd.read_csv(mask_path, header=None)
             print(image.shape)
-            print(mask.head())
+            print(mask.keys()
             for index, row in mask.iterrows():
                 x_min = row['xmin']
                 y_min = row['ymin']
