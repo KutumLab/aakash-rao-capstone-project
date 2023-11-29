@@ -47,7 +47,7 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
         random.seed(seed)
         random.shuffle(images)
 
-        for i in tqdm (range(folds), desc="Processing...", ascii=False, ncols=75):  
+        for i in tqdm (range(folds), desc="Creating Folds...", ascii=False, ncols=75):  
             fold_dir = os.path.join(save_dir, f"fold_{i+1}")
             im_save_dir = os.path.join(fold_dir, 'images')
             mask_save_dir = os.path.join(fold_dir, 'masks')
@@ -82,7 +82,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             os.makedirs(mask_save_dir)
         class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
         num_classes_per_image = np.zeros(len(class_array))
-        for i in tqdm (range(len(os.listdir(image_dir))), desc="Processing...", ascii=False, ncols=75):
+        for i in tqdm (range(len(os.listdir(image_dir))), desc="Creating Master...", ascii=False, ncols=75):
             time.sleep(0.01)
             image_name = os.listdir(image_dir)[i]
             image_path = os.path.join(image_dir, image_name)
@@ -134,7 +134,6 @@ if __name__ == '__main__':
 
     args = argparser.parse_args()
 
-    result = image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
     make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'masks'), args.save_dir, int(args.folds), int(args.seed))
     plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
-    print(result)
