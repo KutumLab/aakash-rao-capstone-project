@@ -124,33 +124,31 @@ def train_detectron2(cfg,fold,data_path):
         # break
         i+=1
 
-    
-  
+    trainer = DefaultTrainer(cfg) 
+    trainer.resume_or_load(resume=False)
+    trainer.train()
 
-    # os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
-    # trainer = DefaultTrainer(cfg) 
-    # trainer.resume_or_load(resume=False)
-    # trainer.train()
-    # predictor = DefaultPredictor(cfg)
-    # predictions = []
-    # pred_save_path = os.path.join(cfg.OUTPUT_DIR, 'predictions')
-    # if not os.path.exists(pred_save_path):
-    #     os.makedirs(pred_save_path)
-    # for d in data_test():
-    #     im = cv2.imread(d["file_name"])
-    #     outputs = predictor(im)
-    #     predictions.append(outputs)
-    #     v = Visualizer(im[:, :, ::-1],
-    #                     metadata=MetadataCatalog.get(f'test'), 
-    #                     scale=0.8,
-    #     )
-    #     out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
-    #     plt.imshow(out.get_image()[:, :, ::-1])
-    #     plt.axis('off')
-    #     plt.savefig(os.path.join(pred_save_path, d['file_name'].split('/')[-1]), bbox_inches='tight', pad_inches=0, dpi=300)
-    # print('Predictions: ', predictions)
-    # predictions = np.array(predictions)
-    # np.save(os.path.join(cfg.OUTPUT_DIR, 'predictions.npy'), predictions)
+    predictor = DefaultPredictor(cfg)
+    predictions = []
+    pred_save_path = os.path.join(cfg.OUTPUT_DIR, 'predictions')
+    if not os.path.exists(pred_save_path):
+        os.makedirs(pred_save_path)
+
+    for d in data_test():
+        im = cv2.imread(d["file_name"])
+        outputs = predictor(im)
+        predictions.append(outputs)
+        v = Visualizer(im[:, :, ::-1],
+                        metadata=MetadataCatalog.get(f'test'), 
+                        scale=0.8,
+        )
+        out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+        plt.imshow(out.get_image()[:, :, ::-1])
+        plt.axis('off')
+        plt.savefig(os.path.join(pred_save_path, d['file_name'].split('/')[-1]), bbox_inches='tight', pad_inches=0, dpi=300)
+    print('Predictions: ', predictions)
+    predictions = np.array(predictions)
+    np.save(os.path.join(cfg.OUTPUT_DIR, 'predictions.npy'), predictions)
 
 
     # experiment.end()
