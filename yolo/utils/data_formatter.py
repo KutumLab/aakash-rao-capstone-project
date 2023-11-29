@@ -55,15 +55,10 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
                 os.makedirs(im_save_dir)
             if not os.path.exists(mask_save_dir):
                 os.makedirs(mask_save_dir)
-            for image_name in images[i*len_of_each_fold:(i+1)*len_of_each_fold]:
-                image_path = os.path.join(image_dir, image_name)
-                try:
-                    mask_path = os.path.join(mask_dir, image_name.split('.png')[0] + '.txt')
-                except:
-                    print(f"{image_name.split('.png')[0] + '.txt'} not exist")
-                    continue
-                shutil.copy(image_path, im_save_dir)
-                shutil.copy(mask_path, mask_save_dir)
+            train_images = [i*len_of_each_fold:(i+1)*len_of_each_fold]
+            test_images = [i for i in images if i not in train_images]
+            print(len(train_images), len(test_images))
+            
 
 
 
