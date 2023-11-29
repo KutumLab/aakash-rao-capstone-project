@@ -50,8 +50,8 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
         for i in tqdm (range(folds), desc="Creating Folds...", ascii=False, ncols=75):  
             print(f"Creating fold {i+1}")
             fold_dir = os.path.join(save_dir, f"fold_{i+1}")
-            im_save_dir = os.path.join(fold_dir, 'images')
-            mask_save_dir = os.path.join(fold_dir, 'labels')
+            im_save_dir = os.path.join(fold_dir)
+            mask_save_dir = os.path.join(fold_dir)
             if not os.path.exists(im_save_dir):
                 os.makedirs(im_save_dir)
             if not os.path.exists(mask_save_dir):
@@ -64,6 +64,19 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
             train_images = images[:i*len_of_each_fold] + images[(i+1)*len_of_each_fold:]
             test_images = images[i*len_of_each_fold:(i+1)*len_of_each_fold]
             print(len(train_images), len(test_images))
+
+            for image in tqdm (train_images, desc="Creating Train...", ascii=False, ncols=75):
+                time.sleep(0.01)
+                image_path = os.path.join(image_dir, image)
+                mask_path = os.path.join(mask_dir, image.split('.png')[0] + '.txt')
+                shutil.copy(image_path, os.path.join(im_save_dir,'train', image))
+                shutil.copy(mask_path, os.path.join(mask_save_dir,'train', image.split('.png')[0] + '.txt'))
+            for image in tqdm (test_images, desc="Creating Test...", ascii=False, ncols=75):
+                time.sleep(0.01)
+                image_path = os.path.join(image_dir, image)
+                mask_path = os.path.join(mask_dir, image.split('.png')[0] + '.txt')
+                shutil.copy(image_path, os.path.join(im_save_dir,'test', image))
+                shutil.copy(mask_path, os.path.join(mask_save_dir,'test', image.split('.png')[0] + '.txt'))
             
 
 
