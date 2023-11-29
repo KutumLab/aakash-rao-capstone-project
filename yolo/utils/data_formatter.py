@@ -16,6 +16,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
     elif len(os.listdir(image_dir)) == 0:
         raise ValueError("image_dir is empty")
     else:
+        save_dir = os.path.join(save_dir, "master")
         im_save_dir = os.path.join(save_dir, 'images')
         mask_save_dir = os.path.join(save_dir, 'masks')
         if not os.path.exists(im_save_dir):
