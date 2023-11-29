@@ -130,7 +130,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             try:
                 mask = pd.read_csv(mask_path, header=0)
             except:
-                print(f"{mask_path.split('/')[-1]} not exist")
+                # print(f"{mask_path.split('/')[-1]} not exist")
                 continue
             # print(image.shape)
             # print(mask.keys())
@@ -154,26 +154,26 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 except ValueError:
                     raise ValueError(f"{class_name} not in class_array")
                 num_classes_per_image[class_id] += 1
-                print(f"Class: {class_name}, Class ID: {class_id}")
+                # print(f"Class: {class_name}, Class ID: {class_id}")
                 loc_ann['bbox'] = [x_min, y_min, x_max, y_max]
                 loc_ann['category_id'] = class_id
                 loc_ann['bbox_mode'] = 0
                 loc_img['annotations'].append(loc_ann.copy())
             master_list.append(loc_img.copy())
-            print(f"Image {i+1} completed")
+            # print(f"Image {i+1} completed")
 
                 
             if phase == 'testing' and i == 10:
                 result = "testing complete"
                 # printing result in a pretty way
-                print("\n")
-                print("Result:")
-                print("=======")
-                for image in master_list:
-                    print(image)
-                    print("\n")
-                    print("---------------------------------------------------------------------------------------------------------------------------------------")
-                    print("\n")
+                # print("\n")
+                # print("Result:")
+                # print("=======")
+                # for image in master_list:
+                #     print(image)
+                #     print("\n")
+                #     print("---------------------------------------------------------------------------------------------------------------------------------------")
+                #     print("\n")
                 return result
             
         
