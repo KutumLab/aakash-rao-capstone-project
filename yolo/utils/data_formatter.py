@@ -28,7 +28,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 x_max = row['xmax']
                 y_max = row['ymax']
                 class_name = row['super_classification']
-                class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other_nucleus']
+                class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
                 if class_name == 'AMBIGUOUS' or class_name == 'other_nucleus':
                     class_name = 'other'
                 try:
