@@ -9,7 +9,7 @@ image_dir = ''
 mask_dir = ''
 phase = 'testing'
 
-def image_info(image_dir):
+def image_info(image_di, mask_dir, phase):
     if not os.path.exists(image_dir):
         raise ValueError("image_dir not exist")
     elif len(os.listdir(image_dir)) == 0:
