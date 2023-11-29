@@ -116,6 +116,7 @@ def train_detectron2(cfg,fold,data_path):
         train_img_path = os.path.join(cfg.OUTPUT_DIR, f'train_images')
         if not os.path.exists(train_img_path):
             os.makedirs(train_img_path)
+        plt.tight_layout()
         plt.savefig(os.path.join(train_img_path, f'{i}.png'), bbox_inches='tight', pad_inches=0, dpi=300)
         plt.close()
         # cv2.waitKey(0)
