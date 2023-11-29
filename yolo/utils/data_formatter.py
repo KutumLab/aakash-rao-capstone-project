@@ -110,7 +110,8 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             image_name = os.listdir(image_dir)[i]
             image_path = os.path.join(image_dir, image_name)
             mask_path = os.path.join(mask_dir, image_name.split('.png')[0] + '.csv')
-            # image = cv2.imread(image_path)
+            image = cv2.imread(image_path)
+            im_height, im_width, _ = image.shape
             try:
                 mask = pd.read_csv(mask_path, header=0)
             except:
@@ -123,6 +124,14 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 y_min = row['ymin']
                 x_max = row['xmax']
                 y_max = row['ymax']
+                x_center = (x_min + x_max) / 2
+                y_center = (y_min + y_max) / 2
+                width = x_max - x_min
+                height = y_max - y_min
+                norm_x_center = x_center / im_width
+                norm_y_center = y_center / im_height
+                norm_width = width / im_width
+                norm_height = height / im_height
                 class_name = row['super_classification']
                 if class_name == 'AMBIGUOUS' or class_name == 'other_nucleus':
                     class_name = 'other'
@@ -133,7 +142,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 num_classes_per_image[class_id] += 1
                 
                 # print(x_min, y_min, x_max, y_max, class_name, class_id)
-                yolo_format = f"{class_id} {x_min} {y_min} {x_max} {y_max}"
+                yolo_format = f"{class_id} {norm_x_center} {norm_y_center} {norm_width} {norm_height}"
                 # print(yolo_format)
 
                 with open(os.path.join(mask_save_dir, image_name.split('.png')[0] + '.txt'), 'a') as f:
