@@ -69,20 +69,11 @@ def make_folds(npy_path, save_dir, folds,seed=42):
             if not os.path.exists(fold_dir):
                 os.makedirs(fold_dir)
             fold_test = train[int(i*number_per_fold):int((i+1)*number_per_fold)]
-            fold_train = train[:int(i*number_per_fold)] + train[int((i+1)*number_per_fold):]
+            # fold_train = train[:int(i*number_per_fold)] + train[int((i+1)*number_per_fold):]
 
                 
             if phase == 'testing' and i == 10:
                 result = "testing complete"
-                # printing result in a pretty way
-                print("\n")
-                print("Result:")
-                print("=======")
-                for image in master_list:
-                    print(image)
-                    print("\n")
-                    print("---------------------------------------------------------------------------------------------------------------------------------------")
-                    print("\n")
                 return result
     
 
