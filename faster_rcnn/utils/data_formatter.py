@@ -62,7 +62,7 @@ def make_folds(npy_path, save_dir, folds,seed=42):
         train_size = len(npy) - test_size
         train = npy[:train_size]
         test = npy[train_size:]
-        npy = train
+        npy = np.array(train)
         length_of_fold = int(len(npy)/folds)
         for i in tqdm (range(folds), desc="Creating Folds...", ascii=False, ncols=75):
             time.sleep(0.01)
