@@ -157,6 +157,14 @@ def train_detectron2(cfg,fold,data_path):
     evaluator = COCOEvaluator("test", cfg, False, output_dir=cfg.OUTPUT_DIR)
     val_loader = build_detection_test_loader(cfg, "test")
     results = inference_on_dataset(trainer.model, val_loader, evaluator)
+
+    # OrderedDict to dict
+    results = dict(results)
+    # save results
+    results_save_path = os.path.join(cfg.OUTPUT_DIR, 'results')
+    if not os.path.exists(results_save_path):
+        os.makedirs(results_save_path)
+    np.save(os.path.join(results_save_path, 'results.npy'), results)
     print(results)
     return results
 
