@@ -2,7 +2,7 @@
 # SEMI-CONSTANT INFO
 DATA_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/detectron
 SAVE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs
-MAX_ITERS=2000
+MAX_ITERS=10
 
 # VARIABLE INFO rpn_R_50_FPN_1x
 CONFIG=COCO-Detection/rpn_R_50_FPN_1x.yaml
