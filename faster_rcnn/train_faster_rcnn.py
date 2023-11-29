@@ -63,19 +63,19 @@ def set_config(config_info, fold, max_iters, data_path, name,save_path):
 
 
 
-def data_train(data_path):
+def data_train(data_path,fold):
     data = np.load(os.path.join(data_path, f'fold_{fold}', 'train.npy'), allow_pickle=True)
     data = list(data)
     print(len(data))
     return data
 
-def data_val(data_path):
+def data_val(data_path,fold):
     data = np.load(os.path.join(data_path, f'fold_{fold}', f'test.npy'), allow_pickle=True)
     data = list(data)
     print(len(data))
     return data
 
-def data_test(data_path):
+def data_test(data_path,fold):
     data = np.load(os.path.join(data_path,f'test.npy'), allow_pickle=True)
     data = list(data)
     print(len(data))
@@ -83,7 +83,8 @@ def data_test(data_path):
 
 
 
-def train_detectron2(cfg):
+def train_detectron2(cfg,fold):
+
     DatasetCatalog.register(f'fold_{fold}_train', data_train)
     MetadataCatalog.get(f'fold_{fold}_train').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other_nucleus']
     MetadataCatalog.get(f'fold_{fold}_train').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
@@ -110,7 +111,8 @@ def train_detectron2(cfg):
         im = vis.get_image()[:, :, ::-1]
         print(im.shape)
         plt.imshow(im)
-        plt.savefig(os.path.join(cfg.OUTPUT_DIR, f'images/{i}.png'), bbox_inches='tight', pad_inches=0, dpi=300)
+        train_img_path = os.path.join(cfg.OUTPUT_DIR, f'train_images')
+        plt.savefig(os.path.join(train_img_path, f'{i}.png'), bbox_inches='tight', pad_inches=0, dpi=300)
         plt.close()
         # cv2.waitKey(0)
         # break
@@ -158,5 +160,4 @@ if __name__ == "__main__":
     argparse.add_argument('--save_path', type=str, default='/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs', help='save path')
     args = argparse.parse_args()
     cfg = set_config(args.config_info, args.fold, args.max_iters, args.data_path, args.name, args.save_path)
-    print(cfg)
-    # results = train_detectron2(cfg)
+    results = train_detectron2(cfg, args.fold)
