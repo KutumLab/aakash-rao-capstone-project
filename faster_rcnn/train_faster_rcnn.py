@@ -57,10 +57,6 @@ def set_config(config_info, fold, max_iters, data_path, name,save_path):
     # trainer = DefaultTrainer(cfg) 
     # trainer.resume_or_load(resume=False)
     # trainer.train()
-
-    cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5   # set the testing threshold for this model
-    cfg.DATASETS.TEST = (f'test',)
     return cfg
 
 
@@ -127,8 +123,10 @@ def train_detectron2(cfg,fold,data_path):
     trainer = DefaultTrainer(cfg) 
     trainer.resume_or_load(resume=False)
     trainer.train()
-    model_path = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
-    log_model(model_path, cfg=cfg, project_name='capstone-project', experiment_name=f'fold_{fold}_train', overwrite=True)
+    
+    cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5   # set the testing threshold for this model
+    cfg.DATASETS.TEST = (f'test',)
 
     predictor = DefaultPredictor(cfg)
     predictions = []
