@@ -48,6 +48,7 @@ def set_config(config_info, fold, max_iters, data_path, name,save_path):
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 4 
     cfg.OUTPUT_DIR = os.path.join(save_path, f'detectron/{name}')
+    os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 
 
     # os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
