@@ -5,9 +5,9 @@ export COMET_API_KEY=$(cat "$input")
 export COMET_WORKSPACE=mraoaakash
 export COMET_PROJECT_NAME=capstone-project
 # setting variables
-YAML_FOLD_1=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/yolo/configs/fold_1
-YAML_FOLD_2=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/yolo/configs/fold_2
-YAML_FOLD_3=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/yolo/configs/fold_3
+YAML_FOLD_1=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/yolo/configs/fold_1.yaml
+YAML_FOLD_2=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/yolo/configs/fold_2.yaml
+YAML_FOLD_3=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/yolo/configs/fold_3.yaml
 
 IMG_SIZE=520
 EPOCHS=200
