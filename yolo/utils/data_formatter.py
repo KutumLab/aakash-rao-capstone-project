@@ -91,7 +91,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             try:
                 mask = pd.read_csv(mask_path, header=0)
             except:
-                print(f"{mask_path} not exist")
+                print(f"{mask_path.split('/')[-1]} not exist")
                 continue
             # print(image.shape)
             # print(mask.keys())
