@@ -57,6 +57,28 @@ def make_folds(npy_path, save_dir, folds,seed=42):
         np.random.shuffle(npy)
         print(f"Total number of images: {len(npy)}")
 
+        # split into 0.2:0.8
+        test_size = int(0.2 * len(npy))
+        train_size = len(npy) - test_size
+        train = npy[:train_size]
+        test = npy[train_size:]
+        npy = train
+        for i in tqdm (range(folds), desc="Creating Folds...", ascii=False, ncols=75):
+            time.sleep(0.01)
+            fold_dir = os.path.join(save_dir, f"fold_{i+1}")
+            if not os.path.exists(fold_dir):
+                os.makedirs(fold_dir)
+            else:
+                shutil.rmtree(fold_dir)
+                os.makedirs(fold_dir)
+            fold_train_dir = os.path.join(fold_dir, 'train.npy')
+            fold_val_dir = os.path.join(fold_dir, 'val.npy')
+            fold_train = npy[:int((i/10)*len(npy))] + npy[int(((i+1)/10)*len(npy)):]
+            fold_val = npy[int((i/10)*len(npy)):int(((i+1)/10)*len(npy))]
+            np.save(fold_train_dir, fold_train)
+            np.save(fold_val_dir, fold_val)
+        test_dir = os.path.join(save_dir, 'test.npy')
+        np.save(test_dir, test)
     
 
 
