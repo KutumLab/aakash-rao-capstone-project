@@ -163,7 +163,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             print(master_list)
 
                 
-            if phase == 'testing':
+            if phase == 'testing' and i == 10:
                 result = "testing complete"
                 return result
         if phase != 'testing':
