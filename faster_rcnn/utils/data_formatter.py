@@ -160,11 +160,11 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 loc_img['annotations'].append(loc_ann.copy())
             master_list.append(loc_img.copy())
             print(f"Image {i+1} completed")
-            print(master_list)
 
                 
             if phase == 'testing' and i == 10:
                 result = "testing complete"
+                print(master_list)
                 return result
         if phase != 'testing':
             np.save(os.path.join(save_dir, 'num_classes_per_image.npy'), num_classes_per_image)
