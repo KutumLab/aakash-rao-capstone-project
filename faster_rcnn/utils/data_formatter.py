@@ -68,8 +68,8 @@ def make_folds(npy_path, save_dir, folds,seed=42):
             fold_dir = os.path.join(save_dir, f"fold_{i+1}")
             if not os.path.exists(fold_dir):
                 os.makedirs(fold_dir)
-            fold_test = train[i*number_per_fold:(i+1)*number_per_fold]
-            fold_train = train[:i*number_per_fold] + train[(i+1)*number_per_fold:]
+            fold_test = train[int(i*number_per_fold):int((i+1)*number_per_fold)]
+            fold_train = train[:int(i*number_per_fold)] + train[int((i+1)*number_per_fold):]
 
                 
             if phase == 'testing' and i == 10:
