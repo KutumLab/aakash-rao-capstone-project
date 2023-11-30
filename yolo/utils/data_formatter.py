@@ -51,8 +51,21 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
         test_len = 0.2*len(images)
         test_imgs = images[:int(test_len)]
         test_masks = masks[:int(test_len)]
+        # removing test images from images
 
-        for image in tqdm (test_imgs, desc="Creating Test...", ascii=False, ncols=75):
+        for image in test_imgs:
+            try:
+                images.remove(image)
+            except:
+                pass
+
+        for mask in test_masks:
+            try:
+                masks.remove(mask)
+            except:
+                pass
+
+        for img in tqdm (test_imgs, desc="Creating Test...", ascii=False, ncols=75):
             im_save_path = os.path.join(save_dir,'test', 'images')
             mask_save_path = os.path.join(save_dir,'test', 'labels')
             if not os.path.exists(im_save_path):
@@ -194,5 +207,5 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
-    make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'labels'), args.save_dir, int(args.folds), int(args.seed))
-    plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
+    # make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'labels'), args.save_dir, int(args.folds), int(args.seed))
+    # plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
