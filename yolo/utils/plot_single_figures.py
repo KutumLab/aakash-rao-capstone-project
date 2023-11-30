@@ -46,6 +46,7 @@ def plot(src_path, phase):
             results = results.rename(columns=translation_dict)
             results = results[relevant_keys]
             for key in relevant_keys:
+                print(key)
                 plt.figure(figsize=(5, 5))
                 x_key = 'epoch'
                 plt.plot(results[x_key], results[key], color='#0000FF', linewidth=2)
