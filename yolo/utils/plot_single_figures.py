@@ -21,7 +21,7 @@ def plot(src_path, phase):
             if not os.path.exists(plot_save_path):
                 os.makedirs(plot_save_path)
             if phase == "testing":
-                print(results)
+                print(results.columns)
                 return
 
             
