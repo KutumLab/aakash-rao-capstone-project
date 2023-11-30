@@ -59,7 +59,7 @@ def plot(src_path, phase):
                 plt.yticks(fontsize=10)
                 plt.grid(True)
                 plt.tight_layout()
-                plt.savefig(os.path.join(plot_save_path, plot_save_names_dict[key] + ".png"))
+                plt.savefig(os.path.join(plot_save_path, plot_save_names_dict[key] + ".png"), dpi=300)
 
             if phase == "testing":
                 print(results.columns)
