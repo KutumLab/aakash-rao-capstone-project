@@ -130,7 +130,7 @@ def train_detectron2(cfg,fold,data_path):
     trainer = MyTrainer(cfg) 
     trainer.resume_or_load(resume=False)
     history = trainer.train()
-    evaluator = DefaultTrainer.build_evaluator(trainer)
+    # evaluator = DefaultTrainer.build_evaluator(trainer)
 
     print(history)
 
