@@ -206,6 +206,6 @@ if __name__ == '__main__':
 
     args = argparser.parse_args()
 
-    image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
-    # make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'labels'), args.save_dir, int(args.folds), int(args.seed))
-    # plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
+    # image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'labels'), args.save_dir, int(args.folds), int(args.seed))
+    plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
