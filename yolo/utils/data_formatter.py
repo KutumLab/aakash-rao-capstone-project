@@ -49,6 +49,7 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
         random.shuffle(masks)
 
         test_len = 0.2*len(images)
+        print(f"Test length: {test_len}")
         test_imgs = images[:int(test_len)]
         test_masks = masks[:int(test_len)]
         # removing test images from images
