@@ -42,6 +42,33 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
     else:
         images = os.listdir(image_dir)
         masks = os.listdir(mask_dir)
+
+        random.seed(seed)
+        random.shuffle(images)
+        random.seed(seed)
+        random.shuffle(masks)
+
+        test_len = 0.2*len(images)
+        test_imgs = images[:int(test_len)]
+        test_masks = masks[:int(test_len)]
+
+        for image in tqdm (test_imgs, desc="Creating Test...", ascii=False, ncols=75):
+            im_save_path = os.path.join(save_dir,'test', 'images')
+            mask_save_path = os.path.join(save_dir,'test', 'labels')
+            if not os.path.exists(im_save_path):
+                os.makedirs(im_save_path)
+            if not os.path.exists(mask_save_path):
+                os.makedirs(mask_save_path)
+            time.sleep(0.01)
+            image_path = os.path.join(image_dir, image)
+            mask_path = os.path.join(mask_dir, image.split('.png')[0] + '.txt')
+            shutil.copy(image_path, im_save_path)
+            shutil.copy(mask_path, mask_save_path)
+
+        images = images[int(test_len):]
+        masks = masks[int(test_len):]
+
+
         len_of_each_fold = len(images) // folds
 
         random.seed(seed)
