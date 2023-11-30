@@ -28,7 +28,7 @@ echo $BATCH_SIZE
 echo $DEVICE
 echo $SAVE_PERIOD
 
-python ./yolov5/val.py --img $IMG_SIZE --data $YAML_FOLD_1 --weights $PROJECT/yolov5m-fold_1/weights/best.pt --device $DEVICE --batch-size $BATCH_SIZE --project $PROJECT --name yolov5m-fold_1
+python ./yolov5/val.py --img $IMG_SIZE --data $YAML_FOLD_1 --weights $PROJECT/yolov5m-fold_1/weights/best.pt --device $DEVICE --batch-size $BATCH_SIZE --project $PROJECT --name yolov5m-fold_1 --task test --save-txt --save-conf --save-hybrid --save-json
 # python ./yolov5/val.py --img $IMG_SIZE --data $YAML_FOLD_2 --weights $PROJECT/yolov5m-fold_2/weights/best.pt --device $DEVICE --batch-size $BATCH_SIZE --project $PROJECT --name yolov5m-fold_2
 # python ./yolov5/val.py --img $IMG_SIZE --data $YAML_FOLD_3 --weights $PROJECT/yolov5m-fold_3/weights/best.pt --device $DEVICE --batch-size $BATCH_SIZE --project $PROJECT --name yolov5m-fold_3
 
