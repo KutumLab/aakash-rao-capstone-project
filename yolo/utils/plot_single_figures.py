@@ -55,9 +55,11 @@ def plot(src_path, phase):
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.xlim(x_y_lim_dict[x_key])
                 plt.ylim(x_y_lim_dict[key])
+                plt.xticks(fontsize=10)
+                plt.yticks(fontsize=10)
                 plt.grid(True)
-                plt.savefig(os.path.join(plot_save_path, plot_save_names_dict[key] + ".png"))
                 plt.tight_layout()
+                plt.savefig(os.path.join(plot_save_path, plot_save_names_dict[key] + ".png"))
 
             if phase == "testing":
                 print(results.columns)
