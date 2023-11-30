@@ -17,7 +17,7 @@ translation_array = ['epoch', 'train_box_loss', 'train_obj_loss',
          'lr1', 'lr2']
 translation_dict = dict(zip(keys, translation_array))
 relevant_keys = ['epoch', 'train_box_loss', 'train_obj_loss', 'train_cls_loss', 'metrics_precision', 'metrics_recall', 'metrics_mAP_0.5', 'metrics_mAP_0.5:0.95']
-plot_titles = ['Box loss', 'Object loss', 'Class loss', 'Precision', 'Recall', 'mAP at IoU=0.5', 'mAP at IoU=0.5:0.95']
+plot_titles = ['Epoch','Box loss', 'Object loss', 'Class loss', 'Precision', 'Recall', 'mAP at IoU=0.5', 'mAP at IoU=0.5:0.95']
 axis_labels = ['Epoch', 'Loss', 'Loss', 'Loss', 'Precision', 'Recall', 'mAP', 'mAP']
 x_y_lim =     [[0,200], [0,10], [0,10], [0,10],  [0,1],      [0,1],    [0,1],  [0,1]]
 plot_save_names = ['epoch','box_loss', 'obj_loss', 'cls_loss', 'precision', 'recall', 'mAP_50', 'mAP_50_95']
