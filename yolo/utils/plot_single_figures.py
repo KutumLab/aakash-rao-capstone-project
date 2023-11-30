@@ -19,13 +19,11 @@ translation_dict = dict(zip(keys, translation_array))
 relevant_keys = ['epoch', 'train_box_loss', 'train_obj_loss', 'train_cls_loss', 'metrics_precision', 'metrics_recall', 'metrics_mAP_0.5', 'metrics_mAP_0.5:0.95']
 plot_titles = ['Epoch','Box loss', 'Object loss', 'Class loss', 'Precision', 'Recall', 'mAP at IoU=0.5', 'mAP at IoU=0.5:0.95']
 axis_labels = ['Epoch', 'Loss', 'Loss', 'Loss', 'Precision', 'Recall', 'mAP', 'mAP']
-x_y_lim =     [[0,200], [0,10], [0,10], [0,10],  [0,1],      [0,1],    [0,1],  [0,1]]
 plot_save_names = ['epoch','box_loss', 'obj_loss', 'cls_loss', 'precision', 'recall', 'mAP_50', 'mAP_50_95']
 
 # dictionary to map the keys to the plot titles
 plot_titles_dict = dict(zip(relevant_keys, plot_titles))
 axis_labels_dict = dict(zip(relevant_keys, axis_labels))
-x_y_lim_dict = dict(zip(relevant_keys, x_y_lim))
 plot_save_names_dict = dict(zip(relevant_keys, plot_save_names))
 
 
@@ -53,11 +51,19 @@ def plot(src_path, phase):
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
-                plt.xlim(x_y_lim_dict[x_key])
-                plt.ylim(x_y_lim_dict[key])
+                if 'loss' in key:
+                    plt.ylim(0, max(results[key]))
+                else:
+                    plt.ylim(0, 1)
+
+                if 'mAP' in key:
+                    max_result_index = numpy.argmax(results[key])
+                    epoch_max_result = results[x_key][max_result_index]
+                    plt.annotate(f"Max: {results[key][max_result_index]:.3f}\nat epoch {epoch_max_result}", xy=(epoch_max_result, results[key][max_result_index]), xytext=(epoch_max_result, results[key][max_result_index]+0.1),arrowprops=dict(arrowstyle='->',connectionstyle='arc3,rad=.5'), fontsize=10, fontweight='bold')
                 plt.xticks(fontsize=10)
                 plt.yticks(fontsize=10)
-                plt.grid(True)
+                # plt.grid(True)
+
                 plt.tight_layout()
                 plt.savefig(os.path.join(plot_save_path, plot_save_names_dict[key] + ".png"), dpi=300)
 
