@@ -23,7 +23,7 @@ def json_gen(path):
         df = pd.concat([df, pd.DataFrame(item, index=[0])], ignore_index=True)
     # sorting df to iteration
     df = df.sort_values(by=['iteration'])
-    print(df.head())
+    print(df.head()['iteration'])
 
 
 if __name__ == '__main__':
