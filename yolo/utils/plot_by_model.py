@@ -1,6 +1,6 @@
 import os
 import numpy
-import pandas
+import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
 
@@ -49,7 +49,7 @@ def plot_model_individual(src_path, phase):
                 elif folder not in dir:
                     continue
                 else:
-                    results = pandas.read_csv(os.path.join(src_path,dir, "results.csv"))
+                    results = pd.read_csv(os.path.join(src_path,dir, "results.csv"))
                     results = results.rename(columns=translation_dict)
                     results = results[relevant_keys]
                     resultdict[dir] = results
@@ -94,11 +94,12 @@ def plot_model_individual_with_collective(src_path, phase):
                 elif folder not in dir:
                     continue
                 else:
-                    results = pandas.read_csv(os.path.join(src_path,dir, "results.csv"))
+                    results = pd.read_csv(os.path.join(src_path,dir, "results.csv"))
                     results = results.rename(columns=translation_dict)
                     results = results[relevant_keys]
                     resultdict[dir] = results
             folds = len(resultdict.keys())
+            result_df = pd.DataFrame(columns=relevant_keys)
             for key in relevant_keys:
                 if key == 'epoch':
                     continue
@@ -113,6 +114,7 @@ def plot_model_individual_with_collective(src_path, phase):
                 print(metric_sums)
                 sem = numpy.std(metric_sums, axis=0)#/numpy.sqrt(folds)
                 metric_sums = numpy.mean(metric_sums, axis=0)
+                result_df[key] = metric_sums
                 print(metric_sums)
                 print(sem)
 
@@ -132,6 +134,8 @@ def plot_model_individual_with_collective(src_path, phase):
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + "_mean.png"), dpi=300)
                 plt.close()
+            result_df['epoch'] = results['epoch']
+            pd.DataFrame.to_csv(result_df, os.path.join(output_path, "results.csv"),index=False)
                 
             if phase == "testing":
                 return

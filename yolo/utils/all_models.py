@@ -38,62 +38,30 @@ def plot(src_path, phase):
         print("Empty folder: ", src_path)
         raise FileNotFoundError(src_path)
     else:
+        output_path = os.path.join(src_path)
+        resultdict = {}
+        if not os.path.exists(output_path):
+            os.makedirs(output_path)
         for folder in model_list:
-            output_path = os.path.join(src_path, folder)
-            if not os.path.exists(output_path):
-                os.makedirs(output_path)
-            resultdict = {}
-            for dir in os.listdir(src_path):
-                if dir==folder:
-                    continue
-                elif folder not in dir:
-                    continue
-                else:
-                    results = pd.read_csv(os.path.join(src_path,dir, "results.csv"))
-                    results = results.rename(columns=translation_dict)
-                    results = results[relevant_keys]
-                    resultdict[dir] = results
-            folds = len(resultdict.keys())
-            result_df = pd.DataFrame(columns=relevant_keys)
-            for key in relevant_keys:
-                if key == 'epoch':
-                    continue
-                plt.figure(figsize=(4,4))
-                x_key = 'epoch'
-                metric_sums = []
-                for dir in resultdict.keys():
-                    results = resultdict[dir]
-                    metric_sums.append(results[key])
-                metric_sums = numpy.array(metric_sums)
-                metric_sums = metric_sums.reshape(folds, -1)
-                print(metric_sums)
-                sem = numpy.std(metric_sums, axis=0)#/numpy.sqrt(folds)
-                metric_sums = numpy.mean(metric_sums, axis=0)
-                result_df[key] = metric_sums
-                print(metric_sums)
-                print(sem)
-
-                plt.plot(metric_sums, color='#0000FF', linewidth=1)
-                # errorbars at every 5th point without connecting lines
-                plt.errorbar(numpy.arange(0, len(metric_sums), 5), metric_sums[::5], yerr=sem[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
+            results = pd.read_csv(os.path.join(src_path, folder, "results.csv"))
+            results = results.rename(columns=translation_dict)
+            results = results[relevant_keys]
+            resultdict[folder] = results
+        
+        for key in relevant_keys:
+            plt.figure(figsize=(4,4))
+            x_key = 'epoch'
+            for dir in resultdict.keys():
+                plt.plot(resultdict[dir][x_key], resultdict[dir][key], label=dir)
+            plt.title(plot_titles_dict[key])
+            plt.xlabel(axis_labels_dict[key])
+            plt.ylabel(axis_labels_dict[key])
+            plt.legend()
+            plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"))
+            plt.close()
                 
-
-                plt.title(f'{plot_titles_dict[key]} for {folder}', fontsize=14, fontweight='bold')
-                plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
-                plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
-                if 'loss' in key:
-                    plt.ylim(0, max(results[key]))
-                else:
-                    plt.ylim(0, 1)
-
-                plt.tight_layout()
-                plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + "_mean.png"), dpi=300)
-                plt.close()
-            result_df['epoch'] = results['epoch']
-            pd.DataFrame.to_csv(result_df, os.path.join(output_path, "results.csv"),index=False)
-                
-            if phase == "testing":
-                return
+        if phase == "testing":
+            return
 
             
 if __name__ == "__main__":
