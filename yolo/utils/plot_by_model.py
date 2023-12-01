@@ -67,11 +67,7 @@ def plot_model_individual(src_path, phase):
                     plt.ylim(0, max(results[key]))
                 else:
                     plt.ylim(0, 1)
-
-                if 'mAP' in key:
-                    plt.legend(loc='lower right')
-                else:
-                    plt.legend(loc='upper right')
+                plt.legend(loc='best', fontsize=12)
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
                 plt.close()
