@@ -53,11 +53,11 @@ def plot(src_path, phase):
             x_key = 'epoch'
             for dir in resultdict.keys():
                 plt.plot(resultdict[dir][x_key], resultdict[dir][key], label=dir)
-            plt.title(plot_titles_dict[key])
-            plt.xlabel(axis_labels_dict[key])
-            plt.ylabel(axis_labels_dict[key])
-            plt.legend()
-            plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"))
+            plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
+            plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+            plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+            plt.legend(loc = 'best', fontsize=12)
+            plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
             plt.close()
                 
         if phase == "testing":
