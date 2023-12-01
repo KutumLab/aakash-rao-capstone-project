@@ -10,14 +10,13 @@ def json_gen(path):
     with open(os.path.join(path, 'metrics.json'), 'r') as f:
         for line in f:
             json_data.append(json.loads(line))
-    keys = []
+    keys = np.array([])
     for item in json_data:
-        keys.append(list(item.keys()))
-    # reshape
-    keys = np.asarray(keys, dtype="object")
-    keys = np.array(keys)
-    keys = keys.reshape(-1)
+        items = list(item.keys())
+        items = np.array(items)
+        keys = np.concatenate((keys, items))
     keys = np.unique(keys)
+    
     print(keys)
 
 if __name__ == '__main__':
