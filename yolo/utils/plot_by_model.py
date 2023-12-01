@@ -44,7 +44,7 @@ def plot(src_path, phase):
             if not os.path.exists(output_path):
                 print("File not found: ", output_path)
                 raise FileNotFoundError(output_path)
-            for dir in os.listdir(output_path):
+            for dir in os.listdir(src_path):
                 if dir=='folder':
                     continue
                 elif folder not in dir:
