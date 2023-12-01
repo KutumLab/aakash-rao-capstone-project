@@ -65,10 +65,9 @@ def generate_coco_dataset(data_path, fold):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     
-    # register_coco_instances(f'fold_{fold}_train', {}, os.path.join(output_dir, f'train.json'), output_dir)
-    # register_coco_instances(f'fold_{fold}_val', {}, os.path.join(output_dir, f'val.json'), output_dir)
-    # register_coco_instances(f'test', {}, os.path.join(output_dir, f'test.json'), output_dir)
     convert_to_coco_json(f'fold_{fold}_train', os.path.join(output_dir, f'train.json'), allow_cached=True)
+    convert_to_coco_json(f'fold_{fold}_val', os.path.join(output_dir, f'val.json'), allow_cached=True)
+    convert_to_coco_json(f'test', os.path.join(output_dir, f'test.json'), allow_cached=True)
 
     return
 
