@@ -11,7 +11,7 @@ def plot_model(path):
     info = info.sort_values(by=['iteration'])
     # remove nas
     info = info.dropna(axis=1)
-    print(info.head()['iteration'])
+    print(info.head())
 
 if __name__ == '__main__':
     argparse = argparse.ArgumentParser()
