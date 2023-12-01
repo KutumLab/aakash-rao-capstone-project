@@ -40,6 +40,18 @@ def plot(src_path, phase):
     else:
         for folder in model_list:
             print(folder)
+            output_path = os.path.join(src_path, folder)
+            if not os.path.exists(output_path):
+                print("File not found: ", output_path)
+                raise FileNotFoundError(output_path)
+            for dir in os.listdir(output_path):
+                if dir=='folder':
+                    continue
+                elif folder not in dir:
+                    continue
+                else:
+                    print(dir)
+            
 
             if phase == "testing":
                 return
