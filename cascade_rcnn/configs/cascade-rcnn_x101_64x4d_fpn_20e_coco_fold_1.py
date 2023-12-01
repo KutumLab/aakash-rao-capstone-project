@@ -5,7 +5,7 @@ _base_ = f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-
 # We also need to change the num_classes in head to match the dataset's annotation
 model = dict(
     roi_head=dict(
-        bbox_head=dict(num_classes=1), mask_head=dict(num_classes=1)))
+        bbox_head=dict(num_classes=4), mask_head=False))
 
 # Modify dataset related settings
 data_root = ''
