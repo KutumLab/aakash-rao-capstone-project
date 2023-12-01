@@ -60,7 +60,7 @@ def plot_model_individual(src_path, phase):
                 for dir in resultdict.keys():
                     results = resultdict[dir]
                     plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1)
-                plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
+                plt.title(f'{plot_titles_dict[key]} for {folder}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.legend(loc='upper right')
@@ -126,7 +126,7 @@ def plot_model_individual_with_collective(src_path, phase):
                 plt.errorbar(numpy.arange(0, len(metric_sums), 5), metric_sums[::5], yerr=sem[::5], capsize=1, capthick=1, elinewidth=1, color='#0000FF', linewidth=0)
                 
 
-                plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
+                plt.title(f'{plot_titles_dict[key]} for {folder}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 if 'loss' in key:
@@ -153,4 +153,4 @@ if __name__ == "__main__":
     parser.add_argument("--phase", type=str, default="testing", help="phase to plot")
     args = parser.parse_args()
     # plot_model_individual(args.src_path, args.phase)
-    plot_model_individual_with_collective(args.src_path, args.phase)
+    # plot_model_individual_with_collective(args.src_path, args.phase)
