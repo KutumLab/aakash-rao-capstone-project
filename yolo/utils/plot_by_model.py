@@ -122,9 +122,9 @@ def plot_model_individual_with_collective(src_path, phase):
                 print(sem)
 
                 plt.plot(metric_sums)
-                # errorbars
-                plt.fill_between(range(len(metric_sums)), metric_sums-sem, metric_sums+sem, alpha=0.5)
-                plt.errorbar(range(len(metric_sums))[::5], metric_sums[::5], yerr=sem[::5], color='r', ecolor='r', capsize=3)
+                # errorbars at every 5th point without connecting lines
+                plt.errorbar(numpy.arange(0, len(metric_sums), 5), metric_sums[::5], yerr=sem[::5], fmt=None, capsize=5, capthick=1, elinewidth=1, color='#0000FF', linewidth=0)
+                
 
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
