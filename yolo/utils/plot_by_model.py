@@ -76,7 +76,7 @@ def plot(src_path, phase):
                 else:
                     plt.legend(loc='upper right')
 
-                plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"))
+                plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
                 plt.close()
                 # break
 
