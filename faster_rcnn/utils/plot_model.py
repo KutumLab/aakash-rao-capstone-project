@@ -1,7 +1,7 @@
-import json
 import argparse
 import os
 import numpy as np
+import matplotlib.pyplot as plt
 import pandas as pd
 
 cols = ['bbox/AP', 'bbox/AP-nonTIL_stromal', 'bbox/AP-other', 'bbox/AP-sTIL',
@@ -17,7 +17,12 @@ relevant_cols = ['bbox/AP', 'bbox/AP-nonTIL_stromal', 'bbox/AP-other', 'bbox/AP-
 
 translations_arr = ['mAP', 'map0', 'map1', 'map2','map3', 'mAP50', 'mAP75', 'iteration', 'loss_box_reg', 'loss_cls', 'total_loss', 'validation_loss']
 
+axis_arr = ['mAP', 'mAP', 'mAP', 'mAP','mAP', 'mAP50', 'mAP75', 'Iterations', 'Loss', 'Loss', 'Loss', 'Loss']
+
 titles_arr = ['mean AP', 'mean AP for nonTIL_stromal', 'mean AP for other', 'mean AP for sTIL','mean AP for tumor_any', 'mean AP at IoU 50', 'mean AP at IoU 75', 'iteration', 'Box Loss', 'Class Loss', 'Total Loss', 'Validation Loss']
+title_dict = dict(zip(relevant_cols, titles_arr))
+axis_dict = dict(zip(relevant_cols, axis_arr))
+x_axis = 'iteration'
 
 def plot_model(path):
     # read json file
@@ -25,7 +30,23 @@ def plot_model(path):
     info = info[relevant_cols]
     info = info.rename(columns=dict(zip(relevant_cols, translations_arr))) 
     info_cols = info.columns
-    print(info_cols)
+    print(info_cols)    
+    plot_save_path = os.path.join(path, 'plots')
+    if not os.path.exists(plot_save_path):
+        os.makedirs(plot_save_path)
+    for col in info_cols:
+        if col == 'iteration':
+            continue
+        plt.figure(figsize=(4, 4))
+        copy_info = info.copy()
+        copy_info = copy_info[[x_axis, col]].dropna(axis=0, how='any')
+        plt.plot(info[x_axis], info[col])
+        plt.title(title_dict[col], fontsize=14, fontweight='bold')
+        plt.xlabel(axis_dict[col], fontsize=14, fontweight='bold')
+        plt.ylabel(col, fontsize=14, fontweight='bold')
+        plt.savefig(os.path.join(plot_save_path, col + '.png'))
+
+            
 
 if __name__ == '__main__':
     argparse = argparse.ArgumentParser()
