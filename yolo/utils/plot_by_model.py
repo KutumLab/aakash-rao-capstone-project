@@ -55,12 +55,12 @@ def plot_model_individual(src_path, phase):
                     resultdict[dir] = results
             folds = len(resultdict.keys())
             for key in relevant_keys:
-                plt.figure(figsize=(5, 5))
+                plt.figure(figsize=(4,4))
                 x_key = 'epoch'
                 for dir in resultdict.keys():
                     results = resultdict[dir]
                     plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1)
-                plt.title(f'{plot_titles_dict[key]} for {folder}', fontsize=14, fontweight='bold')
+                plt.title(f'{plot_titles_dict[key]} for {folder} \n fold {dir[-1]}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.legend(loc='upper right')
@@ -107,7 +107,7 @@ def plot_model_individual_with_collective(src_path, phase):
             for key in relevant_keys:
                 if key == 'epoch':
                     continue
-                plt.figure(figsize=(5, 5))
+                plt.figure(figsize=(4,4))
                 x_key = 'epoch'
                 metric_sums = []
                 for dir in resultdict.keys():
