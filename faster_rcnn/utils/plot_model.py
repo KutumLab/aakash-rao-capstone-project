@@ -40,12 +40,7 @@ def plot_model(path):
         plt.figure(figsize=(4, 4))
         copy_info = info.copy()
         copy_info = copy_info[[x_axis, col]].dropna(axis=0, how='any')
-        x = copy_info[x_axis]
-        y = copy_info[col]
-        if 'mAP' in col:
-            plt.ylim(0, 1)
-            x = [i/100 for i in x]
-        plt.plot(x, y)
+        plt.plot(copy_info[x_axis], copy_info[col]/1000, linewidth=1)
         plt.title(title_dict[col], fontsize=14, fontweight='bold')
         plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
         plt.ylabel(axis_dict[col], fontsize=14, fontweight='bold')
