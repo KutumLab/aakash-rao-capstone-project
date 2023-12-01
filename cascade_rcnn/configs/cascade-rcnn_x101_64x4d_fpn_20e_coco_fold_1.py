@@ -4,6 +4,7 @@ _base_ = f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-
 
 # We also need to change the num_classes in head to match the dataset's annotation
 model = dict(
+    type='CascadeRCNN',
     roi_head=dict(
         type='RPNHead',
         bbox_head=dict(num_classes=4), mask_head=False),
