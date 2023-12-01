@@ -18,6 +18,3 @@ if __name__ == '__main__':
     argparse.add_argument('--path', help='path to json file')
     args = argparse.parse_args()
     plot_model(args.path)
-
-
-    
