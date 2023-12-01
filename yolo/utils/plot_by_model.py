@@ -78,7 +78,7 @@ def plot(src_path, phase):
 
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"))
                 plt.close()
-                break
+                # break
 
                     
             
