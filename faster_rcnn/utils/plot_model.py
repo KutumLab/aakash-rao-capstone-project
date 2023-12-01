@@ -40,13 +40,15 @@ def plot_model(path):
         plt.figure(figsize=(4, 4))
         copy_info = info.copy()
         copy_info = copy_info[[x_axis, col]].dropna(axis=0, how='any')
-        plt.plot(copy_info[x_axis], copy_info[col]/1000, linewidth=1)
+        plt.plot(copy_info[x_axis], copy_info[col]/100, linewidth=1)
         plt.title(title_dict[col], fontsize=14, fontweight='bold')
         plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
         plt.ylabel(axis_dict[col], fontsize=14, fontweight='bold')
         plt.xticks(np.arange(0, copy_info[x_axis].max()+1, 3000), fontsize=10)
         plt.yticks(fontsize=10)
         plt.xlim(0, copy_info[x_axis].max()+10)
+        if 'mAP' in col:
+            plt.ylim(0, 1)
         plt.tight_layout()
         plt.savefig(os.path.join(plot_save_path, col + '.png'), dpi=300)
 
