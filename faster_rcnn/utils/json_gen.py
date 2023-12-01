@@ -2,6 +2,7 @@ import json
 import argparse
 import os
 import numpy as np
+import pandas as pd
 
 
 def json_gen(path):
@@ -16,8 +17,14 @@ def json_gen(path):
         items = np.array(items)
         keys = np.concatenate((keys, items))
     keys = np.unique(keys)
-    
-    print(keys)
+
+    df  = pd.DataFrame(columns=keys)
+    for item in json_data:
+        df = df.append(item, ignore_index=True)
+    # sorting df to iteration
+    df = df.sort_values(by=['iteration'])
+    print(df.head())
+
 
 if __name__ == '__main__':
     argparse = argparse.ArgumentParser()
