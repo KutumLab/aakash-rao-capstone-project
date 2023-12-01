@@ -62,7 +62,7 @@ def plot(src_path, phase):
                 x_key = 'epoch'
                 for dir in resultdict.keys():
                     results = resultdict[dir]
-                    plt.plot(results[x_key], results[key], label=[f'fold {i}' for i in range(folds)], linewidth=1)
+                    plt.plot(results[x_key], results[key], label=[f'fold {dir[-1]}'], linewidth=1)
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
