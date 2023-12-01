@@ -5,6 +5,7 @@ _base_ = f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-
 # We also need to change the num_classes in head to match the dataset's annotation
 model = dict(
     roi_head=dict(
+        type='RPNHead',
         bbox_head=dict(num_classes=4), mask_head=False),
         # setting _delete_=True will delete the attribute in the original config file
         _delete_=True,
