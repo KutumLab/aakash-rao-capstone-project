@@ -114,6 +114,10 @@ def plot_model_individual_with_collective(src_path, phase):
                 metric_sums = numpy.array(metric_sums)
                 metric_sums = metric_sums.reshape(folds, -1)
                 print(metric_sums)
+                sem = numpy.std(metric_sums, axis=0)/numpy.sqrt(folds)
+                metric_sums = numpy.mean(metric_sums, axis=0)
+                print(metric_sums)
+                print(sem)
                 break
 
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
