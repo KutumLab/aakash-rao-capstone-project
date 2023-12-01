@@ -20,7 +20,7 @@ def json_gen(path):
 
     df  = pd.DataFrame(columns=keys)
     for item in json_data:
-        df = df.append(item, ignore_index=True)
+        df = pd.concat([df, pd.DataFrame(item, index=[0])], ignore_index=True)
     # sorting df to iteration
     df = df.sort_values(by=['iteration'])
     print(df.head())
