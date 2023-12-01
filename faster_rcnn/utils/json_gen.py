@@ -5,9 +5,10 @@ import os
 
 def json_gen(path):
     # read json file
-    json_data = {}
+    json_data = []
     with open(os.path.join(path, 'metrics.json'), 'r') as f:
-        json_data = json.load(f)
+        for line in f:
+            json_data.append(json.loads(line))
     print(json_data)
 
 if __name__ == '__main__':
