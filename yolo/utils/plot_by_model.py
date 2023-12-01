@@ -55,7 +55,7 @@ def plot(src_path, phase):
                     results = results.rename(columns=translation_dict)
                     results = results[relevant_keys]
                     resultdict[dir] = results
-
+            folds = len(resultdict.keys())
             for key in relevant_keys:
                 print(key)
                 plt.figure(figsize=(5, 5))
@@ -66,6 +66,7 @@ def plot(src_path, phase):
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+                plt.legend([f'fold {i}' for i in range(folds)])
                 if 'loss' in key:
                     plt.ylim(0, max(results[key]))
                 else:
@@ -79,6 +80,15 @@ def plot(src_path, phase):
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
                 plt.close()
                 # break
+            for key in relevant_keys:
+                print(key)
+                plt.figure(figsize=(5, 5))
+                x_key = 'epoch'
+                for dir in resultdict.keys():
+                    results = resultdict[dir]
+                # finding mean across three models
+
+
 
                     
             
