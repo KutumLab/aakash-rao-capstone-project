@@ -74,8 +74,8 @@ def plot_model_individual(src_path, phase):
                 else:
                     plt.legend(loc='upper right')
 
-            plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
-            plt.close()
+                plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
+                plt.close()
                 # break
                 # finding mean across three models
 
@@ -124,7 +124,7 @@ def plot_model_individual_with_collective(src_path, phase):
                 else:
                     plt.legend(loc='upper right')
 
-            plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
+            plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + "_mean.png"), dpi=300)
             plt.close()
                 # break
                 # finding mean across three models
@@ -143,5 +143,5 @@ if __name__ == "__main__":
     parser.add_argument("--src_path", type=str, default="results", help="path to the results folder")
     parser.add_argument("--phase", type=str, default="testing", help="phase to plot")
     args = parser.parse_args()
-    # plot_model_individual(args.src_path, args.phase)
-    plot_model_individual_with_collective(args.src_path, args.phase)
+    plot_model_individual(args.src_path, args.phase)
+    # plot_model_individual_with_collective(args.src_path, args.phase)
