@@ -1,6 +1,6 @@
 # The new config inherits a base config to highlight the necessary modification
-base_path = '/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project'
-_base_ = f'{base_path}mmdetection_base/mmdetection/configs/cascade_rcnn/cascade-rcnn_x101_64x4d_fpn_20e_coco.py'
+
+_base_ = f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/mmdetection_base/mmdetection/configs/cascade_rcnn/cascade-rcnn_x101_64x4d_fpn_20e_coco.py'
 
 # We also need to change the num_classes in head to match the dataset's annotation
 model = dict(
@@ -17,25 +17,25 @@ train_dataloader = dict(
     dataset=dict(
         data_root=data_root,
         metainfo=metainfo,
-        ann_file=f'{base_path}datasets/mmdetection/fold_1/train.json')
+        ann_file=f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/mmdetection/fold_1/train.json')
 )
 val_dataloader = dict(
     dataset=dict(
         data_root=data_root,
         metainfo=metainfo,
-        ann_file=f'{base_path}datasets/mmdetection/fold_1/val.json')
+        ann_file=f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/mmdetection/fold_1/val.json')
 )
 test_dataloader = dict(
     dataset=dict(
         data_root=data_root,
         metainfo=metainfo,
         test_mode=True,
-        ann_file=f'{base_path}datasets/mmdetection/fold_1/test.json')
+        ann_file=f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/mmdetection/fold_1/test.json')
 )
 
 # Modify metric related settings
-val_evaluator = dict(ann_file=f'{base_path}datasets/mmdetection/fold_1/val.json')
-test_evaluator = dict(ann_file=f'{base_path}datasets/mmdetection/fold_1/test.json')
+val_evaluator = dict(ann_file=f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/mmdetection/fold_1/val.json')
+test_evaluator = dict(ann_file=f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/mmdetection/fold_1/test.json')
 
 train_cfg = dict(
     type='EpochBasedTrainLoop',  # The training loop type. Refer to https://github.com/open-mmlab/mmengine/blob/main/mmengine/runner/loops.py
