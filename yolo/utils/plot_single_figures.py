@@ -36,6 +36,7 @@ def plot(src_path, phase):
         raise FileNotFoundError(src_path)
     else:
         for folder in os.listdir(src_path):
+            print(folder)
             outpath = os.path.join(src_path, folder)
             results = pandas.read_csv(os.path.join(outpath, "results.csv"))
             plot_save_path = os.path.join(outpath, "plot")
@@ -67,9 +68,9 @@ def plot(src_path, phase):
                 plt.tight_layout()
                 plt.savefig(os.path.join(plot_save_path, plot_save_names_dict[key] + ".png"), dpi=300)
 
-            if phase == "testing":
-                print(results.columns)
-                return
+            # if phase == "testing":
+            #     print(results.columns)
+            #     return
 
             
 if __name__ == "__main__":
