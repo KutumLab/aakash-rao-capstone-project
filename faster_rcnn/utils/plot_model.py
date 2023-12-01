@@ -47,7 +47,8 @@ def plot_model(path):
         plt.xticks(np.arange(0, copy_info[x_axis].max()+1, 3000), fontsize=10)
         plt.yticks(fontsize=10)
         plt.xlim(0, copy_info[x_axis].max()+10)
-        if 'mAP' in col:
+        # check if mAP is a substring of the column name
+        if 'map' in col.lower():
             plt.ylim(0, 1)
         plt.tight_layout()
         plt.savefig(os.path.join(plot_save_path, col + '.png'), dpi=300)
