@@ -43,7 +43,7 @@ def plot(src_path, phase):
             output_path = os.path.join(src_path, folder)
             if not os.path.exists(output_path):
                 os.makedirs(output_path)
-            resultdf = pandas.DataFrame(columns=relevant_keys.copy().append('model'))
+            resultdict = {}
             for dir in os.listdir(src_path):
                 if dir==folder:
                     continue
@@ -52,6 +52,34 @@ def plot(src_path, phase):
                 else:
                     results = pandas.read_csv(os.path.join(src_path,dir, "results.csv"))
                     print(results)
+                    results = results.rename(columns=translation_dict)
+                    results = results[relevant_keys]
+                    resultdict[dir] = results
+
+            for key in relevant_keys:
+                print(key)
+                plt.figure(figsize=(5, 5))
+                x_key = 'epoch'
+                for dir in resultdict.keys():
+                    results = resultdict[dir]
+                    plt.plot(results[x_key], results[key], label=dir, linewidth=2)
+                plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
+                plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+                plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+                if 'loss' in key:
+                    plt.ylim(0, max(results[key]))
+                else:
+                    plt.ylim(0, 1)
+
+                if 'mAP' in key:
+                    plt.legend(loc='lower right')
+                else:
+                    plt.legend(loc='upper right')
+
+                plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"))
+                plt.close()
+                break
+
                     
             
 
