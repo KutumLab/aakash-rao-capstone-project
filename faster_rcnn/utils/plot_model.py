@@ -23,7 +23,7 @@ def plot_model(path):
     # read json file
     info = pd.read_csv(os.path.join(path, 'metrics.csv'), index_col=False, header=0)
     info = info[relevant_cols]
-    info = info.rename(columns=dict(zip(translations_arr, translations_arr))) 
+    info = info.rename(columns=dict(zip(relevant_cols, translations_arr))) 
     info_cols = info.columns
     print(info_cols)
 
