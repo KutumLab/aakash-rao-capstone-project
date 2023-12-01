@@ -8,10 +8,9 @@ import pandas as pd
 def plot_model(path):
     # read json file
     info = pd.read_csv(os.path.join(path, 'metrics.csv'), index_col=False, header=0)
-    # info = info.sort_values(by=['iteration'])
-    # # remove nas
-    # info = info.dropna(axis=1)
-    print(info)
+    info_cols = info.columns
+
+    print(info_cols)
 
 if __name__ == '__main__':
     argparse = argparse.ArgumentParser()
