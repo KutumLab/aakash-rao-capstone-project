@@ -18,8 +18,6 @@ def json_gen(path):
     keys = np.array(keys)
     keys = keys.reshape(-1)
     keys = np.unique(keys)
-
-    print(json_data)
     print(keys)
 
 if __name__ == '__main__':
