@@ -66,7 +66,7 @@ def plot(src_path, phase):
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
-                plt.legend([f'fold {i}' for i in range(folds)])
+                plt.legend([f'fold {i}' for i in range(folds)],[dir for dir in resultdict.keys()]],loc='best')
                 if 'loss' in key:
                     plt.ylim(0, max(results[key]))
                 else:
