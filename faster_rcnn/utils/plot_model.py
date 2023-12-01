@@ -20,8 +20,8 @@ translations_arr = ['mAP', 'map0', 'map1', 'map2','map3', 'mAP50', 'mAP75', 'ite
 axis_arr = ['mAP', 'mAP', 'mAP', 'mAP','mAP', 'mAP50', 'mAP75', 'Iterations', 'Loss', 'Loss', 'Loss', 'Loss']
 
 titles_arr = ['mean AP', 'mean AP for nonTIL_stromal', 'mean AP for other', 'mean AP for sTIL','mean AP for tumor_any', 'mean AP at IoU 50', 'mean AP at IoU 75', 'iteration', 'Box Loss', 'Class Loss', 'Total Loss', 'Validation Loss']
-title_dict = dict(zip(relevant_cols, titles_arr))
-axis_dict = dict(zip(relevant_cols, axis_arr))
+title_dict = dict(zip(translations_arr, titles_arr))
+axis_dict = dict(zip(translations_arr, axis_arr))
 x_axis = 'iteration'
 
 def plot_model(path):
