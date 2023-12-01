@@ -45,7 +45,7 @@ def plot(src_path, phase):
                 os.makedirs(output_path)
             resultdf = pandas.DataFrame(columns=relevant_keys.copy().append('model'))
             for dir in os.listdir(src_path):
-                if dir=='folder':
+                if dir==folder:
                     continue
                 elif folder not in dir:
                     continue
