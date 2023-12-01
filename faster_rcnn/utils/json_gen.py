@@ -1,11 +1,12 @@
 import json
 import argparse
+import os
 
 
 def json_gen(path):
     # read json file
     json_data = {}
-    with open(path, 'r') as f:
+    with open(os.path.join(path, 'metrics.json'), 'r') as f:
         json_data = json.load(f)
     print(json_data)
 
