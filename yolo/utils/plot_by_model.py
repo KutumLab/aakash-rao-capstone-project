@@ -63,7 +63,6 @@ def plot_model_individual(src_path, phase):
                 plt.title(f'{plot_titles_dict[key]} for {folder} \n fold {dir[-1]}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
-                plt.legend(loc='upper right')
                 if 'loss' in key:
                     plt.ylim(0, max(results[key]))
                 else:
@@ -73,7 +72,7 @@ def plot_model_individual(src_path, phase):
                     plt.legend(loc='lower right')
                 else:
                     plt.legend(loc='upper right')
-
+                plt.tight_layout()
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
                 plt.close()
                 # break
