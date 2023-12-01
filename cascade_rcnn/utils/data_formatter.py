@@ -22,6 +22,7 @@ fold = 1
 
 
 def generate_coco_dataset(data_path, fold):
+    print('Generating coco version...')
     def data_train():
         data = np.load(os.path.join(data_path, f'fold_{fold}', 'train.npy'), allow_pickle=True)
         data = list(data)
