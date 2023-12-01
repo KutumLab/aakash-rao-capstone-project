@@ -116,14 +116,14 @@ def plot_model_individual_with_collective(src_path, phase):
                 metric_sums = numpy.array(metric_sums)
                 metric_sums = metric_sums.reshape(folds, -1)
                 print(metric_sums)
-                sem = numpy.std(metric_sums, axis=0)/numpy.sqrt(folds)
+                sem = numpy.std(metric_sums, axis=0)#/numpy.sqrt(folds)
                 metric_sums = numpy.mean(metric_sums, axis=0)
                 print(metric_sums)
                 print(sem)
 
                 plt.plot(metric_sums)
                 # errorbars at every 5th point without connecting lines
-                plt.errorbar(numpy.arange(0, len(metric_sums), 5), metric_sums[::5], yerr=sem[::5], capsize=5, capthick=1, elinewidth=1, color='#0000FF', linewidth=0)
+                plt.errorbar(numpy.arange(0, len(metric_sums), 5), metric_sums[::5], yerr=sem[::5], capsize=1, capthick=1, elinewidth=1, color='#0000FF', linewidth=0)
                 
 
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
