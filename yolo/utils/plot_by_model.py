@@ -107,11 +107,13 @@ def plot_model_individual_with_collective(src_path, phase):
             for key in relevant_keys:
                 plt.figure(figsize=(5, 5))
                 x_key = 'epoch'
+                metric_sums = []
                 for dir in resultdict.keys():
                     results = resultdict[dir]
-                    # plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1, alpha=0.25)
-
-                print(resultdict)
+                    metric_sums.append(results[key])
+                metric_sums = numpy.array(metric_sums)
+                metric_sums = metric_sums.reshape(folds, -1)
+                print(metric_sums)
                 break
 
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
