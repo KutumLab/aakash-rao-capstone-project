@@ -14,6 +14,7 @@ def json_gen(path):
     for item in json_data:
         keys.append(list(item.keys()))
     # reshape
+    keys = np.asarray(keys, dtype="object")
     keys = np.array(keys)
     keys = keys.reshape(-1)
     keys = np.unique(keys)
