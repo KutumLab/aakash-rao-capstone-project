@@ -89,7 +89,7 @@ def plot(src_path, phase):
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + "_mean.png"), dpi=300)
                 plt.close()
-            pd.DataFrame.to_csv(result_df, os.path.join(output_path, "results.csv"))
+            pd.DataFrame.to_csv(result_df, os.path.join(output_path, "results.csv"),index=False)
                 
             if phase == "testing":
                 return
