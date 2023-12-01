@@ -137,9 +137,6 @@ def plot_model_individual_with_collective(src_path, phase):
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + "_mean.png"), dpi=300)
                 plt.close()
-                break
-                # break
-                # finding mean across three models
 
 
 
