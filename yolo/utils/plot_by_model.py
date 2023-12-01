@@ -122,8 +122,9 @@ def plot_model_individual_with_collective(src_path, phase):
                 print(sem)
 
                 plt.plot(metric_sums)
-                plt.fill_between(range(len(metric_sums)), metric_sums-sem, metric_sums+sem, alpha=0.3)
-                
+                # errorbars
+                plt.fill_between(range(len(metric_sums)), metric_sums-sem, metric_sums+sem, alpha=0.5)
+
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
@@ -133,11 +134,7 @@ def plot_model_individual_with_collective(src_path, phase):
                 else:
                     plt.ylim(0, 1)
 
-                if 'mAP' in key:
-                    plt.legend(loc='lower right')
-                else:
-                    plt.legend(loc='upper right')
-
+                plt.tight_layout()
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + "_mean.png"), dpi=300)
                 plt.close()
                 break
