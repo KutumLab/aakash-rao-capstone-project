@@ -43,7 +43,7 @@ def plot_model(path):
         plt.plot(copy_info[x_axis], copy_info[col])
         plt.title(title_dict[col], fontsize=14, fontweight='bold')
         plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
-        plt.ylabel(col, fontsize=14, fontweight='bold')
+        plt.ylabel(axis_dict[col], fontsize=14, fontweight='bold')
         plt.tight_layout()
         plt.savefig(os.path.join(plot_save_path, col + '.png'), dpi=300)
 
