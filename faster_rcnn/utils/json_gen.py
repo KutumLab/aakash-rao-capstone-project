@@ -13,7 +13,7 @@ def json_gen(path):
     keys = []
     for item in json_data:
         keys.append(list(item.keys()))
-    keys = np.array(keys).reshape(-1)
+    keys = np.array(keys)
     keys = np.unique(keys)
 
     print(json_data)
