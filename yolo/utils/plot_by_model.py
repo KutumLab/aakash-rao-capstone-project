@@ -39,7 +39,6 @@ def plot_model_individual(src_path, phase):
         raise FileNotFoundError(src_path)
     else:
         for folder in model_list:
-            print(folder)
             output_path = os.path.join(src_path, folder)
             if not os.path.exists(output_path):
                 os.makedirs(output_path)
@@ -51,18 +50,66 @@ def plot_model_individual(src_path, phase):
                     continue
                 else:
                     results = pandas.read_csv(os.path.join(src_path,dir, "results.csv"))
-                    print(results)
                     results = results.rename(columns=translation_dict)
                     results = results[relevant_keys]
                     resultdict[dir] = results
             folds = len(resultdict.keys())
             for key in relevant_keys:
-                print(key)
                 plt.figure(figsize=(5, 5))
                 x_key = 'epoch'
                 for dir in resultdict.keys():
                     results = resultdict[dir]
                     plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1)
+                plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
+                plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+                plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+                plt.legend(loc='upper right')
+                if 'loss' in key:
+                    plt.ylim(0, max(results[key]))
+                else:
+                    plt.ylim(0, 1)
+
+                if 'mAP' in key:
+                    plt.legend(loc='lower right')
+                else:
+                    plt.legend(loc='upper right')
+
+            plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
+            plt.close()
+                # break
+                # finding mean across three models
+
+
+def plot_model_individual_with_collective(src_path, phase):
+    if not os.path.exists(src_path):
+        print("File not found: ", src_path)
+        raise FileNotFoundError(src_path)
+    elif len(os.listdir(src_path)) == 0:
+        print("Empty folder: ", src_path)
+        raise FileNotFoundError(src_path)
+    else:
+        for folder in model_list:
+            output_path = os.path.join(src_path, folder)
+            if not os.path.exists(output_path):
+                os.makedirs(output_path)
+            resultdict = {}
+            for dir in os.listdir(src_path):
+                if dir==folder:
+                    continue
+                elif folder not in dir:
+                    continue
+                else:
+                    results = pandas.read_csv(os.path.join(src_path,dir, "results.csv"))
+                    results = results.rename(columns=translation_dict)
+                    results = results[relevant_keys]
+                    resultdict[dir] = results
+            folds = len(resultdict.keys())
+            for key in relevant_keys:
+                plt.figure(figsize=(5, 5))
+                x_key = 'epoch'
+                for dir in resultdict.keys():
+                    results = resultdict[dir]
+                    plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1, alpha=0.25)
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
@@ -96,4 +143,5 @@ if __name__ == "__main__":
     parser.add_argument("--src_path", type=str, default="results", help="path to the results folder")
     parser.add_argument("--phase", type=str, default="testing", help="phase to plot")
     args = parser.parse_args()
-    plot_model_individual(args.src_path, args.phase)
+    # plot_model_individual(args.src_path, args.phase)
+    plot_model_individual_with_collective(args.src_path, args.phase)
