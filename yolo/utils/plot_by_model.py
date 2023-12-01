@@ -109,7 +109,11 @@ def plot_model_individual_with_collective(src_path, phase):
                 x_key = 'epoch'
                 for dir in resultdict.keys():
                     results = resultdict[dir]
-                    plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1, alpha=0.25)
+                    # plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1, alpha=0.25)
+
+                print(resultdict)
+                break
+
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
@@ -124,8 +128,8 @@ def plot_model_individual_with_collective(src_path, phase):
                 else:
                     plt.legend(loc='upper right')
 
-            plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + "_mean.png"), dpi=300)
-            plt.close()
+                plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + "_mean.png"), dpi=300)
+                plt.close()
                 # break
                 # finding mean across three models
 
@@ -143,5 +147,5 @@ if __name__ == "__main__":
     parser.add_argument("--src_path", type=str, default="results", help="path to the results folder")
     parser.add_argument("--phase", type=str, default="testing", help="phase to plot")
     args = parser.parse_args()
-    plot_model_individual(args.src_path, args.phase)
-    # plot_model_individual_with_collective(args.src_path, args.phase)
+    # plot_model_individual(args.src_path, args.phase)
+    plot_model_individual_with_collective(args.src_path, args.phase)
