@@ -40,7 +40,7 @@ def plot_model(path):
         plt.figure(figsize=(4, 4))
         copy_info = info.copy()
         copy_info = copy_info[[x_axis, col]].dropna(axis=0, how='any')
-        plt.plot(info[x_axis], info[col])
+        plt.plot(copy_info[x_axis], copy_info[col])
         plt.title(title_dict[col], fontsize=14, fontweight='bold')
         plt.xlabel(axis_dict[col], fontsize=14, fontweight='bold')
         plt.ylabel(col, fontsize=14, fontweight='bold')
