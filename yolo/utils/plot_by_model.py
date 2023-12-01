@@ -30,7 +30,7 @@ axis_labels_dict = dict(zip(relevant_keys, axis_labels))
 plot_save_names_dict = dict(zip(relevant_keys, plot_save_names))
 
 
-def plot(src_path, phase):
+def plot_model_individual(src_path, phase):
     if not os.path.exists(src_path):
         print("File not found: ", src_path)
         raise FileNotFoundError(src_path)
@@ -77,15 +77,9 @@ def plot(src_path, phase):
                 else:
                     plt.legend(loc='upper right')
 
-                plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
-                plt.close()
+            plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
+            plt.close()
                 # break
-            for key in relevant_keys:
-                print(key)
-                plt.figure(figsize=(5, 5))
-                x_key = 'epoch'
-                for dir in resultdict.keys():
-                    results = resultdict[dir]
                 # finding mean across three models
 
 
@@ -102,4 +96,4 @@ if __name__ == "__main__":
     parser.add_argument("--src_path", type=str, default="results", help="path to the results folder")
     parser.add_argument("--phase", type=str, default="testing", help="phase to plot")
     args = parser.parse_args()
-    plot(args.src_path, args.phase)
+    plot_model_individual(args.src_path, args.phase)
