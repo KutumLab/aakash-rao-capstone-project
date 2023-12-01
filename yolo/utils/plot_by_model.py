@@ -43,13 +43,16 @@ def plot(src_path, phase):
             output_path = os.path.join(src_path, folder)
             if not os.path.exists(output_path):
                 os.makedirs(output_path)
+            resultdf = pandas.DataFrame(columns=relevant_keys.copy().append('model'))
             for dir in os.listdir(src_path):
                 if dir=='folder':
                     continue
                 elif folder not in dir:
                     continue
                 else:
-                    print(dir)
+                    results = pandas.read_csv(os.path.join(src_path,dir, "results.csv"))
+                    print(results)
+                    
             
 
             if phase == "testing":
