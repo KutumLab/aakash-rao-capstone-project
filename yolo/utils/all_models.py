@@ -1,6 +1,6 @@
 import os
 import numpy
-import pandas
+import pandas as pd 
 import matplotlib.pyplot as plt
 import argparse
 
@@ -49,12 +49,12 @@ def plot(src_path, phase):
                 elif folder not in dir:
                     continue
                 else:
-                    results = pandas.read_csv(os.path.join(src_path,dir, "results.csv"))
+                    results = pd.read_csv(os.path.join(src_path,dir, "results.csv"))
                     results = results.rename(columns=translation_dict)
                     results = results[relevant_keys]
                     resultdict[dir] = results
             folds = len(resultdict.keys())
-            result_df = pandas.DataFrame(columns=relevant_keys)
+            result_df = pd.DataFrame(columns=relevant_keys)
             for key in relevant_keys:
                 if key == 'epoch':
                     continue
