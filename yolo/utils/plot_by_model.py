@@ -116,9 +116,9 @@ def plot_model_individual_with_collective(src_path, phase):
                 print(metric_sums)
                 print(sem)
 
-                plt.plot(metric_sums)
+                plt.plot(metric_sums, color='#0000FF', linewidth=1)
                 # errorbars at every 5th point without connecting lines
-                plt.errorbar(numpy.arange(0, len(metric_sums), 5), metric_sums[::5], yerr=sem[::5], capsize=1, capthick=1, elinewidth=1, color='#0000FF', linewidth=0)
+                plt.errorbar(numpy.arange(0, len(metric_sums), 5), metric_sums[::5], yerr=sem[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
                 
 
                 plt.title(f'{plot_titles_dict[key]} for {folder}', fontsize=14, fontweight='bold')
