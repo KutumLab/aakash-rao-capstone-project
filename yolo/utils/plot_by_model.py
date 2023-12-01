@@ -22,7 +22,7 @@ axis_labels = ['Epoch', 'Loss', 'Loss', 'Loss', 'Precision', 'Recall', 'mAP', 'm
 plot_save_names = ['epoch','box_loss', 'obj_loss', 'cls_loss', 'precision', 'recall', 'mAP_50', 'mAP_50_95']
 
 
-model_list = ['tolov5m','tolov5x','tolov5l',]
+model_list = ['yolov5m','yolov5x','yolov5l',]
 
 # dictionary to map the keys to the plot titles
 plot_titles_dict = dict(zip(relevant_keys, plot_titles))
