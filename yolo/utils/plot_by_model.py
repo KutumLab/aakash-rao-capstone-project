@@ -120,8 +120,10 @@ def plot_model_individual_with_collective(src_path, phase):
                 metric_sums = numpy.mean(metric_sums, axis=0)
                 print(metric_sums)
                 print(sem)
-                break
 
+                plt.plot(metric_sums)
+                plt.fill_between(range(len(metric_sums)), metric_sums-sem, metric_sums+sem, alpha=0.3)
+                
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
@@ -138,6 +140,7 @@ def plot_model_individual_with_collective(src_path, phase):
 
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + "_mean.png"), dpi=300)
                 plt.close()
+                break
                 # break
                 # finding mean across three models
 
