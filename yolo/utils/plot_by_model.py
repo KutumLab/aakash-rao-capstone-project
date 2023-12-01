@@ -61,7 +61,7 @@ def plot_model_individual(src_path, phase):
                     results = resultdict[dir]
                     plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1)
                 plt.title(f'{plot_titles_dict[key]} for {folder} \n fold {dir[-1]}', fontsize=14, fontweight='bold')
-                plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+                plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 if 'loss' in key:
                     plt.ylim(0, max(results[key]))
@@ -115,8 +115,8 @@ def plot_model_individual_with_collective(src_path, phase):
                 sem = numpy.std(metric_sums, axis=0)#/numpy.sqrt(folds)
                 metric_sums = numpy.mean(metric_sums, axis=0)
                 result_df[key] = metric_sums
-                print(metric_sums)
-                print(sem)
+                # print(metric_sums)
+                # print(sem)
 
                 plt.plot(metric_sums, color='#0000FF', linewidth=1)
                 # errorbars at every 5th point without connecting lines
@@ -124,7 +124,7 @@ def plot_model_individual_with_collective(src_path, phase):
                 
 
                 plt.title(f'{plot_titles_dict[key]} for {folder}', fontsize=14, fontweight='bold')
-                plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+                plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 if 'loss' in key:
                     plt.ylim(0, max(results[key]))

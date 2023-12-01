@@ -50,7 +50,7 @@ def plot(src_path, phase):
                 x_key = 'epoch'
                 plt.plot(results[x_key], results[key], color='#0000FF', linewidth=2)
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
-                plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+                plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 if 'loss' in key:
                     plt.ylim(0, max(results[key]))
