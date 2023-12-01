@@ -43,7 +43,6 @@ def plot(src_path, phase):
             output_path = os.path.join(src_path, folder)
             if not os.path.exists(output_path):
                 os.makedirs(output_path)
-                raise FileNotFoundError(output_path)
             for dir in os.listdir(src_path):
                 if dir=='folder':
                     continue
