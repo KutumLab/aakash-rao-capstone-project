@@ -124,7 +124,7 @@ def plot_model_individual_with_collective(src_path, phase):
                 plt.plot(metric_sums)
                 # errorbars
                 plt.fill_between(range(len(metric_sums)), metric_sums-sem, metric_sums+sem, alpha=0.5)
-                plt.errorbar(range(len(metric_sums)), metric_sums, yerr=sem, fmt='o', color='black', ecolor='black', capsize=2)
+                plt.errorbar(range(len(metric_sums))[::5], metric_sums[::5], yerr=sem[::5], color='r', ecolor='r', capsize=3)
 
                 plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
