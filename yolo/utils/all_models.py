@@ -54,7 +54,7 @@ def plot(src_path, phase):
             for dir in resultdict.keys():
                 plt.plot(resultdict[dir][x_key], resultdict[dir][key], label=dir)
             plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
-            plt.xlabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+            plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
             plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
             plt.legend(loc = 'best', fontsize=12)
             plt.tight_layout()
