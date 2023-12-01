@@ -24,6 +24,8 @@ def json_gen(path):
     # sorting df to iteration
     df = df.sort_values(by=['iteration'])
     print(df.head()['iteration'])
+    # save to csv
+    df.to_csv(os.path.join(path, 'metrics.csv'), index=False)
 
 
 if __name__ == '__main__':
