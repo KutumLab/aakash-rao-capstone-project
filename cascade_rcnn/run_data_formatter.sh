@@ -3,4 +3,5 @@ SAVE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-c
 
 python3 ./utils/data_formatter.py \
     --data_path $DATA_PATH \
-    --save_path $SAVE_PATH \ 
+    --outp_dir $SAVE_PATH \
+    --fold 1 \
