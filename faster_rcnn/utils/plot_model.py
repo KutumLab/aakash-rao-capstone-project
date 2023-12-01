@@ -15,7 +15,7 @@ cols = ['bbox/AP', 'bbox/AP-nonTIL_stromal', 'bbox/AP-other', 'bbox/AP-sTIL',
 
 relevant_cols = ['bbox/AP', 'bbox/AP-nonTIL_stromal', 'bbox/AP-other', 'bbox/AP-sTIL','bbox/AP-tumor_any', 'bbox/AP50', 'bbox/AP75', 'iteration', 'loss_box_reg', 'loss_cls', 'total_loss', 'validation_loss']
 
-translations_arr = ['bbox/AP', 'bbox/AP-nonTIL_stromal', 'bbox/AP-other', 'bbox/AP-sTIL','bbox/AP-tumor_any', 'bbox/AP50', 'bbox/AP75', 'iteration', 'loss_box_reg', 'loss_cls', 'total_loss', 'validation_loss']
+translations_arr = ['mAP', 'map0', 'map1', 'map2','map3', 'mAP50', 'mAP75', 'iteration', 'loss_box_reg', 'loss_cls', 'total_loss', 'validation_loss']
 
 titles_arr = ['mean AP', 'mean AP for nonTIL_stromal', 'mean AP for other', 'mean AP for sTIL','mean AP for tumor_any', 'mean AP at IoU 50', 'mean AP at IoU 75', 'iteration', 'Box Loss', 'Class Loss', 'Total Loss', 'Validation Loss']
 
