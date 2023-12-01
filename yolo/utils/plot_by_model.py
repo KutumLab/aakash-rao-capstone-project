@@ -105,6 +105,8 @@ def plot_model_individual_with_collective(src_path, phase):
                     resultdict[dir] = results
             folds = len(resultdict.keys())
             for key in relevant_keys:
+                if key == 'epoch':
+                    continue
                 plt.figure(figsize=(5, 5))
                 x_key = 'epoch'
                 metric_sums = []
