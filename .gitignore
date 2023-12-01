@@ -2,3 +2,5 @@ datasets/*/*
 !datasets/*/.gitkeep*
 outputs/*
 *.log
+mmdetection_base/*
+mmdetection_base/.gitkeep*
