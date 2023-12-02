@@ -50,7 +50,7 @@ def plot(src_path, phase):
             for key in relevant_keys:
                 plt.figure(figsize=(3,3))
                 x_key = 'epoch'
-                plt.plot(results[x_key], results[key], color='#0000FF', linewidth=2)
+                plt.plot(results[x_key], results[key], color='#0000FF', linewidth=1)
                 plt.title(f'{plot_titles_dict[key]} \n for fold {folder[-1]}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
@@ -64,6 +64,7 @@ def plot(src_path, phase):
 
                 plt.tight_layout()
                 plt.savefig(os.path.join(plot_save_path, plot_save_names_dict[key] + ".png"), dpi=300)
+                plt.close()
 
             # if phase == "testing":
             #     print(results.columns)

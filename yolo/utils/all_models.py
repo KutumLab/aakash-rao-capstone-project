@@ -52,7 +52,7 @@ def plot(src_path, phase):
             plt.figure(figsize=(3,3))
             x_key = 'epoch'
             for dir in resultdict.keys():
-                plt.plot(resultdict[dir][x_key], resultdict[dir][key], label=dir)
+                plt.plot(resultdict[dir][x_key], resultdict[dir][key], label=dir, linewidth=1)
             plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
             plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
             plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
