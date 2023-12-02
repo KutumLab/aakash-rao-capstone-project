@@ -147,6 +147,34 @@ def plot_model_individual_with_collective(src_path, phase):
                 
             if phase == "testing":
                 return
+            
+def give_stats(src_path):
+    if not os.path.exists(src_path):
+        print("File not found: ", src_path)
+        raise FileNotFoundError(src_path)
+    elif len(os.listdir(src_path)) == 0:
+        print("Empty folder: ", src_path)
+        raise FileNotFoundError(src_path)
+    else:
+        for folder in model_list:
+            output_path = os.path.join(src_path, folder)
+            if not os.path.exists(output_path):
+                os.makedirs(output_path)
+            resultdict = {}
+            for dir in os.listdir(src_path):
+                if dir==folder:
+                    continue
+                elif folder not in dir:
+                    continue
+                else:
+                    results = pd.read_csv(os.path.join(src_path,dir, "results.csv"))
+                    results = results.rename(columns=translation_dict)
+                    results = results[['metrics_precision', 'metrics_recall', 'metrics_mAP_0.5', 'metrics_mAP_0.5:0.95']]
+                    max_results = results.max()
+                    print(max_results)
+                    break
+
+    return
 
             
 if __name__ == "__main__":
@@ -154,5 +182,6 @@ if __name__ == "__main__":
     parser.add_argument("--src_path", type=str, default="results", help="path to the results folder")
     parser.add_argument("--phase", type=str, default="testing", help="phase to plot")
     args = parser.parse_args()
-    plot_model_individual(args.src_path, args.phase)
-    plot_model_individual_with_collective(args.src_path, args.phase)
+    # plot_model_individual(args.src_path, args.phase)
+    # plot_model_individual_with_collective(args.src_path, args.phase)
+    give_stats(args.src_path)
