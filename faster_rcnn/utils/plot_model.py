@@ -49,12 +49,12 @@ def plot_model(path):
         plt.title(title_dict[col], fontsize=14, fontweight='bold')
         plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
         plt.ylabel(axis_dict[col], fontsize=14, fontweight='bold')
-        plt.xticks(fontsize=10)
-        plt.yticks(fontsize=10)
         plt.xlim(0, copy_info[x_axis].max()+10)
         # check if mAP is a substring of the column name
         if 'map' in col.lower():
             plt.ylim(0, 1)
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
         plt.tight_layout()
         plt.savefig(os.path.join(plot_save_path, col + '.png'), dpi=300)
 
