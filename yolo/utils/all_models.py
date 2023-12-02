@@ -58,6 +58,10 @@ def plot(src_path, phase):
             plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
             plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
             plt.legend(loc = 'best', fontsize=8)
+            if 'loss' in key:
+                plt.ylim(0, max(resultdict[dir][key]))
+            else:
+                plt.ylim(0, 1)
             plt.tight_layout()
             plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
             plt.close()

@@ -132,11 +132,8 @@ def plot_model_individual_with_collective(src_path, phase):
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 # print basic stats
                 if 'mAP' in key:
-                    print(f'{folder} {key} mean: {numpy.mean(metric_sums)}')
-                    print(f'{folder} {key} std: {numpy.std(metric_sums)}')
-                    print(f'{folder} {key} sem: {numpy.std(metric_sums)/numpy.sqrt(folds)}')
-                    print(f'{folder} {key} max: {numpy.max(metric_sums)}')
-                    print(f'{folder} {key} min: {numpy.min(metric_sums)}')
+                    print(f'{folder} {key} mean: {numpy.max(sem)}')
+                    print(f'{folder} {key} std: {numpy.max(metric_sums)}')
                 if 'loss' in key:
                     plt.ylim(0, max(results[key]))
                 else:
