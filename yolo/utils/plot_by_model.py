@@ -156,6 +156,7 @@ def give_stats(src_path):
         print("Empty folder: ", src_path)
         raise FileNotFoundError(src_path)
     else:
+        master_df = pd.DataFrame(columns=['model', 'metrics_precision', 'metrics_recall', 'metrics_mAP_0.5', 'metrics_mAP_0.5:0.95'])
         for folder in model_list:
             output_path = os.path.join(src_path, folder)
             if not os.path.exists(output_path):
@@ -171,9 +172,10 @@ def give_stats(src_path):
                     results = results.rename(columns=translation_dict)
                     results = results[['metrics_precision', 'metrics_recall', 'metrics_mAP_0.5', 'metrics_mAP_0.5:0.95']]
                     max_results = results.max()
+                    master_df = master_df.append({'model': folder, 'metrics_precision': max_results['metrics_precision'], 'metrics_recall': max_results['metrics_recall'], 'metrics_mAP_0.5': max_results['metrics_mAP_0.5'], 'metrics_mAP_0.5:0.95': max_results['metrics_mAP_0.5:0.95']}, ignore_index=True)
                     print(max_results)
                     break
-
+        master_df.to_csv(os.path.join(src_path, "stats.csv"),index=False)            
     return
 
             
