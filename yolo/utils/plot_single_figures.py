@@ -56,7 +56,7 @@ def plot(src_path, phase):
                 plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 if 'loss' in key:
-                    plt.ylim(0, max(results[key]))
+                    plt.ylim(0, max(results[key]) + 0.1)
                 else:
                     plt.ylim(0, 1)
                 plt.xticks(fontsize=10)
