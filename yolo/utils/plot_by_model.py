@@ -189,6 +189,8 @@ def give_stats(src_path):
         master_df['metrics_mAP_0.5'] = map50_list
         master_df['metrics_mAP_0.5:0.95'] = map5095_list
         print(master_df)
+        # to latex
+        print(master_df.to_latex(index=False))
         # master_df.to_csv(os.path.join(src_path, "stats.csv"),index=False)            
     return
 
