@@ -43,6 +43,8 @@ def plot_model(path):
         copy_info = copy_info[[x_axis, col]].dropna(axis=0, how='any')
         if col =='loss_cls':
             copy_info[col] = copy_info[col]
+        if 'map' in col.lower():
+            copy_info[col] = copy_info[col]/100
         plt.plot(copy_info[x_axis], copy_info[col], linewidth=1)
         plt.title(title_dict[col], fontsize=14, fontweight='bold')
         plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
