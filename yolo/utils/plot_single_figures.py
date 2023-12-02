@@ -36,7 +36,6 @@ def plot(src_path, phase):
         raise FileNotFoundError(src_path)
     else:
         for folder in os.listdir(src_path):
-            print(folder)
             if len(folder) < 7:
                 continue
             elif folder[-3:] == 'png':
@@ -49,7 +48,6 @@ def plot(src_path, phase):
             results = results.rename(columns=translation_dict)
             results = results[relevant_keys]
             for key in relevant_keys:
-                print(key)
                 plt.figure(figsize=(3,3))
                 x_key = 'epoch'
                 plt.plot(results[x_key], results[key], color='#0000FF', linewidth=2)
@@ -60,11 +58,6 @@ def plot(src_path, phase):
                     plt.ylim(0, max(results[key]))
                 else:
                     plt.ylim(0, 1)
-
-                if 'mAP' in key:
-                    max_result_index = numpy.argmax(results[key])
-                    epoch_max_result = results[x_key][max_result_index]
-                    plt.annotate(f"Max: {results[key][max_result_index]:.3f}\nat epoch {epoch_max_result}", xy=(epoch_max_result, results[key][max_result_index]), xytext=(epoch_max_result, results[key][max_result_index]+0.1),arrowprops=dict(arrowstyle='->',connectionstyle='arc3,rad=.5'), fontsize=10, fontweight='bold')
                 plt.xticks(fontsize=10)
                 plt.yticks(fontsize=10)
                 # plt.grid(True)
