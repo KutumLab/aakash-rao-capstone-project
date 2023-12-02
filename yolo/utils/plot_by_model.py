@@ -55,7 +55,7 @@ def plot_model_individual(src_path, phase):
                     resultdict[dir] = results
             folds = len(resultdict.keys())
             for key in relevant_keys:
-                plt.figure(figsize=(4,4))
+                plt.figure(figsize=(3,3))
                 x_key = 'epoch'
                 for dir in resultdict.keys():
                     results = resultdict[dir]
@@ -103,7 +103,7 @@ def plot_model_individual_with_collective(src_path, phase):
             for key in relevant_keys:
                 if key == 'epoch':
                     continue
-                plt.figure(figsize=(4,4))
+                plt.figure(figsize=(3,3))
                 x_key = 'epoch'
                 metric_sums = []
                 for dir in resultdict.keys():
