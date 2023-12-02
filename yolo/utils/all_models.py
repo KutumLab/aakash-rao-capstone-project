@@ -50,6 +50,7 @@ def plot(src_path, phase):
         
         for key in relevant_keys:
             plt.figure(figsize=(3,3))
+            plt.locator_params(nbins=5)
             x_key = 'epoch'
             for dir in resultdict.keys():
                 plt.plot(resultdict[dir][x_key], resultdict[dir][key], label=dir, linewidth=1)
