@@ -39,6 +39,8 @@ def plot(src_path, phase):
             print(folder)
             if len(folder) < 7:
                 continue
+            elif folder[-3:] == 'png':
+                continue
             outpath = os.path.join(src_path, folder)
             results = pandas.read_csv(os.path.join(outpath, "results.csv"))
             plot_save_path = os.path.join(outpath, "plot")
