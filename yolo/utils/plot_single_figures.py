@@ -63,7 +63,7 @@ def plot(src_path, phase):
                 # plt.grid(True)
 
                 plt.tight_layout()
-                plt.grid(True, alpha=0.3, linestyle='--', linewidth=0.25)
+                plt.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
                 plt.savefig(os.path.join(plot_save_path, plot_save_names_dict[key] + ".png"), dpi=300)
                 plt.close()
 
