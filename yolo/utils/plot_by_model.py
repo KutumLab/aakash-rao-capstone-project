@@ -60,7 +60,7 @@ def plot_model_individual(src_path, phase):
                 for dir in resultdict.keys():
                     results = resultdict[dir]
                     plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1)
-                plt.title(f'{plot_titles_dict[key]}\nfor {folder} \n fold {dir[-1]}', fontsize=14, fontweight='bold')
+                plt.title(f'{plot_titles_dict[key]}\nfor {folder}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 if 'loss' in key:
@@ -111,7 +111,7 @@ def plot_model_individual_with_collective(src_path, phase):
                     metric_sums.append(results[key])
                 metric_sums = numpy.array(metric_sums)
                 metric_sums = metric_sums.reshape(folds, -1)
-                print(metric_sums)
+                # print(metric_sums)
                 sem = numpy.std(metric_sums, axis=0)#/numpy.sqrt(folds)
                 metric_sums = numpy.mean(metric_sums, axis=0)
                 result_df[key] = metric_sums
