@@ -56,6 +56,7 @@ def plot_model(path):
         plt.yticks(fontsize=10)
         plt.tight_layout()
         plt.savefig(os.path.join(plot_save_path, col + '.png'), dpi=300)
+        plt.close()
 
             
 
