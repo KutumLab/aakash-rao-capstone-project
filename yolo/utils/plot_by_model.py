@@ -60,14 +60,14 @@ def plot_model_individual(src_path, phase):
                 for dir in resultdict.keys():
                     results = resultdict[dir]
                     plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1)
-                plt.title(f'{plot_titles_dict[key]} for {folder} \n fold {dir[-1]}', fontsize=14, fontweight='bold')
+                plt.title(f'{plot_titles_dict[key]}\nfor {folder} \n fold {dir[-1]}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 if 'loss' in key:
                     plt.ylim(0, max(results[key]))
                 else:
                     plt.ylim(0, 1)
-                plt.legend(loc='best', fontsize=12)
+                plt.legend(loc='best', fontsize=8)
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
                 plt.close()
@@ -123,7 +123,7 @@ def plot_model_individual_with_collective(src_path, phase):
                 plt.errorbar(numpy.arange(0, len(metric_sums), 5), metric_sums[::5], yerr=sem[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
                 
 
-                plt.title(f'{plot_titles_dict[key]} for {folder}', fontsize=14, fontweight='bold')
+                plt.title(f'{plot_titles_dict[key]}\nfor {folder}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 if 'loss' in key:
