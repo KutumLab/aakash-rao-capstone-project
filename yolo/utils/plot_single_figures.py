@@ -37,6 +37,8 @@ def plot(src_path, phase):
     else:
         for folder in os.listdir(src_path):
             print(folder)
+            if len(folder) < 7:
+                continue
             outpath = os.path.join(src_path, folder)
             results = pandas.read_csv(os.path.join(outpath, "results.csv"))
             plot_save_path = os.path.join(outpath, "plot")
