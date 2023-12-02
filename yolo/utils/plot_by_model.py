@@ -130,6 +130,12 @@ def plot_model_individual_with_collective(src_path, phase):
                 plt.title(f'{plot_titles_dict[key]}\nfor {folder}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
+                # print basic stats
+                print(f'{folder} {key} mean: {numpy.mean(metric_sums)}')
+                print(f'{folder} {key} std: {numpy.std(metric_sums)}')
+                print(f'{folder} {key} sem: {numpy.std(metric_sums)/numpy.sqrt(folds)}')
+                print(f'{folder} {key} max: {numpy.max(metric_sums)}')
+                print(f'{folder} {key} min: {numpy.min(metric_sums)}')
                 if 'loss' in key:
                     plt.ylim(0, max(results[key]))
                 else:
