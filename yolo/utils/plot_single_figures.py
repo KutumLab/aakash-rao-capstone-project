@@ -46,10 +46,10 @@ def plot(src_path, phase):
             results = results[relevant_keys]
             for key in relevant_keys:
                 print(key)
-                plt.figure(figsize=(5, 5))
+                plt.figure(figsize=(3,3))
                 x_key = 'epoch'
                 plt.plot(results[x_key], results[key], color='#0000FF', linewidth=2)
-                plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
+                plt.title(f'{plot_titles_dict[key]} \n for fold {folder[-1]}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
                 if 'loss' in key:

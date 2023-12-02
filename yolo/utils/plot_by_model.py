@@ -55,6 +55,8 @@ def plot_model_individual(src_path, phase):
                     resultdict[dir] = results
             folds = len(resultdict.keys())
             for key in relevant_keys:
+                if key == 'epoch':
+                    continue
                 plt.figure(figsize=(3,3))
                 x_key = 'epoch'
                 for dir in resultdict.keys():

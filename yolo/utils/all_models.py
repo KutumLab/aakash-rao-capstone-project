@@ -49,14 +49,14 @@ def plot(src_path, phase):
             resultdict[folder] = results
         
         for key in relevant_keys:
-            plt.figure(figsize=(4,4))
+            plt.figure(figsize=(3,3))
             x_key = 'epoch'
             for dir in resultdict.keys():
                 plt.plot(resultdict[dir][x_key], resultdict[dir][key], label=dir)
             plt.title(plot_titles_dict[key], fontsize=14, fontweight='bold')
             plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
             plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
-            plt.legend(loc = 'best', fontsize=12)
+            plt.legend(loc = 'best', fontsize=8)
             plt.tight_layout()
             plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
             plt.close()
