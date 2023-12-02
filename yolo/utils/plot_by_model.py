@@ -172,7 +172,7 @@ def give_stats(src_path):
                     results = results.rename(columns=translation_dict)
                     results = results[['metrics_precision', 'metrics_recall', 'metrics_mAP_0.5', 'metrics_mAP_0.5:0.95']]
                     max_results = results.max()
-                    loc_df = pd.DataFrame({'model': folder, 'metrics_precision': max_results['metrics_precision'][0], 'metrics_recall': max_results['metrics_recall'][0], 'metrics_mAP_0.5': max_results['metrics_mAP_0.5'][0], 'metrics_mAP_0.5:0.95': max_results['metrics_mAP_0.5:0.95'][0]})
+                    loc_df = pd.DataFrame({'model': folder, 'metrics_precision': max_results['metrics_precision'][0], 'metrics_recall': max_results['metrics_recall'][0], 'metrics_mAP_0.5': max_results['metrics_mAP_0.5'][0], 'metrics_mAP_0.5:0.95': max_results['metrics_mAP_0.5:0.95'][0]}, index=0)
                     master_df = pd.concat([master_df, loc_df])
                     print(max_results)
                     break
