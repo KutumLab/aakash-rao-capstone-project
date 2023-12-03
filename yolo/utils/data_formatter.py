@@ -54,19 +54,9 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
         print(f"Test length: {test_len}")
         test_imgs = images[:int(test_len)]
         test_masks = masks[:int(test_len)]
-        # removing test images from images
-
-        for image in test_imgs:
-            try:
-                images.remove(image)
-            except:
-                pass
-
-        for mask in test_masks:
-            try:
-                masks.remove(mask)
-            except:
-                pass
+        
+        images = images[int(test_len):]
+        masks = masks[int(test_len):]
 
         for image in tqdm (test_imgs, desc="Creating Test...", ascii=False, ncols=75):
             im_save_path = os.path.join(save_dir,'test', 'images')
