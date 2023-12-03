@@ -4,6 +4,7 @@ import pandas as pd
 import cv2
 import argparse
 import shutil
+import sys
 import random
 import matplotlib.pyplot as plt
 
@@ -82,8 +83,9 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
         images = images[int(test_len):]
         masks = masks[int(test_len):]
 
-
+        print(f"Number of images: {len(images)}")
         len_of_each_fold = len(images) // folds
+        sys.exit()
 
         random.seed(seed)
         random.shuffle(images)
