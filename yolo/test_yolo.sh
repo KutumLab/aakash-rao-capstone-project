@@ -14,7 +14,7 @@ EPOCHS=200
 BATCH_SIZE=16
 DEVICE=0
 SAVE_PERIOD=10
-PROJECT=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs/yolo
+PROJECT=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs/yolo_test
 
 echo "Training YOLOv5s"
 echo $input
