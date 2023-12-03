@@ -43,6 +43,7 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
     else:
         images = os.listdir(image_dir)
         masks = os.listdir(mask_dir)
+        print(f"Number of images: {len(images)}")
 
         random.seed(seed)
         random.shuffle(images)
