@@ -102,7 +102,7 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
             except:
                 pass
             train_images = images[:i*len_of_each_fold] + images[(i+1)*len_of_each_fold:]
-            test_images = images[i*len_of_each_fold:(i+1)*len_of_each_fold]
+            val_images = images[i*len_of_each_fold:(i+1)*len_of_each_fold]
 
             for image in tqdm (train_images, desc="Creating Train...", ascii=False, ncols=75):
                 im_save_path = os.path.join(im_save_dir,'train', 'images')
@@ -116,7 +116,7 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
                 mask_path = os.path.join(mask_dir, image.split('.png')[0] + '.txt')
                 shutil.copy(image_path, im_save_path)
                 shutil.copy(mask_path, mask_save_path)
-            for image in tqdm (test_images, desc="Creating Val...", ascii=False, ncols=75):
+            for image in tqdm (val_images, desc="Creating Val...", ascii=False, ncols=75):
                 im_save_path = os.path.join(im_save_dir,'val', 'images')
                 mask_save_path = os.path.join(mask_save_dir,'val', 'labels')
                 if not os.path.exists(im_save_path):
