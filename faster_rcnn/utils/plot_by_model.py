@@ -100,7 +100,7 @@ def plot_model_individual(src_path, phase):
                 if 'map' in key.lower():
                     plt.ylim(0, 1)
                 plt.tight_layout()
-                plt.savefig(os.path.join(output_path, key + "_mean.png"), dpi=300)
+                plt.savefig(os.path.join(output_path, folder + "_" + key + "_mean.png"), dpi=300)
                 plt.close()
 
                 col1 = 'mAP'
@@ -118,7 +118,7 @@ def plot_model_individual(src_path, phase):
                 plt.yticks(fontsize=10)
                 plt.ylim(0, 1)
                 plt.tight_layout()
-                plt.savefig(os.path.join(output_path, 'mAP_vs_mAP50.png'), dpi=300)
+                plt.savefig(os.path.join(output_path, folder+ "_" + 'mAP_vs_mAP50.png'), dpi=300)
                 copy_info.to_csv(os.path.join(output_path, 'mAP_vs_mAP50.csv'), index=False)
                 plt.close()
 
@@ -162,7 +162,7 @@ def plot_model_individual_with_collective(path, phase):
     plt.yticks(fontsize=10)
     plt.ylim(0, 1)
     plt.tight_layout()
-    plt.savefig(os.path.join(plot_path, 'mAP50.png'), dpi=300)
+    plt.savefig(os.path.join(plot_path, f'mAP50.png'), dpi=300)
     plt.close()
 
 
