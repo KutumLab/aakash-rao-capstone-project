@@ -19,7 +19,8 @@ def metrics(src_path, phase):
             # convert to dict
             results = results.tolist()
             results = pd.DataFrame(results)
-            print(results['bbox'].values)
+            print(results)
+            results = results['bbpx'].values
             # sumap50 += results['AP50'].values[0]
             # sumap75 += results['AP75'].values[0]
             # sumap += results['AP'].values[0]
