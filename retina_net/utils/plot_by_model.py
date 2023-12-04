@@ -89,7 +89,7 @@ def plot_model_individual(src_path, phase):
                 else:
                     plt.plot(model_dict[model]['iteration'], mean, color='#0000FF', linewidth=1)
                     plt.errorbar(model_dict[model]['iteration'][::5], mean[::5], yerr=std[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
-                plt.title(f'{title_dict[key]}\nfor {name_key{folder}}', fontsize=14, fontweight='bold')
+                plt.title(f'{title_dict[key]}\nfor {name_key[folder]}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_dict[key], fontsize=14, fontweight='bold')
                 if 'map' in key.lower():
