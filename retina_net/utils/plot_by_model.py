@@ -88,8 +88,8 @@ def plot_model_individual(src_path, phase):
                 mean = numpy.mean(metric_sum, axis=0)
                 std = numpy.std(metric_sum, axis=0)
                 mean_df = pd.DataFrame(mean)
-                output_path = os.path.join(src_path, folder)
-                pd.DataFrame(mean).to_csv(os.path.join(output_path, key + "_mean.csv"), index=False)
+                csv_save = os.path.join(src_path, folder)
+                pd.DataFrame(mean).to_csv(os.path.join(csv_save, key + "_mean.csv"), index=False)
                 plt.figure(figsize=(3,3))
                 plt.locator_params(nbins=5)
                 if 'map' in key.lower():
