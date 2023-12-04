@@ -58,5 +58,5 @@ BASEPATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-ca
 
 
 python3 utils/metrics.py \
-    --path $BASEPATH \
+    --src_path $BASEPATH \
     --phase run 
