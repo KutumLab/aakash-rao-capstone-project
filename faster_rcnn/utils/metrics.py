@@ -26,7 +26,7 @@ def metrics(src_path, phase):
             sumap75 += results[6]
             sumap += results[0]
         # print(f"Model: {model}")
-        print(f"{model} & {math.round(sumap50/3,2)} & {math.round(sumap75/3,2)} & {math.round(sumap/3,2)} \\\\")
+        print(f"{model} & {round(sumap50/3,2)} & {round(sumap75/3,2)} & {round(sumap/3,2)} \\\\")
 
 
 if __name__ == '__main__':
