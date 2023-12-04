@@ -18,8 +18,8 @@ def metrics(src_path, phase):
             results = np.load(os.path.join(path, "results", "results.npy"), allow_pickle=True)
             # convert to dict
             results = results.tolist()
-            results = results['bbox']
-            # results = pd.DataFrame(results)
+            print(results['bbox'])
+            results = pd.DataFrame(results)
             print(results)
             # sumap50 += results['AP50'].values[0]
             # sumap75 += results['AP75'].values[0]
