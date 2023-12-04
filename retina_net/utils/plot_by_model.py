@@ -130,10 +130,27 @@ def plot_model_individual(src_path, phase):
 
 def plot_model_individual_with_collective(path, phase):
     plot_path = os.path.join(path)
+    map50_arr = numpy.array([])
+    map_arr = numpy.array([])
+    plt.figure(figsize=(3,3))
     for folder in model_list:
         src_path = os.path.join(path, folder,"plots")
         map_file = pd.read_csv(os.path.join(src_path, 'mAP_vs_mAP50.csv'))
         print(map_file.head())
+        plt.plot(map_file['iteration'], map_file['mAP'], linewidth=1, label=name_key[folder])
+        plt.title(f'mAP for \n{phase}', fontsize=14, fontweight='bold')
+        plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
+        plt.ylabel('mAP', fontsize=14, fontweight='bold')
+        plt.legend()
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
+        plt.ylim(0, 1)
+        plt.tight_layout()
+        plt.savefig(os.path.join(plot_path, 'mAP_vs_mAP50.png'), dpi=300)
+        plt.close()
+
+
+   
         
 
 
