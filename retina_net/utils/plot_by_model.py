@@ -45,6 +45,7 @@ def plot_model_individual(src_path, phase):
         for folder in model_list:
             for folds in range (1,4):
                 fold_path = os.path.join(src_path, folder+f"_fold_{folds}")
+                print(fold_path)
 
 
 def plot_model_individual_with_collective(src_path, phase):
