@@ -16,6 +16,8 @@ def metrics(src_path, phase):
         for fold in range(1,4):
             path = os.path.join(src_path, model+f"_fold_{fold}",)
             results = np.load(os.path.join(path, "results", "results.npy"), allow_pickle=True)
+            # convert to dict
+            results = results.tolist()[0]
             print(results)
             results = results[0]['bbox']
             results = pd.DataFrame(results)
