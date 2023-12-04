@@ -17,15 +17,17 @@ def metrics(src_path, phase):
             path = os.path.join(src_path, model+f"_fold_{fold}",)
             results = np.load(os.path.join(path, "results", "results.npy"), allow_pickle=True)
             # convert to dict
-            results = results.tolist()[0]
+            results = results.tolist()
             print(results)
-            results = results[0]['bbox']
-            results = pd.DataFrame(results)
-            sumap50 += results['AP50'].values[0]
-            sumap75 += results['AP75'].values[0]
-            sumap += results['AP'].values[0]
-        print(f"Model: {model}")
-        print(f"{sumap50/3} & {sumap75/3} & {sumap/3}")
+            break
+        break
+        #     results = results[0]['bbox']
+        #     results = pd.DataFrame(results)
+        #     sumap50 += results['AP50'].values[0]
+        #     sumap75 += results['AP75'].values[0]
+        #     sumap += results['AP'].values[0]
+        # print(f"Model: {model}")
+        # print(f"{sumap50/3} & {sumap75/3} & {sumap/3}")
 
 
 if __name__ == '__main__':
