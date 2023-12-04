@@ -103,7 +103,24 @@ def plot_model_individual(src_path, phase):
                 plt.savefig(os.path.join(output_path, key + "_mean.png"), dpi=300)
                 plt.close()
 
-                col1 = 'metrics_mAP_0.5'
+                col1 = 'mAP'
+                col2 = 'mAP50'
+                plt.figure(figsize=(3, 3))
+                plt.locator_params(nbins=5)
+                copy_info = model_dict[model][[x_axis, col1, col2]].dropna(axis=0, how='any')
+                plt.plot(copy_info[x_axis], copy_info[col1], linewidth=1, label='mAP')
+                plt.plot(copy_info[x_axis], copy_info[col2], linewidth=1, label='mAP50')
+                plt.title(f'mAP for {name_key[folder]}', fontsize=14, fontweight='bold')
+                plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
+                plt.ylabel('mAP', fontsize=14, fontweight='bold')
+                plt.legend()
+                plt.xticks(fontsize=10)
+                plt.yticks(fontsize=10)
+                plt.ylim(0, 1)
+                plt.tight_layout()
+                plt.savefig(os.path.join(output_path, 'mAP_vs_mAP50.png'), dpi=300)
+                plt.close()
+
                 if phase == "training":
                     break 
 
