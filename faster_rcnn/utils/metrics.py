@@ -9,7 +9,7 @@ def metrics(src_path, phase):
     for model in model_list:
         for fold in range(1,4):
             path = os.path.join(src_path, model+f"_fold_{fold}",)
-            results = np.load(os.path.join(path, "results", "results.csv"), allow_pickle=True)
+            results = np.load(os.path.join(path, "results", "results.npy"), allow_pickle=True)
             print(results)
             break
 
