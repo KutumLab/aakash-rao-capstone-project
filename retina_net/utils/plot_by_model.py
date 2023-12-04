@@ -67,10 +67,23 @@ def plot_model_individual(src_path, phase):
                     
                     plt.tight_layout()
                     plt.savefig(os.path.join(output_path, key + f"_fold_{folds}.png"), dpi=300)
-
                 
+                model_dict[folder+f"_fold_{folds}"] = metrics
                 print(metrics.head())
-                
+            
+            model_csv = []
+            for model in model_dict.keys():
+                # finding mean and std
+                metric_sum = numpy.array([])
+                for key in translations_arr:
+                    if key == 'iteration':
+                        continue
+                    metric_sum = numpy.append(metric_sum, model_dict[model][key])
+                metric_sum = metric_sum.reshape(3, -1)
+                print(metric_sum)
+                    
+
+
             if phase == "testing":
                 return
 
