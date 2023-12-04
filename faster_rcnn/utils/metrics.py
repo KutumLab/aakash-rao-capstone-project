@@ -20,7 +20,7 @@ def metrics(src_path, phase):
             results = results.tolist()
             results = pd.DataFrame(results)
             print(results)
-            results = results['bbpx'].values
+            results = results['bbox'].values
             # sumap50 += results['AP50'].values[0]
             # sumap75 += results['AP75'].values[0]
             # sumap += results['AP'].values[0]
