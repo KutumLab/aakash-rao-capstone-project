@@ -119,6 +119,7 @@ def plot_model_individual(src_path, phase):
                 plt.ylim(0, 1)
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, 'mAP_vs_mAP50.png'), dpi=300)
+                copy_info.to_csv(os.path.join(output_path, 'mAP_vs_mAP50.csv'), index=False)
                 plt.close()
 
                 if phase == "testing":
