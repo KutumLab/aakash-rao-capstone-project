@@ -24,7 +24,7 @@ title_dict = dict(zip(translations_arr, titles_arr))
 axis_dict = dict(zip(translations_arr, axis_arr))
 x_axis = 'iteration'
 
-def plot_model(path):
+def plot_model(path, name):
     # read json file
     info = pd.read_csv(os.path.join(path, 'metrics.csv'), index_col=False, header=0)
     info = info[relevant_cols]
@@ -46,7 +46,7 @@ def plot_model(path):
         if 'map' in col.lower():
             copy_info[col] = copy_info[col]/100
         plt.plot(copy_info[x_axis], copy_info[col], linewidth=1)
-        plt.title(title_dict[col], fontsize=14, fontweight='bold')
+        plt.title(f'{title_dict[col]}\n for {name}', fontsize=14, fontweight='bold')
         plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
         plt.ylabel(axis_dict[col], fontsize=14, fontweight='bold')
         # check if mAP is a substring of the column name
@@ -57,6 +57,16 @@ def plot_model(path):
         plt.tight_layout()
         plt.savefig(os.path.join(plot_save_path, col + '.png'), dpi=300)
         plt.close()
+
+    col1 = 'mAP'
+    col2 = 'mAP50'
+    plt.figure(figsize=(4, 4))
+    plt.locator_params(nbins=5)
+    copy_info = info.copy()
+    copy_info = copy_info[[x_axis, col1, col2]].dropna(axis=0, how='any')
+    plt.plot(copy_info[x_axis], copy_info[col1], linewidth=1, label='mAP')
+    plt.plot(copy_info[x_axis], copy_info[col2], linewidth=1, label='mAP50')
+    plt.title(f'mAP vs mAP50 \nfor {name}', fontsize=14, fontweight='bold')
 
             
 

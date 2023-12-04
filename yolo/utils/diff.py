@@ -7,6 +7,4 @@ l2 = os.listdir('/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakas
 l1 = np.array(l1)
 l2 = np.array(l2)
 
-intersection = np.intersect1d(l1, l2)
-print(intersection)
-print(len(intersection))
+# finding common files in two lists
