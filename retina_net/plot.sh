@@ -40,7 +40,12 @@ BASEPATH=/media/chs.gpu/19b31863-d2db-44c2-b407-9a4ffbebcbd1/DATA/research-cance
 
 
 
-# MODEL=retinanet_R_101_FPN_3x
-python3 utils/plot_by_model.py \
-    --path $BASEPATH \
-    --phase run
+# # MODEL=retinanet_R_101_FPN_3x
+# python3 utils/plot_by_model.py \
+#     --path $BASEPATH \
+#     --phase run
+
+
+python3 utils/metrics.py \
+    --src_path $BASEPATH \
+    --phase run 
