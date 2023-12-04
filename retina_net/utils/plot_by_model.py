@@ -38,7 +38,7 @@ def plot_model_individual(src_path, phase):
             model_dict = {}
             for folds in range (1,4):
                 fold_path = os.path.join(src_path, folder+f"_fold_{folds}")
-                output_path = os.path.join(src_path, folder)
+                output_path = os.path.join(src_path, folder, "plots")
                 if not os.path.exists(output_path):
                     os.makedirs(output_path)
                 metrics = pd.read_csv(os.path.join(fold_path, "metrics.csv"))
