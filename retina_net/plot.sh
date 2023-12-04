@@ -14,6 +14,7 @@ do
 done
 
 
+
 # MODEL=retinanet_R_50_FPN_1x
 # for FOLD in 1 2 3 
 # do
@@ -35,3 +36,11 @@ done
 #     #     --path $BASEPATH/"$MODEL"_fold_${FOLD} \
 #     #     --name "ResNet50 at 3x" 
 # done
+
+
+
+
+# MODEL=retinanet_R_101_FPN_3x
+python3 utils/plot_by_model.py \
+    --path $BASEPATH \
+    --phase run
