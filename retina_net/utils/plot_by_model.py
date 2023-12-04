@@ -72,15 +72,15 @@ def plot_model_individual(src_path, phase):
                 print(metrics.head())
             
             model_csv = []
-            for model in model_dict.keys():
-                # finding mean and std
+            for key in translations_arr:
                 metric_sum = numpy.array([])
-                for key in translations_arr:
-                    if key == 'iteration':
-                        continue
+                for model in model_dict.keys():
+                    # finding mean and std
                     metric_sum = numpy.append(metric_sum, model_dict[model][key].dropna(axis=0, how='any').values)
                 metric_sum = metric_sum.reshape(3, -1)
                 print(metric_sum)
+                if phase == "training":
+                    break 
                     
 
 
