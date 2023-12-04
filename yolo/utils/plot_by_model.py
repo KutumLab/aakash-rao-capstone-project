@@ -144,6 +144,25 @@ def plot_model_individual_with_collective(src_path, phase):
                 plt.close()
             result_df['epoch'] = results['epoch']
             pd.DataFrame.to_csv(result_df, os.path.join(output_path, "results.csv"),index=False)
+
+            col1 = 'mAP'
+            col2 = 'mAP50'
+            plt.figure(figsize=(3, 3))
+            plt.locator_params(nbins=5)
+            copy_info = result_df.copy()
+            copy_info = copy_info[[x_key, col1, col2]].dropna(axis=0, how='any')
+            plt.plot(copy_info[x_key], copy_info[col1]/100, linewidth=1, label='mAP')   
+            plt.plot(copy_info[x_key], copy_info[col2]/100, linewidth=1, label='mAP50')
+            plt.title(f'mAP vs mAP50 \nfor {folder}', fontsize=14, fontweight='bold')
+            plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
+            plt.ylabel('mAP', fontsize=14, fontweight='bold')
+            plt.legend()
+            plt.xticks(fontsize=10)
+            plt.yticks(fontsize=10)
+            plt.ylim(0, 1)
+            plt.tight_layout()
+            plt.savefig(os.path.join(output_path, 'mAP_vs_mAP50.png'), dpi=300)
+
                 
             if phase == "testing":
                 return
