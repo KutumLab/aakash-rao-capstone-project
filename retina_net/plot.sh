@@ -8,30 +8,30 @@ do
     python3 utils/json_gen.py \
         --path $BASEPATH/"$MODEL"_fold_${FOLD}
 
-    # python3 utils/plot_model.py \
-    #     --path $BASEPATH/"$MODEL"_fold_${FOLD} \
-    #     --name "ResNet50+FPN at 1x" 
+    python3 utils/plot_model.py \
+        --path $BASEPATH/"$MODEL"_fold_${FOLD} \
+        --name "ResNet101 at 1x" 
 done
 
 
-MODEL=retinanet_R_50_FPN_1x
-for FOLD in 1 2 3 
-do
-    python3 utils/json_gen.py \
-        --path $BASEPATH/"$MODEL"_fold_${FOLD}
+# MODEL=retinanet_R_50_FPN_1x
+# for FOLD in 1 2 3 
+# do
+#     python3 utils/json_gen.py \
+#         --path $BASEPATH/"$MODEL"_fold_${FOLD}
 
-    # python3 utils/plot_model.py \
-    #     --path $BASEPATH/"$MODEL"_fold_${FOLD} \
-    #     --name "ResNet50+FPN at 3x" 
-done
+#     # python3 utils/plot_model.py \
+#     #     --path $BASEPATH/"$MODEL"_fold_${FOLD} \
+#     #     --name "ResNet50 at 1x" 
+# done
 
-MODEL=retinanet_R_50_FPN_3x
-for FOLD in 1 2 3 
-do
-    python3 utils/json_gen.py \
-        --path $BASEPATH/"$MODEL"_fold_${FOLD}
+# MODEL=retinanet_R_50_FPN_3x
+# for FOLD in 1 2 3 
+# do
+#     python3 utils/json_gen.py \
+#         --path $BASEPATH/"$MODEL"_fold_${FOLD}
 
-    # python3 utils/plot_model.py \
-    #     --path $BASEPATH/"$MODEL"_fold_${FOLD} \
-    #     --name "ResNet101+FPN at 3x" 
-done
+#     # python3 utils/plot_model.py \
+#     #     --path $BASEPATH/"$MODEL"_fold_${FOLD} \
+#     #     --name "ResNet50 at 3x" 
+# done
