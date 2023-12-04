@@ -128,6 +128,13 @@ def plot_model_individual(src_path, phase):
             if phase == "testing":
                 return
 
+def plot_model_individual_with_collective(path, phase):
+    plot_path = os.path.join(path)
+    for folder in model_list:
+        src_path = os.path.join(path, folder,"plots")
+        map_file = pd.read_csv(os.path.join(src_path, 'mAP_vs_mAP50.csv'))
+        print(map_file.head())
+        
 
 
             
@@ -136,6 +143,6 @@ if __name__ == "__main__":
     parser.add_argument("--path", type=str, default="results", help="path to the results folder")
     parser.add_argument("--phase", type=str, default="testing", help="phase to plot")
     args = parser.parse_args()
-    plot_model_individual(args.path, args.phase)
-    # plot_model_individual_with_collective(args.path, args.phase)
+    # plot_model_individual(args.path, args.phase)
+    plot_model_individual_with_collective(args.path, args.phase)
     # give_stats(args.path)
