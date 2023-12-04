@@ -19,8 +19,6 @@ def metrics(src_path, phase):
             # convert to dict
             results = results.tolist()
             print(results['bbox'])
-            
-            results = results[0]['bbox']
             results = pd.DataFrame(results)
             print(results)
             # sumap50 += results['AP50'].values[0]
