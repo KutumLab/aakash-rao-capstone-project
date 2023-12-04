@@ -55,7 +55,10 @@ def plot_model_individual(src_path, phase):
                     # print(small_metrics)
                     plt.figure(figsize=(3,3))
                     plt.locator_params(nbins=5)
-                    plt.plot(small_metrics['iteration'], small_metrics[key], color='#0000FF', linewidth=1)
+                    if 'map' in key.lower():
+                        plt.plot(small_metrics['iteration'], small_metrics[key]/100, color='#0000FF', linewidth=1)
+                    else:
+                        plt.plot(small_metrics['iteration'], small_metrics[key], color='#0000FF', linewidth=1)
                     plt.title(f'{title_dict[key]}\nfor {folder}', fontsize=14, fontweight='bold')
                     plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
                     plt.ylabel(axis_dict[key], fontsize=14, fontweight='bold')
