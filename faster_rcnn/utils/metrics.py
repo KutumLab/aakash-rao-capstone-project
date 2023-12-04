@@ -6,12 +6,24 @@ import pandas as pd
 model_list = ['faster_rcnn_R_50_C4_1x','faster_rcnn_R_50_C4_3x','faster_rcnn_R_50_DC5_1x','faster_rcnn_R_101_DC5_3x']
 
 def metrics(src_path, phase):
+    meanap50 = []
+    meanap75 = []
+    meanap = []
     for model in model_list:
+        sumap50 = 0
+        sumap75 = 0
+        sumap = 0
         for fold in range(1,4):
             path = os.path.join(src_path, model+f"_fold_{fold}",)
             results = np.load(os.path.join(path, "results", "results.npy"), allow_pickle=True)
             print(results)
-            break
+            results = results['bbox']
+            results = pd.DataFrame(results)
+            sumap50 += results['AP50'].values[0]
+            sumap75 += results['AP75'].values[0]
+            sumap += results['AP'].values[0]
+        print(f"Model: {model}")
+        print(f"{sumap50/3} & {sumap75/3} & {sumap/3}")
 
 
 if __name__ == '__main__':
