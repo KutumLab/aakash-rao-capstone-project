@@ -17,7 +17,8 @@ def metrics(src_path, phase):
             path = os.path.join(src_path, model+f"_fold_{fold}",)
             results = np.load(os.path.join(path, "results", "results.npy"), allow_pickle=True)
             # convert to dict
-            results = results.tolist()['bbox']
+            results = results.tolist()
+            results = results['bbox']
             results = pd.DataFrame(results)
             print(results)
             # sumap50 += results['AP50'].values[0]
