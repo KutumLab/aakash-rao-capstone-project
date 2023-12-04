@@ -30,7 +30,7 @@ translation_dict = dict(zip(cols, translations_arr))
 plot_titles_dict = dict(zip(translations_arr, titles_arr))
 axis_labels_dict = dict(zip(translations_arr, axis_arr))
 plot_save_names_dict = dict(zip(translations_arr, plot_save_array))
-x_axis = 'iteration'
+x_key = 'iteration'
 
 model_list = ['retinanet_R_50_FPN_1x','retinanet_R_50_FPN_3x','retinanet_R_101_FPN_3x']
 
@@ -63,7 +63,6 @@ def plot_model_individual(src_path, phase):
                     continue
                 plt.figure(figsize=(3,3))
                 plt.locator_params(nbins=5)
-                x_key = 'epoch'
                 for dir in resultdict.keys():
                     results = resultdict[dir]
                     plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1)
@@ -112,7 +111,6 @@ def plot_model_individual_with_collective(src_path, phase):
                     continue
                 plt.figure(figsize=(3,3))
                 plt.locator_params(nbins=5)
-                x_key = 'epoch'
                 metric_sums = []
                 for dir in resultdict.keys():
                     results = resultdict[dir]
