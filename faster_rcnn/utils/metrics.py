@@ -21,9 +21,9 @@ def metrics(src_path, phase):
             results = pd.DataFrame(results)
             # print(results)
             results = results['bbox'].values
-            sumap50 += results['AP50'].values[5]
-            sumap75 += results['AP75'].values[6]
-            sumap += results['AP'].values[0]
+            sumap50 += results[5]
+            sumap75 += results[6]
+            sumap += results[0]
         print(f"Model: {model}")
         print(f"{sumap50/3} & {sumap75/3} & {sumap/3}")
 
