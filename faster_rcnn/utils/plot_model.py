@@ -73,5 +73,6 @@ def plot_model(path, name):
 if __name__ == '__main__':
     argparse = argparse.ArgumentParser()
     argparse.add_argument('--path', help='path to json file')
+    argparse.add_argument('--name', help='name of model')
     args = argparse.parse_args()
-    plot_model(args.path)
+    plot_model(args.path, args.name)
