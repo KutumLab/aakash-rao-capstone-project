@@ -45,6 +45,26 @@ def plot_model_individual(src_path, phase):
                 print(fold_path)
                 metrics = metrics[relevant_cols]
                 metrics = metrics.rename(columns=dict(zip(relevant_cols, translations_arr)))
+
+                for key in translations_arr:
+                    if key == 'iteration':
+                        continue
+                    small_metrics = metrics[['iteration', key]]
+                    # drop rows with nan
+                    small_metrics = small_metrics.dropna(axis=0, how='any')
+                    # print(small_metrics)
+                    plt.figure(figsize=(3,3))
+                    plt.locator_params(nbins=5)
+                    plt.plot(small_metrics['iteration'], small_metrics[key], color='#0000FF', linewidth=1)
+                    plt.title(f'{title_dict[key]}\nfor {folder}', fontsize=14, fontweight='bold')
+                    plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
+                    plt.ylabel(axis_dict[key], fontsize=14, fontweight='bold')
+                    if 'map' in key.lower():
+                        plt.ylim(0, 1)
+                    
+                    plt.tight_layout()
+                    plt.savefig(os.path.join(output_path, key + f"_fold_{folds}.png"), dpi=300)
+
                 
                 print(metrics.head())
                 
