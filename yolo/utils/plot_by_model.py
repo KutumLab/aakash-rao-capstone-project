@@ -220,5 +220,5 @@ if __name__ == "__main__":
     parser.add_argument("--phase", type=str, default="testing", help="phase to plot")
     args = parser.parse_args()
     # plot_model_individual(args.src_path, args.phase)
-    # plot_model_individual_with_collective(args.src_path, args.phase)
+    plot_model_individual_with_collective(args.src_path, args.phase)
     give_stats(args.src_path)
