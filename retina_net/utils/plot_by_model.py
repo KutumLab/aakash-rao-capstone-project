@@ -43,44 +43,7 @@ def plot_model_individual(src_path, phase):
         raise FileNotFoundError(src_path)
     else:
         for folder in model_list:
-            output_path = os.path.join(src_path, folder)
-            if not os.path.exists(output_path):
-                os.makedirs(output_path)
-            resultdict = {}
-            for dir in os.listdir(src_path):
-                if dir==folder:
-                    continue
-                elif folder not in dir:
-                    continue
-                else:
-                    results = pd.read_csv(os.path.join(src_path,dir, "metrics.csv"))
-                    results = results.rename(columns=translation_dict)
-                    results = results[relevant_keys]
-                    resultdict[dir] = results
-                    # remove nan values
-                    # results = results.dropna(axis=0, how='any')
-            folds = len(resultdict.keys())
-            for key in relevant_keys:
-                if key == 'epoch':
-                    continue
-                plt.figure(figsize=(3,3))
-                plt.locator_params(nbins=5)
-                for dir in resultdict.keys():
-                    results = resultdict[dir]
-                    plt.plot(results[x_key], results[key], label=f'fold {dir[-1]}', linewidth=1)
-                plt.title(f'{plot_titles_dict[key]}\nfor {folder}', fontsize=14, fontweight='bold')
-                plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
-                plt.ylabel(axis_labels_dict[key], fontsize=14, fontweight='bold')
-                if 'loss' in key:
-                    plt.ylim(0, max(results[key]))
-                else:
-                    plt.ylim(0, 1)
-                plt.legend(loc='best', fontsize=8)
-                plt.tight_layout()
-                plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + ".png"), dpi=300)
-                plt.close()
-                # break
-                # finding mean across three models
+            print(folder)
 
 
 def plot_model_individual_with_collective(src_path, phase):
