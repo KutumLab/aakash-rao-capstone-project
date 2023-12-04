@@ -25,6 +25,7 @@ axis_dict = dict(zip(translations_arr, axis_arr))
 x_axis = 'iteration'
 
 model_list = ['retinanet_R_50_FPN_1x','retinanet_R_50_FPN_3x','retinanet_R_101_FPN_3x']
+name_key = {'retinanet_R_50_FPN_1x': 'RetinaNet R50 1x', 'retinanet_R_50_FPN_3x': 'RetinaNet R50 3x', 'retinanet_R_101_FPN_3x': 'RetinaNet R101 3x'}
 
 def plot_model_individual(src_path, phase):
     if not os.path.exists(src_path):
@@ -78,7 +79,23 @@ def plot_model_individual(src_path, phase):
                     # finding mean and std
                     metric_sum = numpy.append(metric_sum, model_dict[model][key].dropna(axis=0, how='any').values)
                 metric_sum = metric_sum.reshape(3, -1)
-                print(metric_sum)
+                mean = numpy.mean(metric_sum, axis=0)
+                std = numpy.std(metric_sum, axis=0)
+                plt.figure(figsize=(3,3))
+                plt.locator_params(nbins=5)
+                if 'map' in key.lower():
+                    plt.plot(model_dict[model]['iteration'], mean/100, color='#0000FF', linewidth=1)
+                    plt.errorbar(model_dict[model]['iteration'][::5], mean[::5]/100, yerr=std[::5]/100, capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
+                else:
+                    plt.plot(model_dict[model]['iteration'], mean, color='#0000FF', linewidth=1)
+                    plt.errorbar(model_dict[model]['iteration'][::5], mean[::5], yerr=std[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
+                plt.title(f'{title_dict[key]}\nfor {name_key{folder}}', fontsize=14, fontweight='bold')
+                plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
+                plt.ylabel(axis_dict[key], fontsize=14, fontweight='bold')
+                if 'map' in key.lower():
+                    plt.ylim(0, 1)
+                plt.tight_layout()
+                plt.savefig(os.path.join(output_path, key + "_mean.png"), dpi=300)
                 if phase == "training":
                     break 
                     
