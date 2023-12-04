@@ -17,20 +17,12 @@ relevant_cols = ['bbox/AP', 'bbox/AP-nonTIL_stromal', 'bbox/AP-other', 'bbox/AP-
 
 translations_arr = ['mAP', 'map0', 'map1', 'map2','map3', 'mAP50', 'mAP75', 'iteration', 'loss_box_reg', 'loss_cls', 'total_loss', 'validation_loss']
 
-relevant_keys = ['mAP', 'map0', 'map1', 'map2','map3', 'mAP50', 'mAP75', 'iteration', 'loss_box_reg', 'loss_cls', 'total_loss', 'validation_loss']
-
 axis_arr = ['mAP', 'mAP', 'mAP', 'mAP','mAP', 'mAP50', 'mAP75', 'Iterations', 'Loss', 'Loss', 'Loss', 'Loss']
 
 titles_arr = ['mean AP', 'mean AP for Stromal', 'mean AP for Other', 'mean AP for sTIL','mean AP for Tumor', 'mean AP at IoU 50', 'mean AP at IoU 75', 'iteration', 'Box Loss', 'Class Loss', 'Total Loss', 'Validation Loss']
-
-plot_save_array = ['mAP', 'map0', 'map1', 'map2','map3', 'mAP50', 'mAP75', 'iteration', 'loss_box_reg', 'loss_cls', 'total_loss', 'validation_loss']
-
-
-translation_dict = dict(zip(cols, translations_arr))
-plot_titles_dict = dict(zip(translations_arr, titles_arr))
-axis_labels_dict = dict(zip(translations_arr, axis_arr))
-plot_save_names_dict = dict(zip(translations_arr, plot_save_array))
-x_key = 'iteration'
+title_dict = dict(zip(translations_arr, titles_arr))
+axis_dict = dict(zip(translations_arr, axis_arr))
+x_axis = 'iteration'
 
 model_list = ['retinanet_R_50_FPN_1x','retinanet_R_50_FPN_3x','retinanet_R_101_FPN_3x']
 
@@ -43,12 +35,17 @@ def plot_model_individual(src_path, phase):
         raise FileNotFoundError(src_path)
     else:
         for folder in model_list:
+            model_dict = {}
             for folds in range (1,4):
                 fold_path = os.path.join(src_path, folder+f"_fold_{folds}")
                 output_path = os.path.join(src_path, folder)
                 if not os.path.exists(output_path):
                     os.makedirs(output_path)
+                metrics = pd.read_csv(os.path.join(fold_path, "metrics.csv"))
+                print(metrics.head())
                 print(fold_path)
+            if phase == "testing":
+                return
 
 
 def plot_model_individual_with_collective(src_path, phase):
