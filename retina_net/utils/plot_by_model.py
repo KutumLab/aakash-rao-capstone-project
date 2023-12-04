@@ -43,7 +43,8 @@ def plot_model_individual(src_path, phase):
         raise FileNotFoundError(src_path)
     else:
         for folder in model_list:
-            print(folder)
+            for folds in range (1,4):
+                fold_path = os.path.join(src_path, folder+f"_fold_{folds}")
 
 
 def plot_model_individual_with_collective(src_path, phase):
