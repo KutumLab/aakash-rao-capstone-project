@@ -176,6 +176,6 @@ if __name__ == "__main__":
     parser.add_argument("--path", type=str, default="results", help="path to the results folder")
     parser.add_argument("--phase", type=str, default="testing", help="phase to plot")
     args = parser.parse_args()
-    # plot_model_individual(args.path, args.phase)
+    plot_model_individual(args.path, args.phase)
     plot_model_individual_with_collective(args.path, args.phase)
     # give_stats(args.path)
