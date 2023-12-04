@@ -91,7 +91,7 @@ def plot_model_individual(src_path, phase):
                     plt.errorbar(numpy.array(range(0, len(mean),1))[::5], mean[::5]/100, yerr=std[::5]/100, capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
                 else:
                     plt.plot(numpy.array(range(0, len(mean),1)), mean, color='#0000FF', linewidth=1)
-                    plt.errorbar(numpy.array(range(0, len(mean),1))s[::5], mean[::5], yerr=std[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
+                    plt.errorbar(numpy.array(range(0, len(mean),1))[::5], mean[::5], yerr=std[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
                 plt.title(f'{title_dict[key]}\nfor {name_key[folder]}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_dict[key], fontsize=14, fontweight='bold')
