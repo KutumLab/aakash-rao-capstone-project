@@ -53,7 +53,7 @@ def plot_model_individual(src_path, phase):
                 elif folder not in dir:
                     continue
                 else:
-                    results = pd.read_csv(os.path.join(src_path,dir, "results.csv"))
+                    results = pd.read_csv(os.path.join(src_path,dir, "metrics.csv"))
                     results = results.rename(columns=translation_dict)
                     results = results[relevant_keys]
                     resultdict[dir] = results
@@ -101,7 +101,7 @@ def plot_model_individual_with_collective(src_path, phase):
                 elif folder not in dir:
                     continue
                 else:
-                    results = pd.read_csv(os.path.join(src_path,dir, "results.csv"))
+                    results = pd.read_csv(os.path.join(src_path,dir, "metrics.csv"))
                     results = results.rename(columns=translation_dict)
                     results = results[relevant_keys]
                     resultdict[dir] = results
@@ -147,7 +147,7 @@ def plot_model_individual_with_collective(src_path, phase):
                 plt.savefig(os.path.join(output_path, plot_save_names_dict[key] + "_mean.png"), dpi=300)
                 plt.close()
             result_df['epoch'] = results['epoch']
-            pd.DataFrame.to_csv(result_df, os.path.join(output_path, "results.csv"),index=False)
+            pd.DataFrame.to_csv(result_df, os.path.join(output_path, "metrics.csv"),index=False)
 
             col1 = 'metrics_mAP_0.5'
             col2 = 'metrics_mAP_0.5:0.95'
@@ -196,7 +196,7 @@ def give_stats(src_path):
                 elif folder not in dir:
                     continue
                 else:
-                    results = pd.read_csv(os.path.join(src_path,dir, "results.csv"))
+                    results = pd.read_csv(os.path.join(src_path,dir, "metrics.csv"))
                     results = results.rename(columns=translation_dict)
                     results = results[['metrics_precision', 'metrics_recall', 'metrics_mAP_0.5', 'metrics_mAP_0.5:0.95']]
                     max_results = results.max()
