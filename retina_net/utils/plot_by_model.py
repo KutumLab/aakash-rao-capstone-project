@@ -73,6 +73,7 @@ def plot_model_individual(src_path, phase):
                 model_dict[folder+f"_fold_{folds}"] = metrics
                 print(metrics.head())
             
+            
             model_csv = []
             for key in translations_arr:
                 metric_sum = numpy.array([])
@@ -88,11 +89,11 @@ def plot_model_individual(src_path, phase):
                 plt.figure(figsize=(3,3))
                 plt.locator_params(nbins=5)
                 if 'map' in key.lower():
-                    plt.plot(numpy.array(range(0, len(mean),1)), mean/100, color='#0000FF', linewidth=1)
-                    plt.errorbar(numpy.array(range(0, len(mean),1))[::5], mean[::5]/100, yerr=std[::5]/100, capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
+                    plt.plot(numpy.array(range(0, len(mean),1))*10, mean/100, color='#0000FF', linewidth=1)
+                    plt.errorbar(numpy.array(range(0, len(mean),1))*10[::5], mean[::5]/100, yerr=std[::5]/100, capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
                 else:
-                    plt.plot(numpy.array(range(0, len(mean),1)), mean, color='#0000FF', linewidth=1)
-                    plt.errorbar(numpy.array(range(0, len(mean),1))[::5], mean[::5], yerr=std[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
+                    plt.plot(numpy.array(range(0, len(mean),1))*10, mean, color='#0000FF', linewidth=1)
+                    plt.errorbar(numpy.array(range(0, len(mean),1))*10[::5], mean[::5], yerr=std[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
                 plt.title(f'{title_dict[key]}\nfor {name_key[folder]}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
                 plt.ylabel(axis_dict[key], fontsize=14, fontweight='bold')
@@ -101,8 +102,13 @@ def plot_model_individual(src_path, phase):
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, key + "_mean.png"), dpi=300)
                 plt.close()
+
+                col1 = 'metrics_mAP_0.5'
                 if phase == "training":
                     break 
+
+            
+
                     
 
 
