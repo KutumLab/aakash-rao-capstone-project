@@ -145,8 +145,8 @@ def plot_model_individual_with_collective(src_path, phase):
             result_df['epoch'] = results['epoch']
             pd.DataFrame.to_csv(result_df, os.path.join(output_path, "results.csv"),index=False)
 
-            col1 = 'mAP'
-            col2 = 'mAP50'
+            col1 = 'metrics_mAP_0.5'
+            col2 = 'metrics_mAP_0.5:0.95'
             plt.figure(figsize=(3, 3))
             plt.locator_params(nbins=5)
             copy_info = result_df.copy()
