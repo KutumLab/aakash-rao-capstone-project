@@ -69,93 +69,7 @@ def plot_model_individual(src_path, phase):
                     plt.tight_layout()
                     # plt.savefig(os.path.join(output_path, key + f"_fold_{folds}.png"), dpi=300)
                     plt.close()
-                    metric_df = pd.DataFrame(small_metrics)
-                    # metric_df.to_csv(os.path.join(output_path, key + f"_fold_{folds}.csv"), index=False)
                 
-                print(metrics.head())
-            
-            
-            model_csv = []
-            for key in translations_arr:
-                metric_sum = numpy.array([])
-                is_nan_list = []
-                for model in model_dict.keys():
-                    # finding mean and std
-                    is_nan_list = model_dict[model][key].isnull()
-                    metric_sum = numpy.append(metric_sum, model_dict[model][key].dropna(axis=0, how='any').values)
-                    # which indixes were dropped
-                metric_sum = metric_sum.reshape(3, -1)
-                mean = numpy.mean(metric_sum, axis=0)
-                std = numpy.std(metric_sum, axis=0)
-                
-                plt.figure(figsize=(3,3))
-                plt.locator_params(nbins=5)
-                if 'map' in key.lower():
-                    plt.plot((numpy.array(range(0, len(mean),1))*100), mean/100, color='#0000FF', linewidth=1)
-                    plt.errorbar((numpy.array(range(0, len(mean),1))*100)[::5], mean[::5]/100, yerr=std[::5]/100, capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
-                else:
-                    plt.plot((numpy.array(range(0, len(mean),1))*100), mean, color='#0000FF', linewidth=1)
-                    plt.errorbar((numpy.array(range(0, len(mean),1))*100)[::5], mean[::5], yerr=std[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
-                plt.title(f'{title_dict[key]}\nfor {name_key[folder]}', fontsize=14, fontweight='bold')
-                plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
-                plt.ylabel(axis_dict[key], fontsize=14, fontweight='bold')
-                if 'map' in key.lower():
-                    plt.ylim(0, 1)
-                plt.tight_layout()
-                plt.savefig(os.path.join(output_path, key + "_mean.png"), dpi=300)
-                plt.close()
-                for model in model_dict.keys():
-                    col1 = 'mAP'
-                    col2 = 'mAP50'
-                    plt.figure(figsize=(3, 3))
-                    plt.locator_params(nbins=5)
-                    copy_info = model_dict[model][[x_axis, col1, col2]].dropna(axis=0, how='any')
-                    plt.plot(copy_info[x_axis], copy_info[col1]/100, linewidth=1, label='mAP')
-                    plt.plot(copy_info[x_axis], copy_info[col2]/100, linewidth=1, label='mAP50')
-                    plt.title(f'mAP for \n{name_key[folder]}', fontsize=14, fontweight='bold')
-                    plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
-                    plt.ylabel('mAP', fontsize=14, fontweight='bold')
-                    plt.legend()
-                    plt.xticks(fontsize=10)
-                    plt.yticks(fontsize=10)
-                    plt.ylim(0, 1)
-                    plt.tight_layout()
-                    plt.savefig(os.path.join(output_path, 'mAP_vs_mAP50.png'), dpi=300)
-                    plt.close()
-
-
-                if phase == "testing":
-                    break 
-
-            if phase == "testing":
-                return
-
-
-def plot_model_individual_with_collective(src_path, phase):
-    if not os.path.exists(src_path):
-        print("File not found: ", src_path)
-        raise FileNotFoundError(src_path)
-    elif len(os.listdir(src_path)) == 0:
-        print("Empty folder: ", src_path)
-        raise FileNotFoundError(src_path)
-    else:
-        for folder in model_list:
-            model_dict = {}
-            for folds in range (1,4):
-                fold_path = os.path.join(src_path, folder+f"_fold_{folds}")
-                output_path = os.path.join(src_path, folder, "plots")
-                if not os.path.exists(output_path):
-                    os.makedirs(output_path)
-                metrics = pd.read_csv(os.path.join(fold_path, "metrics.csv"))
-                print(fold_path)
-                metrics = metrics[relevant_cols]
-                metrics = metrics.rename(columns=dict(zip(relevant_cols, translations_arr)))
-
-                for key in translations_arr:
-                    if key == 'iteration':
-                        continue
-                    small_metrics = metrics[['iteration', key]]
-                    small_metrics = small_metrics.dropna(axis=0, how='any')
                 model_dict[folder+f"_fold_{folds}"] = metrics
                 print(metrics.head())
             
@@ -213,52 +127,7 @@ def plot_model_individual_with_collective(src_path, phase):
             if phase == "testing":
                 return
 
-            
-def give_stats(src_path):
-    if not os.path.exists(src_path):
-        print("File not found: ", src_path)
-        raise FileNotFoundError(src_path)
-    elif len(os.listdir(src_path)) == 0:
-        print("Empty folder: ", src_path)
-        raise FileNotFoundError(src_path)
-    else:
-        master_df = pd.DataFrame(columns=['model', 'metrics_precision', 'metrics_recall', 'metrics_mAP_0.5', 'metrics_mAP_0.5:0.95'])
-        model_list = ['yolov5m','yolov5x','yolov5l',]
-        prec_list = []
-        rec_list = []
-        map50_list = []
-        map5095_list = []
-        for folder in model_list:
-            output_path = os.path.join(src_path, folder)
-            if not os.path.exists(output_path):
-                os.makedirs(output_path)
-            resultdict = {}
-            for dir in os.listdir(src_path):
-                if dir==folder:
-                    continue
-                elif folder not in dir:
-                    continue
-                else:
-                    results = pd.read_csv(os.path.join(src_path,dir, "metrics.csv"))
-                    results = results.rename(columns=translation_dict)
-                    results = results[['metrics_precision', 'metrics_recall', 'metrics_mAP_0.5', 'metrics_mAP_0.5:0.95']]
-                    max_results = results.max()
-                    prec_list.append(max_results['metrics_precision'])
-                    rec_list.append(max_results['metrics_recall'])
-                    map50_list.append(max_results['metrics_mAP_0.5'])
-                    map5095_list.append(max_results['metrics_mAP_0.5:0.95'])
-                    print(max_results)
-                    break
-        master_df['model'] = model_list
-        master_df['metrics_precision'] = prec_list
-        master_df['metrics_recall'] = rec_list
-        master_df['metrics_mAP_0.5'] = map50_list
-        master_df['metrics_mAP_0.5:0.95'] = map5095_list
-        print(master_df)
-        # to latex
-        print(master_df.to_latex(index=False))
-        # master_df.to_csv(os.path.join(src_path, "stats.csv"),index=False)            
-    return
+
 
             
 if __name__ == "__main__":
