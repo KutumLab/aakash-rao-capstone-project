@@ -57,6 +57,8 @@ def plot_model_individual(src_path, phase):
                     results = results.rename(columns=translation_dict)
                     results = results[relevant_keys]
                     resultdict[dir] = results
+                    # remove nan values
+                    # results = results.dropna(axis=0, how='any')
             folds = len(resultdict.keys())
             for key in relevant_keys:
                 if key == 'epoch':
@@ -222,5 +224,5 @@ if __name__ == "__main__":
     parser.add_argument("--phase", type=str, default="testing", help="phase to plot")
     args = parser.parse_args()
     plot_model_individual(args.path, args.phase)
-    plot_model_individual_with_collective(args.path, args.phase)
-    give_stats(args.path)
+    # plot_model_individual_with_collective(args.path, args.phase)
+    # give_stats(args.path)
