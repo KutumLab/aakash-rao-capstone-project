@@ -44,6 +44,9 @@ def plot_model_individual(src_path, phase):
                 metrics = pd.read_csv(os.path.join(fold_path, "metrics.csv"))
                 print(metrics.head())
                 print(fold_path)
+                metrics = metrics[relevant_cols]
+                metrics = metrics.rename(columns=dict(zip(relevant_cols, translations_arr)))
+                
             if phase == "testing":
                 return
 
