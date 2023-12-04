@@ -67,6 +67,14 @@ def plot_model(path, name):
     plt.plot(copy_info[x_axis], copy_info[col1], linewidth=1, label='mAP')
     plt.plot(copy_info[x_axis], copy_info[col2], linewidth=1, label='mAP50')
     plt.title(f'mAP vs mAP50 \nfor {name}', fontsize=14, fontweight='bold')
+    plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
+    plt.ylabel('mAP', fontsize=14, fontweight='bold')
+    plt.legend()
+    plt.xticks(fontsize=10)
+    plt.yticks(fontsize=10)
+    plt.ylim(0, 1)
+    plt.tight_layout()
+    plt.savefig(os.path.join(plot_save_path, 'mAP_vs_mAP50.png'), dpi=300)
 
             
 
