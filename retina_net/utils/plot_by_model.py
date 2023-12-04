@@ -141,7 +141,7 @@ def plot_model_individual_with_collective(path, phase):
     plt.title(f'mAP for \n{phase}', fontsize=14, fontweight='bold')
     plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
     plt.ylabel('mAP', fontsize=14, fontweight='bold')
-    plt.legend()
+    plt.legend(fontsize=8)
     plt.xticks(fontsize=10)
     plt.yticks(fontsize=10)
     plt.ylim(0, 1)
