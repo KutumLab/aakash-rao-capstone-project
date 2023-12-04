@@ -18,7 +18,7 @@ def metrics(src_path, phase):
             results = np.load(os.path.join(path, "results", "results.npy"), allow_pickle=True)
             # convert to dict
             results = results.tolist()
-            print(results)
+            print(results['bbox'])
             break
         break
         #     results = results[0]['bbox']
