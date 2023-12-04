@@ -70,7 +70,7 @@ def plot_model_individual(src_path, phase):
                     # plt.savefig(os.path.join(output_path, key + f"_fold_{folds}.png"), dpi=300)
                     plt.close()
                     metric_df = pd.DataFrame(small_metrics)
-                    metric_df.to_csv(os.path.join(output_path, key + f"_fold_{folds}.csv"), index=False)
+                    # metric_df.to_csv(os.path.join(output_path, key + f"_fold_{folds}.csv"), index=False)
                 
                 print(metrics.head())
             
