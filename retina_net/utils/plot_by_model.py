@@ -110,7 +110,7 @@ def plot_model_individual(src_path, phase):
                 copy_info = model_dict[model][[x_axis, col1, col2]].dropna(axis=0, how='any')
                 plt.plot(copy_info[x_axis], copy_info[col1]/100, linewidth=1, label='mAP')
                 plt.plot(copy_info[x_axis], copy_info[col2]/100, linewidth=1, label='mAP50')
-                plt.title(f'mAP for {name_key[folder]}', fontsize=14, fontweight='bold')
+                plt.title(f'mAP for \n{name_key[folder]}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
                 plt.ylabel('mAP', fontsize=14, fontweight='bold')
                 plt.legend()
