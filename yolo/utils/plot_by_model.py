@@ -153,7 +153,7 @@ def plot_model_individual_with_collective(src_path, phase):
             copy_info = copy_info[[x_key, col1, col2]].dropna(axis=0, how='any')
             plt.plot(copy_info[x_key], copy_info[col1], linewidth=1, label='mAP')   
             plt.plot(copy_info[x_key], copy_info[col2], linewidth=1, label='mAP50')
-            plt.title(f'mAP vs mAP50 \nfor {folder}', fontsize=14, fontweight='bold')
+            plt.title(f'mAP for {folder}', fontsize=14, fontweight='bold')
             plt.xlabel(axis_labels_dict[x_key], fontsize=14, fontweight='bold')
             plt.ylabel('mAP', fontsize=14, fontweight='bold')
             plt.legend()
