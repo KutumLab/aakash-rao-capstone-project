@@ -75,19 +75,22 @@ def plot_model_individual(src_path, phase):
             model_csv = []
             for key in translations_arr:
                 metric_sum = numpy.array([])
+                is_nan_list = []
                 for model in model_dict.keys():
                     # finding mean and std
+                    is_nan_list = model_dict[model][key].isnull()
                     metric_sum = numpy.append(metric_sum, model_dict[model][key].dropna(axis=0, how='any').values)
+                    # which indixes were dropped
                 metric_sum = metric_sum.reshape(3, -1)
                 mean = numpy.mean(metric_sum, axis=0)
                 std = numpy.std(metric_sum, axis=0)
                 plt.figure(figsize=(3,3))
                 plt.locator_params(nbins=5)
                 if 'map' in key.lower():
-                    plt.plot(model_dict[model]['iteration'].dropna(axis=0, how='any').values, mean/100, color='#0000FF', linewidth=1)
+                    plt.plot(numpy.arrange(0, len(mean),1), mean/100, color='#0000FF', linewidth=1)
                     plt.errorbar(model_dict[model]['iteration'].dropna(axis=0, how='any').values[::5], mean[::5]/100, yerr=std[::5]/100, capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
                 else:
-                    plt.plot(model_dict[model]['iteration'].dropna(axis=0, how='any').values, mean, color='#0000FF', linewidth=1)
+                    plt.plot(numpy.arrange(0, len(mean),1), mean, color='#0000FF', linewidth=1)
                     plt.errorbar(model_dict[model]['iteration'].dropna(axis=0, how='any').values[::5], mean[::5], yerr=std[::5], capsize=1, capthick=1, elinewidth=1, color='black', linewidth=0)
                 plt.title(f'{title_dict[key]}\nfor {name_key[folder]}', fontsize=14, fontweight='bold')
                 plt.xlabel(axis_dict[x_axis], fontsize=14, fontweight='bold')
