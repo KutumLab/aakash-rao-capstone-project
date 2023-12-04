@@ -78,7 +78,7 @@ def plot_model_individual(src_path, phase):
                 for key in translations_arr:
                     if key == 'iteration':
                         continue
-                    metric_sum = numpy.append(metric_sum, model_dict[model][key])
+                    metric_sum = numpy.append(metric_sum, model_dict[model][key].dropna(axis=0, how='any').values)
                 metric_sum = metric_sum.reshape(3, -1)
                 print(metric_sum)
                     
