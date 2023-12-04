@@ -67,7 +67,8 @@ def plot_model_individual(src_path, phase):
                         plt.ylim(0, 1)
                     
                     plt.tight_layout()
-                    plt.savefig(os.path.join(output_path, key + f"_fold_{folds}.png"), dpi=300)
+                    # plt.savefig(os.path.join(output_path, key + f"_fold_{folds}.png"), dpi=300)
+                    plt.close()
                 
                 model_dict[folder+f"_fold_{folds}"] = metrics
                 print(metrics.head())
@@ -99,6 +100,7 @@ def plot_model_individual(src_path, phase):
                     plt.ylim(0, 1)
                 plt.tight_layout()
                 plt.savefig(os.path.join(output_path, key + "_mean.png"), dpi=300)
+                plt.close()
                 if phase == "training":
                     break 
                     
