@@ -38,8 +38,7 @@ def image_info(image_dir, mask_dir, plot_dir):
                 # print(f"{mask_path.split('/')[-1]} not exist")
                 continue
             # print(image.shape)
-            leng_annots = np.array([i, len(mask)])
-            annot_per_image = np.append(annot_per_image, leng_annots)
+            print(f'{image_name} has {mask.shape[0]} annotations')
 
             for index, row in mask.iterrows():
                 x_min = row['xmin']
