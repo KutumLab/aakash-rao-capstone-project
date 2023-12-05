@@ -3,8 +3,8 @@ import pandas as pd
 import os
 import argparse
 
-models = ['faster_rcnn', 'retina_net', 'yolo']
-dict_oof = {'yolo':['mAP_'], 'retina_net':['AP'], 'faster_rcnn':['AP']}
+models = ['faster_rcnn', 'retinanet', 'yolo']
+dict_oof = {'yolo':['mAP_'], 'retinanet':['AP'], 'faster_rcnn':['AP']}
 def gen_stat(src_path):
     models_list = []
     ap50_list = []
@@ -39,14 +39,14 @@ def gen_stat(src_path):
 
     pass
 
-best_from_all = ['faster_rcnn_R_50_C4_3x', 'retina_net_R_101_FPN_3x', 'yolov5m']
+best_from_all = ['faster_rcnn_R_50_C4_3x', 'retinanet_R_101_FPN_3x', 'yolov5m']
 
 def grp_plot(src_path):
     mean_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs','faster_rcnn_R_50_C4_3x', 'mean_faster_rcnn_R_50_C4_3x.csv'), header=0)
-    mean_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs','retina_net_R_101_FPN_3x', 'mean_retina_net_R_101_FPN_3x.csv'), header=0)
+    mean_retinanet = pd.read_csv(os.path.join(src_path, 'retinanet', 'csvs','retinanet_R_101_FPN_3x', 'mean_retinanet_R_101_FPN_3x.csv'), header=0)
     mean_yolo = pd.read_csv(os.path.join(src_path, 'yolo', 'csvs', 'yolov5m', 'mean_yolov5m.csv'), header=0)
     std_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs','faster_rcnn_R_50_C4_3x', 'std_faster_rcnn_R_50_C4_3x.csv'), header=0)
-    std_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs','retina_net_R_101_FPN_3x', 'std_retina_net_R_101_FPN_3x.csv'), header=0)
+    std_retinanet = pd.read_csv(os.path.join(src_path, 'retinanet', 'csvs','retinanet_R_101_FPN_3x', 'std_retinanet_R_101_FPN_3x.csv'), header=0)
     std_yolo = pd.read_csv(os.path.join(src_path, 'yolo', 'csvs', 'yolov5m', 'std_yolov5m.csv'), header=0)
     pass
 
