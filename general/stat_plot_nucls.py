@@ -28,7 +28,7 @@ def plot_stats(image_dir, plot_dir):
     class_stats = class_stats[:-2].astype(int)
 
     plt.figure(figsize=(3,3))
-    plt.bar(np.arange(len(class_stats)), class_stats, labels=classes)
+    plt.bar(np.arange(len(class_stats)), class_stats)
     plt.xticks(np.arange(len(class_stats)), class_stats)
     plt.xlabel('Class')
     plt.ylabel('Number of Images')
