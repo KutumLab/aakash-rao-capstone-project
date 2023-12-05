@@ -9,8 +9,8 @@ axis = ['mAP', 'mAP', 'mAP', 'Accuracy', 'Iteration', 'Loss', 'Loss', 'Loss', 'L
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
 x_axis_dict = "No. of Iterations"
-model_list = ['faster_rcnn_R_101_DC5_3x','faster_rcnn_R_50_C4_1x','faster_rcnn_R_50_C4_3x','faster_rcnn_R_50_DC5_1x','faster_rcnn_R_50_DC5_3x']
-names = ['ResNet101 with DC5', 'ResNet50 with C4', 'ResNet50 with C4', 'ResNet50 with DC5', 'ResNet50 with DC5']
+model_list = ['retinanet_R_50_FPN_1x','retinanet_R_50_FPN_3x','retinanet_R_101_FPN_3x',]
+names = ['ResNet50 with FPN at 1x', 'ResNet50 with FPN at 3x', 'ResNet101 with FPN at 3x']
 model_dict = dict(zip(model_list, names))
 
 def plot_model(data_dir, plot_dir):
