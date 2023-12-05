@@ -15,7 +15,7 @@ def generate_csvs(data_dir, output_dir):
         folder_path = os.path.join(data_dir, folder)
         fold = folder.split('-')[-1]
         model = folder.split('-')[0]
-        model_output_dir = os.path.join(output_dir, model)
+        model_output_dir = os.path.join(output_dir, model, "folds")
         if not os.path.exists(model_output_dir):
             os.makedirs(model_output_dir)
         csv = pd.read_csv(os.path.join(folder_path, 'results.csv'), header=0)
