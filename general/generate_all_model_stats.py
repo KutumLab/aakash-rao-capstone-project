@@ -2,6 +2,10 @@ import numpy as np
 import pandas as pd
 import os
 import argparse
+import matplotlib.pyplot as plt
+
+
+
 
 models = ['faster_rcnn', 'retina_net', 'yolo']
 dict_oof = {'yolo':['mAP_'], 'retina_net':['AP'], 'faster_rcnn':['AP']}
@@ -43,20 +47,46 @@ best_from_all = ['faster_rcnn_R_50_C4_3x', 'retina_net_R_101_FPN_3x', 'yolov5m']
 
 def grp_plot(src_path):
     mean_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs','faster_rcnn_R_50_C4_3x', 'mean_faster_rcnn_R_50_C4_3x.csv'), header=0)
+    mean_frcnn_50 = mean_frcnn['AP50'].dropna(how='all').values
+    mean_frcnn_5095 = mean_frcnn['AP5095'].dropna(how='all').values
     mean_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs','retinanet_R_101_FPN_3x', 'mean_retinanet_R_101_FPN_3x.csv'), header=0)
+    mean_retinanet_50 = mean_retinanet['AP50'].dropna(how='all').values
+    mean_retinanet_5095 = mean_retinanet['AP5095'].dropna(how='all').values
     mean_yolo = pd.read_csv(os.path.join(src_path, 'yolo', 'csvs', 'yolov5m', 'mean_yolov5m.csv'), header=0)
     mean_yolo['mAP_50'] = mean_yolo['mAP_50']*100
     mean_yolo['mAP_50_95'] = mean_yolo['mAP_5095']*100
     mean_yolo['epoch'] = mean_yolo['epoch']*100
+    mean_yolo_50 = mean_yolo['mAP_50'].dropna(how='all').values
+    mean_yolo_5095 = mean_yolo['mAP_50_95'].dropna(how='all').values
     std_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs','faster_rcnn_R_50_C4_3x', 'std_faster_rcnn_R_50_C4_3x.csv'), header=0)
+    std_frcnn_50 = std_frcnn['AP50'].dropna(how='all').values
+    std_frcnn_5095 = std_frcnn['AP5095'].dropna(how='all').values
     std_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs','retinanet_R_101_FPN_3x', 'std_retinanet_R_101_FPN_3x.csv'), header=0)
+    std_retinanet_50 = std_retinanet['AP50'].dropna(how='all').values
+    std_retinanet_5095 = std_retinanet['AP5095'].dropna(how='all').values
     std_yolo = pd.read_csv(os.path.join(src_path, 'yolo', 'csvs', 'yolov5m', 'std_yolov5m.csv'), header=0)
     std_yolo['mAP_50'] = std_yolo['mAP_50']*100
     std_yolo['mAP_50_95'] = std_yolo['mAP_5095']*100
     std_yolo['epoch'] = std_yolo['epoch']*100
+    std_yolo_50 = std_yolo['mAP_50'].dropna(how='all').values
+    std_yolo_5095 = std_yolo['mAP_50_95'].dropna(how='all').values
 
-    print(mean_yolo)
-    print(mean_retinanet)
+
+    # bringing all to same length
+    mean_yolo_50 = mean_yolo_50
+    mean_yolo_5095 = mean_yolo_5095
+    std_yolo_50 = std_yolo_50
+    std_yolo_5095 = std_yolo_5095
+    mean_frcnn_50 = mean_frcnn_50[:,:len(mean_frcnn_50)//len(mean_yolo_50)]
+    print(mean_frcnn_50.shape)
+    print(mean_yolo_50.shape)
+
+
+    plt.figure(figsize=(10, 5))
+    plt.plot
+
+
+
     pass
 
 if __name__ == '__main__':
