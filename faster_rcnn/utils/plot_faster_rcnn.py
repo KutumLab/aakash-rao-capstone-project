@@ -25,7 +25,9 @@ def plot_model(data_dir, plot_dir):
             if column == 'iteration' or 'unnamed' in column.lower():
                 continue
             mean = mean_df[column]
+            mean = mean.dropna(how='any')
             std = std_df[column]
+            std = std.dropna(how='any')
             plt.figure(figsize=(4, 4))
             plt.subplots_adjust(left=0.15, bottom=0.15, right=0.95, top=0.95)
             plt.locator_params(axis='x', nbins=5)
