@@ -10,7 +10,7 @@ def gen_stat(src_path):
     ap50_list = []
     ap5095_list = []
     for model in os.listdir(src_path):
-        if '.gitkeep' in model:
+        if '.gitkeep' in model or 'NuCLS_Stastistics' in model:
             continue
         model_path = os.path.join(src_path, model, "csvs")
         for submodel in os.listdir(model_path):
