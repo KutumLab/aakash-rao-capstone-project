@@ -13,10 +13,15 @@ def generate_csvs(data_dir, output_dir):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     for folder in os.listdir(data_dir):
+        metrics = pd.read_csv(os.path.join(data_dir, folder, 'metrics.csv'))
+        print(metrics.columns)
         foldr_split = folder.split('_')
         net_name = '_'.join(foldr_split[:-2])
         fold_num = '_'.join(foldr_split[-2:])
         print(net_name, fold_num)
+        
+        
+        break
     pass
 
 def mean_and_std_fold(data_dir, output_dir):
