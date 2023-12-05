@@ -20,10 +20,10 @@ def gen_stat(src_path):
             print(mean_df)
             std_df = pd.read_csv(os.path.join(model_path, submodel, f'std_{submodel}.csv'), header=0)
             models_list.append(submodel)
-            ap50 = mean_df[f'{dict_oof[model][0]}50'].values
+            ap50 = mean_df[f'{dict_oof[model][0]}50'].dropna(how='all').values
             # appending max value
             ap50_list.append(np.max(ap50))
-            ap5095 = mean_df[f'{dict_oof[model][0]}5095'].values
+            ap5095 = mean_df[f'{dict_oof[model][0]}5095'].dropna(how='all').values
             # appending max value
             ap5095_list.append(np.max(ap5095))
     print(models_list)
