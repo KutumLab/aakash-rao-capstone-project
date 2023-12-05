@@ -41,6 +41,7 @@ def plot_model(data_dir, plot_dir):
             plt.yticks(fontsize=10)
             plt.tight_layout()
             plt.savefig(os.path.join(model_plot_dir, f'{column}.png'))
+            plt.close()
 
         break
     pass
