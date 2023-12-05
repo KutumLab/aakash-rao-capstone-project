@@ -65,8 +65,8 @@ def plot_metric(data_dir, plot_dir):
             plt.fill_between(mean.index, mean - std, mean + std, alpha=0.5, label=model)
         # custom legend content
         handles, labels = plt.gca().get_legend_handles_labels()
-        order = [0, 3, 1, 4, 2, 5]
-        plt.legend([handles[idx] for idx in order],[labels[idx] for idx in order], fontsize=10)
+        order = [0, 2, 4, 1, 3, 5]
+        plt.legend([handles[idx] for idx in order],[labels[idx] for idx in order], fontsize=8)
         plt.title(title_dict[column], fontsize=14, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=14, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=14, fontweight='bold')
