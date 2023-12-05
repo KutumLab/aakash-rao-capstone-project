@@ -55,7 +55,7 @@ def plot_metric(data_dir, plot_dir):
     for column in cols:
         if column == 'iteration' or 'unnamed' in column.lower():
             continue
-        plt.figure(figsize=(4, 4))
+        plt.figure(figsize=(6, 4))
         plt.locator_params(axis='x', nbins=5)
         plt.locator_params(axis='y', nbins=5)
         plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
@@ -71,7 +71,7 @@ def plot_metric(data_dir, plot_dir):
         # custom legend content
         handles, labels = plt.gca().get_legend_handles_labels()
         order = [0, 2, 4, 1, 3, 5]
-        plt.legend([handles[idx] for idx in order],[model_dict[labels[idx]] for idx in order], fontsize=8)
+        plt.legend([handles[idx] for idx in order],[model_dict[labels[idx]] for idx in order], fontsize=8, bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.title(f'{title_dict[column]} for Faster R-CNN', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
