@@ -1,3 +1,4 @@
+import numpy as np
 import os
 import pandas as pd
 import argparse
@@ -47,7 +48,7 @@ def plot_model(data_dir, plot_dir):
             plt.title(title_dict[column], fontsize=12, fontweight='bold')
             plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
             plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
-            plt.xticks(fontsize=10)
+            plt.xticks(np.arange(0, 150, 150//5), fontsize=10)
             plt.yticks(fontsize=10)
             plt.legend(fontsize=10)
             plt.tight_layout()
