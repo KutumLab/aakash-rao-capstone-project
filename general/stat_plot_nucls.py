@@ -27,7 +27,7 @@ def plot_stats(image_dir, plot_dir):
     total_annotations = int(class_stats[-2])
     class_stats = class_stats[:-2].astype(int)
 
-    plt.figure(figsize=(5,5))
+    plt.figure(figsize=(4,4))
     plt.bar(np.arange(len(class_stats)), class_stats)
     plt.xticks(np.arange(len(class_stats)), class_stats)
     plt.xlabel('Class', fontsize=14, fontweight='bold')
