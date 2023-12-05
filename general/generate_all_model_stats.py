@@ -77,7 +77,8 @@ def grp_plot(src_path):
     mean_yolo_5095 = mean_yolo_5095
     std_yolo_50 = std_yolo_50
     std_yolo_5095 = std_yolo_5095
-    mean_frcnn_50 = mean_frcnn_50[:,:len(mean_frcnn_50)//len(mean_yolo_50)]
+    # mean_frcnn_50 = mean_frcnn_50[:,:len(mean_frcnn_50)//len(mean_yolo_50)]
+
     print(mean_frcnn_50.shape)
     print(mean_yolo_50.shape)
 
