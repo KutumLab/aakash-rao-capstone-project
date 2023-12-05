@@ -70,4 +70,4 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     print("Generating NuCLS Dataset Statistics...")
-    image_info(args.image_dir, args.mask_dir, args.save_dir)
+    image_info(args.image_dir, args.mask_dir, args.plot_directory)
