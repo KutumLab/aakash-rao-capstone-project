@@ -32,7 +32,7 @@ def plot_model(data_dir, plot_dir):
             plt.locator_params(axis='x', nbins=5)
             plt.locator_params(axis='y', nbins=5)
             plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
-            plt.plot(mean)
+            plt.plot(mean, label='mean',linewidth=0.75)
             plt.fill_between(mean.index, mean - std, mean + std, alpha=0.5)
             plt.title(title_dict[column], fontsize=14, fontweight='bold')
             plt.xlabel(x_axis_dict, fontsize=14, fontweight='bold')
