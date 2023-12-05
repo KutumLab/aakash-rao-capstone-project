@@ -84,7 +84,7 @@ def grp_plot(src_path):
     plt.xlabel('Epoch')
     plt.ylabel('AP50')
     plt.legend()
-    plt.savefig('ap50.png')
+    plt.savefig(f'{src_path}/ap50.png')
     plt.close()
 
 
