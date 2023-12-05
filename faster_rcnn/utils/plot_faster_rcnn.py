@@ -1,4 +1,3 @@
-import numpy as np
 import os
 import pandas as pd
 import argparse
@@ -9,7 +8,7 @@ titles = ['mAP@50:95', 'mAP@50', 'mAP@75', 'Class Accuracy', 'Iteration', 'Box L
 axis = ['mAP', 'mAP', 'mAP', 'Accuracy', 'Iteration', 'Loss', 'Loss', 'Loss', 'Loss']
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
-x_axis_dict = "No. of Epochs"
+x_axis_dict = "No. of Iterations"
 model_list = ['faster_rcnn_R_101_DC5_3x','faster_rcnn_R_50_C4_1x','faster_rcnn_R_50_C4_3x','faster_rcnn_R_50_DC5_1x','faster_rcnn_R_50_DC5_3x']
 names = ['ResNet101 with DC5 at 3x', 'ResNet50 with C4 at 1x', 'ResNet50 with C4 at 3x', 'ResNet50 with DC5 at 1x', 'ResNet50 with DC5 at 3x']
 model_dict = dict(zip(model_list, names))
@@ -31,29 +30,19 @@ def plot_model(data_dir, plot_dir):
                 continue
             mean = mean_df[column]
             mean = mean.dropna(how='any')
-            # take 150 values at equal intervals
-            mean = mean.iloc[::len(mean)//150]
-            # making values an np array
-            mean = np.array(mean)
-            print(mean)
-            print(len(mean))
             std = std_df[column]
             std = std.dropna(how='any')
-            # take 150 values at equal intervals
-            std = std.iloc[::len(std)//150]
-            # making values an np array
-            std = np.array(std)
             plt.figure(figsize=(4, 4))
             plt.subplots_adjust(left=0.15, bottom=0.15, right=0.95, top=0.95)
             plt.locator_params(axis='x', nbins=5)
             plt.locator_params(axis='y', nbins=5)
             plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
             plt.plot(mean, label='mean',linewidth=0.75)
-            plt.fill_between(np.arange(0, 150, 150//5), mean - std, mean + std, alpha=0.5, label='std')
+            plt.fill_between(mean.index, mean - std, mean + std, alpha=0.5, label='std')
             plt.title(title_dict[column], fontsize=12, fontweight='bold')
             plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
             plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
-            plt.xticks(np.arange(0, 150, 150//5), fontsize=10)
+            plt.xticks(fontsize=10)
             plt.yticks(fontsize=10)
             plt.legend(fontsize=10)
             plt.tight_layout()
