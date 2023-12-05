@@ -48,7 +48,6 @@ def plot_stats(image_dir, plot_dir):
     fig_2.savefig(os.path.join(plot_dir, 'num_images_per_num_classes.png'), bbox_inches='tight', dpi=300)
     plt.close()
 
-    
 
     
     
