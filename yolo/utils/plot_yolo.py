@@ -29,6 +29,7 @@ def plot_model(data_dir, plot_dir):
             mean = mean_df[column]
             std = std_df[column]
             plt.figure(figsize=(4, 4))
+            plt.subplots_adjust(left=0.15, bottom=0.15, right=0.95, top=0.95)
             plt.locator_params(axis='x', nbins=5)
             plt.locator_params(axis='y', nbins=5)
             plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
