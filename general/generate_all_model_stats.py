@@ -82,8 +82,8 @@ def grp_plot(src_path):
     print(mean_yolo_50.shape)
 
 
-    plt.figure(figsize=(10, 5))
-    plt.plot
+    # plt.figure(figsize=(10, 5))
+    # plt.plot
 
 
 
