@@ -8,7 +8,7 @@ titles = ['mAP@50:95', 'mAP@50', 'mAP@75', 'Class Accuracy', 'Iteration', 'Box L
 axis = ['mAP', 'mAP', 'mAP', 'Accuracy', 'Iteration', 'Loss', 'Loss', 'Loss', 'Loss']
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
-x_axis_dict = "No. of Iterations"
+x_axis_dict = "No. of Epochs"
 model_list = ['faster_rcnn_R_101_DC5_3x','faster_rcnn_R_50_C4_1x','faster_rcnn_R_50_C4_3x','faster_rcnn_R_50_DC5_1x','faster_rcnn_R_50_DC5_3x']
 names = ['ResNet101 with DC5 at 3x', 'ResNet50 with C4 at 1x', 'ResNet50 with C4 at 3x', 'ResNet50 with DC5 at 1x', 'ResNet50 with DC5 at 3x']
 model_dict = dict(zip(model_list, names))
@@ -30,8 +30,12 @@ def plot_model(data_dir, plot_dir):
                 continue
             mean = mean_df[column]
             mean = mean.dropna(how='any')
+            # take 150 values at equal intervals
+            mean = mean.iloc[::len(mean)//150]
             std = std_df[column]
             std = std.dropna(how='any')
+            # take 150 values at equal intervals
+            std = std.iloc[::len(std)//150]
             plt.figure(figsize=(4, 4))
             plt.subplots_adjust(left=0.15, bottom=0.15, right=0.95, top=0.95)
             plt.locator_params(axis='x', nbins=5)
