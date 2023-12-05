@@ -78,7 +78,7 @@ def grp_plot(src_path):
     std_retinanet_50 = std_retinanet_50[:99]
     std_yolo_50 = std_yolo_50[:99]
     
-    plt.figure(figsize=(6, 4))
+    plt.figure(figsize=(4, 4))
     plt.locator_params(axis='x', nbins=5)
     plt.locator_params(axis='y', nbins=5)
     plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
