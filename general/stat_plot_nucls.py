@@ -48,6 +48,24 @@ def plot_stats(image_dir, plot_dir):
     fig_2.savefig(os.path.join(plot_dir, 'num_images_per_num_classes.png'), bbox_inches='tight', dpi=300)
     plt.close()
 
+    composite_fig = plt.figure(figsize=(8,4))
+    ax1 = composite_fig.add_subplot(121)
+    ax1.bar(np.arange(len(class_stats)), class_stats)
+    ax1.set_xticks(np.arange(len(class_stats)))
+    ax1.set_xticklabels(classes, rotation=45, fontsize=8)
+    ax1.set_xlabel('Class', fontsize=14, fontweight='bold')
+    ax1.set_ylabel('No of Images', fontsize=14, fontweight='bold')
+    ax1.set_title('Number of Images per Class', fontsize=14, fontweight='bold')
+
+    ax2 = composite_fig.add_subplot(122)
+    ax2.boxplot(num_classes_per_image, widths=2, showfliers=False)
+    ax2.set_ylabel('No of Annotations', fontsize=14, fontweight='bold')
+    ax2.set_xlabel('Images', fontsize=14, fontweight='bold')
+    ax2.set_title('Annotations Boxplot', fontsize=14, fontweight='bold')
+    ax2.set_yticks(np.arange(0, 60, 10))
+    composite_fig.tight_layout()
+    composite_fig.savefig(os.path.join(plot_dir, 'composite_plot.png'), bbox_inches='tight', dpi=300)
+    plt.close()
 
     
     
