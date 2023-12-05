@@ -78,7 +78,10 @@ def grp_plot(src_path):
     std_retinanet_50 = std_retinanet_50[:99]
     std_yolo_50 = std_yolo_50[:99]
     
-    plt.figure(figsize=(10, 5))
+    plt.figure(figsize=(6, 4))
+    plt.locator_params(axis='x', nbins=5)
+    plt.locator_params(axis='y', nbins=5)
+    plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
     plt.plot(mean_frcnn_50, label='Faster R-CNN', color='r')
     plt.plot(mean_retinanet_50, label='RetinaNet', color='b')
     plt.plot(mean_yolo_50, label='YOLOv5', color='g')
