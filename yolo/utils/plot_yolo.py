@@ -28,7 +28,6 @@ def plot_model(data_dir, plot_dir):
                 continue
             mean = mean_df[column]
             std = std_df[column]
-            txt = f"{column} for {model.upper()}"
             plt.figure(figsize=(4, 4))
             plt.subplots_adjust(left=0.15, bottom=0.15, right=0.95, top=0.95)
             plt.locator_params(axis='x', nbins=5)
@@ -42,7 +41,6 @@ def plot_model(data_dir, plot_dir):
             plt.xticks(fontsize=10)
             plt.yticks(fontsize=10)
             plt.legend(fontsize=10)
-            plt.text(.5, .05, txt, ha='center')
             plt.tight_layout()
             plt.savefig(os.path.join(model_plot_dir, f'{column}.png'), dpi=300)
             plt.close()
