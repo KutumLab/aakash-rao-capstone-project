@@ -4,7 +4,7 @@ import argparse
 import matplotlib.pyplot as plt
 
 cols = ['AP5095', 'AP50', 'AP75', 'cls_accuracy', 'iteration', 'loss_box_reg', 'loss_cls',  'total_loss', 'validation_loss']
-titles = ['mAP@50:95', 'mAP@50', 'mAP@75', 'Classification Accuracy', 'Iteration', 'Box Loss', 'Object Loss', 'Total Loss', 'Validation Loss']
+titles = ['mAP@50:95', 'mAP@50', 'mAP@75', 'Class Accuracy', 'Iteration', 'Box Loss', 'Object Loss', 'Total Loss', 'Validation Loss']
 axis = ['mAP', 'mAP', 'mAP', 'Accuracy', 'Iteration', 'Loss', 'Loss', 'Loss', 'Loss']
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
