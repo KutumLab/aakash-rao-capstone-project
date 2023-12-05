@@ -40,7 +40,7 @@ def plot_model(data_dir, plot_dir):
             plt.xticks(fontsize=10)
             plt.yticks(fontsize=10)
             plt.tight_layout()
-            plt.savefig(os.path.join(model_plot_dir, f'{column}.png'))
+            plt.savefig(os.path.join(model_plot_dir, f'{column}.png'), dpi=300)
             plt.close()
 
         break
