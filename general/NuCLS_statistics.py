@@ -15,6 +15,8 @@ def image_info(image_dir, mask_dir, plot_dir):
     class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
     num_classes_per_image = np.zeros(len(class_array))
     annot_per_image = np.zeros((2,1))
+    file_names = []
+    len_masks = []
     if not os.path.exists(image_dir):
         raise ValueError("image_dir not exist")
     elif len(os.listdir(image_dir)) == 0:
@@ -38,7 +40,9 @@ def image_info(image_dir, mask_dir, plot_dir):
                 # print(f"{mask_path.split('/')[-1]} not exist")
                 continue
             # print(image.shape)
-            print(f'{image_name} has {mask.shape[0]} annotations')
+            # print(f'{image_name} has {mask.shape[0]} annotations')
+            file_names.append(image_name)
+            len_masks.append(mask.shape[0])
 
             for index, row in mask.iterrows():
                 x_min = row['xmin']
@@ -58,6 +62,9 @@ def image_info(image_dir, mask_dir, plot_dir):
         print(f"Total number of classes: {sum(num_classes_per_image)}")
         print(f"Number of classes per image: {num_classes_per_image}")
         print(f"Number of annotations per image: {annot_per_image}")
+        pd.DataFrame(num_classes_per_image, index=class_array).to_csv(os.path.join(plot_dir, 'num_classes_per_image.csv'))
+
+
                 
 
 
