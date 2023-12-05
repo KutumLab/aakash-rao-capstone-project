@@ -1,7 +1,14 @@
 import os
 import pandas as pd
 import argparse
+import matplotlib.pyplot as plt
 
+cols = ['epoch', 'train_box_loss', 'train_obj_loss', 'train_cls_loss', 'precision', 'recall', 'mAP_50', 'mAP_5095', 'val_box_loss', 'val_obj_loss', 'val_cls_loss']
+titles = ['epoch', 'Train-time Box Loss', 'Train-time Object Loss', 'Train-time Class Loss', 'Precision', 'Recall', 'mAP@50', 'mAP@50:95', 'Validation-time Box Loss', 'Validation-time Object Loss', 'Validation-time Class Loss']
+axis = ['Epoch', 'Box Loss', 'Object Loss', 'Class Loss', 'Precision', 'Recall', 'mAP@50', 'mAP@50:95', 'Box Loss', 'Object Loss', 'Class Loss']
+title_dict = dict(zip(cols, titles))
+y_axis_dict = dict(zip(cols, axis))
+x_axis_dict = "No. of Epochs"
 
 def plot_model(data_dir, plot_dir):
     if not os.path.exists(plot_dir):
@@ -10,11 +17,31 @@ def plot_model(data_dir, plot_dir):
         model_plot_dir = os.path.join(plot_dir, model)
         if not os.path.exists(model_plot_dir):
             os.makedirs(model_plot_dir)
-            
+
         mean_df = pd.read_csv(os.path.join(data_dir, model, f'mean_{model}.csv'), header=0)
         std_df = pd.read_csv(os.path.join(data_dir, model, f'std_{model}.csv'), header=0)
         print(mean_df.columns)
         print(std_df.columns)
+
+        for column in mean_df.columns:
+            if column == 'epoch':
+                continue
+            mean = mean_df[column]
+            std = std_df[column]
+            plt.figure(figsize=(4, 4))
+            plt.locator_params(axis='x', nbins=5)
+            plt.locator_params(axis='y', nbins=5)
+            plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
+            plt.plot(mean)
+            plt.fill_between(mean.index, mean - std, mean + std, alpha=0.5)
+            plt.title(title_dict[column], fontsize=14, fontweight='bold')
+            plt.xlabel(x_axis_dict, fontsize=14, fontweight='bold')
+            plt.ylabel(y_axis_dict[column], fontsize=14, fontweight='bold')
+            plt.xticks(fontsize=10)
+            plt.yticks(fontsize=10)
+            plt.tight_layout()
+            plt.savefig(os.path.join(model_plot_dir, f'{column}.png'))
+
         break
     pass
 
