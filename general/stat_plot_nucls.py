@@ -17,6 +17,7 @@ def plot_stats(image_dir, plot_dir):
     class_stats = pd.read_csv(os.path.join(image_dir, 'class_stats.csv'), header=0)
     class_stats = class_stats.values.tolist()
     class_stats = np.array(class_stats)
+    print(class_stats)
     num_classes_per_image = pd.read_csv(os.path.join(image_dir, 'num_classes_per_image.csv'), header=0)
     num_classes_per_image = num_classes_per_image['len_masks'].values.tolist()
     num_classes_per_image = np.array(num_classes_per_image)
