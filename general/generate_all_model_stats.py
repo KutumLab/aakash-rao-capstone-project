@@ -52,9 +52,9 @@ def grp_plot(src_path):
     std_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs','retinanet_R_101_FPN_3x', 'std_retinanet_R_101_FPN_3x.csv'), header=0)
     std_yolo = pd.read_csv(os.path.join(src_path, 'yolo', 'csvs', 'yolov5m', 'std_yolov5m.csv'), header=0)
     std_yolo['mAP_50'] = std_yolo['mAP_50']*100
-    std_yolo['mAP_50_95'] = std_yolo['mAP_50_95']*100
+    std_yolo['mAP_50_95'] = std_yolo['mAP_5095']*100
     std_yolo['epoch'] = std_yolo['epoch']*100
-    
+
     print(mean_yolo)
     pass
 
