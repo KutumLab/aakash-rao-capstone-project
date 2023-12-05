@@ -11,10 +11,14 @@ import json
 
 
 def plot_stats(image_dir, plot_dir):
-    class_stats = pd.read_csv(os.path.join(image_dir, 'class_stats.csv'), header=0, columns=['class_name','num_instances'])
-    num_classes_per_image = pd.read_csv(os.path.join(image_dir, 'num_classes_per_image.csv'), header=0, columns=['image_id', 'image_name', 'num_classes'])
+    class_stats = pd.read_csv(os.path.join(image_dir, 'class_stats.csv'), header=0)
+    num_classes_per_image = pd.read_csv(os.path.join(image_dir, 'num_classes_per_image.csv'), header=0)
     print(class_stats)
     print(num_classes_per_image)
+    total_images = num_classes_per_image['images'].sum()
+    # plt.figure(figsize=(3, 3))
+    
+
     
 
 
