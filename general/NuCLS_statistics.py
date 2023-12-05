@@ -14,6 +14,7 @@ def image_info(image_dir, mask_dir, plot_dir):
     im_count = 0
     class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
     num_classes_per_image = np.zeros(len(class_array))
+    annot_per_image = np.zeros((2,1))
     if not os.path.exists(image_dir):
         raise ValueError("image_dir not exist")
     elif len(os.listdir(image_dir)) == 0:
@@ -37,6 +38,9 @@ def image_info(image_dir, mask_dir, plot_dir):
                 # print(f"{mask_path.split('/')[-1]} not exist")
                 continue
             # print(image.shape)
+            leng_annots = np.array([i, len(mask)])
+            annot_per_image = np.append(annot_per_image, leng_annots)
+
             for index, row in mask.iterrows():
                 x_min = row['xmin']
                 y_min = row['ymin']
@@ -54,6 +58,7 @@ def image_info(image_dir, mask_dir, plot_dir):
         print(f"Total number of images: {im_count}")
         print(f"Total number of classes: {sum(num_classes_per_image)}")
         print(f"Number of classes per image: {num_classes_per_image}")
+        print(f"Number of annotations per image: {annot_per_image}")
                 
 
 
