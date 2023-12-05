@@ -25,8 +25,30 @@ def generate_csvs(data_dir, output_dir):
         csv = csv.rename(columns=rename)
         csv.to_csv(os.path.join(model_output_dir, f'results_{fold}.csv'), index=False)
         print(csv.columns)
+    pass
 
-        
+def mean_and_std_fold(data_dir, output_dir):
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    for model in os.listdir(data_dir):
+        output_dir = os.path.join(output_dir, model)
+        fold_1 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_1.csv'), header=0)
+        fold_2 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_2.csv'), header=0)
+        fold_3 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_3.csv'), header=0)
+        mean_df = pd.DataFrame(columns=fold_1.columns)
+        std_df = pd.DataFrame(columns=fold_1.columns)
+        mean_df['epoch'] = fold_1['epoch']
+        std_df['epoch'] = fold_1['epoch']
+        for column in fold_1.columns:
+            if column == 'epoch':
+                continue
+            mean_df[column] = (fold_1[column] + fold_2[column] + fold_3[column]) / 3
+            std_df[column] = (fold_1[column] - mean_df[column])**2 + (fold_2[column] - mean_df[column])**2 + (fold_3[column] - mean_df[column])**2
+
+        mean_df.to_csv(os.path.join(output_dir, f'mean_{model}.csv'), index=False)
+        std_df.to_csv(os.path.join(output_dir, f'std_{model}.csv'), index=False)
+
+
     pass
 
 if __name__ == '__main__':
