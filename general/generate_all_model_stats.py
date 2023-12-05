@@ -17,6 +17,7 @@ def gen_stat(src_path):
             if '.gitkeep' in submodel:
                 continue
             mean_df = pd.read_csv(os.path.join(model_path, submodel, f'mean_{submodel}.csv'), header=0)
+            print(mean_df)
             std_df = pd.read_csv(os.path.join(model_path, submodel, f'std_{submodel}.csv'), header=0)
             models_list.append(submodel)
             ap50 = mean_df[f'{dict_oof[model][0]}50'].values
