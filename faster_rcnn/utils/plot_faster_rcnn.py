@@ -57,9 +57,11 @@ def plot_metric(data_dir, plot_dir):
         for model in os.listdir(data_dir):
             mean_df = pd.read_csv(os.path.join(data_dir, model, f'mean_{model}.csv'), header=0)
             mean = mean_df[column]
+            mean = mean.dropna(how='any')
             plt.plot(mean, label=model,linewidth=0.75)
             std_df = pd.read_csv(os.path.join(data_dir, model, f'std_{model}.csv'), header=0)
             std = std_df[column]
+            std = std.dropna(how='any')
             plt.fill_between(mean.index, mean - std, mean + std, alpha=0.25, label=model)
         # custom legend content
         handles, labels = plt.gca().get_legend_handles_labels()
