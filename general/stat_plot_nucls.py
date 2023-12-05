@@ -48,7 +48,7 @@ def plot_stats(image_dir, plot_dir):
     fig_2.savefig(os.path.join(plot_dir, 'num_images_per_num_classes.png'), bbox_inches='tight', dpi=300)
     plt.close()
 
-    composite_fig = plt.figure(figsize=(8,4))
+    composite_fig = plt.figure(figsize=(6,4))
     ax1 = composite_fig.add_subplot(121)
     ax1.bar(np.arange(len(class_stats)), class_stats)
     ax1.set_xticks(np.arange(len(class_stats)))
