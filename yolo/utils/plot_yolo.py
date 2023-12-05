@@ -20,8 +20,6 @@ def plot_model(data_dir, plot_dir):
 
         mean_df = pd.read_csv(os.path.join(data_dir, model, f'mean_{model}.csv'), header=0)
         std_df = pd.read_csv(os.path.join(data_dir, model, f'std_{model}.csv'), header=0)
-        print(mean_df.columns)
-        print(std_df.columns)
 
         for column in mean_df.columns:
             if column == 'epoch':
@@ -76,7 +74,7 @@ def plot_metric(data_dir, plot_dir):
         plt.savefig(os.path.join(plot_dir, f'{column}.png'), dpi=300)
         plt.close()
 
-        break
+        
     pass
 
 if __name__ == '__main__':
