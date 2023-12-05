@@ -29,8 +29,8 @@ def image_info(image_dir, mask_dir, plot_dir):
             image_name = os.listdir(image_dir)[i]
             image_path = os.path.join(image_dir, image_name)
             mask_path = os.path.join(mask_dir, image_name.split('.png')[0] + '.csv')
-            image = cv2.imread(image_path)
-            im_height, im_width, _ = image.shape
+            # image = cv2.imread(image_path)
+            # im_height, im_width, _ = image.shape
             try:
                 mask = pd.read_csv(mask_path, header=0)
             except:
@@ -50,7 +50,7 @@ def image_info(image_dir, mask_dir, plot_dir):
                 except ValueError:
                     raise ValueError(f"{class_name} not in class_array")
                 num_classes_per_image[class_id] += 1
-                im_count += 1
+            im_count += 1
         print(f"Total number of images: {im_count}")
         print(f"Total number of classes: {sum(num_classes_per_image)}")
         print(f"Number of classes per image: {num_classes_per_image}")
