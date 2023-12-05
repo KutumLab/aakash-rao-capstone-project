@@ -14,8 +14,8 @@ def generate_csvs(data_dir, output_dir):
         os.makedirs(output_dir)
     for folder in os.listdir(data_dir):
         foldr_split = folder.split('_')
-        net_name = foldr_split[:-2].join('_')
-        fold_num = foldr_split[-2:]
+        net_name = '-'.join(foldr_split[:-2])
+        fold_num = '-'.join(foldr_split[-2:])
         print(net_name, fold_num)
     pass
 
