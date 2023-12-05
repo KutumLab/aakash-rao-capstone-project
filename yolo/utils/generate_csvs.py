@@ -15,7 +15,7 @@ def generate_csvs(data_dir, output_dir):
         folder_path = os.path.join(data_dir, folder)
         fold = folder.split('-')[-1]
         model = folder.split('-')[0]
-        model_output_dir = os.path.join(output_dir, model, fold)
+        model_output_dir = os.path.join(output_dir, model)
         if not os.path.exists(model_output_dir):
             os.makedirs(model_output_dir)
         csv = pd.read_csv(os.path.join(folder_path, 'results.csv'), header=0)
@@ -23,7 +23,7 @@ def generate_csvs(data_dir, output_dir):
         csv.columns = translation
         csv = csv[relevant]
         csv = csv.rename(columns=rename)
-        csv.to_csv(os.path.join(model_output_dir, 'results.csv'), index=False)
+        csv.to_csv(os.path.join(model_output_dir, f'results_{fold}.csv'), index=False)
         print(csv.columns)
         break
 
