@@ -95,7 +95,7 @@ def grp_plot(src_path):
     plt.xticks(fontsize=10)
     plt.yticks(fontsize=10)
     plt.tight_layout()
-    plt.savefig(f'{src_path}/ap50.png')
+    plt.savefig(f'{src_path}/ap50.png',dpi=300)
     plt.close()
 
 
