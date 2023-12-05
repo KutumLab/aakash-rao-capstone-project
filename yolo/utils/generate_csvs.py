@@ -25,7 +25,6 @@ def generate_csvs(data_dir, output_dir):
         csv = csv.rename(columns=rename)
         csv.to_csv(os.path.join(model_output_dir, f'results_{fold}.csv'), index=False)
         print(csv.columns)
-        break
 
         
     pass
