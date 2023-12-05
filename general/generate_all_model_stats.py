@@ -24,15 +24,17 @@ def gen_stat(src_path):
             # appending max value
             ap5095 = mean_df[f'{dict_oof[model][0]}5095'].dropna(how='all').values
             # appending max value
-            if 'yo' not in model:
-                ap50 = ap50/100
-                ap5095 = ap5095/100
+            if 'yo' in model:
+                ap50 = ap50*100
+                ap5095 = ap5095*100
             ap50_list.append(np.max(ap50))
             ap5095_list.append(np.max(ap5095))
     print(models_list)
     print(ap50_list)
     print(ap5095_list)
 
+    df = pd.DataFrame({'model':models_list, 'ap50':ap50_list, 'ap5095':ap5095_list})
+    print(df.to_latex(index=False))
 
 
     pass
