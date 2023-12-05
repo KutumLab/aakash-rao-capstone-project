@@ -33,6 +33,8 @@ def plot_model(data_dir, plot_dir):
             mean = mean.dropna(how='any')
             # take 150 values at equal intervals
             mean = mean.iloc[::len(mean)//150]
+            # making values an np array
+            mean = np.array(mean)
             print(mean)
             print(len(mean))
             std = std_df[column]
