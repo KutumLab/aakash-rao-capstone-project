@@ -3,9 +3,9 @@ import pandas as pd
 import argparse
 
 original_titles = ['bbox/AP', 'bbox/AP-nonTIL_stromal', 'bbox/AP-other', 'bbox/AP-sTIL','bbox/AP-tumor_any', 'bbox/AP50', 'bbox/AP75', 'bbox/APl', 'bbox/APm','bbox/APs', 'data_time', 'eta_seconds', 'fast_rcnn/cls_accuracy','fast_rcnn/false_negative', 'fast_rcnn/fg_cls_accuracy', 'iteration','loss_box_reg', 'loss_cls', 'loss_rpn_cls', 'loss_rpn_loc', 'lr','rank_data_time', 'roi_head/num_bg_samples', 'roi_head/num_fg_samples','rpn/num_neg_anchors', 'rpn/num_pos_anchors', 'time', 'timetest','total_loss', 'validation_loss']
-relevant = ['bbox/AP', 'bbox/AP50', 'bbox/AP75', 'fast_rcnn/cls_accuracy', 'iteration','loss_box_reg', 'loss_cls', 'loss_rpn_cls', 'loss_rpn_loc', 'total_loss', 'validation_loss']
-translation = ['AP', 'AP50', 'AP75', 'cls_accuracy', 'iteration', 'loss_box_reg', 'loss_cls', 'loss_rpn_cls', 'loss_rpn_loc', 'total_loss', 'validation_loss']
-rename = {}
+relevant = ['bbox/AP', 'bbox/AP50', 'bbox/AP75', 'fast_rcnn/cls_accuracy', 'iteration','loss_box_reg', 'loss_cls',  'total_loss', 'validation_loss']
+translation = ['AP5095', 'AP50', 'AP75', 'cls_accuracy', 'iteration', 'loss_box_reg', 'loss_cls',  'total_loss', 'validation_loss']
+rename = {original_titles[i]: translation[i] for i in range(len(original_titles))}
 
 
 
@@ -16,6 +16,7 @@ def generate_csvs(data_dir, output_dir):
     for folder in os.listdir(data_dir):
         metrics = pd.read_csv(os.path.join(data_dir, folder, 'metrics.csv'))
         metrics = metrics[relevant]
+        metrics = metrics.rename(columns=rename)
         print(metrics.columns)
         foldr_split = folder.split('_')
         net_name = '_'.join(foldr_split[:-2])
