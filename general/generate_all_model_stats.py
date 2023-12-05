@@ -95,7 +95,7 @@ def grp_plot(src_path):
     plt.xticks(fontsize=10)
     plt.yticks(fontsize=10)
     plt.tight_layout()
-    plt.savefig(f'{src_path}/ap50.png',dpi=300)
+    plt.savefig(f'{src_path}/best_ap50.png',dpi=300)
     plt.close()
 
     mean_frcnn_5095 = mean_frcnn_5095[:99]
@@ -122,7 +122,7 @@ def grp_plot(src_path):
     plt.xticks(fontsize=10)
     plt.yticks(fontsize=10)
     plt.tight_layout()
-    plt.savefig(f'{src_path}/ap5095.png',dpi=300)
+    plt.savefig(f'{src_path}/best_ap5095.png',dpi=300)
     plt.close()
 
 
