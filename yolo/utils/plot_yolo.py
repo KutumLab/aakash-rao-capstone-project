@@ -46,7 +46,6 @@ def plot_model(data_dir, plot_dir):
             plt.close()
 
         break
-    pass
 
 
 if __name__ == '__main__':
