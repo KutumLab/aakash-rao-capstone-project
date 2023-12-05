@@ -38,7 +38,7 @@ def plot_stats(image_dir, plot_dir):
     fig_1.savefig(os.path.join(plot_dir, 'num_images_per_class.png'), bbox_inches='tight', dpi=300)
     plt.close()
 
-    fig_2 = plt.figure(figsize=(4,2))
+    fig_2 = plt.figure(figsize=(2,4))
     plt.boxplot(num_classes_per_image)
     plt.xlabel('No of annotations', fontsize=14, fontweight='bold')
     plt.ylabel('No of Images', fontsize=14, fontweight='bold')
