@@ -57,6 +57,7 @@ def plot_metric(data_dir, plot_dir):
         plt.locator_params(axis='y', nbins=5)
         plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
         for model in os.listdir(data_dir):
+            print(model)
             mean_df = pd.read_csv(os.path.join(data_dir, model, f'mean_{model}.csv'), header=0)
             mean = mean_df[column]
             mean = mean.dropna(how='any')
