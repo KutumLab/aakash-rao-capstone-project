@@ -12,7 +12,7 @@ import json
 
 def image_info(image_dir, mask_dir, plot_dir):
     im_count = 0
-    class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
+    class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other', 'total', 'images']
     num_classes_per_image = np.zeros(len(class_array))
     annot_per_image = np.zeros((2,1))
     file_names = []
@@ -57,11 +57,14 @@ def image_info(image_dir, mask_dir, plot_dir):
                 except ValueError:
                     raise ValueError(f"{class_name} not in class_array")
                 num_classes_per_image[class_id] += 1
-            im_count += 1
+                num_classes_per_image[-2] += 1
+            num_classes_per_image[-1] += 1
         print(f"Total number of images: {im_count}")
         print(f"Total number of classes: {sum(num_classes_per_image)}")
         print(f"Number of classes per image: {num_classes_per_image}")
-        pd.DataFrame(num_classes_per_image, index=class_array).to_csv(os.path.join(plot_dir, 'num_classes_per_image.csv'))
+        pd.DataFrame(num_classes_per_image, index=class_array).to_csv(os.path.join(plot_dir, 'class_stats.csv'))
+        df = pd.DataFrame({'file_name': file_names, 'len_masks': len_masks})
+        df.to_csv(os.path.join(plot_dir, 'num_classes_per_image.csv'))
 
 
                 
