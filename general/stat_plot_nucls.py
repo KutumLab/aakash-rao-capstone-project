@@ -27,15 +27,15 @@ def plot_stats(image_dir, plot_dir):
     total_annotations = int(class_stats[-2])
     class_stats = class_stats[:-2].astype(int)
 
-    plt.figure(figsize=(4,4))
-    plt.bar(np.arange(len(class_stats)), class_stats)
+    fig_1 = plt.figure(figsize=(4,4))
+    fig_1.bar(np.arange(len(class_stats)), class_stats)
     plt.xticks(np.arange(len(class_stats)), class_stats)
     plt.xlabel('Class', fontsize=14, fontweight='bold')
     plt.ylabel('No of Images', fontsize=14, fontweight='bold')
     plt.xticks(np.arange(len(class_stats)), classes, rotation=45, fontsize=8)
     plt.title('Number of Images per Class', fontsize=14, fontweight='bold')
-    plt.tight_layout()
-    plt.savefig(os.path.join(plot_dir, 'num_images_per_class.png'), bbox_inches='tight', dpi=300)
+    fig_1.tight_layout()
+    fig_1.savefig(os.path.join(plot_dir, 'num_images_per_class.png'), bbox_inches='tight', dpi=300)
     plt.close()
 
 
