@@ -3,8 +3,6 @@ import numpy as np
 import pandas as pd
 import cv2
 import argparse
-import shutil
-import random
 import matplotlib.pyplot as plt
 
 from tqdm import tqdm
