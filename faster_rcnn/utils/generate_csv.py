@@ -21,10 +21,10 @@ def generate_csvs(data_dir, output_dir):
         foldr_split = folder.split('_')
         net_name = '_'.join(foldr_split[:-2])
         fold_num = '_'.join(foldr_split[-2:])
-        outpath = os.path.join(output_dir, net_name)
+        outpath = os.path.join(output_dir, net_name,"folds")
         if not os.path.exists(os.path.join(outpath)):
             os.makedirs(os.path.join(outpath))
-        metrics.to_csv(os.path.join(outpath, fold_num + '.csv'))
+        metrics.to_csv(os.path.join(outpath, "results_"+fold_num + '.csv'))
             
         print(net_name, fold_num)
         
