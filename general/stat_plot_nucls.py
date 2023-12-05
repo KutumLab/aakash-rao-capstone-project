@@ -25,8 +25,8 @@ def plot_stats(image_dir, plot_dir):
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser(description='Data Formatter')
     argparser.add_argument('-i', '--image_dir', required=True, help='image directory')
-    argparser.add_argument('-p', '--plot_directory', required=True, help='save directory')
+    argparser.add_argument('-p', '--plot_dir', required=True, help='save directory')
     args = argparser.parse_args()
 
     print("Generating plots for NuCLS Dataset Statistics...")
-    plot_stats(args.image_dir, args.mask_dir, args.plot_directory)
+    plot_stats(args.image_dir, args.plot_dir)
