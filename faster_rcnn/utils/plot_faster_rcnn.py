@@ -17,6 +17,7 @@ def plot_model(data_dir, plot_dir):
     if not os.path.exists(plot_dir):
         os.makedirs(plot_dir)
     for model in os.listdir(data_dir):
+        print(model)
         model_plot_dir = os.path.join(plot_dir, model)
         if not os.path.exists(model_plot_dir):
             os.makedirs(model_plot_dir)
