@@ -22,7 +22,7 @@ def plot_model(data_dir, plot_dir):
         std_df = pd.read_csv(os.path.join(data_dir, model, f'std_{model}.csv'), header=0)
 
         for column in mean_df.columns:
-            if column == 'iteration':
+            if column == 'iteration' or 'unnamed' in column.lower():
                 continue
             mean = mean_df[column]
             std = std_df[column]
@@ -48,7 +48,7 @@ def plot_metric(data_dir, plot_dir):
     if not os.path.exists(plot_dir):
         os.makedirs(plot_dir)
     for column in cols:
-        if column == 'iteration':
+        if column == 'iteration' or 'unnamed' in column.lower():
             continue
         plt.figure(figsize=(4, 4))
         plt.locator_params(axis='x', nbins=5)
