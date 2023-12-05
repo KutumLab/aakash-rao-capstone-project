@@ -41,13 +41,15 @@ def plot_model(data_dir, plot_dir):
             std = std.dropna(how='any')
             # take 150 values at equal intervals
             std = std.iloc[::len(std)//150]
+            # making values an np array
+            std = np.array(std)
             plt.figure(figsize=(4, 4))
             plt.subplots_adjust(left=0.15, bottom=0.15, right=0.95, top=0.95)
             plt.locator_params(axis='x', nbins=5)
             plt.locator_params(axis='y', nbins=5)
             plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
             plt.plot(mean, label='mean',linewidth=0.75)
-            plt.fill_between(mean.index, mean - std, mean + std, alpha=0.5, label='std')
+            plt.fill_between(np.arange(0, 150, 150//5), mean - std, mean + std, alpha=0.5, label='std')
             plt.title(title_dict[column], fontsize=12, fontweight='bold')
             plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
             plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
