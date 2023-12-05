@@ -42,12 +42,12 @@ def gen_stat(src_path):
 best_from_all = ['faster_rcnn_R_50_C4_3x', 'retina_net_R_101_FPN_3x', 'yolov5m']
 
 def grp_plot(src_path):
-    mean_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs', 'mean_faster_rcnn_R_50_C4_3x.csv'), header=0)
-    mean_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs', 'mean_retina_net_R_101_FPN_3x.csv'), header=0)
-    mean_yolo = pd.read_csv(os.path.join(src_path, 'yolo', 'csvs', 'mean_yolov5m.csv'), header=0)
-    std_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs', 'std_faster_rcnn_R_50_C4_3x.csv'), header=0)
-    std_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs', 'std_retina_net_R_101_FPN_3x.csv'), header=0)
-    std_yolo = pd.read_csv(os.path.join(src_path, 'yolo', 'csvs', 'std_yolov5m.csv'), header=0)
+    mean_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs','faster_rcnn_R_50_C4_3x', 'mean_faster_rcnn_R_50_C4_3x.csv'), header=0)
+    mean_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs','retina_net_R_101_FPN_3x', 'mean_retina_net_R_101_FPN_3x.csv'), header=0)
+    mean_yolo = pd.read_csv(os.path.join(src_path, 'yolo', 'csvs', 'yolov5m', 'mean_yolov5m.csv'), header=0)
+    std_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs','faster_rcnn_R_50_C4_3x', 'std_faster_rcnn_R_50_C4_3x.csv'), header=0)
+    std_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs','retina_net_R_101_FPN_3x', 'std_retina_net_R_101_FPN_3x.csv'), header=0)
+    std_yolo = pd.read_csv(os.path.join(src_path, 'yolo', 'csvs', 'yolov5m', 'std_yolov5m.csv'), header=0)
     pass
 
 if __name__ == '__main__':
