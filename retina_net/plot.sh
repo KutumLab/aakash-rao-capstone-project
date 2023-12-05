@@ -1,51 +1,18 @@
-# for loop
-BASEPATH=/media/chs.gpu/19b31863-d2db-44c2-b407-9a4ffbebcbd1/DATA/research-cancerPathology/aakash-rao-capstone-project/outputs/detectron
+INDIR=/media/chs.gpu/19b31863-d2db-44c2-b407-9a4ffbebcbd1/DATA/research-cancerPathology/aakash-rao-capstone-project/outputs/detectron
+python3 utils/json_gen.py \
+    --path $INDIR 
 
 
-# MODEL=retinanet_R_101_FPN_3x
-# for FOLD in 1 2 3 
-# do
-#     python3 utils/json_gen.py \
-#         --path $BASEPATH/"$MODEL"_fold_${FOLD}
-
-#     python3 utils/plot_model.py \
-#         --path $BASEPATH/"$MODEL"_fold_${FOLD} \
-#         --name "ResNet101 at 1x" 
-# done
+# INDIR=/media/chs.gpu/19b31863-d2db-44c2-b407-9a4ffbebcbd1/DATA/research-cancerPathology/aakash-rao-capstone-project/outputs/detectron
+# OUTDIR=/media/chs.gpu/19b31863-d2db-44c2-b407-9a4ffbebcbd1/DATA/research-cancerPathology/aakash-rao-capstone-project/plots/retina_net/csvs
+# python3 utils/generate_csv.py \
+#     -d $INDIR \
+#     -o $OUTDIR \
 
 
 
-# MODEL=retinanet_R_50_FPN_1x
-# for FOLD in 1 2 3 
-# do
-#     python3 utils/json_gen.py \
-#         --path $BASEPATH/"$MODEL"_fold_${FOLD}
-
-#     # python3 utils/plot_model.py \
-#     #     --path $BASEPATH/"$MODEL"_fold_${FOLD} \
-#     #     --name "ResNet50 at 1x" 
-# done
-
-# MODEL=retinanet_R_50_FPN_3x
-# for FOLD in 1 2 3 
-# do
-#     python3 utils/json_gen.py \
-#         --path $BASEPATH/"$MODEL"_fold_${FOLD}
-
-#     # python3 utils/plot_model.py \
-#     #     --path $BASEPATH/"$MODEL"_fold_${FOLD} \
-#     #     --name "ResNet50 at 3x" 
-# done
-
-
-
-
-# # MODEL=retinanet_R_101_FPN_3x
-# python3 utils/plot_by_model.py \
-#     --path $BASEPATH \
-#     --phase run
-
-
-python3 utils/metrics.py \
-    --src_path $BASEPATH \
-    --phase run 
+# INDIR=/media/chs.gpu/19b31863-d2db-44c2-b407-9a4ffbebcbd1/DATA/research-cancerPathology/aakash-rao-capstone-project/plots/retina_net/csvs
+# OUTDIR=/media/chs.gpu/19b31863-d2db-44c2-b407-9a4ffbebcbd1/DATA/research-cancerPathology/aakash-rao-capstone-project/plots/retina_net/plots
+# python3 utils/plot_faster_rcnn.py \
+#     -d $INDIR \
+#     -o $OUTDIR
