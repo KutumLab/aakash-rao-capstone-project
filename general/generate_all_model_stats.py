@@ -56,6 +56,7 @@ def grp_plot(src_path):
     std_yolo['epoch'] = std_yolo['epoch']*100
 
     print(mean_yolo)
+    print(mean_retinanet)
     pass
 
 if __name__ == '__main__':
