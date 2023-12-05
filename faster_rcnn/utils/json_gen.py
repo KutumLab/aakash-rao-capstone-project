@@ -10,7 +10,7 @@ def json_gen(path):
         fold_path = os.path.join(path, folder)
         # read json file
         json_data = []
-        with open(os.path.join(path, 'metrics.json'), 'r') as f:
+        with open(os.path.join(fold_path, 'metrics.json'), 'r') as f:
             for line in f:
                 json_data.append(json.loads(line))
         keys = np.array([])
