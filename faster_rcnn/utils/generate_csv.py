@@ -39,10 +39,10 @@ def mean_and_std_fold(data_dir, output_dir):
         fold_3 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_3.csv'), header=0)
         mean_df = pd.DataFrame(columns=fold_1.columns)
         std_df = pd.DataFrame(columns=fold_1.columns)
-        mean_df['epoch'] = fold_1['epoch']
-        std_df['epoch'] = fold_1['epoch']
+        mean_df['iteration'] = fold_1['iteration']
+        std_df['iteration'] = fold_1['iteration']
         for column in fold_1.columns:
-            if column == 'epoch':
+            if column == 'iteration':
                 continue
             mean_df[column] = (fold_1[column] + fold_2[column] + fold_3[column]) / 3
             std_array = [fold_1[column], fold_2[column], fold_3[column]]
