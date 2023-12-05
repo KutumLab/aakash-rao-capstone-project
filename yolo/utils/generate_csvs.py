@@ -2,6 +2,11 @@ import os
 import pandas as pd
 import argparse
 
+original_titles = ['               epoch', '      train/box_loss', '      train/obj_loss','      train/cls_loss', '   metrics/precision', '      metrics/recall','     metrics/mAP_0.5', 'metrics/mAP_0.5:0.95', '        val/box_loss','        val/obj_loss', '        val/cls_loss', '               x/lr0','               x/lr1', '               x/lr2']
+translation = ['epoch', 'train/box_loss', 'train/obj_loss','train/cls_loss', 'metrics/precision', 'metrics/recall','metrics/mAP_0.5', 'metrics/mAP_0.5:0.95', 'val/box_loss','val/obj_loss', 'val/cls_loss', 'x/lr0','x/lr1', 'x/lr2']
+relevant = ['epoch', 'train/box_loss', 'train/obj_loss','train/cls_loss', 'metrics/precision', 'metrics/recall','metrics/mAP_0.5', 'metrics/mAP_0.5:0.95', 'val/box_loss','val/obj_loss', 'val/cls_loss']
+rename = {'train/box_loss': 'train_box_loss', 'train/obj_loss': 'train_obj_loss', 'train/cls_loss': 'train_cls_loss', 'metrics/precision': 'precision', 'metrics/recall': 'recall', 'metrics/mAP_0.5': 'mAP_50', 'metrics/mAP_0.5:0.95': 'mAP_5095', 'val/box_loss': 'val_box_loss', 'val/obj_loss': 'val_obj_loss', 'val/cls_loss': 'val_cls_loss'}
+
 
 def generate_csvs(data_dir, output_dir):
     if not os.path.exists(output_dir):
@@ -14,6 +19,10 @@ def generate_csvs(data_dir, output_dir):
         if not os.path.exists(model_output_dir):
             os.makedirs(model_output_dir)
         csv = pd.read_csv(os.path.join(folder_path, 'results.csv'), header=0)
+        csv = csv[original_titles]
+        csv.columns = translation
+        csv = csv[relevant]
+        csv = csv.rename(columns=rename)
         print(csv.columns)
         break
 
