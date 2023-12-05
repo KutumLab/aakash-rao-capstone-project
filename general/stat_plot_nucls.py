@@ -43,6 +43,7 @@ def plot_stats(image_dir, plot_dir):
     plt.ylabel('No of Annotations', fontsize=14, fontweight='bold')
     plt.xlabel('Images', fontsize=14, fontweight='bold')
     plt.title('Annotations Boxplot', fontsize=14, fontweight='bold')
+    plt.yticks(np.arange(0, 100, 10), fontsize=8)
     fig_2.tight_layout()
     fig_2.savefig(os.path.join(plot_dir, 'num_images_per_num_classes.png'), bbox_inches='tight', dpi=300)
     plt.close()
