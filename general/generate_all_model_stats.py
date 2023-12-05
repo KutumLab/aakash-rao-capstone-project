@@ -32,4 +32,6 @@ def gen_stat(src_path):
 if __name__ == '__main__':
     argparse = argparse.ArgumentParser()
     argparse.add_argument('-s','--src_path', type=str, default='data')
+    args = argparse.parse_args()
+    gen_stat(args.src_path)
     pass
