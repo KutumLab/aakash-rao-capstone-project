@@ -98,6 +98,35 @@ def grp_plot(src_path):
     plt.savefig(f'{src_path}/ap50.png',dpi=300)
     plt.close()
 
+    mean_frcnn_5095 = mean_frcnn_5095[:99]
+    mean_retinanet_5095 = mean_retinanet_5095[:99]
+    mean_yolo_5095 = mean_yolo_5095[:99]
+    std_frcnn_5095 = std_frcnn_5095[:99]
+    std_retinanet_5095 = std_retinanet_5095[:99]
+    std_yolo_5095 = std_yolo_5095[:99]
+
+    plt.figure(figsize=(4, 4))
+    plt.locator_params(axis='x', nbins=5)
+    plt.locator_params(axis='y', nbins=5)
+    plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
+    plt.plot(mean_frcnn_5095, label='Faster R-CNN', color='r')
+    plt.plot(mean_retinanet_5095, label='RetinaNet', color='b')
+    plt.plot(mean_yolo_5095, label='YOLOv5', color='g')
+    plt.fill_between(np.arange(len(mean_frcnn_5095)), mean_frcnn_5095-std_frcnn_5095, mean_frcnn_5095+std_frcnn_5095, alpha=0.3, color='r')
+    plt.fill_between(np.arange(len(mean_retinanet_5095)), mean_retinanet_5095-std_retinanet_5095, mean_retinanet_5095+std_retinanet_5095, alpha=0.3, color='b')
+    plt.fill_between(np.arange(len(mean_yolo_5095)), mean_yolo_5095-std_yolo_5095, mean_yolo_5095+std_yolo_5095, alpha=0.3, color='g')
+    plt.legend(fontsize=10)
+    plt.title(f'Best Performers for mAP@50:95', fontsize=12, fontweight='bold')
+    plt.xlabel("Epochs", fontsize=12, fontweight='bold')
+    plt.ylabel("Mean AP", fontsize=12, fontweight='bold')
+    plt.xticks(fontsize=10)
+    plt.yticks(fontsize=10)
+    plt.tight_layout()
+    plt.savefig(f'{src_path}/ap5095.png',dpi=300)
+    plt.close()
+
+
+
 
 
     pass
