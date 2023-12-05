@@ -61,7 +61,6 @@ def plot_metric(data_dir, plot_dir):
             if column == 'epoch':
                 continue
             mean = mean_df[column]
-            std = std_df[column]
             plt.plot(mean, label=model,linewidth=0.75)
         plt.legend(fontsize=10)
         for model in os.listdir(data_dir):
@@ -69,7 +68,6 @@ def plot_metric(data_dir, plot_dir):
             print(std_df.columns)
             if column == 'epoch':
                 continue
-            mean = mean_df[column]
             std = std_df[column]
             plt.fill_between(mean.index, mean - std, mean + std, alpha=0.5, label=model)
         plt.title(title_dict[column], fontsize=14, fontweight='bold')
