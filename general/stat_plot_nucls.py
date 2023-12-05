@@ -21,10 +21,10 @@ def plot_stats(image_dir, plot_dir):
     num_classes_per_image = num_classes_per_image['len_masks'].values.tolist()
     num_classes_per_image = np.array(num_classes_per_image)
 
-    total_images = class_stats[:, -1]
+    total_images = class_stats[-1]
     print("Total Images: {}".format(total_images))
-    total_annotations = int(class_stats[:, -2])
-    class_stats = class_stats[:, :-2].astype(int)
+    total_annotations = int(class_stats[-2])
+    class_stats = class_stats[:-2].astype(int)
 
     plt.figure(figsize=(3,3))
     plt.bar(np.arange(len(class_stats)), class_stats, labels=classes)
