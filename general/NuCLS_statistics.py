@@ -61,7 +61,6 @@ def image_info(image_dir, mask_dir, plot_dir):
         print(f"Total number of images: {im_count}")
         print(f"Total number of classes: {sum(num_classes_per_image)}")
         print(f"Number of classes per image: {num_classes_per_image}")
-        print(f"Number of annotations per image: {annot_per_image}")
         pd.DataFrame(num_classes_per_image, index=class_array).to_csv(os.path.join(plot_dir, 'num_classes_per_image.csv'))
 
 
