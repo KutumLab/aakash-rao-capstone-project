@@ -70,7 +70,7 @@ def plot_metric(data_dir, plot_dir):
             plt.fill_between(mean.index, mean - std, mean + std, alpha=0.25, label=model)
         # custom legend content
         handles, labels = plt.gca().get_legend_handles_labels()
-        order = [0, 2, 4, 6, 8, 1, 3, 5, 7]
+        order = [0, 2, 4, 1, 3, 5]
         plt.legend([handles[idx] for idx in order],[model_dict[labels[idx]] for idx in order], fontsize=8)
         plt.title(f'{title_dict[column]} for Faster R-CNN', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
