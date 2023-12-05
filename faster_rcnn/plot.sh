@@ -1,6 +1,6 @@
-INDIR=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs/detectron
-python3 utils/json_gen.py \
-    --path $INDIR 
+# INDIR=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs/detectron
+# python3 utils/json_gen.py \
+#     --path $INDIR 
 
 
 INDIR=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs/detectron

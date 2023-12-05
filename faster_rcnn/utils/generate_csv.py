@@ -50,7 +50,6 @@ def mean_and_std_fold(data_dir, output_dir):
 
         mean_df.to_csv(os.path.join(out_dir, f'mean_{model}.csv'), index=False)
         std_df.to_csv(os.path.join(out_dir, f'std_{model}.csv'), index=False)
-        break
 
 if __name__ == '__main__':
     argparse = argparse.ArgumentParser()
