@@ -14,16 +14,15 @@ im_count = 0
 class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
 num_classes_per_image = np.zeros(len(class_array))
 
-def image_info(image_dir, mask_dir, save_dir):
+def image_info(image_dir, mask_dir, plot_dir):
     if not os.path.exists(image_dir):
         raise ValueError("image_dir not exist")
     elif len(os.listdir(image_dir)) == 0:
         raise ValueError("image_dir is empty")
     else:
         master_list = []
-        save_dir = os.path.join(save_dir, "master")
-        if not os.path.exists(save_dir):
-            os.makedirs(save_dir)
+        if not os.path.exists(plot_dir):
+            os.makedirs(plot_dir)
         class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
         num_classes_per_image = np.zeros(len(class_array))
         for i in tqdm (range(len(os.listdir(image_dir))), desc="Creating Master...", ascii=False, ncols=75):
