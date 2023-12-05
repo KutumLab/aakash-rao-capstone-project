@@ -27,8 +27,8 @@ def gen_stat(src_path):
             if 'yo' in model:
                 ap50 = ap50*100
                 ap5095 = ap5095*100
-            ap50_list.append(np.max(ap50))
-            ap5095_list.append(np.max(ap5095))
+            ap50_list.append(round(np.max(ap50), 2))
+            ap5095_list.append(round(np.max(ap5095), 2))
     print(models_list)
     print(ap50_list)
     print(ap5095_list)
