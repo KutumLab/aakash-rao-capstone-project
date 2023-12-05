@@ -19,10 +19,10 @@ def gen_stat(src_path):
             mean_df = pd.read_csv(os.path.join(model_path, submodel, f'mean_{submodel}.csv'), header=0)
             std_df = pd.read_csv(os.path.join(model_path, submodel, f'std_{submodel}.csv'), header=0)
             models_list.append(model)
-            ap50 = mean_df[f'{dict_oof[model][0]}50'].values.to_numpy()
+            ap50 = mean_df[f'{dict_oof[model][0]}50'].values
             # appending max value
             ap50_list.append(np.max(ap50))
-            ap5095 = mean_df[f'{dict_oof[model][0]}5095'].values.to_numpy()
+            ap5095 = mean_df[f'{dict_oof[model][0]}5095'].values
             # appending max value
             ap5095_list.append(np.max(ap5095))
     print(models_list)
