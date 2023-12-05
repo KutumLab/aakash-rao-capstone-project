@@ -32,6 +32,7 @@ def plot_stats(image_dir, plot_dir):
     plt.xticks(np.arange(len(class_stats)), class_stats)
     plt.xlabel('Class')
     plt.ylabel('Number of Images')
+    plt.xticks(np.arange(len(class_stats)), classes, rotation=45)
     plt.title('Number of Images per Class')
     plt.tight_layout()
     plt.savefig(os.path.join(plot_dir, 'num_images_per_class.png'), bbox_inches='tight', dpi=300)
