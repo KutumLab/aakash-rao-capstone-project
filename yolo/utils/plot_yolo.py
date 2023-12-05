@@ -60,7 +60,7 @@ def plot_metric(data_dir, plot_dir):
             plt.plot(mean, label=model,linewidth=0.75)
             std_df = pd.read_csv(os.path.join(data_dir, model, f'std_{model}.csv'), header=0)
             std = std_df[column]
-            plt.fill_between(mean.index, mean - std, mean + std, alpha=0.5, label=model)
+            plt.fill_between(mean.index, mean - std, mean + std, alpha=0.25, label=model)
         # custom legend content
         handles, labels = plt.gca().get_legend_handles_labels()
         order = [0, 2, 4, 1, 3, 5]
