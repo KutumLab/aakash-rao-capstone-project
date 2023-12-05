@@ -81,6 +81,7 @@ def grp_plot(src_path):
 
     print(mean_frcnn_50.shape)
     print(mean_yolo_50.shape)
+    print(mean_retinanet_50.shape)
 
 
     # plt.figure(figsize=(10, 5))
