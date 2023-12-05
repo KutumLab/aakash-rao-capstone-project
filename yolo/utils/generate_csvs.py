@@ -14,7 +14,7 @@ def generate_csvs(data_dir, output_dir):
         if not os.path.exists(model_output_dir):
             os.makedirs(model_output_dir)
         csv = pd.read_csv(os.path.join(folder_path, 'results.csv'), header=0)
-        print(csv.head())
+        print(csv.columns)
         break
 
         
