@@ -39,7 +39,7 @@ def plot_stats(image_dir, plot_dir):
     plt.close()
 
     fig_2 = plt.figure(figsize=(2,4))
-    plt.boxplot(num_classes_per_image)
+    plt.boxplot(num_classes_per_image, vert=False)
     plt.ylabel('No of Annotations', fontsize=14, fontweight='bold')
     plt.xlabel('Images', fontsize=14, fontweight='bold')
     plt.title('Annotations Boxplot', fontsize=14, fontweight='bold')
