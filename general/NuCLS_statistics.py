@@ -25,8 +25,6 @@ def image_info(image_dir, mask_dir, plot_dir):
         master_list = []
         if not os.path.exists(plot_dir):
             os.makedirs(plot_dir)
-        class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
-        num_classes_per_image = np.zeros(len(class_array))
         for i in tqdm (range(len(os.listdir(image_dir))), desc="Creating Master...", ascii=False, ncols=75):
             time.sleep(0.01)
             image_name = os.listdir(image_dir)[i]
