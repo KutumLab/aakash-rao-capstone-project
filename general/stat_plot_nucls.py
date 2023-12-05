@@ -13,6 +13,7 @@ import json
 def plot_stats(image_dir, plot_dir):
     if not os.path.exists(plot_dir):
         os.makedirs(plot_dir)
+    classes = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
     class_stats = pd.read_csv(os.path.join(image_dir, 'class_stats.csv'), header=0)
     class_stats = class_stats.values.tolist()
     class_stats = np.array(class_stats)
@@ -20,12 +21,12 @@ def plot_stats(image_dir, plot_dir):
     num_classes_per_image = num_classes_per_image['len_masks'].values.tolist()
     num_classes_per_image = np.array(num_classes_per_image)
 
-    total_images = class_stats[:, -1]
-    total_annotations = class_stats[:, -2]
-    class_stats = class_stats[:, :-2]
+    total_images = int(class_stats[:, -1])
+    total_annotations = int(class_stats[:, -2])
+    class_stats = class_stats[:, :-2].astype(int)
 
     plt.figure(figsize=(3,3))
-    plt.bar(np.arange(len(class_stats)), total_images, color='b')
+    plt.bar(np.arange(len(class_stats)), class_stats, labels=classes)
     plt.xticks(np.arange(len(class_stats)), class_stats)
     plt.xlabel('Class')
     plt.ylabel('Number of Images')
