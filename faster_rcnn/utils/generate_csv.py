@@ -27,9 +27,6 @@ def generate_csvs(data_dir, output_dir):
         metrics.to_csv(os.path.join(outpath, "results_"+fold_num + '.csv'))
             
         print(net_name, fold_num)
-        
-        
-        break
     pass
 
 def mean_and_std_fold(data_dir, output_dir):
