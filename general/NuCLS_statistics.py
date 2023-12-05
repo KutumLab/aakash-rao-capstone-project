@@ -10,11 +10,10 @@ import time
 import json
 
 
-im_count = 0
-class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
-num_classes_per_image = np.zeros(len(class_array))
-
 def image_info(image_dir, mask_dir, plot_dir):
+    im_count = 0
+    class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
+    num_classes_per_image = np.zeros(len(class_array))
     if not os.path.exists(image_dir):
         raise ValueError("image_dir not exist")
     elif len(os.listdir(image_dir)) == 0:
