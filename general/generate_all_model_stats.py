@@ -11,8 +11,6 @@ def gen_stat(src_path):
     ap5095_list = []
     for model in os.listdir(src_path):
         model_path = os.path.join(src_path, model, "csvs")
-
-
         for submodel in os.listdir(model_path):
             mean_df = pd.read_csv(os.path.join(model_path, submodel, f'mean_{submodel}.csv'), header=0)
             std_df = pd.read_csv(os.path.join(model_path, submodel, f'std_{submodel}.csv'), header=0)
@@ -26,7 +24,7 @@ def gen_stat(src_path):
     print(models_list)
     print(ap50_list)
     print(ap5095_list)
-    
+
 
 
     pass
