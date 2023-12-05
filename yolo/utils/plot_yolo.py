@@ -58,18 +58,12 @@ def plot_metric(data_dir, plot_dir):
         plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
         for model in os.listdir(data_dir):
             mean_df = pd.read_csv(os.path.join(data_dir, model, f'mean_{model}.csv'), header=0)
-            if column == 'epoch':
-                continue
             mean = mean_df[column]
             plt.plot(mean, label=model,linewidth=0.75)
-        plt.legend(fontsize=10)
-        for model in os.listdir(data_dir):
             std_df = pd.read_csv(os.path.join(data_dir, model, f'std_{model}.csv'), header=0)
-            print(std_df.columns)
-            if column == 'epoch':
-                continue
             std = std_df[column]
             plt.fill_between(mean.index, mean - std, mean + std, alpha=0.5, label=model)
+        plt.legend(fontsize=10)
         plt.title(title_dict[column], fontsize=14, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=14, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=14, fontweight='bold')
