@@ -9,6 +9,9 @@ axis = ['mAP', 'mAP', 'mAP', 'Accuracy', 'Iteration', 'Loss', 'Loss', 'Loss', 'L
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
 x_axis_dict = "No. of Iterations"
+model_list = ['faster_rcnn_R_101_DC5_3x','faster_rcnn_R_50_C4_1x','faster_rcnn_R_50_C4_3x','faster_rcnn_R_50_DC5_1x','faster_rcnn_R_50_DC5_3x']
+names = ['ResNet101 with Dilated C5', 'ResNet50 with C4', 'ResNet50 with C4', 'ResNet50 with Dilated C5', 'ResNet50 with Dilated C5']
+model_dict = dict(zip(model_list, names))
 
 def plot_model(data_dir, plot_dir):
     if not os.path.exists(plot_dir):
@@ -69,7 +72,7 @@ def plot_metric(data_dir, plot_dir):
         # custom legend content
         handles, labels = plt.gca().get_legend_handles_labels()
         order = [0, 2, 4, 6, 8, 1, 3, 5, 7]
-        plt.legend([handles[idx] for idx in order],[labels[idx] for idx in order], fontsize=8)
+        plt.legend([handles[idx] for idx in order],[model_dict[labels[idx]] for idx in order], fontsize=8)
         plt.title(f'{title_dict[column]} for Faster R-CNN', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
@@ -90,3 +93,4 @@ if __name__ == '__main__':
     args = argparse.parse_args()
     plot_model(args.data_dir, args.output_dir)
     plot_metric(args.data_dir, args.output_dir)
+
