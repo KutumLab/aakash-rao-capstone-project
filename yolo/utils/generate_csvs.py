@@ -23,6 +23,7 @@ def generate_csvs(data_dir, output_dir):
         csv.columns = translation
         csv = csv[relevant]
         csv = csv.rename(columns=rename)
+        csv.to_csv(os.path.join(model_output_dir, 'results.csv'), index=False)
         print(csv.columns)
         break
 
