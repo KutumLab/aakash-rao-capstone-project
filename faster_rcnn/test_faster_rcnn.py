@@ -96,7 +96,7 @@ def train_detectron2(cfg,fold,data_path):
     predictor = DefaultPredictor(cfg)
     predictions = []
     pred_save_path = os.path.join(cfg.OUTPUT_DIR, 'predictions')
-    d=DatasetCatalog.get(f'test')[0]
+    d=DatasetCatalog.get(f'test')[12]
     im = cv2.imread(d["file_name"])
     outputs = predictor(im)
     predictions.append(outputs)
