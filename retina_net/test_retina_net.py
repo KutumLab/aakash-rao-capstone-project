@@ -3,6 +3,8 @@ import os
 import argparse
 
 from utils.MyTrainer import MyTrainer
+import matplotlib.pyplot as plt
+import cv2
 
 
 
@@ -87,18 +89,35 @@ def train_detectron2(cfg,fold,data_path):
     pred_save_path = os.path.join(cfg.OUTPUT_DIR, 'predictions')
     if not os.path.exists(pred_save_path):
         os.makedirs(pred_save_path)
-    evaluator = COCOEvaluator("test", cfg, False, output_dir=cfg.OUTPUT_DIR)
-    val_loader = build_detection_test_loader(cfg, "test")
-    results = inference_on_dataset(trainer.model, val_loader, evaluator)
+    # evaluator = COCOEvaluator("test", cfg, False, output_dir=cfg.OUTPUT_DIR)
+    # val_loader = build_detection_test_loader(cfg, "test")
+    # results = inference_on_dataset(trainer.model, val_loader, evaluator)
+
+    predictor = DefaultPredictor(cfg)
+    predictions = []
+    pred_save_path = os.path.join(cfg.OUTPUT_DIR, 'predictions')
+    d=DatasetCatalog.get(f'test')[12]
+    im = cv2.imread(d["file_name"])
+    outputs = predictor(im)
+    predictions.append(outputs)
+    v = Visualizer(im[:, :, ::-1],
+                    metadata=MetadataCatalog.get(f'test'), 
+                    scale=1,
+    )
+    out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+    plt.imshow(out.get_image()[:, :, ::-1])
+    plt.axis('off')
+    plt.savefig(os.path.join(pred_save_path, d['file_name'].split('/')[-1]), bbox_inches='tight', pad_inches=0, dpi=300)
+
 
     # OrderedDict to dict
-    results = dict(results)
-    # save results
-    results_save_path = os.path.join(cfg.OUTPUT_DIR, 'results')
-    if not os.path.exists(results_save_path):
-        os.makedirs(results_save_path)
-    np.save(os.path.join(results_save_path, 'results.npy'), results)
-    return results
+    # results = dict(results)
+    # # save results
+    # results_save_path = os.path.join(cfg.OUTPUT_DIR, 'results')
+    # if not os.path.exists(results_save_path):
+    #     os.makedirs(results_save_path)
+    # np.save(os.path.join(results_save_path, 'results.npy'), results)
+    # return results
 
 
 
