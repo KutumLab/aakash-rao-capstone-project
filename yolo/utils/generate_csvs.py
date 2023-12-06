@@ -51,8 +51,8 @@ def mean_and_std_fold(data_dir, output_dir):
             std_array = [fold_1[column], fold_2[column], fold_3[column]]
             std_df[column] = pd.concat(std_array, axis=1).std(axis=1)
 
-        # mean_df.to_csv(os.path.join(out_dir, f'mean_{model}.csv'), index=False)
-        # std_df.to_csv(os.path.join(out_dir, f'std_{model}.csv'), index=False)
+        mean_df.to_csv(os.path.join(out_dir, f'mean_{model}.csv'), index=False)
+        std_df.to_csv(os.path.join(out_dir, f'std_{model}.csv'), index=False)
  
 
     pass
