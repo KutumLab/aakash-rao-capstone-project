@@ -97,6 +97,11 @@ def train_detectron2(cfg,fold,data_path):
     predictions = []
     pred_save_path = os.path.join(cfg.OUTPUT_DIR, 'predictions')
     d=DatasetCatalog.get(f'test')[12]
+    for file in DatasetCatalog.get(f'test'):
+        if file['file_name'].split('/')[-1] == 'NP.3_#_E_#_TCGA-AR-A1AR-01Z-00-DX1_id-5e83b113ddda5f83987d0e6c_left-14230_top-31915_bottom-32180_right-14510.png':
+            print('here')
+            d = file
+            break
     im = cv2.imread(d["file_name"])
     outputs = predictor(im)
     predictions.append(outputs)
