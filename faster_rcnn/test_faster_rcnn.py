@@ -102,7 +102,7 @@ def train_detectron2(cfg,fold,data_path):
     predictions.append(outputs)
     v = Visualizer(im[:, :, ::-1],
                     metadata=MetadataCatalog.get(f'test'), 
-                    scale=0.8,
+                    scale=1,
     )
     out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
     plt.imshow(out.get_image()[:, :, ::-1])
