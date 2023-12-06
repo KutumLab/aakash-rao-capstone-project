@@ -17,19 +17,19 @@ python3 test_faster_rcnn.py \
     --fold 1 \
     --save_path $SAVE_PATH \
 
-python3 test_faster_rcnn.py \
-    --data_path $DATA_PATH \
-    --config_info $CONFIG \
-    --max_iters $MAX_ITERS \
-    --name $NAME \
-    --fold 2 \
-    --save_path $SAVE_PATH \
+# python3 test_faster_rcnn.py \
+#     --data_path $DATA_PATH \
+#     --config_info $CONFIG \
+#     --max_iters $MAX_ITERS \
+#     --name $NAME \
+#     --fold 2 \
+#     --save_path $SAVE_PATH \
 
-python3 test_faster_rcnn.py \
-    --data_path $DATA_PATH \
-    --config_info $CONFIG \
-    --max_iters $MAX_ITERS \
-    --name $NAME \
-    --fold 3 \
-    --save_path $SAVE_PATH \
+# python3 test_faster_rcnn.py \
+#     --data_path $DATA_PATH \
+#     --config_info $CONFIG \
+#     --max_iters $MAX_ITERS \
+#     --name $NAME \
+#     --fold 3 \
+#     --save_path $SAVE_PATH \
 
