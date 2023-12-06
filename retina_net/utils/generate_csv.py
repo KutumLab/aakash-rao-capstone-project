@@ -37,6 +37,10 @@ def mean_and_std_fold(data_dir, output_dir):
         fold_1 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_1.csv'), header=0)
         fold_2 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_2.csv'), header=0)
         fold_3 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_3.csv'), header=0)
+        print(f'{model} * & fold 1 & {round(fold_1["AP50"].max()*100,2)} & {round(fold_1["AP5095"].max()*100,2)} \\\\')
+        print(f'{model} * & fold 2 & {round(fold_2["AP50"].max()*100,2)} & {round(fold_2["AP5095"].max()*100,2)} \\\\')
+        print(f'{model} * & fold 3 & {round(fold_3["AP50"].max()*100,2)} & {round(fold_3["AP5095"].max()*100,2)} \\\\')
+
         mean_df = pd.DataFrame(columns=fold_1.columns)
         std_df = pd.DataFrame(columns=fold_1.columns)
         mean_df['iteration'] = fold_1['iteration']
@@ -48,8 +52,8 @@ def mean_and_std_fold(data_dir, output_dir):
             std_array = [fold_1[column], fold_2[column], fold_3[column]]
             std_df[column] = pd.concat(std_array, axis=1).std(axis=1)
 
-        mean_df.to_csv(os.path.join(out_dir, f'mean_{model}.csv'), index=False)
-        std_df.to_csv(os.path.join(out_dir, f'std_{model}.csv'), index=False)
+        # mean_df.to_csv(os.path.join(out_dir, f'mean_{model}.csv'), index=False)
+        # std_df.to_csv(os.path.join(out_dir, f'std_{model}.csv'), index=False)
 
 if __name__ == '__main__':
     argparse = argparse.ArgumentParser()
@@ -57,5 +61,5 @@ if __name__ == '__main__':
     argparse.add_argument('-o','--output_dir', type=str, default='data')
 
     args = argparse.parse_args()
-    generate_csvs(args.data_dir, args.output_dir)
+    # generate_csvs(args.data_dir, args.output_dir)
     mean_and_std_fold(args.output_dir, args.output_dir)
