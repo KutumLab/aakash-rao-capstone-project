@@ -37,9 +37,9 @@ def mean_and_std_fold(data_dir, output_dir):
         fold_1 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_1.csv'), header=0)
         fold_2 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_2.csv'), header=0)
         fold_3 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_3.csv'), header=0)
-        print(f'{model} * & fold 1 & {round(fold_1["AP50"].max()*100,2)} & {round(fold_1["AP5095"].max()*100,2)} \\\\')
-        print(f'{model} * & fold 2 & {round(fold_2["AP50"].max()*100,2)} & {round(fold_2["AP5095"].max()*100,2)} \\\\')
-        print(f'{model} * & fold 3 & {round(fold_3["AP50"].max()*100,2)} & {round(fold_3["AP5095"].max()*100,2)} \\\\')
+        print(f'{model} * & fold 1 & {round(fold_1["AP50"].max(),2)} & {round(fold_1["AP5095"].max(),2)} \\\\')
+        print(f'{model} * & fold 2 & {round(fold_2["AP50"].max(),2)} & {round(fold_2["AP5095"].max(),2)} \\\\')
+        print(f'{model} * & fold 3 & {round(fold_3["AP50"].max(),2)} & {round(fold_3["AP5095"].max(),2)} \\\\')
 
         mean_df = pd.DataFrame(columns=fold_1.columns)
         std_df = pd.DataFrame(columns=fold_1.columns)
