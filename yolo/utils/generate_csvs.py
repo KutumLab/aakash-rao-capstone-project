@@ -38,6 +38,8 @@ def mean_and_std_fold(data_dir, output_dir):
         fold_2 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_2.csv'), header=0)
         fold_3 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_3.csv'), header=0)
         print(f'{model} & & & fold 1 & {fold_1["mAP_50"].max()} & {fold_1["mAP_5095"].max()}')
+        print(f'{model} & & & fold 2 & {fold_2["mAP_50"].max()} & {fold_2["mAP_5095"].max()}')
+        print(f'{model} & & & fold 3 & {fold_3["mAP_50"].max()} & {fold_3["mAP_5095"].max()}')
         mean_df = pd.DataFrame(columns=fold_1.columns)
         std_df = pd.DataFrame(columns=fold_1.columns)
         mean_df['epoch'] = fold_1['epoch']
