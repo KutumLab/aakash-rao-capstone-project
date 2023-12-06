@@ -111,13 +111,13 @@ def train_detectron2(cfg,fold,data_path):
 
 
     # OrderedDict to dict
-    results = dict(results)
-    # save results
-    results_save_path = os.path.join(cfg.OUTPUT_DIR, 'results')
-    if not os.path.exists(results_save_path):
-        os.makedirs(results_save_path)
-    np.save(os.path.join(results_save_path, 'results.npy'), results)
-    return results
+    # results = dict(results)
+    # # save results
+    # results_save_path = os.path.join(cfg.OUTPUT_DIR, 'results')
+    # if not os.path.exists(results_save_path):
+    #     os.makedirs(results_save_path)
+    # np.save(os.path.join(results_save_path, 'results.npy'), results)
+    # return results
 
 
 
