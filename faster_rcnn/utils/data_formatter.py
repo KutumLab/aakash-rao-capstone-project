@@ -85,7 +85,8 @@ def make_folds(npy_path, save_dir, folds,seed=42):
 
 
 
-def image_info(image_dir, mask_dir, save_dir, phase):
+def image_info(image_dir, mask_dir, save_dir, phase, version=""):
+    save_dir += f"_{version}")
     if not os.path.exists(image_dir):
         raise ValueError("image_dir not exist")
     elif len(os.listdir(image_dir)) == 0:
@@ -123,8 +124,12 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 y_min = row['ymin']
                 x_max = row['xmax']
                 y_max = row['ymax']
-                class_name = row['super_classification']
-                if class_name == 'AMBIGUOUS' or class_name == 'other_nucleus':
+                if version == '':
+                    class_name = row['super_classification']
+                else:
+                    class_name = 'cell'
+
+                if (class_name == 'AMBIGUOUS' or class_name == 'other_nucleus' ) and version == '':
                     class_name = 'other'
                 try:
                     class_id = class_array.index(class_name)
@@ -171,6 +176,7 @@ if __name__ == '__main__':
     argparser.add_argument('-m', '--mask_dir', required=True, help='mask directory')
     argparser.add_argument('-s', '--save_dir', required=True, help='save directory')
     argparser.add_argument('-f', '--folds', required=True, help='number of folds')
+    argparse.add_argument('-v', '--version', required=False, default='', help='version of the data')
     argparser.add_argument('-p', '--phase', required=True, help='phase')
     argparser.add_argument('--seed', required=False, help='Seed for reproducibility')
 
@@ -178,7 +184,7 @@ if __name__ == '__main__':
 
     print("Creating Master...")
     image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
-    print("Creating Folds...")
-    make_folds(os.path.join(args.save_dir, 'master', 'master.npy'), args.save_dir, int(args.folds), int(args.seed))
-    print("Creating Plot...")
-    plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
+    # print("Creating Folds...")
+    # make_folds(os.path.join(args.save_dir, 'master', 'master.npy'), args.save_dir, int(args.folds), int(args.seed))
+    # print("Creating Plot...")
+    # plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
