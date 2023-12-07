@@ -1,4 +1,4 @@
-_BASE_: "./configs/Base-RCNN-DilatedC5.yaml"
+_BASE_: "./Base-RCNN-DilatedC5.yaml"
 MODEL:
   WEIGHTS: ""
   MASK_ON: False
