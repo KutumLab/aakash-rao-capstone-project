@@ -98,17 +98,17 @@ def train_detectron2(cfg,fold,data_path, version=""):
         classes = ['nonTIL_stromal','sTIL','tumor_any','other']
     else:
         classes = ['cell']
-    MetadataCatalog.get(f'fold_{fold}_train').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other']
+    MetadataCatalog.get(f'fold_{fold}_train').thing_classes = classes
     MetadataCatalog.get(f'fold_{fold}_train').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
 
 
     DatasetCatalog.register(f'fold_{fold}_val', data_val)
-    MetadataCatalog.get(f'fold_{fold}_val').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other']
+    MetadataCatalog.get(f'fold_{fold}_val').thing_classes = classes
     MetadataCatalog.get(f'fold_{fold}_val').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
 
     DatasetCatalog.register(f'test', data_test)
     data = DatasetCatalog.get(f'test')
-    MetadataCatalog.get(f'test').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other']
+    MetadataCatalog.get(f'test').thing_classes = classes
     MetadataCatalog.get(f'test').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
 
     dataset_dicts = DatasetCatalog.get(f'fold_{fold}_train')
