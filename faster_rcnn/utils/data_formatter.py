@@ -131,10 +131,10 @@ def image_info(image_dir, mask_dir, save_dir, phase, version):
 
                 if (class_name == 'AMBIGUOUS' or class_name == 'other_nucleus' ) and version == '':
                     class_name = 'other'
-                try:
-                    class_id = class_array.index(class_name)
-                except ValueError:
-                    raise ValueError(f"{class_name} not in class_array")
+                    try:
+                        class_id = class_array.index(class_name)
+                    except ValueError:
+                        raise ValueError(f"{class_name} not in class_array")
                 # print(f"Class: {class_name}, Class ID: {class_id}")
                 loc_ann['bbox'] = [x_min, y_min, x_max, y_max]
                 loc_ann['category_id'] = class_id
