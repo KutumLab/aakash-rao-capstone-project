@@ -74,7 +74,7 @@ def set_config(config_info, fold, max_iters, data_path, name,save_path):
 
 
 
-def train_detectron2(cfg,fold,data_path):
+def train_detectron2(cfg,fold,data_path, version=""):
     def data_train():
         data = np.load(os.path.join(data_path, f'fold_{fold}', 'train.npy'), allow_pickle=True)
         data = list(data)
@@ -94,6 +94,10 @@ def train_detectron2(cfg,fold,data_path):
         return data
 
     DatasetCatalog.register(f'fold_{fold}_train', data_train)
+    if version =="":
+        classes = ['nonTIL_stromal','sTIL','tumor_any','other']
+    else:
+        classes = ['cell']
     MetadataCatalog.get(f'fold_{fold}_train').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other']
     MetadataCatalog.get(f'fold_{fold}_train').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
 
@@ -189,6 +193,7 @@ if __name__ == "__main__":
     argparse.add_argument('--max_iters', type=int, default=1500, help='max iters')
     argparse.add_argument('--name', type=str, default='faster_rcnn_R_50_FPN_3x', help='name')
     argparse.add_argument('--fold', type=str, default=1, help='version')
+    argparse.add_argument('--version', type=str, default='', help='version')
     argparse.add_argument('--save_path', type=str, default='/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs', help='save path')
     args = argparse.parse_args()
     cfg = set_config(args.config_info, args.fold, args.max_iters, args.data_path, args.name, args.save_path)

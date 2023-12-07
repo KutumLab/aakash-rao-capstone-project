@@ -2,7 +2,7 @@
 # SEMI-CONSTANT INFO
 DATA_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/detectron_single
 SAVE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs
-MAX_ITERS=15000
+MAX_ITERS=10
 
 
 # # VARIABLE INFO [DONE]
@@ -137,6 +137,7 @@ python3 train_faster_rcnn.py \
     --name $NAME \
     --fold 1 \
     --save_path $SAVE_PATH \
+    --version single
 
 python3 train_faster_rcnn.py \
     --data_path $DATA_PATH \
@@ -145,6 +146,7 @@ python3 train_faster_rcnn.py \
     --name $NAME \
     --fold 2 \
     --save_path $SAVE_PATH \
+    --version single
 
 python3 train_faster_rcnn.py \
     --data_path $DATA_PATH \
@@ -153,6 +155,7 @@ python3 train_faster_rcnn.py \
     --name $NAME \
     --fold 3 \
     --save_path $SAVE_PATH \
+    --version single
 
 
 
