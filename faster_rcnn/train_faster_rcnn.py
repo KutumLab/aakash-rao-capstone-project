@@ -42,7 +42,10 @@ fold = 1
 
 def set_config(config_info, fold, max_iters, data_path, name,save_path):
     cfg = get_cfg()
-    cfg.merge_from_file(model_zoo.get_config_file(config_info))
+    if 'COCO' in config_info:
+        cfg.merge_from_file(model_zoo.get_config_file(config_info))
+    else:
+        cfg.merge_from_file(config_info)
     cfg.DATASETS.TRAIN = (f'fold_{fold}_train',)
     cfg.DATASETS.TEST = (f'fold_{fold}_val',)
     cfg.TEST.EVAL_PERIOD = 100
