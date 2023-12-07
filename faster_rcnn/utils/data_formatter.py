@@ -135,7 +135,6 @@ def image_info(image_dir, mask_dir, save_dir, phase, version):
                     class_id = class_array.index(class_name)
                 except ValueError:
                     raise ValueError(f"{class_name} not in class_array")
-                num_classes_per_image[class_id] += 1
                 # print(f"Class: {class_name}, Class ID: {class_id}")
                 loc_ann['bbox'] = [x_min, y_min, x_max, y_max]
                 loc_ann['category_id'] = class_id
