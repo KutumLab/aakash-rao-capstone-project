@@ -176,7 +176,7 @@ if __name__ == '__main__':
     argparser.add_argument('-m', '--mask_dir', required=True, help='mask directory')
     argparser.add_argument('-s', '--save_dir', required=True, help='save directory')
     argparser.add_argument('-f', '--folds', required=True, help='number of folds')
-    argparse.add_argument('-v', '--version', required=False, default='', help='version of the data')
+    argparser.add_argument('-v', '--version', required=False, default='', help='version of the data')
     argparser.add_argument('-p', '--phase', required=True, help='phase')
     argparser.add_argument('-s','--seed', required=False, help='Seed for reproducibility')
 
