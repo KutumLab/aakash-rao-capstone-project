@@ -5,5 +5,5 @@ python3 utils/data_formatter.py \
     -s /media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/detectron \
     -p run \
     -f 3 \
-    -v single \ 
-    --seed 42 \
+    -v single \
+    -s 42 \
