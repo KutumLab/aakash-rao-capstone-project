@@ -6,4 +6,4 @@ python3 utils/data_formatter.py \
     -p run \
     -f 3 \
     -v single \
-    -s 42 \
+    --seed 42 \
