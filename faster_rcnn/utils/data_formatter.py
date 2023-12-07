@@ -86,7 +86,7 @@ def make_folds(npy_path, save_dir, folds,seed=42):
 
 
 def image_info(image_dir, mask_dir, save_dir, phase, version=""):
-    save_dir += f"_{version}")
+    save_dir += f"_{version}"
     if not os.path.exists(image_dir):
         raise ValueError("image_dir not exist")
     elif len(os.listdir(image_dir)) == 0:
