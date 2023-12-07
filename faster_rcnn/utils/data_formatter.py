@@ -185,7 +185,10 @@ if __name__ == '__main__':
 
     print("Creating Master...")
     image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase, args.version)
-    # print("Creating Folds...")
-    # make_folds(os.path.join(args.save_dir, 'master', 'master.npy'), args.save_dir, int(args.folds), int(args.seed))
+    print("Creating Folds...")
+    if args.version == '':
+       make_folds(os.path.join(args.save_dir, 'master', 'master.npy'), args.save_dir, int(args.folds), int(args.seed))
+    else:
+        make_folds(os.path.join(f'{args.save_dir}_{args.version}', 'master', 'master.npy'), f'{args.save_dir}_{args.version}', int(args.folds), int(args.seed))
     # print("Creating Plot...")
     # plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
