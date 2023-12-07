@@ -85,7 +85,7 @@ def make_folds(npy_path, save_dir, folds,seed=42):
 
 
 
-def image_info(image_dir, mask_dir, save_dir, phase, version=""):
+def image_info(image_dir, mask_dir, save_dir, phase, version):
     save_dir += f"_{version}"
     if not os.path.exists(image_dir):
         raise ValueError("image_dir not exist")
@@ -183,7 +183,7 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     print("Creating Master...")
-    image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase, args.version)
     # print("Creating Folds...")
     # make_folds(os.path.join(args.save_dir, 'master', 'master.npy'), args.save_dir, int(args.folds), int(args.seed))
     # print("Creating Plot...")
