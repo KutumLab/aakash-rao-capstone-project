@@ -71,7 +71,7 @@ def set_config(config_info, fold, max_iters, data_path, name,save_path):
 
 
 
-def train_detectron2(cfg,fold,data_path):
+def train_detectron2(cfg,fold,data_path, classes=['nonTIL_stromal','sTIL','tumor_any','other']):
     def data_train():
         data = np.load(os.path.join(data_path, f'fold_{fold}', 'train.npy'), allow_pickle=True)
         data = list(data)
@@ -91,17 +91,17 @@ def train_detectron2(cfg,fold,data_path):
         return data
 
     DatasetCatalog.register(f'fold_{fold}_train', data_train)
-    MetadataCatalog.get(f'fold_{fold}_train').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other']
+    MetadataCatalog.get(f'fold_{fold}_train').thing_classes = classes
     MetadataCatalog.get(f'fold_{fold}_train').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
 
 
     DatasetCatalog.register(f'fold_{fold}_val', data_val)
-    MetadataCatalog.get(f'fold_{fold}_val').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other']
+    MetadataCatalog.get(f'fold_{fold}_val').thing_classes = classes
     MetadataCatalog.get(f'fold_{fold}_val').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
 
     DatasetCatalog.register(f'test', data_test)
     data = DatasetCatalog.get(f'test')
-    MetadataCatalog.get(f'test').thing_classes = ['nonTIL_stromal','sTIL','tumor_any','other']
+    MetadataCatalog.get(f'test').thing_classes = classes
     MetadataCatalog.get(f'test').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
 
     dataset_dicts = DatasetCatalog.get(f'fold_{fold}_train')
@@ -189,5 +189,5 @@ if __name__ == "__main__":
     argparse.add_argument('--save_path', type=str, default='/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs', help='save path')
     args = argparse.parse_args()
     cfg = set_config(args.config_info, args.fold, args.max_iters, args.data_path, args.name, args.save_path)
-    results = train_detectron2(cfg, args.fold, args.data_path)
+    results = train_detectron2(cfg, args.fold, args.data_path,classes=['Cell'])
     print(results)
