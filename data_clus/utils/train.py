@@ -553,6 +553,7 @@ def feature_gen(savepath, model_type, batch_size):
         target_size=(50,50))
     # getting the features
     features = model.predict(test_generator)
+    
     print(features.shape)
     
 
