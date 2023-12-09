@@ -7,6 +7,8 @@ import pandas as pd
 
 def json_gen(path):
     for folder in os.listdir(path):
+        if 'retinanet' not in folder:
+            continue
         fold_path = os.path.join(path, folder)
         # read json file
         json_data = []

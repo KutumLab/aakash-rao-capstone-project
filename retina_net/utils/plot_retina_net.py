@@ -17,6 +17,8 @@ def plot_model(data_dir, plot_dir):
     if not os.path.exists(plot_dir):
         os.makedirs(plot_dir)
     for model in os.listdir(data_dir):
+        if 'retinanet' not in model:
+            continue
         model_plot_dir = os.path.join(plot_dir, model)
         if not os.path.exists(model_plot_dir):
             os.makedirs(model_plot_dir)
@@ -60,6 +62,8 @@ def plot_metric(data_dir, plot_dir):
         plt.locator_params(axis='y', nbins=5)
         plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
         for model in os.listdir(data_dir):
+            if 'retinanet' not in model:
+                continue
             mean_df = pd.read_csv(os.path.join(data_dir, model, f'mean_{model}.csv'), header=0)
             mean = mean_df[column]
             mean = mean.dropna(how='any')
