@@ -10,6 +10,7 @@ from tqdm import tqdm
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications import Xception
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout
+from sklearn.manifold import TSNE
 
 
 
@@ -186,7 +187,7 @@ def plot_few(path):
 
 def genpca(path):
     im_path = os.path.join(path, 'master/images')
-    if not os.path.join(path, 'master/pca_plot.png'):
+    if not os.path.exists(os.path.join(path, 'master/tsne.csv')):
         X = None
         test_shape = len(os.listdir(im_path))
         labs = pd.read_csv(os.path.join(path, 'master/metrics.csv'))['class'].values[:test_shape]
@@ -199,33 +200,36 @@ def genpca(path):
                 X = im
             else:
                 X = np.concatenate((X, im), axis=0)
-        X = X.reshape(-1, 50*50*3).T
+        X = X.reshape(-1, 50*50*3)
         print(X.shape)
-        pca = PCA(n_components=2)
-        pca.fit_transform(X)
-        print(pca.components_.shape)
-        df_pca = pd.DataFrame({'pca1':pca.components_[0], 'pca2':pca.components_[1], 'class':labs})
-        df_pca.to_csv(os.path.join(path, 'master/pca.csv'), index=False)
+        tsne = TSNE(n_components=2, verbose=1, perplexity=40, n_iter=300)
+        tsne_results = tsne.fit_transform(X).T
+        print(tsne_results[0].shape)
+        print(labs.shape)
+        
+        df_pca = pd.DataFrame({'TSNE-1':tsne_results[0], 'TSNE-2':tsne_results[1], 'class':labs})
+        df_pca.to_csv(os.path.join(path, 'master/tsne.csv'), index=False)
         print(df_pca.head())
     else:
-        df_pca = pd.read_csv(os.path.join(path, 'master/pca.csv'))
+        print('Loading t-sne results from csv')
+        df_pca = pd.read_csv(os.path.join(path, 'master/tsne.csv'))
     
-    df_pca['pca1'] = df_pca['pca1']*100
-    df_pca['pca2'] = df_pca['pca2']*100
+    df_pca['TSNE-1'] = df_pca['TSNE-1']
+    df_pca['TSNE-2'] = df_pca['TSNE-2']
     plt.figure(figsize=(4,4))
     cls_1 = df_pca[df_pca['class'] == 0]
     cls_2 = df_pca[df_pca['class'] == 1]
     cls_3 = df_pca[df_pca['class'] == 2]
     cls_4 = df_pca[df_pca['class'] == 3]
-    cls_1 = plt.scatter(cls_1['pca1'], cls_1['pca2'], c='#D7263D', label='Stromal',marker='o', s=0.1)
-    cls_2 = plt.scatter(cls_2['pca1'], cls_2['pca2'], c='#F46036', label='sTIL',marker='o', s=0.1)
-    cls_3 = plt.scatter(cls_3['pca1'], cls_3['pca2'], c='#2E294E', label='Tumor',marker='o', s=0.1)
-    cls_4 = plt.scatter(cls_4['pca1'], cls_4['pca2'], c='#1B998B', label='Other',marker='o', s=0.1)
+    cls_1 = plt.scatter(cls_1['TSNE-1'], cls_1['TSNE-2'], c='#D7263D', label='Stromal',marker='o', s=0.1)
+    cls_2 = plt.scatter(cls_2['TSNE-1'], cls_2['TSNE-2'], c='#F46036', label='sTIL',marker='o', s=0.1)
+    cls_3 = plt.scatter(cls_3['TSNE-1'], cls_3['TSNE-2'], c='#2E294E', label='Tumor',marker='o', s=0.1)
+    cls_4 = plt.scatter(cls_4['TSNE-1'], cls_4['TSNE-2'], c='#1B998B', label='Other',marker='o', s=0.1)
 
-    plt.legend(handles=[cls_1, cls_2, cls_3, cls_4], loc='upper right', fontsize=8)
-    plt.title('PCA plot of the data', fontsize=14, fontweight='bold')
-    plt.xlabel('PCA1', fontsize=14, fontweight='bold')
-    plt.ylabel('PCA2', fontsize=14, fontweight='bold')
+    plt.legend(handles=[cls_1, cls_2, cls_3, cls_4], loc='upper right', fontsize=6)
+    plt.title('NuCLS Dataset (T-SNE)', fontsize=14, fontweight='bold')
+    plt.xlabel('1st component', fontsize=14, fontweight='bold')
+    plt.ylabel('2nd component', fontsize=14, fontweight='bold')
     plt.tight_layout()
     plt.savefig(os.path.join(path, 'master/pca_plot.png'), dpi=300)
     # plt.show()
@@ -233,6 +237,10 @@ def genpca(path):
 
 
 
+    pass
+
+
+def k_means_onset(path):
     pass
 
 if __name__ == "__main__":

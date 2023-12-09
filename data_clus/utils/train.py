@@ -4,6 +4,7 @@
 #Importing necessary packages
 import pandas as pd
 import sys
+from sklearn.decomposition import PCA
 import tensorflow as tf
 import seaborn as sns
 import numpy as np
@@ -19,6 +20,10 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import classification_report, confusion_matrix
 from tensorflow.keras.optimizers import RMSprop
 from tensorflow.keras.regularizers import l2
+import shutil
+
+from sklearn.manifold import TSNE
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -553,14 +558,137 @@ def feature_gen(savepath, model_type, batch_size):
         target_size=(50,50))
     # getting the features
     features = model.predict(test_generator)
-    
-    print(features.shape)
-    
 
-    # acc, loss = model.evaluate(test_generator, verbose=1)
-    # print(f'Test Loss: {loss}')
-    # print(f'Test Accuracy: {acc}')
-    class_keys = test_generator.class_indices.keys()
+    class_1_indices = np.where(np.array(test_generator.classes)==0)[0]
+    class_2_indices = np.where(np.array(test_generator.classes)==1)[0]
+    class_3_indices = np.where(np.array(test_generator.classes)==2)[0]
+    class_4_indices = np.where(np.array(test_generator.classes)==3)[0]
+    print(class_1_indices.shape)
+    print(class_2_indices.shape)
+    print(class_3_indices.shape)
+    print(class_4_indices.shape)
+
+    # tsne
+    tsne = TSNE(n_components=2, verbose=1, perplexity=40, n_iter=300)
+    tsne_results = tsne.fit_transform(features)
+    print(tsne_results.shape)
+
+    # plotting
+    plt.figure(figsize=(4,4))
+    cls_1 = plt.scatter(tsne_results[class_1_indices,0], tsne_results[class_1_indices,1], c='#D7263D', label='Stromal',marker='o', s=0.1)
+    cls_2 = plt.scatter(tsne_results[class_2_indices,0], tsne_results[class_2_indices,1], c='#F46036', label='sTIL',marker='o', s=0.1)
+    cls_3 = plt.scatter(tsne_results[class_3_indices,0], tsne_results[class_3_indices,1], c='#2E294E', label='Tumor',marker='o', s=0.1)
+    cls_4 = plt.scatter(tsne_results[class_4_indices,0], tsne_results[class_4_indices,1], c='#1B998B', label='Other',marker='o', s=0.1)
+
+    plt.legend(handles=[cls_1, cls_2, cls_3, cls_4], loc='upper right', fontsize=6)
+    plt.title('Xception Features from\nPooling Layer (T-SNE)', fontsize=14, fontweight='bold')
+    plt.xlabel('1st component', fontsize=14, fontweight='bold')
+    plt.ylabel('2nd component', fontsize=14, fontweight='bold')
+    plt.tight_layout()
+    plt.savefig(os.path.join(outpath,"plots",'tsne.png'), dpi=300)
+    plt.close()
+
+
+
+
+def gen_few_preds(savepath, model_type, batch_size):
+    train_large = '/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/datasets/clus/master/images'
+    dataframe = pd.read_csv(f'{savepath}/{model_type}/gt_pred.csv')
+    correct_df = dataframe[dataframe['gt']==dataframe['pred']]
+    dataframe = dataframe[dataframe['pred']!=dataframe['gt']]
+    required_indices = dataframe.index.tolist()
+    test_dataframe = pd.read_csv('/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/datasets/clus/master/master.csv')
+    # map df to classes
+    test_dataframe['label'] = test_dataframe['label'].map({0:'nonTIL_stromal',1:'sTIL',2:'tumor_any',3:'other'})
+    test_dataframe = test_dataframe.sample(frac=0.2, random_state=42)
+    test_data = ImageDataGenerator(rescale = 1.0/255.0)
+    test_generator = test_data.flow_from_dataframe(
+        dataframe=test_dataframe,
+        directory=train_large,
+        x_col="image",
+        y_col="label",
+        batch_size=batch_size,
+        seed=42,
+        shuffle=False,
+        class_mode="categorical",
+        target_size=(50,50))
+    image_names = test_generator.filenames
+    class_mapping = test_generator.classes
+    # filtering required indices
+    image_names = [image_names[ind] for ind in required_indices]
+    class_names = [class_mapping[key] for key in required_indices]
+
+    
+    weirdo_df = pd.DataFrame(columns=['filename', 'label', 'pred'])
+    weirdo_df['filename'] = image_names
+    weirdo_df['label'] = class_names
+    weirdo_df['pred'] = dataframe['pred'].values
+
+    pred_mapping = test_generator.class_indices
+    pred_mapping = {v: k for k, v in pred_mapping.items()}
+    weirdo_df['label'] = weirdo_df['label'].map(pred_mapping)
+    weirdo_df['pred'] = weirdo_df['pred'].map(pred_mapping)
+
+
+    
+    for class_name in weirdo_df['label'].unique():
+        temp = weirdo_df.iloc[np.where(weirdo_df['label']==class_name)[0]]
+        for class_name2 in temp['pred'].unique():
+            temp2 = temp.iloc[np.where(temp['pred']==class_name2)[0]]
+            new_file_name = f'{class_name}_{class_name2}.png'
+            filename = temp2['filename'].values[0]
+            print(filename)
+            print(new_file_name)
+            shutil.copy(filename, f'{savepath}/{model_type}/weirdos/{new_file_name}')
+    
+            
+
+
+def feature_vis(savepath, model_type, batch_size):
+    train_large = '/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/datasets/clus/master/images'
+    dataframe = pd.read_csv('/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/datasets/clus/master/master.csv')
+    clases = ['nonTIL_stromal','sTIL','tumor_any','other']
+    # map df to classes
+    dataframe['label'] = dataframe['label'].map({0:'nonTIL_stromal',1:'sTIL',2:'tumor_any',3:'other'})
+    test_df = dataframe.sample(frac=0.2, random_state=42).iloc[:1]
+    outpath = os.path.join(savepath, model_type,"plots", "feature_maps")
+    if not os.path.exists(outpath):
+        os.makedirs(outpath)
+    # Evaluating the model
+    model_dir = os.path.join(savepath, model_type,"model_log")
+    model = load_model(f'{model_dir}/model-300-0.70.h5')
+    # using only till the global_average_pooling2d layer
+    # model = Model(inputs=model.input, outputs=model.get_layer('global_average_pooling2d').output)
+    model.summary()
+    test_data = ImageDataGenerator(rescale = 1.0/255.0)
+    test_generator = test_data.flow_from_dataframe(
+        dataframe=test_df,
+        directory=train_large,
+        x_col="image",
+        y_col="label",
+        batch_size=batch_size,
+        seed=42,
+        shuffle=False,
+        class_mode="categorical",
+        target_size=(50,50))
+    # getting the features
+    layer_names = [layer.name for layer in model.layers]
+    layer_outputs = [layer.output for layer in model.layers]
+    feature_map_model = Model(inputs=model.input, outputs=model.get_layer('block1_conv1').output)
+    feature_maps = feature_map_model.predict(test_generator)
+    # vis
+    for ind, feature_map in enumerate(feature_maps):
+        print(feature_map.shape)
+        plt.figure(figsize=(16,16))
+        for i in range(16):
+            map = feature_map[:,:,i]
+            plt.subplot(4,4,i+1)
+            plt.imshow(map)
+        plt.savefig(os.path.join(outpath, f'feature_map_{ind}.png'), dpi=300)
+        plt.close()
+
+    
+     
 
 
 if __name__ == '__main__':
@@ -573,4 +701,6 @@ if __name__ == '__main__':
     # test_best('/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/outputs/im_clus', 'Xception', 128)
     # precision_recall('/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/outputs/im_clus/Xception')
     # roc_auc('/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/outputs/im_clus/Xception')
-    feature_gen('/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/outputs/im_clus', 'Xception', 128)
+    # feature_gen('/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/outputs/im_clus', 'Xception', 128)
+    # gen_few_preds('/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/outputs/im_clus', 'Xception', 128)
+    feature_vis('/Users/mraoaakash/Documents/research/aakash-rao-capstone-project/outputs/im_clus', 'Xception', 128)
