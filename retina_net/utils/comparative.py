@@ -43,7 +43,7 @@ def plot_metric(old_best_path, new_best_path, plot_dir, model):
         new_model_std = new_model_std[column][:100]
         new_model_std = new_model_std.dropna(how='any')
         plt.fill_between(new_model_mean.index, new_model_mean - new_model_std, new_model_mean + new_model_std, alpha=0.25, label='Single-label')
-
+        g = 0
         plt.title(f'{title_dict[column]} for RetinaNet', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
