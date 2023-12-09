@@ -120,7 +120,7 @@ def make_folds(image_dir, mask_dir, save_dir, folds,seed=42):
 
 
 
-def image_info(image_dir, mask_dir, save_dir, phase):
+def image_info(image_dir, mask_dir, save_dir, phase, version):
     if not os.path.exists(image_dir):
         raise ValueError("image_dir not exist")
     elif len(os.listdir(image_dir)) == 0:
@@ -172,7 +172,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 num_classes_per_image[class_id] += 1
                 
                 # print(x_min, y_min, x_max, y_max, class_name, class_id)
-                yolo_format = f"{class_id} {norm_x_center} {norm_y_center} {norm_width} {norm_height}"
+                yolo_format = f"{class_id if version =='' else 0} {norm_x_center} {norm_y_center} {norm_width} {norm_height}"
                 # print(yolo_format)
 
                 with open(os.path.join(mask_save_dir, image_name.split('.png')[0] + '.txt'), 'a') as f:
@@ -197,5 +197,5 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     # image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
-    make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'labels'), args.save_dir, int(args.folds), int(args.seed))
+    make_folds(os.path.join (args.save_dir, 'master', 'images'), os.path.join (args.save_dir, 'master', 'labels'), args.save_dir, int(args.folds), int(args.seed), "version")
     # plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))

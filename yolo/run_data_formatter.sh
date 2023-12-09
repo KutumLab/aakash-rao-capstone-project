@@ -2,7 +2,7 @@
 python3 utils/data_formatter.py \
     -i /media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/rgb \
     -m /media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/csv \
-    -s /media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/yolov5 \
+    -s /media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/yolov5_single \
     -p run \
     -f 3 \
     --seed 42 \
