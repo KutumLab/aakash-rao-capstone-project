@@ -29,11 +29,11 @@ def plot_metric(old_best_path, new_best_path, plot_dir, model):
         old_model_mean = pd.read_csv(os.path.join(old_best_path, model, f'mean_{model}.csv'), header=0)
         old_model_mean = old_model_mean[column][:100]
         old_model_mean = old_model_mean.dropna(how='any')
-        plt.plot(old_model_mean, label='old model',linewidth=0.75)
+        plt.plot(old_model_mean, label='Four-label',linewidth=0.75)
         new_model_mean = pd.read_csv(os.path.join(new_best_path, model, f'mean_{model}.csv'), header=0)
         new_model_mean = new_model_mean[column][:100]
         new_model_mean = new_model_mean.dropna(how='any')
-        plt.plot(new_model_mean, label='new model',linewidth=0.75)
+        plt.plot(new_model_mean, label='Single-label',linewidth=0.75)
         plt.legend(loc='best', fontsize=8)
         old_model_std = pd.read_csv(os.path.join(old_best_path, model, f'std_{model}.csv'), header=0)
         old_model_std = old_model_std[column][:100]
