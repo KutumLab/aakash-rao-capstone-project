@@ -73,9 +73,9 @@ def plot_metric(data_dir, plot_dir):
             std = std.dropna(how='any')
             plt.fill_between(mean.index, mean - std, mean + std, alpha=0.25, label=model)
         # custom legend content
-        handles, labels = plt.gca().get_legend_handles_labels()
-        order = [0, 2, 4, 1, 3, 5]
-        plt.legend([handles[idx] for idx in order],[model_dict[labels[idx]] for idx in order], fontsize=8, bbox_to_anchor=(1.05, 1), loc='upper left')
+        # handles, labels = plt.gca().get_legend_handles_labels()
+        # order = [0, 2, 4, 1, 3, 5]
+        # plt.legend([handles[idx] for idx in order],[model_dict[labels[idx]] for idx in order], fontsize=8, bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.title(f'{title_dict[column]} for Faster R-CNN', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
