@@ -44,9 +44,9 @@ def plot_metric(old_best_path, new_best_path, plot_dir, model):
         plt.fill_between(new_model_mean.index, new_model_mean - new_model_std, new_model_mean + new_model_std, alpha=0.25, label='new model')
         plt.title(f'{title_dict[column]} for {model_dict[model]}', fontsize=12, fontweight='bold')
         # custom legend content
-        handles, labels = plt.gca().get_legend_handles_labels()
-        order = [0, 2, 1, 3]
-        plt.legend(order, ['four-class mean','Single Cass mean', 'four-class std', 'Single Class std'], fontsize=8)
+        # handles, labels = plt.gca().get_legend_handles_labels()
+        # order = [0, 2, 1, 3]
+        # plt.legend(order, ['four-class mean','Single Cass mean', 'four-class std', 'Single Class std'], fontsize=8)
         plt.title(f'{title_dict[column]} for RetinaNet', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
