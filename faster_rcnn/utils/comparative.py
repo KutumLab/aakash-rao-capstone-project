@@ -38,11 +38,11 @@ def plot_metric(old_best_path, new_best_path, plot_dir, model):
         old_model_std = pd.read_csv(os.path.join(old_best_path, model, f'std_{model}.csv'), header=0)
         old_model_std = old_model_std[column][:100]
         old_model_std = old_model_std.dropna(how='any')
-        plt.fill_between(old_model_mean.index, old_model_mean - old_model_std, old_model_mean + old_model_std, alpha=0.25, label='old model')
+        plt.fill_between(old_model_mean.index, old_model_mean - old_model_std, old_model_mean + old_model_std, alpha=0.25, label='Four-label')
         new_model_std = pd.read_csv(os.path.join(new_best_path, model, f'std_{model}.csv'), header=0)
         new_model_std = new_model_std[column][:100]
         new_model_std = new_model_std.dropna(how='any')
-        plt.fill_between(new_model_mean.index, new_model_mean - new_model_std, new_model_mean + new_model_std, alpha=0.25, label='new model')
+        plt.fill_between(new_model_mean.index, new_model_mean - new_model_std, new_model_mean + new_model_std, alpha=0.25, label='Single-label')
         plt.title(f'{title_dict[column]} for {model_dict[model]}', fontsize=12, fontweight='bold')
 
         # custom legend content
