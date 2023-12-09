@@ -27,19 +27,19 @@ def plot_metric(old_best_path, new_best_path, plot_dir, model):
         plt.locator_params(axis='y', nbins=5)
         plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
         old_model_mean = pd.read_csv(os.path.join(old_best_path, model, f'mean_{model}.csv'), header=0)
-        old_model_mean = old_model_mean[column]
+        old_model_mean = old_model_mean[column][:100]
         old_model_mean = old_model_mean.dropna(how='any')
         plt.plot(old_model_mean, label='old model',linewidth=0.75)
         old_model_std = pd.read_csv(os.path.join(old_best_path, model, f'std_{model}.csv'), header=0)
-        old_model_std = old_model_std[column]
+        old_model_std = old_model_std[column][:100]
         old_model_std = old_model_std.dropna(how='any')
         plt.fill_between(old_model_mean.index, old_model_mean - old_model_std, old_model_mean + old_model_std, alpha=0.25, label='old model')
         new_model_mean = pd.read_csv(os.path.join(new_best_path, model, f'mean_{model}.csv'), header=0)
-        new_model_mean = new_model_mean[column]
+        new_model_mean = new_model_mean[column][:100]
         new_model_mean = new_model_mean.dropna(how='any')
         plt.plot(new_model_mean, label='new model',linewidth=0.75)
         new_model_std = pd.read_csv(os.path.join(new_best_path, model, f'std_{model}.csv'), header=0)
-        new_model_std = new_model_std[column]
+        new_model_std = new_model_std[column][:100]
         new_model_std = new_model_std.dropna(how='any')
         plt.fill_between(new_model_mean.index, new_model_mean - new_model_std, new_model_mean + new_model_std, alpha=0.25, label='new model')
         plt.title(f'{title_dict[column]} for {model_dict[model]}', fontsize=12, fontweight='bold')
