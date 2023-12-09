@@ -10,8 +10,8 @@ axis = ['mAP', 'mAP', 'mAP',  'Iteration', 'Loss', 'Loss', 'Loss', 'Loss']
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
 x_axis_dict = "No. of Iterations"
-model_list = ['retinanet_R_50_FPN_1x','retinanet_R_50_FPN_3x','retinanet_R_101_FPN_3x',]
-names = ['ResNet50 with FPN at 1x', 'ResNet50 with FPN at 3x', 'ResNet101 with FPN at 3x']
+model_list = ['faster_rcnn_R_50_DC5_3x']
+names = ['ResNet50 with FPN at 3x']
 model_dict = dict(zip(model_list, names))
 
 
@@ -47,7 +47,7 @@ def plot_metric(old_best_path, new_best_path, plot_dir, model):
         # handles, labels = plt.gca().get_legend_handles_labels()
         # order = [0, 2, 1, 3]
         # plt.legend(order, ['four-class mean','Single Cass mean', 'four-class std', 'Single Class std'], fontsize=8)
-        plt.title(f'{title_dict[column]} for RetinaNet', fontsize=12, fontweight='bold')
+        plt.title(f'{title_dict[column]} for Faster R-CNN', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
         plt.xticks(fontsize=10)
