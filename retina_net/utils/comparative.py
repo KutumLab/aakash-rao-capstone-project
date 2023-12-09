@@ -46,7 +46,7 @@ def plot_metric(old_best_path, new_best_path, plot_dir, model):
         # custom legend content
         handles, labels = plt.gca().get_legend_handles_labels()
         order = [0, 2, 1, 3]
-        plt.legend([handles[idx] for idx in order],[model_dict[labels[idx]] for idx in order], fontsize=8, bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.legend(order, ['four-class mean','Single Cass mean', 'four-class std', 'Single Class std'], fontsize=8)
         plt.title(f'{title_dict[column]} for RetinaNet', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
