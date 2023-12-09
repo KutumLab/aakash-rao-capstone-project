@@ -57,7 +57,7 @@ def plot_metric(data_dir, plot_dir):
     for column in cols:
         if column == 'iteration' or 'unnamed' in column.lower():
             continue
-        plt.figure(figsize=(6, 4))
+        plt.figure(figsize=(4,4))
         plt.locator_params(axis='x', nbins=5)
         plt.locator_params(axis='y', nbins=5)
         plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
