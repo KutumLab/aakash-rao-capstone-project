@@ -6,5 +6,5 @@ mmdetection_base/*
 mmdetection_base/.gitkeep*
 plots
 hypothesis_1/datasets/clus
-hypothesis_1/datasets/clus_three/master
+hypothesis_1/datasets/clus_three
 hypothesis_1/output/*
