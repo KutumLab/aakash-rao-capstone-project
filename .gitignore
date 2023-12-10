@@ -1,9 +1,7 @@
+hypothesis_1/datasets/*
+hypothesis_1/output/*
+*.log
 datasets/*
 !datasets/*/.gitkeep*
 outputs/*
-*.log
-mmdetection_base/*
-mmdetection_base/.gitkeep*
 plots
-hypothesis_1/datasets
-hypothesis_1/output/*
