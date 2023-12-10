@@ -1,7 +1,9 @@
-datasets/*/*
+datasets/*
 !datasets/*/.gitkeep*
 outputs/*
 *.log
 mmdetection_base/*
 mmdetection_base/.gitkeep*
 plots
+hypothesis_1/datasets/clus/master/*
+hypothesis_1/output/*
