@@ -45,7 +45,7 @@ def plot_metric(old_best_path, new_best_path, plot_dir, model):
         plt.fill_between(new_model_mean.index, new_model_mean - new_model_std, new_model_mean + new_model_std, alpha=0.25, label='Single-label')
         plt.title(f'{title_dict[column]} for {model_dict[model]}', fontsize=12, fontweight='bold')
 
-        plt.title(f'{title_dict[column]} for Faster R-CNN', fontsize=12, fontweight='bold')
+        plt.title(f'{title_dict[column]} for {model_dict[model]}', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
         plt.xticks(fontsize=10)
