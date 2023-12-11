@@ -64,4 +64,4 @@ if __name__ == '__main__':
     argparse.add_argument('-o','--output_dir', type=str, default='data')
 
     args = argparse.parse_args()
-    plot_metric(args.old_path, args.new_path, args.output_dir, 'faster_rcnn_R_50_DC5_3x')
+    plot_metric(args.old_path, args.new_path, args.output_dir, 'yolov5m')
