@@ -1,4 +1,4 @@
 eval "$(conda shell.bash hook)"
-conda activate tensorflow
+conda activate detectron
 
 pip list
