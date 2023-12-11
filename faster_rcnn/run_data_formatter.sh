@@ -1,5 +1,5 @@
-$BASE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project
 
+$BASE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project
 # multiline run data formatter
 # python3 utils/data_formatter.py \
 #     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
@@ -10,6 +10,7 @@ $BASE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-
 #     -v None \
 #     --seed 42 \
 
+$BASE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project
 # python3 utils/data_formatter.py \
 #     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
 #     -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
@@ -19,6 +20,7 @@ $BASE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-
 #     -v single \
 #     --seed 42 \
 
+$BASE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project
 python3 utils/data_formatter.py \
     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
     -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
