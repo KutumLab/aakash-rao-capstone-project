@@ -310,10 +310,7 @@ def image_info_three_class(image_dir, mask_dir, save_dir, phase, model_path):
                     pred = np.argmax(pred)
                     class_id = pred
                     # print(pred)
-                try:
-                    class_id = class_array.index(class_name)
-                except ValueError:
-                    raise ValueError(f"{class_name} not in class_array")
+                
                 num_classes_per_image[class_id] += 1
                 
                 # print(x_min, y_min, x_max, y_max, class_name, class_id)
