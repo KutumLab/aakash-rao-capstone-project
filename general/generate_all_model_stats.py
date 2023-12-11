@@ -20,9 +20,9 @@ def gen_stat(src_path):
         for submodel in os.listdir(model_path):
             if '.gitkeep' in submodel:
                 continue
-            mean_df = pd.read_csv(os.path.join(model_path, model, f'mean_{submodel}.csv'), header=0)
+            mean_df = pd.read_csv(os.path.join(model_path, submodel, f'mean_{submodel}.csv'), header=0)
             print(mean_df)
-            std_df = pd.read_csv(os.path.join(model_path, model, f'std_{submodel}.csv'), header=0)
+            std_df = pd.read_csv(os.path.join(model_path, submodel, f'std_{submodel}.csv'), header=0)
             models_list.append(submodel)
             ap50 = mean_df[f'{dict_oof[model][0]}50'].dropna(how='all').values
             # appending max value
@@ -135,6 +135,6 @@ if __name__ == '__main__':
     argparse = argparse.ArgumentParser()
     argparse.add_argument('-s','--src_path', type=str, default='data')
     args = argparse.parse_args()
-    # gen_stat(args.src_path)
+    gen_stat(args.src_path)
     grp_plot(args.src_path)
     pass
