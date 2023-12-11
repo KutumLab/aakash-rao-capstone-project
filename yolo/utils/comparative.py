@@ -10,7 +10,7 @@ axis = ['Epoch', 'Box Loss', 'Object Loss', 'Class Loss', 'Precision', 'Recall',
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
 x_axis_dict = "No. of Epochs"
-model_list = ['YOLOv5m']
+model_list = ['yolov5m']
 names = ['YOLOv5m']
 model_dict = dict(zip(model_list, names))
 
