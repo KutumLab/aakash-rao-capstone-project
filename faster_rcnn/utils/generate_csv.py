@@ -14,6 +14,8 @@ def generate_csvs(data_dir, output_dir):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     for folder in os.listdir(data_dir):
+        if 'faster' not in folder:
+            continue
         metrics = pd.read_csv(os.path.join(data_dir, folder, 'metrics.csv'))
         metrics = metrics[relevant]
         metrics = metrics.rename(columns=rename)
@@ -33,6 +35,8 @@ def mean_and_std_fold(data_dir, output_dir):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     for model in os.listdir(data_dir):
+        if 'faster' not in model:
+            continue
         out_dir = os.path.join(output_dir, model)
         fold_1 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_1.csv'), header=0)
         fold_2 = pd.read_csv(os.path.join(data_dir, model, "folds", f'results_fold_2.csv'), header=0)
