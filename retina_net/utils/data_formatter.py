@@ -3,8 +3,6 @@ import numpy as np
 import pandas as pd
 import cv2
 import argparse
-import shutil
-import random
 import matplotlib.pyplot as plt
 
 from tqdm import tqdm
@@ -125,13 +123,85 @@ def image_info(image_dir, mask_dir, save_dir, phase):
                 y_min = row['ymin']
                 x_max = row['xmax']
                 y_max = row['ymax']
-                class_name = row['super_classification']
-                if class_name == 'AMBIGUOUS' or class_name == 'other_nucleus':
-                    class_name = 'other'
-                try:
-                    class_id = class_array.index(class_name)
-                except ValueError:
-                    raise ValueError(f"{class_name} not in class_array")
+                class_name = row['super_classification'] if row['super_classification'] in class_array else 'other'
+                class_id = class_array.index(row['super_classification']) if row['super_classification'] in class_array else class_array.index('other')
+                num_classes_per_image[class_id] += 1
+                # print(f"Class: {class_name}, Class ID: {class_id}")
+                loc_ann['bbox'] = [x_min, y_min, x_max, y_max]
+                loc_ann['category_id'] = class_id
+                loc_ann['bbox_mode'] = 0
+                loc_img['annotations'].append(loc_ann.copy())
+            master_list.append(loc_img.copy())
+            # print(f"Image {i+1} completed")
+
+                
+            if phase == 'testing' and i == 10:
+                result = "testing complete"
+                # printing result in a pretty way
+                print("\n")
+                print("Result:")
+                print("=======")
+                for image in master_list:
+                    print(image)
+                    print("\n")
+                    print("---------------------------------------------------------------------------------------------------------------------------------------")
+                    print("\n")
+                return result
+            
+        
+        if phase != 'testing':
+            master_list = np.array(master_list)
+            np.save(os.path.join(save_dir, 'master.npy'), master_list)
+            # saving as json
+            object = json.dumps(master_list.tolist(), indent = 4)
+            with open(os.path.join(save_dir, 'master.json'), "w+") as outfile:
+                outfile.write(object)
+            np.save(os.path.join(save_dir, 'num_classes_per_image.npy'), num_classes_per_image)
+            print("Completed")
+
+
+
+
+def image_info_single(image_dir, mask_dir, save_dir, phase):
+    if not os.path.exists(image_dir):
+        raise ValueError("image_dir not exist")
+    elif len(os.listdir(image_dir)) == 0:
+        raise ValueError("image_dir is empty")
+    else:
+        master_list = []
+        save_dir = os.path.join(save_dir, "master")
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+        class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
+        num_classes_per_image = np.zeros(len(class_array))
+        for i in tqdm (range(len(os.listdir(image_dir))), desc="Creating Master...", ascii=False, ncols=75):
+            time.sleep(0.01)
+            image_name = os.listdir(image_dir)[i]
+            image_path = os.path.join(image_dir, image_name)
+            mask_path = os.path.join(mask_dir, image_name.split('.png')[0] + '.csv')
+            image = cv2.imread(image_path)
+            im_height, im_width, _ = image.shape
+            try:
+                mask = pd.read_csv(mask_path, header=0)
+            except:
+                # print(f"{mask_path.split('/')[-1]} not exist")
+                continue
+            # print(image.shape)
+            # print(mask.keys())
+            loc_img = master_img.copy()
+            loc_img['file_name'] = image_path
+            loc_img['height'] = im_height
+            loc_img['width'] = im_width
+            loc_img['image_id'] = image_name.split('.png')[0]
+            loc_img['annotations'] = []
+            for index, row in mask.iterrows():
+                loc_ann = master_ann.copy()
+                x_min = row['xmin']
+                y_min = row['ymin']
+                x_max = row['xmax']
+                y_max = row['ymax']
+                class_name = 'Cell'
+                class_id = 0
                 num_classes_per_image[class_id] += 1
                 # print(f"Class: {class_name}, Class ID: {class_id}")
                 loc_ann['bbox'] = [x_min, y_min, x_max, y_max]
@@ -173,14 +243,18 @@ if __name__ == '__main__':
     argparser.add_argument('-m', '--mask_dir', required=True, help='mask directory')
     argparser.add_argument('-s', '--save_dir', required=True, help='save directory')
     argparser.add_argument('-f', '--folds', required=True, help='number of folds')
+    argparser.add_argument('-v', '--version', required=False, default='', help='version of the data')
     argparser.add_argument('-p', '--phase', required=True, help='phase')
     argparser.add_argument('--seed', required=False, help='Seed for reproducibility')
 
     args = argparser.parse_args()
 
-    print("Creating Master...")
-    image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    # print("Creating Master...")
+    if args.version == 'single':
+        image_info_single(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    else:
+        image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
     print("Creating Folds...")
     make_folds(os.path.join(args.save_dir, 'master', 'master.npy'), args.save_dir, int(args.folds), int(args.seed))
-    print("Creating Plot...")
-    plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
+    # print("Creating Plot...")
+    # plot_num_classes(os.path.join(args.save_dir,'master', 'num_classes_per_image.npy'))
