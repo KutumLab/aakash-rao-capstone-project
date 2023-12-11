@@ -32,7 +32,7 @@ from detectron2.data import build_detection_test_loader
 fold = 1
 
 # data_path = f'/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/capstone_project/object-detection/benchmarking/datasets/NuCLS/folds/fold_1/'
-# config_info = "COCO-Detection/retinanet_R_50_FPN_1x.yaml"
+# config_info = "COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"
 # max_iters = 1500
 # name  = 'exp_1_iters_1'
 # project = 'capstone-project' 
@@ -40,21 +40,24 @@ fold = 1
 
 
 
-def set_config(config_info, fold, max_iters, data_path, name,save_path):
+def set_config(config_info, fold, max_iters, data_path, name,save_path, version):
     cfg = get_cfg()
-    cfg.merge_from_file(model_zoo.get_config_file(config_info))
+    if 'COCO' in config_info:
+        cfg.merge_from_file(model_zoo.get_config_file(config_info))
+    else:
+        cfg.merge_from_file(config_info)
     cfg.DATASETS.TRAIN = (f'fold_{fold}_train',)
     cfg.DATASETS.TEST = (f'fold_{fold}_val',)
     cfg.TEST.EVAL_PERIOD = 100
     cfg.DATALOADER.NUM_WORKERS = 2
     cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(config_info)
     cfg.MODEL.LOAD_PROPOSALS = False
-    cfg.SOLVER.IMS_PER_BATCH = 4
+    cfg.SOLVER.IMS_PER_BATCH = 8
     cfg.SOLVER.BASE_LR = 0.00025
     cfg.SOLVER.MAX_ITER = max_iters
     cfg.SOLVER.STEPS = []        
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512
-    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 4 
+    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1 if version == 'single' else (3 if version == 'three_class' else 4)
     cfg.SOLVER.IMS_PER_BATCH = 8
     cfg.OUTPUT_DIR = os.path.join(save_path, f'detectron/{name}_fold_{fold}')
     os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
@@ -71,7 +74,7 @@ def set_config(config_info, fold, max_iters, data_path, name,save_path):
 
 
 
-def train_detectron2(cfg,fold,data_path, classes=['nonTIL_stromal','sTIL','tumor_any','other']):
+def train_detectron2(cfg,fold,data_path, version=""):
     def data_train():
         data = np.load(os.path.join(data_path, f'fold_{fold}', 'train.npy'), allow_pickle=True)
         data = list(data)
@@ -91,18 +94,27 @@ def train_detectron2(cfg,fold,data_path, classes=['nonTIL_stromal','sTIL','tumor
         return data
 
     DatasetCatalog.register(f'fold_{fold}_train', data_train)
+    if version =="":
+        classes = ['nonTIL_stromal','sTIL','tumor_any','other']
+        colour_arr = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
+    elif version == "three_class":
+        classes = ['nonTIL_stromal','sTIL','tumor_any']
+        colour_arr = [(161,9,9),(239,222,0),(22,181,0),(0,32,193)]
+    else:
+        classes = ['cell']
+        colour_arr = [(161,9,9)]
     MetadataCatalog.get(f'fold_{fold}_train').thing_classes = classes
-    MetadataCatalog.get(f'fold_{fold}_train').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
+    MetadataCatalog.get(f'fold_{fold}_train').thing_colors = colour_arr
 
 
     DatasetCatalog.register(f'fold_{fold}_val', data_val)
     MetadataCatalog.get(f'fold_{fold}_val').thing_classes = classes
-    MetadataCatalog.get(f'fold_{fold}_val').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
+    MetadataCatalog.get(f'fold_{fold}_val').thing_colors = colour_arr
 
     DatasetCatalog.register(f'test', data_test)
     data = DatasetCatalog.get(f'test')
     MetadataCatalog.get(f'test').thing_classes = classes
-    MetadataCatalog.get(f'test').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
+    MetadataCatalog.get(f'test').thing_colors = colour_arr
 
     dataset_dicts = DatasetCatalog.get(f'fold_{fold}_train')
     metadata = MetadataCatalog.get(f'fold_{fold}_train')
@@ -182,12 +194,13 @@ def train_detectron2(cfg,fold,data_path, classes=['nonTIL_stromal','sTIL','tumor
 if __name__ == "__main__":
     argparse = argparse.ArgumentParser()
     argparse.add_argument('--data_path', type=str, default='/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/detectron', help='path to data')
-    argparse.add_argument('--config_info', type=str, default="COCO-Detection/retinanet_R_50_FPN_1x.yaml", help='config info')
+    argparse.add_argument('--config_info', type=str, default="COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml", help='config info')
     argparse.add_argument('--max_iters', type=int, default=1500, help='max iters')
-    argparse.add_argument('--name', type=str, default='retinanet_R_50_FPN_1x', help='name')
+    argparse.add_argument('--name', type=str, default='faster_rcnn_R_50_FPN_3x', help='name')
     argparse.add_argument('--fold', type=str, default=1, help='version')
+    argparse.add_argument('--version', type=str, default='', help='version')
     argparse.add_argument('--save_path', type=str, default='/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs', help='save path')
     args = argparse.parse_args()
-    cfg = set_config(args.config_info, args.fold, args.max_iters, args.data_path, args.name, args.save_path)
-    results = train_detectron2(cfg, args.fold, args.data_path,classes=['Cell'])
+    cfg = set_config(args.config_info, args.fold, args.max_iters, args.data_path, args.name, args.save_path, args.version)
+    results = train_detectron2(cfg, args.fold, args.data_path, args.version)
     print(results)
