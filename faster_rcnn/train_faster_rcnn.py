@@ -40,7 +40,7 @@ fold = 1
 
 
 
-def set_config(config_info, fold, max_iters, data_path, name,save_path):
+def set_config(config_info, fold, max_iters, data_path, name,save_path, version):
     cfg = get_cfg()
     if 'COCO' in config_info:
         cfg.merge_from_file(model_zoo.get_config_file(config_info))
@@ -57,7 +57,7 @@ def set_config(config_info, fold, max_iters, data_path, name,save_path):
     cfg.SOLVER.MAX_ITER = max_iters
     cfg.SOLVER.STEPS = []        
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512
-    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 4 
+    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1 if version == 'single' else (3 if version == 'three_class' else 4)
     cfg.SOLVER.IMS_PER_BATCH = 8
     cfg.OUTPUT_DIR = os.path.join(save_path, f'detectron/{name}_fold_{fold}')
     os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
@@ -96,20 +96,25 @@ def train_detectron2(cfg,fold,data_path, version=""):
     DatasetCatalog.register(f'fold_{fold}_train', data_train)
     if version =="":
         classes = ['nonTIL_stromal','sTIL','tumor_any','other']
+        colour_arr = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
+    elif version == "three_class":
+        classes = ['nonTIL_stromal','sTIL','tumor_any']
+        colour_arr = [(161,9,9),(239,222,0),(22,181,0),(0,32,193)]
     else:
         classes = ['cell']
+        colour_arr = [(161,9,9)]
     MetadataCatalog.get(f'fold_{fold}_train').thing_classes = classes
-    MetadataCatalog.get(f'fold_{fold}_train').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
+    MetadataCatalog.get(f'fold_{fold}_train').thing_colors = colour_arr
 
 
     DatasetCatalog.register(f'fold_{fold}_val', data_val)
     MetadataCatalog.get(f'fold_{fold}_val').thing_classes = classes
-    MetadataCatalog.get(f'fold_{fold}_val').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
+    MetadataCatalog.get(f'fold_{fold}_val').thing_colors = colour_arr
 
     DatasetCatalog.register(f'test', data_test)
     data = DatasetCatalog.get(f'test')
     MetadataCatalog.get(f'test').thing_classes = classes
-    MetadataCatalog.get(f'test').thing_colors = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
+    MetadataCatalog.get(f'test').thing_colors = colour_arr
 
     dataset_dicts = DatasetCatalog.get(f'fold_{fold}_train')
     metadata = MetadataCatalog.get(f'fold_{fold}_train')
@@ -196,6 +201,6 @@ if __name__ == "__main__":
     argparse.add_argument('--version', type=str, default='', help='version')
     argparse.add_argument('--save_path', type=str, default='/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs', help='save path')
     args = argparse.parse_args()
-    cfg = set_config(args.config_info, args.fold, args.max_iters, args.data_path, args.name, args.save_path)
+    cfg = set_config(args.config_info, args.fold, args.max_iters, args.data_path, args.name, args.save_path, args.version)
     results = train_detectron2(cfg, args.fold, args.data_path, args.version)
     print(results)
