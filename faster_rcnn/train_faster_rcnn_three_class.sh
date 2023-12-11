@@ -1,8 +1,10 @@
+eval "$(conda shell.bash hook)"
+conda activate detectron
 
 # SEMI-CONSTANT INFO
 DATA_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/detectron_three_class
 SAVE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs
-MAX_ITERS=15 # 15000
+MAX_ITERS=15000
 VERSION=three_class
 
 # VARIABLE INFO faster_rcnn_R_50_DC5_3x [DONE]
