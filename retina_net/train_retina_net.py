@@ -168,9 +168,9 @@ def train_detectron2(cfg,fold,data_path, version=""):
     #     plt.imshow(out.get_image()[:, :, ::-1])
     #     plt.axis('off')
     #     plt.savefig(os.path.join(pred_save_path, d['file_name'].split('/')[-1]), bbox_inches='tight', pad_inches=0, dpi=300)
-    print('Predictions: ', predictions)
-    predictions = np.array(predictions)
-    np.save(os.path.join(cfg.OUTPUT_DIR, 'predictions.npy'), predictions)
+    # print('Predictions: ', predictions)
+    # predictions = np.array(predictions)
+    # np.save(os.path.join(cfg.OUTPUT_DIR, 'predictions.npy'), predictions)
 
     evaluator = COCOEvaluator("test", cfg, False, output_dir=cfg.OUTPUT_DIR)
     val_loader = build_detection_test_loader(cfg, "test")
