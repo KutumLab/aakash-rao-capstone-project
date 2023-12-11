@@ -46,7 +46,7 @@ def gen_stat(src_path):
 best_from_all = ['faster_rcnn_R_50_C4_3x', 'retina_net_R_101_FPN_3x', 'yolov5m']
 
 def grp_plot(src_path):
-    mean_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs','faster_rcnn_R_50_C4_3x', 'mean_faster_rcnn_R_50_C4_3x.csv'), header=0)
+    mean_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs','faster_rcnn_R_50_DC5_3x', 'mean_faster_rcnn_R_50_DC5_3x.csv'), header=0)
     mean_frcnn_50 = mean_frcnn['AP50'].dropna(how='all').values
     mean_frcnn_5095 = mean_frcnn['AP5095'].dropna(how='all').values
     mean_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs','retinanet_R_101_FPN_3x', 'mean_retinanet_R_101_FPN_3x.csv'), header=0)
@@ -58,7 +58,7 @@ def grp_plot(src_path):
     mean_yolo['epoch'] = mean_yolo['epoch']*100
     mean_yolo_50 = mean_yolo['mAP_50'].dropna(how='all').values
     mean_yolo_5095 = mean_yolo['mAP_50_95'].dropna(how='all').values
-    std_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs','faster_rcnn_R_50_C4_3x', 'std_faster_rcnn_R_50_C4_3x.csv'), header=0)
+    std_frcnn = pd.read_csv(os.path.join(src_path, 'faster_rcnn', 'csvs','faster_rcnn_R_50_DC5_3x', 'std_faster_rcnn_R_50_DC5_3x.csv'), header=0)
     std_frcnn_50 = std_frcnn['AP50'].dropna(how='all').values
     std_frcnn_5095 = std_frcnn['AP5095'].dropna(how='all').values
     std_retinanet = pd.read_csv(os.path.join(src_path, 'retina_net', 'csvs','retinanet_R_101_FPN_3x', 'std_retinanet_R_101_FPN_3x.csv'), header=0)
