@@ -22,6 +22,8 @@ def organize_and_extract(image_path, mask_path, save_path, num_classes=4):
     ims_df = pd.DataFrame(columns=['image', 'label'])
     imgs_arr = []
     labels_arr = []
+    test_imgs = []
+    test_labels = []
 
     for image in os.listdir(image_path):
         im_path = os.path.join(image_path, image)
@@ -79,6 +81,11 @@ def organize_and_extract(image_path, mask_path, save_path, num_classes=4):
                 imgs_arr.append(save_name)
                 labels_arr.append(2)
                 tumor += 1
+            else:
+                save_name = os.path.join(save_folder, f'{loc_class}_{other}.png')
+                test_imgs.append(save_name)
+                test_labels.append(3)
+                other += 1
 
             
 
@@ -86,6 +93,11 @@ def organize_and_extract(image_path, mask_path, save_path, num_classes=4):
     ims_df['image'] = imgs_arr
     ims_df['label'] = labels_arr
     ims_df.to_csv(os.path.join(save_path, 'master/master.csv'), index=False)  
+
+    df_test = pd.DataFrame(columns=['image', 'label'])
+    df_test['image'] = test_imgs
+    df_test['label'] = test_labels
+    df_test.to_csv(os.path.join(save_path, 'master/test.csv'), index=False)
     pass
 
 if __name__ == "__main__":

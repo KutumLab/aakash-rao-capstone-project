@@ -1,4 +1,6 @@
 import os
+import sys
+import shutil
 import argparse
 import numpy as np
 import pandas as pd
@@ -17,6 +19,7 @@ from tensorflow.keras.optimizers import RMSprop
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.applications import InceptionV3, Xception
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing import image_dataset_from_directory
 from sklearn.metrics import classification_report, confusion_matrix
 
 import warnings
@@ -51,7 +54,7 @@ def train(train_large,path, model_type, epochs, batch_size,learning_rate, suffix
         seed=42,
         shuffle=True,
         class_mode="categorical",
-        target_size=(50,50))
+        target_size=(300,300))
     #Validation Data
     valid_generator = datagen_train.flow_from_dataframe(
         dataframe=dataframe,
@@ -63,7 +66,7 @@ def train(train_large,path, model_type, epochs, batch_size,learning_rate, suffix
         seed=42,
         shuffle=True,
         class_mode="categorical",
-        target_size=(50,50))
+        target_size=(300,300))
 
     # finding class keys
     class_keys = train_generator.class_indices.keys()
@@ -162,7 +165,7 @@ def train(train_large,path, model_type, epochs, batch_size,learning_rate, suffix
     with open(hist_csv_file, mode='w') as f:
         hist_df.to_csv(f)
         
-    loaded_model = load_model(f'{savepath}/{model_type}.h5')
+    loaded_model = load_model(f'{savepath}/{model_type+suffix}.h5')
     outcomes = loaded_model.predict(valid_generator)
     y_pred = np.argmax(outcomes, axis=1)
     # confusion matrix
@@ -188,7 +191,7 @@ def train(train_large,path, model_type, epochs, batch_size,learning_rate, suffix
     print("------------------------------------------")
 
     # Evaluating the model
-    model = load_model(f'{savepath}/{model_type}.h5')
+    model = load_model(f'{savepath}/{model_type+suffix}.h5')
     test_data = ImageDataGenerator(rescale = 1.0/255.0)
     test_generator = test_data.flow_from_dataframe(
         dataframe=test_df,
@@ -199,7 +202,7 @@ def train(train_large,path, model_type, epochs, batch_size,learning_rate, suffix
         seed=42,
         shuffle=False,
         class_mode="categorical",
-        target_size=(50,50))
+        target_size=(300,300))
     test_loss, test_acc = model.evaluate(test_generator, verbose=1)
     print(f'Test Loss: {test_loss}')
     print(f'Test Accuracy: {test_acc}')
@@ -244,7 +247,7 @@ def test_best(train_large,path, model_type, epochs, batch_size,learning_rate, su
         seed=42,
         shuffle=False,
         class_mode="categorical",
-        target_size=(50,50))
+        target_size=(300,300))
 
     gt_labels = test_generator.classes
     pred = model.predict(test_generator)
@@ -299,7 +302,7 @@ def gen_stage_wise_conf(path, model_type, train_large, suffix="", batch_size=32)
             seed=42,
             shuffle=False,
             class_mode="categorical",
-            target_size=(50,50))
+            target_size=(300,300))
         class_keys = test_generator.class_indices.keys()
         test_loss, test_acc = model.evaluate(test_generator, verbose=1)
         print(f'Test Loss: {test_loss}')
@@ -508,7 +511,7 @@ def gen_GAP_features(train_large, path, model_type, batch_size, suffix=""):
         seed=42,
         shuffle=False,
         class_mode="categorical",
-        target_size=(50,50))
+        target_size=(300,300))
     model = load_model(os.path.join(model_path, model_type+suffix+".h5"))
     model = Model(inputs=model.input, outputs=model.get_layer('global_average_pooling2d').output)
     extra_features = model.predict(extra_generator)
@@ -562,7 +565,89 @@ def GAP_feature_TSNE(train_large, path, model_type, batch_size, suffix=""):
     plt.savefig(os.path.join(plot_savepath,'GAP_featur_cluster.png'), dpi=300)
     plt.close()
 
-     
+def pred_other(train_large, path, model_type, epochs, batch_size, learning_rate, suffix="_three_class", exists_ok=True):
+
+    font_size=14
+
+    csv_path = os.path.join(path, "csvs", model_type+suffix)
+    os.makedirs(csv_path, exist_ok=True)
+    plot_path = os.path.join(path, "plots", model_type+suffix)
+    os.makedirs(plot_path, exist_ok=True)
+    npy_path = os.path.join(path, "npys", model_type+suffix)
+    os.makedirs(npy_path, exist_ok=True)
+
+    if not os.path.exists(os.path.join(csv_path, 'preds_on_others.csv')):
+        dataframe = pd.read_csv(os.path.join(train_large,'test.csv'))
+        train_lrge = os.path.join(train_large, "images")
+
+        classes = ['nonTIL_stromal','sTIL','tumor_any']
+        # drop label
+        dataframe['labels'] = np.zeros(dataframe.shape[0])
+        dataframe['labels'] = dataframe['labels'].astype(int)
+
+        dataframe['labels'] = dataframe['labels'].map({0:'nonTIL_stromal',1:'sTIL',2:'tumor_any'})
+
+        test_data = ImageDataGenerator(rescale = 1.0/255.0)
+        test_generator = test_data.flow_from_dataframe(
+            dataframe=dataframe,
+            directory=train_lrge,
+            x_col="image",
+            y_col="labels",
+            batch_size=batch_size,
+            seed=42,
+            shuffle=False,
+            class_mode="categorical",
+            target_size=(300,300))
+        
+        model_path = os.path.join(path, "models", model_type+suffix)
+        model = load_model(os.path.join(model_path, model_type+suffix+".h5"))
+        preds = model.predict(test_generator)
+
+        dataframe['preds'] = np.argmax(preds, axis=1)
+        dataframe['preds'] = dataframe['preds'].map({0:'nonTIL_stromal',1:'sTIL',2:'tumor_any'})
+        dataframe['condifence'] = np.max(preds, axis=1)
+        dataframe = dataframe.drop(columns=['labels'])
+        dataframe.to_csv(os.path.join(csv_path, 'preds_on_others.csv'), index=False)
+    else:
+        print('Predictions exists, loading from csv')
+        dataframe = pd.read_csv(os.path.join(csv_path, 'preds_on_others.csv'))
+        print(dataframe.head())
+        sys.exit()
+
+
+def gen_few_eg(train_large, path, model_type, epochs, batch_size, learning_rate, suffix):
+    csv_path = os.path.join(path, "csvs", model_type+suffix)
+    os.makedirs(csv_path, exist_ok=True)
+    plot_path = os.path.join(path, "plots", model_type+suffix)
+    os.makedirs(plot_path, exist_ok=True)
+    npy_path = os.path.join(path, "npys", model_type+suffix)
+    os.makedirs(npy_path, exist_ok=True)
+
+    dataframe = ''
+
+    try:
+        dataframe = pd.read_csv(os.path.join(csv_path, 'preds_on_others.csv'))
+    except:
+        print('Predictions not found, generating')
+        pred_other(train_large, path, model_type, epochs, batch_size, learning_rate, suffix)
+        dataframe = pd.read_csv(os.path.join(csv_path, 'preds_on_others.csv'))
+    
+    print(dataframe.head())
+    # shuffle
+    dataframe = dataframe.sample(frac=1)
+    dataframe = dataframe.reset_index(drop=True)
+    pick = dataframe.sample(frac=0.1)
+
+    im_save_path = os.path.join(plot_path, 'few_eg')
+    os.makedirs(im_save_path, exist_ok=True)
+    # iterrows 
+    for index, row in pick.iterrows():
+        print(row['image'], row['preds'])
+        shutil.copy(row['image'], os.path.join(im_save_path, row['preds']+'_'+str(index)+'.png'))
+
+
+
+    pass
 
 
 if __name__ == '__main__':
@@ -573,13 +658,16 @@ if __name__ == '__main__':
     argparser.add_argument('-e', '--epochs', type=int, help='Epochs')
     argparser.add_argument('-b', '--batch_size', type=int, help='Batch Size')
     argparser.add_argument('-l', '--learning_rate', type=float, help='Learning Rate')
+    argparser.add_argument('-s', '--suffix', type=str, help='Suffix')
     args = argparser.parse_args()
-    # train(args.train_large, args.path, args.model_type, args.epochs, args.batch_size, args.learning_rate, suffix="_three_class")
-    test_best(args.train_large, args.path, args.model_type, args.epochs, args.batch_size, args.learning_rate, suffix="_three_class")
-    gen_stage_wise_conf(args.path, args.model_type, args.train_large, suffix="_three_class", batch_size=args.batch_size)
-    plot_model_acc(args.path, args.model_type, suffix="_three_class")
-    plot_model_loss(args.path, args.model_type, suffix="_three_class")
-    plot_model_conf(args.path, args.model_type, suffix="_three_class")
-    roc_auc(args.path, args.model_type, suffix="_three_class")
-    gen_GAP_features(args.train_large, args.path, args.model_type, args.batch_size, suffix="_three_class")
-    GAP_feature_TSNE(args.train_large, args.path, args.model_type, args.batch_size, suffix="_three_class")
+    # train(args.train_large, args.path, args.model_type, args.epochs, args.batch_size, args.learning_rate, args.suffix)
+    # test_best(args.train_large, args.path, args.model_type, args.epochs, args.batch_size, args.learning_rate, args.suffix)
+    # gen_stage_wise_conf(args.path, args.model_type, args.train_large, args.suffix, batch_size=args.batch_size)
+    # plot_model_acc(args.path, args.model_type, args.suffix)
+    # plot_model_loss(args.path, args.model_type, args.suffix)
+    # plot_model_conf(args.path, args.model_type, args.suffix)
+    # roc_auc(args.path, args.model_type, args.suffix)
+    # gen_GAP_features(args.train_large, args.path, args.model_type, args.batch_size, args.suffix)
+    # GAP_feature_TSNE(args.train_large, args.path, args.model_type, args.batch_size, args.suffix)
+    # pred_other(args.train_large, args.path, args.model_type, args.epochs, args.batch_size, args.learning_rate, args.suffix)
+    # gen_few_eg(args.train_large, args.path, args.model_type, args.epochs, args.batch_size, args.learning_rate, args.suffix)

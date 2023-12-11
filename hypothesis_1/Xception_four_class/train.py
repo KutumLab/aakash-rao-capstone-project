@@ -24,7 +24,7 @@ warnings.filterwarnings('ignore')
 
 os.environ['TF_GPU_ALLOCATOR'] = 'cuda_malloc_async'
 def train(train_large,path, model_type, epochs, batch_size,learning_rate, suffix=""):
-    path = os.path.joun(path,'models')
+    path = os.path.join(path,'models')
     dataframe = pd.read_csv(os.path.join(train_large, 'master.csv'))
     dataframe['label'] = dataframe['label'].map({0:'nonTIL_stromal',1:'sTIL',2:'tumor_any',3:'other'})
     train_large = os.path.join(train_large, "images")
@@ -51,7 +51,7 @@ def train(train_large,path, model_type, epochs, batch_size,learning_rate, suffix
         seed=42,
         shuffle=True,
         class_mode="categorical",
-        target_size=(50,50))
+        target_size=(300,300))
     #Validation Data
     valid_generator = datagen_train.flow_from_dataframe(
         dataframe=dataframe,
@@ -63,7 +63,7 @@ def train(train_large,path, model_type, epochs, batch_size,learning_rate, suffix
         seed=42,
         shuffle=True,
         class_mode="categorical",
-        target_size=(50,50))
+        target_size=(300,300))
 
     # finding class keys
     class_keys = train_generator.class_indices.keys()
@@ -199,7 +199,7 @@ def train(train_large,path, model_type, epochs, batch_size,learning_rate, suffix
         seed=42,
         shuffle=False,
         class_mode="categorical",
-        target_size=(50,50))
+        target_size=(300,300))
     test_loss, test_acc = model.evaluate(test_generator, verbose=1)
     print(f'Test Loss: {test_loss}')
     print(f'Test Accuracy: {test_acc}')
@@ -245,7 +245,7 @@ def test_best(train_large,path, model_type, epochs, batch_size,learning_rate, su
         seed=42,
         shuffle=False,
         class_mode="categorical",
-        target_size=(50,50))
+        target_size=(300,300))
 
     gt_labels = test_generator.classes
     pred = model.predict(test_generator)
@@ -299,7 +299,7 @@ def gen_stage_wise_conf(path, model_type, train_large, suffix="", batch_size=32)
             seed=42,
             shuffle=False,
             class_mode="categorical",
-            target_size=(50,50))
+            target_size=(300,300))
         class_keys = test_generator.class_indices.keys()
         test_loss, test_acc = model.evaluate(test_generator, verbose=1)
         print(f'Test Loss: {test_loss}')
@@ -512,7 +512,7 @@ def gen_GAP_features(train_large, path, model_type, batch_size, suffix=""):
         seed=42,
         shuffle=False,
         class_mode="categorical",
-        target_size=(50,50))
+        target_size=(300,300))
     model = load_model(os.path.join(model_path, model_type+suffix+".h5"))
     model = Model(inputs=model.input, outputs=model.get_layer('global_average_pooling2d').output)
     extra_features = model.predict(extra_generator)
@@ -590,13 +590,14 @@ if __name__ == '__main__':
     argparser.add_argument('-e', '--epochs', type=int, help='Epochs')
     argparser.add_argument('-b', '--batch_size', type=int, help='Batch Size')
     argparser.add_argument('-l', '--learning_rate', type=float, help='Learning Rate')
-    args = argparser.parse_args()
-    # train(args.train_large, args.path, args.model_type, args.epochs, args.batch_size, args.learning_rate, suffix="_four_class")
-    # test_best(args.train_large, args.path, args.model_type, args.epochs, args.batch_size, args.learning_rate, suffix="_four_class")
-    # gen_stage_wise_conf(args.path, args.model_type, args.train_large, suffix="_four_class", batch_size=args.batch_size)
-    # plot_model_acc(args.path, args.model_type, suffix="_four_class")
-    # plot_model_loss(args.path, args.model_type, suffix="_four_class")
-    # plot_model_conf(args.path, args.model_type, suffix="_four_class")
-    # roc_auc(args.path, args.model_type, suffix="_four_class")
-    # gen_GAP_features(args.train_large, args.path, args.model_type, args.batch_size, suffix="_four_class")
-    GAP_feature_TSNE(args.train_large, args.path, args.model_type, args.batch_size, suffix="_four_class")
+    argparser.add_argument('-s', '--suffix', type=str, help='Suffix')
+    # args = argparser.parse_args()
+    # train(args.train_large, args.path, args.model_type, args.epochs, args.batch_size, args.learning_rate, args.suffix)
+    # test_best(args.train_large, args.path, args.model_type, args.epochs, args.batch_size, args.learning_rate, args.suffix)
+    # gen_stage_wise_conf(args.path, args.model_type, args.train_large, args.suffix, batch_size=args.batch_size)
+    # plot_model_acc(args.path, args.model_type, args.suffix)
+    # plot_model_loss(args.path, args.model_type, args.suffix)
+    # plot_model_conf(args.path, args.model_type, args.suffix)
+    # roc_auc(args.path, args.model_type, args.suffix)
+    # gen_GAP_features(args.train_large, args.path, args.model_type, args.batch_size, args.suffix)
+    # GAP_feature_TSNE(args.train_large, args.path, args.model_type, args.batch_size, args.suffix)
