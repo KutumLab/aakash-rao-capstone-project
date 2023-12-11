@@ -4,6 +4,7 @@ import pandas as pd
 import cv2
 import argparse
 import matplotlib.pyplot as plt
+import tensorflow as tf
 
 from tqdm import tqdm
 import time
@@ -159,6 +160,97 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             np.save(os.path.join(save_dir, 'num_classes_per_image.npy'), num_classes_per_image)
             print("Completed")
 
+def image_info_three_class(image_dir, mask_dir, save_dir, phase, model_path):
+    if not os.path.exists(image_dir):
+        raise ValueError("image_dir not exist")
+    elif len(os.listdir(image_dir)) == 0:
+        raise ValueError("image_dir is empty")
+    else:
+        master_list = []
+        save_dir = os.path.join(save_dir, "master")
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+        class_array = ['nonTIL_stromal', 'sTIL', 'tumor_any', 'other']
+        num_classes_per_image = np.zeros(len(class_array))
+        model = tf.keras.models.load_model(model_path)
+        for i in tqdm (range(len(os.listdir(image_dir))), desc="Creating Master...", ascii=False, ncols=75):
+            time.sleep(0.01)
+            image_name = os.listdir(image_dir)[i]
+            image_path = os.path.join(image_dir, image_name)
+            mask_path = os.path.join(mask_dir, image_name.split('.png')[0] + '.csv')
+            image = cv2.imread(image_path)
+            im_height, im_width, _ = image.shape
+            try:
+                mask = pd.read_csv(mask_path, header=0)
+            except:
+                # print(f"{mask_path.split('/')[-1]} not exist")
+                continue
+            # print(image.shape)
+            # print(mask.keys())
+            loc_img = master_img.copy()
+            loc_img['file_name'] = image_path
+            loc_img['height'] = im_height
+            loc_img['width'] = im_width
+            loc_img['image_id'] = image_name.split('.png')[0]
+            loc_img['annotations'] = []
+            for index, row in mask.iterrows():
+                loc_ann = master_ann.copy()
+                x_min = row['xmin']
+                y_min = row['ymin']
+                x_max = row['xmax']
+                y_max = row['ymax']
+                class_name = row['super_classification'] if row['super_classification'] in class_array else 'other'
+                class_id = class_array.index(row['super_classification']) if row['super_classification'] in class_array else class_array.index('other')
+                if class_name == 'other':
+                    x1 = row['xmin']
+                    x2 = row['xmax']
+                    y1 = row['ymin']
+                    y2 = row['ymax']
+                    # making a square box from the rectangle
+                    if (x2-x1) > (y2-y1):
+                        y2 = y1 + (x2-x1)
+                    else:
+                        x2 = x1 + (y2-y1)
+                    test_img = image[y1:y2, x1:x2]
+                    test_img = cv2.resize(test_img, (300, 300))
+                    pred = model.predict(np.array([test_img]))
+                    pred = np.argmax(pred)
+                    class_id = pred
+                    # print(pred)
+                num_classes_per_image[class_id] += 1
+                # print(f"Class: {class_name}, Class ID: {class_id}")
+                loc_ann['bbox'] = [x_min, y_min, x_max, y_max]
+                loc_ann['category_id'] = class_id
+                loc_ann['bbox_mode'] = 0
+                loc_img['annotations'].append(loc_ann.copy())
+            master_list.append(loc_img.copy())
+            # print(f"Image {i+1} completed")
+
+                
+            if phase == 'testing' and i == 10:
+                result = "testing complete"
+                # printing result in a pretty way
+                print("\n")
+                print("Result:")
+                print("=======")
+                for image in master_list:
+                    print(image)
+                    print("\n")
+                    print("---------------------------------------------------------------------------------------------------------------------------------------")
+                    print("\n")
+                return result
+            
+        
+        if phase != 'testing':
+            master_list = np.array(master_list)
+            np.save(os.path.join(save_dir, 'master.npy'), master_list)
+            # saving as json
+            object = json.dumps(master_list.tolist(), indent = 4)
+            with open(os.path.join(save_dir, 'master.json'), "w+") as outfile:
+                outfile.write(object)
+            np.save(os.path.join(save_dir, 'num_classes_per_image.npy'), num_classes_per_image)
+            print("Completed")
+
 def image_info_single(image_dir, mask_dir, save_dir, phase):
     if not os.path.exists(image_dir):
         raise ValueError("image_dir not exist")
@@ -226,12 +318,12 @@ def image_info_single(image_dir, mask_dir, save_dir, phase):
         if phase != 'testing':
             master_list = np.array(master_list)
             np.save(os.path.join(save_dir, 'master.npy'), master_list)
-            # saving as json
-            object = json.dumps(master_list.tolist(), indent = 4)
-            with open(os.path.join(save_dir, 'master.json'), "w+") as outfile:
-                outfile.write(object)
-            np.save(os.path.join(save_dir, 'num_classes_per_image.npy'), num_classes_per_image)
-            print("Completed")
+            # # saving as json
+            # object = json.dumps(master_list.tolist(), indent = 4)
+            # with open(os.path.join(save_dir, 'master.json'), "w+") as outfile:
+            #     outfile.write(object)
+            # np.save(os.path.join(save_dir, 'num_classes_per_image.npy'), num_classes_per_image)
+            # print("Completed")
 
 
 
@@ -245,15 +337,18 @@ if __name__ == '__main__':
     argparser.add_argument('-f', '--folds', required=True, help='number of folds')
     argparser.add_argument('-v', '--version', required=False, default='', help='version of the data')
     argparser.add_argument('-p', '--phase', required=True, help='phase')
+    argparser.add_argument('-mp', '--model_path', required=False, help='model path')
     argparser.add_argument('--seed', required=False, help='Seed for reproducibility')
 
     args = argparser.parse_args()
 
     # print("Creating Master...")
-    if args.version == 'single':
-        image_info_single(args.image_dir, args.mask_dir, args.save_dir, args.phase)
-    else:
-        image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    # if args.version == 'single':
+    #     image_info_single(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    # elif args.version == 'three_class':
+    #     image_info_three_class(args.image_dir, args.mask_dir, args.save_dir, args.phase, args.model_path)
+    # else:
+    #     image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
     print("Creating Folds...")
     make_folds(os.path.join(args.save_dir, 'master', 'master.npy'), args.save_dir, int(args.folds), int(args.seed))
     # print("Creating Plot...")
