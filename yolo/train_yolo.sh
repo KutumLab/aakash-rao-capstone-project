@@ -67,7 +67,7 @@ YAML_FOLD_2=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao
 YAML_FOLD_3=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/yolo/configs/fold_3_three_class.yaml
 
 IMG_SIZE=520
-EPOCHS=1
+EPOCHS=150
 BATCH_SIZE=16
 DEVICE=0
 SAVE_PERIOD=10
