@@ -8,7 +8,7 @@ VERSION=three_class
 
 # VARIABLE INFO
 CONFIG=COCO-Detection/retinanet_R_101_FPN_3x.yaml
-NAME=retinanet_R_101_FPN_3x
+NAME=retinanet_R_101_FPN_3x_three_class
 
 python3 train_retina_net.py \
     --data_path $DATA_PATH \
