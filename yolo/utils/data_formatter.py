@@ -309,9 +309,14 @@ def image_info_three_class(image_dir, mask_dir, save_dir, phase, model_path):
                     pred = model.predict(np.array([test_img]))
                     pred = np.argmax(pred)
                     class_id = pred
+                    class_name = class_array[class_id]
                     # print(pred)
-                
-                num_classes_per_image[class_id] += 1
+                else:
+                    try:
+                        class_id = class_array.index(class_name)
+                        class_name = class_array[class_id]
+                    except ValueError:
+                        raise ValueError(f"{class_name} not in class_array")
                 
                 # print(x_min, y_min, x_max, y_max, class_name, class_id)
                 yolo_format = f"{class_id} {norm_x_center} {norm_y_center} {norm_width} {norm_height}"
