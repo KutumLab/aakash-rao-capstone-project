@@ -1,3 +1,5 @@
+eval "$(conda shell.bash hook)"
+conda activate yolov5
 # NuCLSEvalSet
 # read a text file 
 input='./api_keys.txt'
