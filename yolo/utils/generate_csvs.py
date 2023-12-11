@@ -15,7 +15,7 @@ def generate_csvs(data_dir, output_dir):
         if len(folder.split('-')) < 2:
             continue
         folder_path = os.path.join(data_dir, folder)
-        fold = folder.split('-')[-1]
+        fold = folder.split('-')[1]
         model = folder.split('-')[0]
         model_output_dir = os.path.join(output_dir, model, "folds")
         if not os.path.exists(model_output_dir):
