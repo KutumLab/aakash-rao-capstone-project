@@ -63,5 +63,5 @@ if __name__ == '__main__':
     argparse.add_argument('-o','--output_dir', type=str, default='data')
 
     args = argparse.parse_args()
-    # generate_csvs(args.data_dir, args.output_dir)
+    generate_csvs(args.data_dir, args.output_dir)
     mean_and_std_fold(args.output_dir, args.output_dir)
