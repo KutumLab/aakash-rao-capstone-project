@@ -3,9 +3,9 @@ import pandas as pd
 import argparse
 import matplotlib.pyplot as plt
 
-cols = ['AP5095', 'AP50', 'iteration']
-titles = ['mAP@50:95', 'mAP@50', 'Iteration']
-axis = ['mAP', 'mAP', 'Iteration']
+cols = ['AP5095', 'AP50', 'AP75', 'iteration', 'loss_box_reg', 'loss_cls',  'total_loss', 'validation_loss']
+titles = ['mAP@50:95', 'mAP@50', 'mAP@75',  'Iteration', 'Box Loss', 'Object Loss', 'Total Loss', 'Validation Loss']
+axis = ['mAP', 'mAP', 'mAP',  'Iteration', 'Loss', 'Loss', 'Loss', 'Loss']
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
 x_axis_dict = "No. of Iterations"
@@ -20,13 +20,11 @@ def plot_model(data_dir, plot_dir):
         if 'retinanet' not in model:
             continue
         model_plot_dir = os.path.join(plot_dir, model)
-
         if not os.path.exists(model_plot_dir):
             os.makedirs(model_plot_dir)
+
         mean_df = pd.read_csv(os.path.join(data_dir, model, f'mean_{model}.csv'), header=0)
         std_df = pd.read_csv(os.path.join(data_dir, model, f'std_{model}.csv'), header=0)
-        print(mean_df.head())
-        print(std_df.head())
 
         for column in mean_df.columns:
             if column == 'iteration' or 'unnamed' in column.lower():
