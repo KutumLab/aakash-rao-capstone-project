@@ -51,7 +51,7 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
         plt.xticks(fontsize=10)
         plt.yticks(fontsize=10)
-        plt.ylim(0,1)
+        # plt.ylim(0,1)
         plt.tight_layout()
         plt.savefig(os.path.join(output_dir, f'{column}.png'), dpi=300)
         plt.close()
