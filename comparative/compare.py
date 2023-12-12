@@ -4,7 +4,9 @@ import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 
-cols = ['AP5095', 'AP50', 'iteration']
+
+# cols = ['AP5095', 'AP50', 'iteration']
+cols = ['mAP_50', 'mAP_5095', 'Epochs']
 titles = ['mAP@50:95', 'mAP@50',  'Iteration']
 axis = ['mAP', 'mAP',  'Iteration']
 title_dict = dict(zip(cols, titles))
