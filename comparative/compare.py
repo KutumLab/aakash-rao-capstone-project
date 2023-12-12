@@ -32,8 +32,8 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
 
 
         four_class_df = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
-        three_class_df = pd.read_csv(os.path.join(three_class_path, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
-        single_df = pd.read_csv(os.path.join(single_path, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
+        three_class_df = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
+        single_df = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
         print(four_class_df.head())
         print(three_class_df.head())
         print(single_df.head())
