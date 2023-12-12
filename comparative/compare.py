@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-# cols = ['AP5095', 'AP50', 'iteration']
-cols = ['mAP_50', 'mAP_5095', 'epoch']
+cols = ['AP5095', 'AP50', 'iteration']
+# cols = ['mAP_50', 'mAP_5095', 'epoch']
 titles = ['mAP@50:95', 'mAP@50',  'Iteration']
 axis = ['mAP', 'mAP',  'Iteration']
 title_dict = dict(zip(cols, titles))
