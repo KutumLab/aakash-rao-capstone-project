@@ -58,7 +58,7 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
 
 
 
-        plt.title(f'{title_dict[column]} for RetinaNet', fontsize=12, fontweight='bold')
+        plt.title(f'{title_dict[column]} for YOLOv5', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
         plt.xticks(fontsize=10)
