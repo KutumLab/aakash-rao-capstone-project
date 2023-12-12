@@ -45,13 +45,13 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
         plt.locator_params(axis='x', nbins=5)
         plt.locator_params(axis='y', nbins=5)
         plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
-        plt.plot(four_class_mean.index, four_class_mean[column], label='4 Class', color='blue', linewidth=0.75)
-        plt.plot(three_class_mean.index, three_class_mean[column], label='3 Class', color='orange', linewidth=0.75)
-        plt.plot(single_mean.index, single_mean[column], label='1 Class', color='green', linewidth=0.75)
+        plt.plot(four_class_mean[column].dropna().index, four_class_mean[column], label='4 Class', color='blue', linewidth=0.75)
+        plt.plot(three_class_mean[column].dropna().index, three_class_mean[column], label='3 Class', color='orange', linewidth=0.75)
+        plt.plot(single_mean[column].dropna().index, single_mean[column], label='1 Class', color='green', linewidth=0.75)
         plt.legend(loc='upper left', fontsize=10)
-        plt.fill_between(four_class_std.index, four_class_mean[column].dropna() - four_class_std[column].dropna(), four_class_mean[column].dropna() + four_class_std[column].dropna(), alpha=0.25, color='blue')
-        plt.fill_between(three_class_std.index, three_class_mean[column].dropna() - three_class_std[column].dropna(), three_class_mean[column].dropna() + three_class_std[column].dropna(), alpha=0.25, color='orange')
-        plt.fill_between(single_std.index, single_mean[column].dropna() - single_std[column].dropna(), single_mean[column].dropna() + single_std[column].dropna(), alpha=0.25, color='green')
+        plt.fill_between(four_class_std[column].dropna().index, four_class_mean[column].dropna() - four_class_std[column].dropna(), four_class_mean[column].dropna() + four_class_std[column].dropna(), alpha=0.25, color='blue')
+        plt.fill_between(three_class_std[column].dropna().index, three_class_mean[column].dropna() - three_class_std[column].dropna(), three_class_mean[column].dropna() + three_class_std[column].dropna(), alpha=0.25, color='orange')
+        plt.fill_between(single_std[column].dropna().index, single_mean[column].dropna() - single_std[column].dropna(), single_mean[column].dropna() + single_std[column].dropna(), alpha=0.25, color='green')
 
 
 
