@@ -11,6 +11,7 @@ import numpy as np
 def plot_metric(four_class_path, three_class_path, single_path, output_dir, model):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
+    archi = { 'faster_rcnn': 'faster_rcnn_R_50_DC5_3x', 'retina_net': 'retinanet_R_101_FPN_3x', 'yolo': 'yolov5m'}
     if model =='yolo':
         cols = [ 'mAP_5095','mAP_50', 'epoch']
         four_class_mean = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0).iloc[:100]
@@ -35,7 +36,7 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
     model_list = ['faster_rcnn','retina_net', 'yolo']
     names = ['ResNet50 with FPN at 3x', 'ResNet101 with FPN at 3x', 'YOLOv5 M']
     model_dict = dict(zip(model_list, names))
-    archi = { 'faster_rcnn': 'faster_rcnn_R_50_DC5_3x', 'retina_net': 'retinanet_R_101_FPN_3x', 'yolo': 'yolov5m'}
+    
     for column in cols:
         if column == 'iteration' or 'unnamed' in column.lower():
             
