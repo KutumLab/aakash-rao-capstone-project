@@ -10,12 +10,13 @@ axis = ['mAP', 'mAP',  'Iteration']
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
 x_axis_dict = "No. of Epochs"
-model_list = ['faster_rcnn']
+model_list = ['faster_rcnn','retina_net']
 names = ['ResNet50 with FPN at 3x']
 model_dict = dict(zip(model_list, names))
 
 archi = {
-    'faster_rcnn': 'faster_rcnn_R_50_DC5_3x'
+    'faster_rcnn': 'faster_rcnn_R_50_DC5_3x',
+    'retina_net': 'retinanet_R_101_FPN_3x'
 }
 
 
