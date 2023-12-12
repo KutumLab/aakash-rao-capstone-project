@@ -17,7 +17,7 @@ model_dict = dict(zip(model_list, names))
 archi = {
     'faster_rcnn': 'faster_rcnn_R_50_DC5_3x',
     'retina_net': 'retinanet_R_101_FPN_3x',
-    'yolovv5m': 'yolov5m'
+    'yolov5m': 'yolov5m'
 }
 
 
