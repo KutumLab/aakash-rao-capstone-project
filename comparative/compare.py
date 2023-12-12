@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-cols = ['AP5095', 'AP50', 'iteration']
-# cols = ['mAP_50', 'mAP_5095', 'epoch']
+# cols = ['AP5095', 'AP50', 'iteration']
+cols = ['mAP_50', 'mAP_5095', 'epoch']
 titles = ['mAP@50:95', 'mAP@50',  'Iteration']
 axis = ['mAP', 'mAP',  'Iteration']
 title_dict = dict(zip(cols, titles))
@@ -58,7 +58,7 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
 
 
 
-        plt.title(f'{title_dict[column]} for RetinaNet', fontsize=12, fontweight='bold')
+        plt.title(f'{title_dict[column]} for YOLOv5', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
         plt.xticks(fontsize=10)
