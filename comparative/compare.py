@@ -24,12 +24,12 @@ archi = {
 def plot_metric(four_class_path, three_class_path, single_path, output_dir, model):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    four_class_mean = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)/100
-    three_class_mean = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)/100
-    single_mean = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)/100
-    four_class_std = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)/100
-    three_class_std = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)/100
-    single_std = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)/100
+    four_class_mean = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0).iloc[:100]/100
+    three_class_mean = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0).iloc[:100]/100
+    single_mean = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0).iloc[:100]/100
+    four_class_std = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0).iloc[:100]/100
+    three_class_std = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0).iloc[:100]/100
+    single_std = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'std_{archi[model]}.csv'), header=0).iloc[:100]/100
     for column in cols:
         if column == 'iteration' or 'unnamed' in column.lower():
             continue
@@ -47,7 +47,7 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
 
 
 
-        plt.title(f'{title_dict[column]} for {model_dict[model]}', fontsize=12, fontweight='bold')
+        plt.title(f'{title_dict[column]} for RetinaNet', fontsize=12, fontweight='bold')
         plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
         plt.xticks(fontsize=10)
