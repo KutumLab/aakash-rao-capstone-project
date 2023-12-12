@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import argparse
+import numpy as np
 
 original_titles = ['bbox/AP', 'bbox/AP-nonTIL_stromal', 'bbox/AP-other', 'bbox/AP-sTIL','bbox/AP-tumor_any', 'bbox/AP50', 'bbox/AP75', 'bbox/APl', 'bbox/APm','bbox/APs', 'data_time', 'eta_seconds', 'fast_rcnn/cls_accuracy','fast_rcnn/false_negative', 'fast_rcnn/fg_cls_accuracy', 'iteration','loss_box_reg', 'loss_cls', 'loss_rpn_cls', 'loss_rpn_loc', 'lr','rank_data_time', 'roi_head/num_bg_samples', 'roi_head/num_fg_samples','rpn/num_neg_anchors', 'rpn/num_pos_anchors', 'time', 'timetest','total_loss', 'validation_loss']
 relevant = ['bbox/AP', 'bbox/AP50', 'bbox/AP75', 'fast_rcnn/cls_accuracy', 'iteration','loss_box_reg', 'loss_cls',  'total_loss', 'validation_loss']
@@ -53,7 +54,8 @@ def mean_and_std_fold(data_dir, output_dir):
             if column == 'iteration':
                 continue
             mean_df[column] = (fold_1[column] +fold_1[column] +fold_1[column])/3 # + fold_2[column] + fold_3[column]) / 3
-            std_array = (fold_1[column]+ fold_1[column]+ fold_1[column])/3 #fold_2[column], fold_3[column]]
+            std_array = np.array([fold_1[column], fold_1[column], fold_1[column]]) #, fold_2[column], fold_3[column]])
+            std_array = np.std(std_array, axis=0)
             std_df[column] =std_array
 
         mean_df.to_csv(os.path.join(out_dir, f'mean_{model}.csv'), index=False)
