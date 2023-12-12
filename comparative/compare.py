@@ -4,7 +4,7 @@ import argparse
 import matplotlib.pyplot as plt
 
 cols = ['AP5095', 'AP50', 'iteration']
-titles = ['mAP@50:95', 'mAP@50',  'Iteration',
+titles = ['mAP@50:95', 'mAP@50',  'Iteration']
 axis = ['mAP', 'mAP',  'Iteration']
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
