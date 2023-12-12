@@ -3,9 +3,9 @@ import pandas as pd
 import argparse
 import matplotlib.pyplot as plt
 
-cols = ['AP5095', 'AP50', 'AP75', 'iteration', 'loss_box_reg', 'loss_cls',  'total_loss', 'validation_loss']
-titles = ['mAP@50:95', 'mAP@50', 'mAP@75',  'Iteration', 'Box Loss', 'Object Loss', 'Total Loss', 'Validation Loss']
-axis = ['mAP', 'mAP', 'mAP',  'Iteration', 'Loss', 'Loss', 'Loss', 'Loss']
+cols = ['AP5095', 'AP50', 'iteration']
+titles = ['mAP@50:95', 'mAP@50',  'Iteration',
+axis = ['mAP', 'mAP',  'Iteration']
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
 x_axis_dict = "No. of Epochs"
@@ -35,14 +35,14 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
         plt.locator_params(axis='x', nbins=5)
         plt.locator_params(axis='y', nbins=5)
         plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
-        plt.plot(four_class_mean['iteration'], four_class_mean[column], label='4 Class', color='blue')
-        plt.plot(three_class_mean['iteration'], three_class_mean[column], label='3 Class', color='orange')
-        plt.plot(single_mean['iteration'], single_mean[column], label='Single Class', color='green')
+        plt.plot(four_class_mean['iteration'].dropna(), four_class_mean[column].dropna(), label='4 Class', color='blue')
+        plt.plot(three_class_mean['iteration'].dropna(), three_class_mean[column].dropna(), label='3 Class', color='orange')
+        plt.plot(single_mean['iteration'].dropna(), single_mean[column].dropna(), label='2 Class', color='green')
         plt.legend(loc='best', fontsize=10)
 
-        plt.plot(four_class_std['iteration'], four_class_std[column], 'o', color='blue')
-        plt.plot(three_class_std['iteration'], three_class_std[column], 'o', color='orange')
-        plt.plot(single_std['iteration'], single_std[column], 'o', color='green')
+        plt.plot(four_class_std['iteration'].dropna(), four_class_std[column].dropna(), 'o', color='blue')
+        plt.plot(three_class_std['iteration'].dropna(), three_class_std[column].dropna(), 'o', color='orange')
+        plt.plot(single_std['iteration'].dropna(), single_std[column].dropna(), 'o', color='green')
 
 
         plt.title(f'{title_dict[column]} for {model_dict[model]}', fontsize=12, fontweight='bold')
