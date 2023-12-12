@@ -19,4 +19,4 @@ python3 compare.py \
     -tcp /media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/capstone_run_archive/yolo/experiment_3 \
     -sp /media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/capstone_run_archive/yolo/experiment_2 \
     -o /media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/capstone_run_archive/yolo/comparisons \
-    -m yolov5m \
+    -m yolov \
