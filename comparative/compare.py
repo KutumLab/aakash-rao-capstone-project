@@ -62,4 +62,4 @@ if __name__ == '__main__':
     argparse.add_argument('-m','--model', type=str, default='faster_rcnn_R_50_DC5_3x')
 
     args = argparse.parse_args()
-    plot_metric(args.old_path, args.new_path, args.output_dir, args.model)
+    plot_metric(args.four_class_path, args.three_class_path, args.single_path, args.output_dir, args.model)
