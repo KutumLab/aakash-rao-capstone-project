@@ -41,9 +41,9 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
         plt.plot(np.array(range(len(single_mean[column].dropna()))), single_mean[column].dropna(), label='2 Class', color='green')
         plt.legend(loc='best', fontsize=10)
 
-        plt.plot(np.array(range(len(four_class_std[column].dropna()))), four_class_std[column].dropna(), 'o', color='blue')
-        plt.plot(np.array(range(len(three_class_std[column].dropna()))), three_class_std[column].dropna(), 'o', color='orange')
-        plt.plot(np.array(range(len(single_std[column].dropna()))), single_std[column].dropna(), 'o', color='green')
+        plt.plot(np.array(range(len(four_class_std[column].dropna()))), four_class_std[column].dropna(), color='blue')
+        plt.plot(np.array(range(len(three_class_std[column].dropna()))), three_class_std[column].dropna(), color='orange')
+        plt.plot(np.array(range(len(single_std[column].dropna()))), single_std[column].dropna(), color='green')
 
 
         plt.title(f'{title_dict[column]} for {model_dict[model]}', fontsize=12, fontweight='bold')
