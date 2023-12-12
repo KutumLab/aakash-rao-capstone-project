@@ -88,6 +88,6 @@ BATCH_SIZE=16
 DEVICE=0
 SAVE_PERIOD=10
 PROJECT=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs/yolo
-python ./yolov5/train.py --img $IMG_SIZE --epochs $EPOCHS --data $YAML_FOLD_2 --weights '' --device $DEVICE --batch-size $BATCH_SIZE --project $PROJECT --save-period $SAVE_PERIOD --name yolov5m-fold_2-three_class_random_weights
-python ./yolov5/train.py --img $IMG_SIZE --epochs $EPOCHS --data $YAML_FOLD_3 --weights '' --device $DEVICE --batch-size $BATCH_SIZE --project $PROJECT --save-period $SAVE_PERIOD --name yolov5m-fold_3-three_class_random_weights
-python ./yolov5/train.py --img $IMG_SIZE --epochs $EPOCHS --data $YAML_FOLD_1 --weights '' --device $DEVICE --batch-size $BATCH_SIZE --project $PROJECT --save-period $SAVE_PERIOD --name yolov5m-fold_1-three_class_random_weights
+python ./yolov5/train.py --img $IMG_SIZE --epochs $EPOCHS --data $YAML_FOLD_2 --weights '' --cfg yolov5m.yaml --device $DEVICE --batch-size $BATCH_SIZE --project $PROJECT --save-period $SAVE_PERIOD --name yolov5m-fold_2-three_class_random_weights
+python ./yolov5/train.py --img $IMG_SIZE --epochs $EPOCHS --data $YAML_FOLD_3 --weights '' --cfg yolov5m.yaml --device $DEVICE --batch-size $BATCH_SIZE --project $PROJECT --save-period $SAVE_PERIOD --name yolov5m-fold_3-three_class_random_weights
+python ./yolov5/train.py --img $IMG_SIZE --epochs $EPOCHS --data $YAML_FOLD_1 --weights '' --cfg yolov5m.yaml --device $DEVICE --batch-size $BATCH_SIZE --project $PROJECT --save-period $SAVE_PERIOD --name yolov5m-fold_1-three_class_random_weights
