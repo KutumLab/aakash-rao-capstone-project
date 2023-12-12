@@ -3,9 +3,9 @@ import pandas as pd
 import argparse
 import matplotlib.pyplot as plt
 
-cols = ['AP5095', 'AP50', 'AP75', 'iteration', 'loss_box_reg', 'loss_cls',  'total_loss', 'validation_loss']
-titles = ['mAP@50:95', 'mAP@50', 'mAP@75',  'Iteration', 'Box Loss', 'Object Loss', 'Total Loss', 'Validation Loss']
-axis = ['mAP', 'mAP', 'mAP',  'Iteration', 'Loss', 'Loss', 'Loss', 'Loss']
+cols = ['AP5095', 'AP50', 'iteration']
+titles = ['mAP@50:95', 'mAP@50', 'Iteration']
+axis = ['mAP', 'mAP', 'Iteration']
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
 x_axis_dict = "No. of Iterations"
