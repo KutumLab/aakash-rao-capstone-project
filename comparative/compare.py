@@ -5,22 +5,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-cols = ['AP5095', 'AP50', 'iteration']
-# cols = [ 'mAP_5095','mAP_50', 'epoch']
-titles = ['mAP@50:95', 'mAP@50',  'Iteration']
-axis = ['mAP', 'mAP',  'Iteration']
-title_dict = dict(zip(cols, titles))
-y_axis_dict = dict(zip(cols, axis))
-x_axis_dict = "No. of Epochs"
-model_list = ['faster_rcnn','retina_net', 'yolo']
-names = ['ResNet50 with FPN at 3x', 'ResNet101 with FPN at 3x', 'YOLOv5 M']
-model_dict = dict(zip(model_list, names))
-
-archi = {
-    'faster_rcnn': 'faster_rcnn_R_50_DC5_3x',
-    'retina_net': 'retinanet_R_101_FPN_3x',
-    'yolo': 'yolov5m'
-}
 
 
 
@@ -28,6 +12,7 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     if model =='yolo':
+        cols = [ 'mAP_5095','mAP_50', 'epoch']
         four_class_mean = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0).iloc[:100]
         three_class_mean = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0).iloc[:100]
         single_mean = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0).iloc[:100]
@@ -35,12 +20,27 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
         three_class_std = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0).iloc[:100]
         single_std = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'std_{archi[model]}.csv'), header=0).iloc[:100]
     else:
+        cols = ['AP5095', 'AP50', 'iteration']
         four_class_mean = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0).iloc[:100]/100
         three_class_mean = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0).iloc[:100]/100
         single_mean = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0).iloc[:100]/100
         four_class_std = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0).iloc[:100]/100
         three_class_std = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0).iloc[:100]/100
         single_std = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'std_{archi[model]}.csv'), header=0).iloc[:100]/100
+    titles = ['mAP@50:95', 'mAP@50',  'Iteration']
+    axis = ['mAP', 'mAP',  'Iteration']
+    title_dict = dict(zip(cols, titles))
+    y_axis_dict = dict(zip(cols, axis))
+    x_axis_dict = "No. of Epochs"
+    model_list = ['faster_rcnn','retina_net', 'yolo']
+    names = ['ResNet50 with FPN at 3x', 'ResNet101 with FPN at 3x', 'YOLOv5 M']
+    model_dict = dict(zip(model_list, names))
+
+    archi = {
+        'faster_rcnn': 'faster_rcnn_R_50_DC5_3x',
+        'retina_net': 'retinanet_R_101_FPN_3x',
+        'yolo': 'yolov5m'
+    }
     for column in cols:
         if column == 'iteration' or 'unnamed' in column.lower():
             
