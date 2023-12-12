@@ -22,6 +22,12 @@ archi = {
 def plot_metric(four_class_path, three_class_path, single_path, output_dir, model):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
+    four_class_mean = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
+    three_class_mean = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
+    single_mean = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
+    four_class_std = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)
+    three_class_std = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)
+    single_std = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)
     for column in cols:
         if column == 'iteration' or 'unnamed' in column.lower():
             continue
@@ -29,26 +35,24 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
         plt.locator_params(axis='x', nbins=5)
         plt.locator_params(axis='y', nbins=5)
         plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
+        plt.plot(four_class_mean['iteration'], four_class_mean[column], label='4 Class', color='blue')
+        plt.plot(three_class_mean['iteration'], three_class_mean[column], label='3 Class', color='orange')
+        plt.plot(single_mean['iteration'], single_mean[column], label='Single Class', color='green')
+        plt.legend(loc='best', fontsize=10)
+
+        plt.plot(four_class_std['iteration'], four_class_std[column], 'o', color='blue')
+        plt.plot(three_class_std['iteration'], three_class_std[column], 'o', color='orange')
+        plt.plot(single_std['iteration'], single_std[column], 'o', color='green')
 
 
-        four_class_df = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
-        three_class_df = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
-        single_df = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
-        print(four_class_df.head())
-        print(three_class_df.head())
-        print(single_df.head())
-
-
-
-        # plt.title(f'{title_dict[column]} for {model_dict[model]}', fontsize=12, fontweight='bold')
-        # plt.title(f'{title_dict[column]} for Faster R-CNN', fontsize=12, fontweight='bold')
-        # plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
-        # plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
-        # plt.xticks(fontsize=10)
-        # plt.yticks(fontsize=10)
-        # plt.tight_layout()
-        # plt.savefig(os.path.join(output_dir, f'{column}.png'), dpi=300)
-        # plt.close()
+        plt.title(f'{title_dict[column]} for {model_dict[model]}', fontsize=12, fontweight='bold')
+        plt.xlabel(x_axis_dict, fontsize=12, fontweight='bold')
+        plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
+        plt.tight_layout()
+        plt.savefig(os.path.join(output_dir, f'{column}.png'), dpi=300)
+        plt.close()
 
         
     pass
