@@ -54,7 +54,7 @@ def mean_and_std_fold(data_dir, output_dir):
                 continue
             mean_df[column] = (fold_1[column] +fold_1[column] +fold_1[column])/3 # + fold_2[column] + fold_3[column]) / 3
             std_array = (fold_1[column]+ fold_1[column]+ fold_1[column])/3 #fold_2[column], fold_3[column]]
-            std_df[column] = pd.concat(std_array, axis=1).std(axis=1)
+            std_df[column] =std_array
 
         mean_df.to_csv(os.path.join(out_dir, f'mean_{model}.csv'), index=False)
         std_df.to_csv(os.path.join(out_dir, f'std_{model}.csv'), index=False)
