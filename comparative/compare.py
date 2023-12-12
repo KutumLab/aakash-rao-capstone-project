@@ -35,12 +35,7 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
     model_list = ['faster_rcnn','retina_net', 'yolo']
     names = ['ResNet50 with FPN at 3x', 'ResNet101 with FPN at 3x', 'YOLOv5 M']
     model_dict = dict(zip(model_list, names))
-
-    archi = {
-        'faster_rcnn': 'faster_rcnn_R_50_DC5_3x',
-        'retina_net': 'retinanet_R_101_FPN_3x',
-        'yolo': 'yolov5m'
-    }
+    archi = { 'faster_rcnn': 'faster_rcnn_R_50_DC5_3x', 'retina_net': 'retinanet_R_101_FPN_3x', 'yolo': 'yolov5m'}
     for column in cols:
         if column == 'iteration' or 'unnamed' in column.lower():
             
