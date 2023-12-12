@@ -39,7 +39,7 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
         plt.plot(np.array(range(len(four_class_mean[column].dropna()))), four_class_mean[column].dropna(), label='4 Class', color='blue', linewidth=0.75)
         plt.plot(np.array(range(len(three_class_mean[column].dropna()))), three_class_mean[column].dropna(), label='3 Class', color='orange', linewidth=0.75)
         plt.plot(np.array(range(len(single_mean[column].dropna()))), single_mean[column].dropna(), label='2 Class', color='green', linewidth=0.75)
-        plt.legend(loc='top left', fontsize=10)
+        plt.legend(loc='upper left', fontsize=10)
         plt.fill_between(np.array(range(len(four_class_mean[column].dropna()))), four_class_mean[column].dropna() - four_class_std[column].dropna(), four_class_mean[column].dropna() + four_class_std[column].dropna(), alpha=0.25, color='blue')
         plt.fill_between(np.array(range(len(three_class_mean[column].dropna()))), three_class_mean[column].dropna() - three_class_std[column].dropna(), three_class_mean[column].dropna() + three_class_std[column].dropna(), alpha=0.25, color='orange')
         plt.fill_between(np.array(range(len(single_mean[column].dropna()))), single_mean[column].dropna() - single_std[column].dropna(), single_mean[column].dropna() + single_std[column].dropna(), alpha=0.25, color='green')
