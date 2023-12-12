@@ -9,7 +9,7 @@ axis = ['mAP', 'mAP', 'mAP',  'Iteration', 'Loss', 'Loss', 'Loss', 'Loss']
 title_dict = dict(zip(cols, titles))
 y_axis_dict = dict(zip(cols, axis))
 x_axis_dict = "No. of Epochs"
-model_list = ['faster_rcnn_R_50_DC5_3x']
+model_list = ['faster_rcnn']
 names = ['ResNet50 with FPN at 3x']
 model_dict = dict(zip(model_list, names))
 
