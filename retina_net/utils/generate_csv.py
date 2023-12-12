@@ -53,7 +53,6 @@ def mean_and_std_fold(data_dir, output_dir):
             if column == 'iteration':
                 continue
             mean_df[column] = (fold_1[column] + fold_2[column] + fold_3[column]) / 3
-            print(mean_df[column])
             std_array = [fold_1[column], fold_2[column], fold_3[column]]
             std_df[column] = pd.concat(std_array, axis=1).std(axis=1)
             
