@@ -23,12 +23,12 @@ archi = {
 def plot_metric(four_class_path, three_class_path, single_path, output_dir, model):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    four_class_mean = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
-    three_class_mean = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
-    single_mean = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)
-    four_class_std = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)
-    three_class_std = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)
-    single_std = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)
+    four_class_mean = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)/100
+    three_class_mean = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)/100
+    single_mean = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'mean_{archi[model]}.csv'), header=0)/100
+    four_class_std = pd.read_csv(os.path.join(four_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)/100
+    three_class_std = pd.read_csv(os.path.join(three_class_path, model, 'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)/100
+    single_std = pd.read_csv(os.path.join(single_path, model,  'csvs',archi[model], f'std_{archi[model]}.csv'), header=0)/100
     for column in cols:
         if column == 'iteration' or 'unnamed' in column.lower():
             continue
@@ -36,9 +36,9 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
         plt.locator_params(axis='x', nbins=5)
         plt.locator_params(axis='y', nbins=5)
         plt.grid(alpha=0.5, linestyle='--', linewidth=0.75)
-        plt.plot(np.array(range(len(four_class_mean[column].dropna()))), four_class_mean[column].dropna(), label='4 Class', color='blue')
-        plt.plot(np.array(range(len(three_class_mean[column].dropna()))), three_class_mean[column].dropna(), label='3 Class', color='orange')
-        plt.plot(np.array(range(len(single_mean[column].dropna()))), single_mean[column].dropna(), label='2 Class', color='green')
+        plt.plot(np.array(range(len(four_class_mean[column].dropna()))), four_class_mean[column].dropna(), label='4 Class', color='blue', linewidth=0.75)
+        plt.plot(np.array(range(len(three_class_mean[column].dropna()))), three_class_mean[column].dropna(), label='3 Class', color='orange', linewidth=0.75)
+        plt.plot(np.array(range(len(single_mean[column].dropna()))), single_mean[column].dropna(), label='2 Class', color='green', linewidth=0.75)
         plt.legend(loc='best', fontsize=10)
         plt.fill_between(np.array(range(len(four_class_mean[column].dropna()))), four_class_mean[column].dropna() - four_class_std[column].dropna(), four_class_mean[column].dropna() + four_class_std[column].dropna(), alpha=0.25, color='blue')
         plt.fill_between(np.array(range(len(three_class_mean[column].dropna()))), three_class_mean[column].dropna() - three_class_std[column].dropna(), three_class_mean[column].dropna() + three_class_std[column].dropna(), alpha=0.25, color='orange')
@@ -51,6 +51,7 @@ def plot_metric(four_class_path, three_class_path, single_path, output_dir, mode
         plt.ylabel(y_axis_dict[column], fontsize=12, fontweight='bold')
         plt.xticks(fontsize=10)
         plt.yticks(fontsize=10)
+        plt.ylim(0,1)
         plt.tight_layout()
         plt.savefig(os.path.join(output_dir, f'{column}.png'), dpi=300)
         plt.close()
