@@ -23,9 +23,10 @@ def plot_model(data_dir, plot_dir):
 
         if not os.path.exists(model_plot_dir):
             os.makedirs(model_plot_dir)
-        print(os.path.join(data_dir, model, f'mean_{model}.csv'))
         mean_df = pd.read_csv(os.path.join(data_dir, model, f'mean_{model}.csv'), header=0)
         std_df = pd.read_csv(os.path.join(data_dir, model, f'std_{model}.csv'), header=0)
+        print(mean_df.head())
+        print(std_df.head())
 
         for column in mean_df.columns:
             if column == 'iteration' or 'unnamed' in column.lower():
