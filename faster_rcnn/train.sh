@@ -7,6 +7,7 @@ DATA_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-c
 SAVE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs #Specify a path to save the model and other outputs
 MAX_ITERS=18000 #Since we want to train for about 200 epochs, we set the number of iterations to num_train_samples * 200 / batch_size
 VERSION= #Specify a version name for the model
+BATCHSIZE=8
 #!/bin/bash
 
 # Create an array
@@ -28,7 +29,7 @@ do
         --fold 1 \
         --save_path $SAVE_PATH \
         --version $VERSION \
-        --batch_size 8
+        --batch_size $BATCHSIZE
 
     python3 train_faster_rcnn.py \
         --data_path $DATA_PATH \
@@ -38,7 +39,7 @@ do
         --fold 2 \
         --save_path $SAVE_PATH \
         --version $VERSION \
-        --batch_size 8
+        --batch_size $BATCHSIZE
 
     python3 train_faster_rcnn.py \
         --data_path $DATA_PATH \
@@ -48,7 +49,7 @@ do
         --fold 3 \
         --save_path $SAVE_PATH \
         --version $VERSION \
-        --batch_size 8
+        --batch_size $BATCHSIZE
 done
 
 
@@ -60,6 +61,7 @@ DATA_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-c
 SAVE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs #Specify a path to save the model and other outputs
 MAX_ITERS=18000 #Since we want to train for about 200 epochs, we set the number of iterations to num_train_samples * 200 / batch_size
 VERSION= #Specify a version name for the model
+BATCHSIZE=8
 #!/bin/bash
 
 # Create an array
@@ -81,7 +83,7 @@ do
         --fold 1 \
         --save_path $SAVE_PATH \
         --version $VERSION \
-        --batch_size 8
+        --batch_size $BATCHSIZE
 
     python3 train_faster_rcnn.py \
         --data_path $DATA_PATH \
@@ -91,7 +93,7 @@ do
         --fold 2 \
         --save_path $SAVE_PATH \
         --version $VERSION \
-        --batch_size 8
+        --batch_size $BATCHSIZE
 
     python3 train_faster_rcnn.py \
         --data_path $DATA_PATH \
@@ -101,7 +103,7 @@ do
         --fold 3 \
         --save_path $SAVE_PATH \
         --version $VERSION \
-        --batch_size 8
+        --batch_size $BATCHSIZE
 done
 
 
@@ -110,11 +112,11 @@ done
 
 
 # For Single-Class training 
-
 DATA_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/detectron_single #Specify a path to your dataset folder
 SAVE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs #Specify a path to save the model and other outputs
 MAX_ITERS=18000 #Since we want to train for about 200 epochs, we set the number of iterations to num_train_samples * 200 / batch_size
 VERSION= #Specify a version name for the model
+BATCHSIZE=8
 #!/bin/bash
 
 # Create an array
@@ -136,7 +138,7 @@ do
         --fold 1 \
         --save_path $SAVE_PATH \
         --version $VERSION \
-        --batch_size 8
+        --batch_size $BATCHSIZE
 
     python3 train_faster_rcnn.py \
         --data_path $DATA_PATH \
@@ -146,7 +148,7 @@ do
         --fold 2 \
         --save_path $SAVE_PATH \
         --version $VERSION \
-        --batch_size 8
+        --batch_size $BATCHSIZE
 
     python3 train_faster_rcnn.py \
         --data_path $DATA_PATH \
@@ -156,8 +158,5 @@ do
         --fold 3 \
         --save_path $SAVE_PATH \
         --version $VERSION \
-        --batch_size 8
+        --batch_size $BATCHSIZE
 done
-
-
-
