@@ -2,6 +2,8 @@ eval "$(conda shell.bash hook)"
 conda activate detectron
 
 # For Four-Class training 
+# PID: 1298623
+# [1] 1298623
 
 DATA_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/datasets/detectron #Specify a path to your dataset folder
 SAVE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs #Specify a path to save the model and other outputs

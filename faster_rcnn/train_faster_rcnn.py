@@ -76,6 +76,7 @@ def set_config(config_info, fold, max_iters, batch_size, name,save_path, version
 
 
 
+
 def train_detectron2(cfg,fold,data_path, version=""):
     def data_train():
         data = np.load(os.path.join(data_path, f'fold_{fold}', 'train.npy'), allow_pickle=True)
