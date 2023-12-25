@@ -41,6 +41,8 @@ fold = 1
 
 
 def set_config(config_info, fold, max_iters, batch_size, name,save_path, version):
+    max_iters = int(max_iters)
+    batch_size = int(batch_size)
     cfg = get_cfg()
     if 'COCO' in config_info:
         cfg.merge_from_file(model_zoo.get_config_file(config_info))
