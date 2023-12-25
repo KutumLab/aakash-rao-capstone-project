@@ -94,7 +94,7 @@ def train_detectron2(cfg,fold,data_path, version=""):
         return data
 
     DatasetCatalog.register(f'fold_{fold}_train', data_train)
-    if version =="":
+    if version =="four_class":
         classes = ['nonTIL_stromal','sTIL','tumor_any','other']
         colour_arr = [(161,9,9),(239,222,0),(22,181,0),(0,32,193),(115,0,167)]
     elif version == "three_class":
