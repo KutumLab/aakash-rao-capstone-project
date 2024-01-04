@@ -8,30 +8,32 @@
 module load compiler/anaconda3
 source /home/rintu.kutum/.conda/envs/detectron
 
+$BASE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project
+cd $BASE_PATH/faster_rcnn
 # multiline run data formatter
 python3 utils/data_formatter.py \
-    -i /storage/bic/Aakash/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/rgb \
-    -m /storage/bic/Aakash/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/csv \
-    -s /storage/bic/Aakash/aakash-rao-capstone-project/datasets/detectron \
+    -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
+    -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
+    -s $BASE_PATH/datasets/detectron \
     -p run \
     -f 3 \
     -v None \
     --seed 42 \
 
 python3 utils/data_formatter.py \
-    -i /storage/bic/Aakash/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/rgb \
-    -m /storage/bic/Aakash/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/csv \
-    -s /storage/bic/Aakash/aakash-rao-capstone-project/datasets/detectron_single \
+    -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
+    -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
+    -s $BASE_PATH/datasets/detectron_single \
     -p run \
     -f 3 \
     -v single \
     --seed 42 \
 
 python3 utils/data_formatter.py \
-    -i /storage/bic/Aakash/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/rgb \
-    -m /storage/bic/Aakash/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/csv \
-    -s /storage/bic/Aakash/aakash-rao-capstone-project/datasets/detectron_three_class \
-    -mp /storage/bic/Aakash/aakash-rao-capstone-project/hypothesis_1/output/models/Xception_three_class/Xception_three_class.h5 \
+    -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
+    -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
+    -s $BASE_PATH/datasets/detectron_three_class \
+    -mp $BASE_PATH/hypothesis_1/output/models/Xception_three_class/Xception_three_class.h5 \
     -p run \
     -f 3 \
     -v three_class \
