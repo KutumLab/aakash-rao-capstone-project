@@ -31,7 +31,7 @@ do
     NAME="$model_name"_"$VERSION" #Specify a name for the model used for saving and logistics
     echo $NAME
     echo $CONFIG
-    python3 train_faster_rcnn.py \
+    python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
         --data_path $DATA_PATH \
         --config_info $CONFIG \
         --max_iters $MAX_ITERS \
@@ -41,7 +41,7 @@ do
         --version $VERSION \
         --batch_size $BATCHSIZE
 
-    # python3 train_faster_rcnn.py \
+    # python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
     #     --data_path $DATA_PATH \
     #     --config_info $CONFIG \
     #     --max_iters $MAX_ITERS \
@@ -51,7 +51,7 @@ do
     #     --version $VERSION \
     #     --batch_size $BATCHSIZE
 
-    # python3 train_faster_rcnn.py \
+    # python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
     #     --data_path $DATA_PATH \
     #     --config_info $CONFIG \
     #     --max_iters $MAX_ITERS \
