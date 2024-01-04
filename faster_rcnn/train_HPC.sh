@@ -3,6 +3,16 @@
 eval "$(conda shell.bash hook)"
 conda activate detectron
 
+#! /bin/bash
+#PBS -N Data_organization
+#PBS -o out.log
+#PBS -e err.log
+#PBS -l ncpus=10
+#PBS -q cpu
+
+# module load compiler/anaconda3
+# source /storage/tnbc/dev-phase-001/histoimgsplit/bin/activate
+
 BASE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project
 
 # For Four-Class training 
