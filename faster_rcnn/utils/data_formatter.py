@@ -270,7 +270,7 @@ def image_info_single(image_dir, mask_dir, save_dir, phase):
             # print(image.shape)
             # print(mask.keys())
             loc_img = master_img.copy()
-            loc_img['file_name'] = image_path
+            loc_img['file_name'] = os.path.join("/storage/bic/Aakash/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/rgb", image_name)
             loc_img['height'] = im_height
             loc_img['width'] = im_width
             loc_img['image_id'] = image_name.split('.png')[0]
@@ -334,13 +334,13 @@ if __name__ == '__main__':
 
     args = argparser.parse_args()
 
-    # print("Creating Master...")
-    # if args.version == 'single':
-    #     image_info_single(args.image_dir, args.mask_dir, args.save_dir, args.phase)
-    # elif args.version == 'three_class':
-    #     image_info_three_class(args.image_dir, args.mask_dir, args.save_dir, args.phase, args.model_path)
-    # else:
-    #     image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    print("Creating Master...")
+    if args.version == 'single':
+        image_info_single(args.image_dir, args.mask_dir, args.save_dir, args.phase)
+    elif args.version == 'three_class':
+        image_info_three_class(args.image_dir, args.mask_dir, args.save_dir, args.phase, args.model_path)
+    else:
+        image_info(args.image_dir, args.mask_dir, args.save_dir, args.phase)
     print("Creating Folds...")
     make_folds(os.path.join(args.save_dir, 'master', 'master.npy'), args.save_dir, int(args.folds), int(args.seed))
     # print("Creating Plot...")
