@@ -5,11 +5,10 @@
 #PBS -l ncpus=50
 #PBS -q gpu
 
-# module load compiler/anaconda3
-# source /home/rintu.kutum/.conda/envs/detectron
+module load compiler/anaconda3
+source /home/rintu.kutum/.conda/envs/detectron/bin/activate
 
-eval "$(conda shell.bash hook)"
-conda activate detectron
+
 
 BASE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project
 
