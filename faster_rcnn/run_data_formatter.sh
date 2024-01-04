@@ -1,23 +1,23 @@
 
 $BASE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project
 # multiline run data formatter
-# python3 utils/data_formatter.py \
-#     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
-#     -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
-#     -s $BASE_PATH/datasets/detectron \
-#     -p run \
-#     -f 3 \
-#     -v None \
-#     --seed 42 \
+python3 utils/data_formatter.py \
+    -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
+    -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
+    -s $BASE_PATH/datasets/detectron \
+    -p run \
+    -f 3 \
+    -v None \
+    --seed 42 \
 
-# python3 utils/data_formatter.py \
-#     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
-#     -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
-#     -s $BASE_PATH/datasets/detectron_single \
-#     -p run \
-#     -f 3 \
-#     -v single \
-#     --seed 42 \
+python3 utils/data_formatter.py \
+    -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
+    -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
+    -s $BASE_PATH/datasets/detectron_single \
+    -p run \
+    -f 3 \
+    -v single \
+    --seed 42 \
 
 python3 utils/data_formatter.py \
     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
