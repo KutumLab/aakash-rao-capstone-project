@@ -36,8 +36,8 @@
 BASE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project
 
 python3 utils/data_formatter.py \
-    -i $BASE_PATH/datasets/master/EvaluationSet/rgb \
-    -m $BASE_PATH/datasets/master/EvaluationSet/csv \
+    -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
+    -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
     -s $BASE_PATH/datasets/detectron \
     -p run \
     -f 3 \
@@ -45,8 +45,8 @@ python3 utils/data_formatter.py \
     --seed 42 \
 
 # python3 utils/data_formatter.py \
-#     -i $BASE_PATH/datasets/master/EvaluationSet/rgb \
-#     -m $BASE_PATH/datasets/master/EvaluationSet/csv \
+#     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
+#     -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
 #     -s $BASE_PATH/datasets/detectron_single \
 #     -p run \
 #     -f 3 \
@@ -54,8 +54,8 @@ python3 utils/data_formatter.py \
 #     --seed 42 \
 
 # python3 utils/data_formatter.py \
-#     -i $BASE_PATH/datasets/master/EvaluationSet/rgb \
-#     -m $BASE_PATH/datasets/master/EvaluationSet/csv \
+#     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
+#     -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
 #     -s $BASE_PATH/datasets/detectron_three_class \
 #     -mp $BASE_PATH/hypothesis_1/output/models/Xception_three_class/Xception_three_class.h5 \
 #     -p run \
