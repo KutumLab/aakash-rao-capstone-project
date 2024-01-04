@@ -8,10 +8,10 @@
 module load compiler/anaconda3
 source /home/rintu.kutum/.conda/envs/detectron
 
-$BASE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project
-cd $BASE_PATH/faster_rcnn
+BASE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project
+
 # multiline run data formatter
-python3 utils/data_formatter.py \
+python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/utils/data_formatter.py \
     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
     -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
     -s $BASE_PATH/datasets/detectron \
@@ -20,7 +20,7 @@ python3 utils/data_formatter.py \
     -v None \
     --seed 42 \
 
-python3 utils/data_formatter.py \
+python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/utils/data_formatter.py \
     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
     -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
     -s $BASE_PATH/datasets/detectron_single \
@@ -29,7 +29,7 @@ python3 utils/data_formatter.py \
     -v single \
     --seed 42 \
 
-python3 utils/data_formatter.py \
+python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/utils/data_formatter.py \
     -i $BASE_PATH/datasets/master/NuCLSEvalSet/rgb \
     -m $BASE_PATH/datasets/master/NuCLSEvalSet/csv \
     -s $BASE_PATH/datasets/detectron_three_class \
