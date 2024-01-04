@@ -1,17 +1,12 @@
-#!/bin/bash
-
-eval "$(conda shell.bash hook)"
-conda activate detectron
-
 #! /bin/bash
 #PBS -N Data_organization
 #PBS -o out.log
 #PBS -e err.log
-#PBS -l ncpus=10
-#PBS -q cpu
+#PBS -l ncpus=30
+#PBS -q gpu
 
-# module load compiler/anaconda3
-# source /storage/tnbc/dev-phase-001/histoimgsplit/bin/activate
+module load compiler/anaconda3
+source  /home/rintu.kutum/.conda/envs/detectron
 
 BASE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project
 
@@ -46,25 +41,25 @@ do
         --version $VERSION \
         --batch_size $BATCHSIZE
 
-    python3 train_faster_rcnn.py \
-        --data_path $DATA_PATH \
-        --config_info $CONFIG \
-        --max_iters $MAX_ITERS \
-        --name $NAME \
-        --fold 2 \
-        --save_path $SAVE_PATH \
-        --version $VERSION \
-        --batch_size $BATCHSIZE
+    # python3 train_faster_rcnn.py \
+    #     --data_path $DATA_PATH \
+    #     --config_info $CONFIG \
+    #     --max_iters $MAX_ITERS \
+    #     --name $NAME \
+    #     --fold 2 \
+    #     --save_path $SAVE_PATH \
+    #     --version $VERSION \
+    #     --batch_size $BATCHSIZE
 
-    python3 train_faster_rcnn.py \
-        --data_path $DATA_PATH \
-        --config_info $CONFIG \
-        --max_iters $MAX_ITERS \
-        --name $NAME \
-        --fold 3 \
-        --save_path $SAVE_PATH \
-        --version $VERSION \
-        --batch_size $BATCHSIZE
+    # python3 train_faster_rcnn.py \
+    #     --data_path $DATA_PATH \
+    #     --config_info $CONFIG \
+    #     --max_iters $MAX_ITERS \
+    #     --name $NAME \
+    #     --fold 3 \
+    #     --save_path $SAVE_PATH \
+    #     --version $VERSION \
+    #     --batch_size $BATCHSIZE
 done
 
 
