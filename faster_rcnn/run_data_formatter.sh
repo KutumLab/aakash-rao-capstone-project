@@ -5,8 +5,8 @@
 #PBS -l ncpus=50
 #PBS -q gpu
 
-module load compiler/anaconda3
-source /home/rintu.kutum/.conda/envs/detectron/bin/activate
+# module load compiler/anaconda3
+# source /home/rintu.kutum/.conda/envs/detectron/bin/activate
 
 
 
