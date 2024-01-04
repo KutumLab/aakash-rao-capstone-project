@@ -1,3 +1,12 @@
+#! /bin/bash
+#PBS -N Data_organization
+#PBS -o out.log
+#PBS -e err.log
+#PBS -l ncpus=50
+#PBS -q gpu
+
+module load compiler/anaconda3
+source /home/rintu.kutum/.conda/envs/detectron
 
 $BASE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project
 # multiline run data formatter
