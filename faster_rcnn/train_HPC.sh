@@ -6,7 +6,7 @@
 #PBS -q gpu
 
 module load compiler/anaconda3
-source  /home/rintu.kutum/.conda/envs/detectron
+source  /home/rintu.kutum/.conda/envs/detectron/bin/activate
 
 BASE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project
 
