@@ -113,7 +113,7 @@ def image_info(image_dir, mask_dir, save_dir, phase):
             # print(image.shape)
             # print(mask.keys())
             loc_img = master_img.copy()
-            loc_img['file_name'] = image_path
+            loc_img['file_name'] = os.path.join("/storage/bic/Aakash/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/rgb", image_name)
             loc_img['height'] = im_height
             loc_img['width'] = im_width
             loc_img['image_id'] = image_name.split('.png')[0]
@@ -184,7 +184,7 @@ def image_info_three_class(image_dir, mask_dir, save_dir, phase, model_path):
             # print(image.shape)
             # print(mask.keys())
             loc_img = master_img.copy()
-            loc_img['file_name'] = image_path
+            loc_img['file_name'] = os.path.join("/storage/bic/Aakash/aakash-rao-capstone-project/datasets/master/NuCLSEvalSet/rgb", image_name)
             loc_img['height'] = im_height
             loc_img['width'] = im_width
             loc_img['image_id'] = image_name.split('.png')[0]
