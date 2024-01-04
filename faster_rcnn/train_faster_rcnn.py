@@ -144,6 +144,9 @@ def train_detectron2(cfg,fold,data_path, version=""):
 
     trainer = MyTrainer(cfg) 
     trainer.resume_or_load(resume=False)
+
+    sys.exit()
+
     history = trainer.train()
     # evaluator = DefaultTrainer.build_evaluator(trainer)
 

@@ -3,7 +3,7 @@
 eval "$(conda shell.bash hook)"
 conda activate detectron
 
-BASE_PATH=/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project
+BASE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project
 
 # For Four-Class training 
 # PID: 1298623
