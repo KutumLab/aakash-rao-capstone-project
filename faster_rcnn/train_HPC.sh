@@ -49,7 +49,7 @@ do
         --save_path $SAVE_PATH \
         --version $VERSION \
         --batch_size $BATCHSIZE \
-        --weight_path WEIGHT
+        --weight_path $WEIGHT
 
     # python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
     #     --data_path $DATA_PATH \
