@@ -202,6 +202,6 @@ if __name__ == "__main__":
     argparse.add_argument('--save_path', type=str, default='/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs', help='save path')
     argparse.add_argument('--weight_path', type=str, default='', help='weight path')
     args = argparse.parse_args()
-    cfg = set_config(args.config_info, args.fold, args.max_iters, args.batch_size, args.name, args.save_path, args.version)
+    cfg = set_config(args.config_info, args.fold, args.max_iters, args.batch_size, args.name, args.save_path, args.version, args.weight_path)
     results = train_detectron2(cfg, args.fold, args.data_path, args.version)
     print(results)
