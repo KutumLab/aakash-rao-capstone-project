@@ -53,7 +53,7 @@ do
     echo $NAME
     echo $CONFIG
     echo $WEIGHT
-    python3 train_faster_rcnn.py \
+    python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
         --data_path $DATA_PATH \
         --config_info $CONFIG \
         --max_iters $MAX_ITERS \
@@ -64,7 +64,7 @@ do
         --batch_size $BATCHSIZE \
         --weight_path $WEIGHT
 
-    python3 train_faster_rcnn.py \
+    python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
         --data_path $DATA_PATH \
         --config_info $CONFIG \
         --max_iters $MAX_ITERS \
@@ -75,7 +75,7 @@ do
         --batch_size $BATCHSIZE \
         --weight_path $WEIGHT
 
-    python3 train_faster_rcnn.py \
+    python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
         --data_path $DATA_PATH \
         --config_info $CONFIG \
         --max_iters $MAX_ITERS \
