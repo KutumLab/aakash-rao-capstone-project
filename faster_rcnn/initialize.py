@@ -40,7 +40,7 @@ fold = 1
 
 
 
-def set_config(config_info, fold, max_iters, batch_size, name,save_path, version):
+def set_config(config_info, fold, max_iters, batch_size, name,save_path, version, weight_path):
     max_iters = int(max_iters)
     batch_size = int(batch_size)
     cfg = get_cfg()
@@ -52,7 +52,7 @@ def set_config(config_info, fold, max_iters, batch_size, name,save_path, version
     cfg.DATASETS.TEST = (f'fold_{fold}_val',)
     cfg.TEST.EVAL_PERIOD = max_iters//150
     cfg.DATALOADER.NUM_WORKERS = 2
-    cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(config_info)
+    cfg.MODEL.WEIGHTS = weight_path if weight_path else model_zoo.get_checkpoint_url(config_info)
     cfg.MODEL.LOAD_PROPOSALS = False
     cfg.SOLVER.IMS_PER_BATCH = 8
     cfg.SOLVER.BASE_LR = 0.00025
@@ -64,11 +64,6 @@ def set_config(config_info, fold, max_iters, batch_size, name,save_path, version
     cfg.OUTPUT_DIR = os.path.join(save_path, f'detectron/{name}_fold_{fold}')
     os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 
-
-    # os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
-    # trainer = DefaultTrainer(cfg) 
-    # trainer.resume_or_load(resume=False)
-    # trainer.train()
     return cfg
 
 if __name__ == "__main__":
@@ -81,6 +76,7 @@ if __name__ == "__main__":
     argparse.add_argument('--fold', type=str, default=1, help='version')
     argparse.add_argument('--version', type=str, default='', help='version')
     argparse.add_argument('--save_path', type=str, default='/media/chs.gpu/DATA/hdd/chs.data/research-cancerPathology/aakash-rao-capstone-project/outputs', help='save path')
+    argparse.add_argument('--weight_path', type=str, default='', help='weight path')
     args = argparse.parse_args()
     cfg = set_config(args.config_info, args.fold, args.max_iters, args.batch_size, args.name, args.save_path, args.version)
     # cache the model 
