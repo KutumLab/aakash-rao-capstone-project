@@ -143,7 +143,6 @@ def train_detectron2(cfg,fold,data_path, version=""):
         i+=1
 
     trainer = MyTrainer(cfg) 
-    sys.exit()
     trainer.resume_or_load(resume=False)
 
 
