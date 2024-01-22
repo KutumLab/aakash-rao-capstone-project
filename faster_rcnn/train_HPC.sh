@@ -35,7 +35,7 @@ do
     NAME="$model_name"_"$VERSION" #Specify a name for the model used for saving and logistics
     echo $NAME
     echo $CONFIG
-    python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
+    python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/initialize.py \
         --data_path $DATA_PATH \
         --config_info $CONFIG \
         --max_iters $MAX_ITERS \
@@ -44,6 +44,20 @@ do
         --save_path $SAVE_PATH \
         --version $VERSION \
         --batch_size $BATCHSIZE
+    # VARIABLE INFO "$model_name"_[DONE]
+    # CONFIG=COCO-Detection/"$model_name".yaml #Specify a config file which is used to source the model from detectron2's model zoo
+    # NAME="$model_name"_"$VERSION" #Specify a name for the model used for saving and logistics
+    # echo $NAME
+    # echo $CONFIG
+    # python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
+    #     --data_path $DATA_PATH \
+    #     --config_info $CONFIG \
+    #     --max_iters $MAX_ITERS \
+    #     --name $NAME \
+    #     --fold 1 \
+    #     --save_path $SAVE_PATH \
+    #     --version $VERSION \
+    #     --batch_size $BATCHSIZE
 
     # python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
     #     --data_path $DATA_PATH \
