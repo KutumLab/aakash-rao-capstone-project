@@ -1,7 +1,7 @@
 #! /bin/bash
 #PBS -N One_Class_Faster_RCNN
-#PBS -o out_three_class.log
-#PBS -e err_three_class.log
+#PBS -o out_one_class.log
+#PBS -e err_one_class.log
 #PBS -l ncpus=30
 #PBS -q gpu
 
