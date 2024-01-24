@@ -56,7 +56,7 @@ do
         --config_info $CONFIG \
         --max_iters $MAX_ITERS \
         --name $NAME \
-        --fold 2 \
+        --fold 1 \
         --save_path $SAVE_PATH \
         --version $VERSION \
         --batch_size $BATCHSIZE \
