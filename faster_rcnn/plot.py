@@ -93,6 +93,39 @@ def clean(model_name, inpath, outpath):
 
     pass
 
+def plot(outpath):
+    csv_path = os.path.join(outpath, 'csv')
+    mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
+    sem = pd.read_csv(os.path.join(csv_path, 'sem.csv'))
+    figures_path = os.path.join(outpath, 'figures')
+    os.makedirs(figures_path, exist_ok=True)
+
+    # plot
+    for col in mean.columns:
+        mean[col] = mean[col].astype(float)
+        sem[col] = sem[col].astype(float)
+
+        col_mean = mean[col].values
+        col_sem = sem[col].values
+
+        x = np.arange(len(col_mean))
+        # find indices of 0.0 values in col_mean
+        zero_indices = np.where(col_mean == 0.0)[0]
+        # remove 0.0 values from col_mean and col_sem
+        col_mean = np.delete(col_mean, zero_indices)
+        col_sem = np.delete(col_sem, zero_indices)
+        x = np.delete(x, zero_indices)
+        ax, fig = plt.subplots(figsize=(5, 5))
+        ax.plot(x, col_mean, label=col)
+        ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2)
+        ax.set_xlabel('Epochs')
+        ax.set_ylabel(col)
+        ax.legend()
+        plt.savefig(os.path.join(figures_path, f'{col}.png'))
+
+        
+    pass
+
 if __name__ == '__main__':
     argparseer = argparse.ArgumentParser()
     argparseer.add_argument('--inpath', type=str, default='../outputs/detectron')
@@ -100,3 +133,4 @@ if __name__ == '__main__':
     argparseer.add_argument('--output_path', type=str, default='../data/plot.png')
     args = argparseer.parse_args()
     clean(args.model_name, args.inpath, args.output_path)
+    plot(args.output_path)
