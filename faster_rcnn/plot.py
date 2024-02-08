@@ -126,7 +126,7 @@ def plot(outpath, model_name):
         col_sem = sem[col].values[x]
         print (col_mean)
 
-        fig, ax = plt.subplots(fig_kw={'figsize': (5, 4)})
+        fig, ax = plt.subplots(figsize=(5, 4))
         ax.plot(x, col_mean, label='Mean', marker='o', markersize=0.001, linewidth=1)
         ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2, label='SEM')
 
