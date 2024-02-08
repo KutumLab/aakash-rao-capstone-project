@@ -77,14 +77,15 @@ def clean(model_name, inpath, outpath):
     print (mean)
 
     # replace nan with 0
-    # df_1 = df_1.fillna(0)
-    # df_2 = df_2.fillna(0)
-    # df_3 = df_3.fillna(0)
+    df_1 = df_1.fillna(0)
+    df_2 = df_2.fillna(0)
+    df_3 = df_3.fillna(0)
     # compute standard error across folds
-    std_err = (df_1.std() + df_2.std() + df_3.std()) / sqrt(3)
-    std_err.to_csv(os.path.join(csv_path, 'sem.csv'), index=False)
-    print (std_err)
-
+    sem = pd.DataFrame(columns=cols)
+    for col in cols:
+        sem[col] = [np.std([df_1[col], df_2[col], df_3[col]]) / sqrt(3)]
+    sem.to_csv(os.path.join(csv_path, 'sem.csv'), index=False)
+    print (sem)
 
     pass
 
