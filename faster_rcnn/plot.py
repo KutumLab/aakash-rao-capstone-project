@@ -122,12 +122,9 @@ def plot(outpath, model_name):
         col_sem = sem[col].values
 
         x = mean['iteration'].values
-        # find indices of 0.0 values in col_mean
-        zero_indices = np.where(col_mean == 0.0)[0]
-        # remove 0.0 values from col_mean and col_sem
-        col_mean = np.delete(col_mean, zero_indices)
-        col_sem = np.delete(col_sem, zero_indices)
-        x = np.delete(x, zero_indices)
+        col_mean = mean[col].dropna()
+        print (col_mean)
+        break
 
         fig, ax = plt.subplots()
         ax.plot(x, col_mean, label='Mean', marker='o', markersize=0.001)
