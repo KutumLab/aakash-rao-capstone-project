@@ -108,7 +108,7 @@ def plot(outpath, model_name):
         col_mean = mean[col].values
         col_sem = sem[col].values
 
-        x = np.arange(len(col_mean))
+        x = mean['iteration'].values
         # find indices of 0.0 values in col_mean
         zero_indices = np.where(col_mean == 0.0)[0]
         # remove 0.0 values from col_mean and col_sem
