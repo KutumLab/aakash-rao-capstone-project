@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import json
 import numpy as np
 from math import sqrt
+from matplotlib import rc 
+rc('font',**{'family':'serif','serif':['Times New Roman']})
 
 def clean(model_name, inpath, outpath):
     print (model_name)
@@ -196,7 +198,7 @@ def plot(outpath, model_name):
         ax.plot(x, col_mean, label='Mean', marker='o', markersize=0.001, linewidth=1, color='#43766C')
         ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2, label='SEM',color='#43766C')
 
-        ax.set_xlabel('Iteration', fontsize=12, fontweight='bold')
+        ax.set_xlabel('Iterations', fontsize=12, fontweight='bold')
         ax.set_xlim(0, 18001)
         ax.set_xticks(np.arange(0, 18001, 3000), minor=False)
 
