@@ -195,8 +195,8 @@ def plot(outpath, model_name):
         ax.plot(x, col_mean, label='Mean', marker='o', markersize=0.001, linewidth=1)
         ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2, label='SEM')
 
-        ax.set_ylabel('Iteration')
-        ax.set_xlabel(axes_titles[col])
+        ax.set_xlabel('Iteration')
+        ax.set_ylabel(axes_titles[col])
         ax.set_title(f'{model_name_dict[model_name]}\n{plot_col_titles[col]}')
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         col_name = col.replace('/', '_')
