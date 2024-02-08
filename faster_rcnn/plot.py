@@ -210,7 +210,7 @@ def plot(outpath, model_name):
 
         ax.set_xlim(0, 18001)
         # set ticks
-        ax.set_xticks(np.arange(0, 18001, 6000))
+        ax.set_xticks(np.arange(0, 18001, 3000))
 
 
         plt.tight_layout()
