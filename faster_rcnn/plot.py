@@ -75,6 +75,9 @@ def clean(model_name, inpath, outpath):
     mean.to_csv(os.path.join(csv_path, 'mean.csv'), index=False)
     print (mean)
 
+    standard_error_Across_Folds = np.std([df_1, df_2, df_3], axis=0) / np.sqrt(3)
+    standard_error_Across_Folds.to_csv(os.path.join(csv_path, 'sem.csv'), index=False)
+
 
     pass
 
