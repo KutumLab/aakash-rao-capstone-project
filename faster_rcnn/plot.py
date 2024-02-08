@@ -134,4 +134,4 @@ if __name__ == '__main__':
     argparseer.add_argument('--output_path', type=str, default='../data/plot.png')
     args = argparseer.parse_args()
     clean(args.model_name, args.inpath, args.output_path)
-    plot(args.output_path)
+    plot(args.output_path, args.model_name)
