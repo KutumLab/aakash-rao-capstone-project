@@ -3,6 +3,7 @@ import argparse
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
+import numpy as np
 
 def clean(model_name, inpath, outpath):
     print (model_name)
@@ -23,18 +24,45 @@ def clean(model_name, inpath, outpath):
     print (csv_path)
 
     # reading fold-wise json
-    fold_1_json = json.load(open(os.path.join(fold_1, 'metrics.json')))
-    fold_2_json = json.load(open(os.path.join(fold_2, 'metrics.json')))
-    fold_3_json = json.load(open(os.path.join(fold_3, 'metrics.json')))
+    fold_1_json = []
+    with open(os.path.join(fold_1, 'metrics.json')) as f:
+        for line in f:
+            fold_1_json.append(json.loads(line))
 
-    # converting json to CSV
-    fold_1_csv = pd.DataFrame(fold_1_json)
-    fold_2_csv = pd.DataFrame(fold_2_json)
-    fold_3_csv = pd.DataFrame(fold_3_json)
+    fold_2_json = []
+    with open(os.path.join(fold_2, 'metrics.json')) as f:
+        for line in f:
+            fold_2_json.append(json.loads(line))
 
-    print (fold_1_csv)
-    print (fold_2_csv)
-    print (fold_3_csv)
+    fold_3_json = []
+    with open(os.path.join(fold_3, 'metrics.json')) as f:
+        for line in f:
+            fold_3_json.append(json.loads(line))
+
+    cols = []
+    for i in range(len(fold_1_json)):
+        for key in fold_1_json[i].keys():
+            cols.append(key)
+
+    cols = np.array(cols)
+    cols = np.unique(cols)
+
+    df_1 = pd.DataFrame(columns=cols)
+    df_2 = pd.DataFrame(columns=cols)
+    df_3 = pd.DataFrame(columns=cols)
+
+    for i in range(len(fold_1_json)):
+        df_1 = pd.concat([df_1, pd.DataFrame(fold_1_json[i], index=[0])], ignore_index=True)
+
+    for i in range(len(fold_2_json)):
+        df_2 = pd.concat([df_2, pd.DataFrame(fold_2_json[i], index=[0])], ignore_index=True)
+    
+    for i in range(len(fold_3_json)):
+        df_3 = pd.concat([df_3, pd.DataFrame(fold_3_json[i], index=[0])], ignore_index=True)
+    
+    print (df_1)
+    print (df_2)
+    print (df_3)
 
 
     pass
