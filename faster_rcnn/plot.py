@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import json
 import numpy as np
+from numpy import sqrt
 
 def clean(model_name, inpath, outpath):
     print (model_name)
@@ -75,7 +76,7 @@ def clean(model_name, inpath, outpath):
     mean.to_csv(os.path.join(csv_path, 'mean.csv'), index=False)
     print (mean)
 
-    sem = np.std([df_1, df_2, df_3], axis=0) / np.sqrt(3)
+    sem = np.std([df_1, df_2, df_3], axis=0) / sqrt(3)
     sem.to_csv(os.path.join(csv_path, 'sem.csv'), index=False)
     print (sem)
 
