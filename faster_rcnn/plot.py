@@ -204,7 +204,6 @@ def plot(outpath, model_name):
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
 
         ax.set_title(f'{plot_col_titles[col]}' , fontsize=12, fontweight='bold')
-        ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         col_name = col.replace('/', '_')
 
         if "AP" in col_name:
@@ -215,6 +214,8 @@ def plot(outpath, model_name):
             ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=6)
 
 
+        ax.legend(['Mean', 'Standard Error'],bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=6)
+            
 
         plt.tight_layout()
         plt.savefig(os.path.join(figures_path, f'{col_name}.png'), bbox_inches='tight', dpi=300)
