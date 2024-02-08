@@ -21,6 +21,21 @@ def clean(model_name, inpath, outpath):
     print (json_path)
     print (csv_path)
 
+    # reading fold-wise json
+    fold_1_json = pd.read_json(os.path.join(json_path, f'metrics.json'))
+    fold_2_json = pd.read_json(os.path.join(json_path, f'metrics.json'))
+    fold_3_json = pd.read_json(os.path.join(json_path, f'metrics.json'))
+
+    # making a dataframe out of the json
+    fold_1_df = pd.DataFrame(fold_1_json)
+    fold_2_df = pd.DataFrame(fold_2_json)
+    fold_3_df = pd.DataFrame(fold_3_json)
+
+    print (fold_1_df)
+    print (fold_2_df)
+    print (fold_3_df)
+    
+
     pass
 
 if __name__ == '__main__':
