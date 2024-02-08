@@ -101,7 +101,6 @@ def plot(outpath, model_name):
     figures_path = os.path.join(outpath, 'figures')
     os.makedirs(figures_path, exist_ok=True)
 
-    # plot
     for col in mean.columns:
         mean[col] = mean[col].astype(float)
         sem[col] = sem[col].astype(float)
@@ -117,14 +116,14 @@ def plot(outpath, model_name):
         col_sem = np.delete(col_sem, zero_indices)
         x = np.delete(x, zero_indices)
 
-
-        fig, ax = plt.subplots(figsize=(6, 5))
-        ax.plot(x, col_mean, label=col)
-        ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2)
-        ax.set_xlabel('Epochs')
+        fig, ax = plt.subplots()
+        ax.errorbar(x, col_mean, yerr=col_sem, fmt='o', label=col)
+        ax.set_xlabel('Epoch')
         ax.set_ylabel(col)
+        ax.set_title(f'{model_name} {col}')
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         plt.savefig(os.path.join(figures_path, f'{col}.png'))
+
 
         
     pass
