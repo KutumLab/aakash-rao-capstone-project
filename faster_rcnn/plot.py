@@ -187,7 +187,8 @@ def plot(outpath, model_name):
         col_sem = sem[col].values
 
         col_mean = mean[col].dropna()
-        x = col_mean.index
+        x = col_mean['iteration'].values[col_mean.index]
+
         col_sem = sem[col].values[x]
         print (col_mean)
 
