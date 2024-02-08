@@ -76,6 +76,10 @@ def clean(model_name, inpath, outpath):
     mean.to_csv(os.path.join(csv_path, 'mean.csv'), index=False)
     print (mean)
 
+    # replace nan with 0
+    df_1 = df_1.fillna(0)
+    df_2 = df_2.fillna(0)
+    df_3 = df_3.fillna(0)
     sem = np.std([df_1, df_2, df_3], axis=0) / sqrt(3)
     sem.to_csv(os.path.join(csv_path, 'sem.csv'), index=False)
     print (sem)
