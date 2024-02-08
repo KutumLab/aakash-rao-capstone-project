@@ -134,7 +134,7 @@ def plot(outpath, model_name):
 
         ax.set_ylabel('Iteration')
         ax.set_xlabel(col)
-        ax.set_title(f'{model_name_dict[model_name]} {col}')
+        ax.set_title(f'{model_name_dict[model_name]}\n{col}')
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         col_name = col.replace('/', '_')
 
