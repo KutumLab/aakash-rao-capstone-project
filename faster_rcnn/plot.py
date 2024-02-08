@@ -85,8 +85,9 @@ def clean(model_name, inpath, outpath):
     for col in cols:
         sem[col] = pd.concat([df_1[col], df_2[col], df_3[col]], axis=1).sem(axis=1).values
 
-    # insert nans where there are nans in df_1
-    sem = sem.where(df_1 != 0, 0)
+    # insert nans in SEM where there are nans in df_1
+    for col in cols:
+        sem[col] = sem[col].where(df_1[col].notna(), np.nan)
     sem.to_csv(os.path.join(csv_path, 'sem.csv'), index=False)
     print (sem)
 
