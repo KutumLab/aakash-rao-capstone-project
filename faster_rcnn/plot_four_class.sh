@@ -3,7 +3,7 @@
 #PBS -o out_plot.log
 #PBS -e err_plot.log
 #PBS -l ncpus=50
-#PBS -q gpu
+#PBS -q cpu
 
 eval "$(conda shell.bash hook)"
 conda activate detectron
