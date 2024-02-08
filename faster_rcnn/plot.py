@@ -121,11 +121,11 @@ def plot(outpath, model_name):
         col_mean = mean[col].values
         col_sem = sem[col].values
 
-        x = mean['iteration'].values
         col_mean = mean[col].dropna()
+        x = col_mean.index
+        col_sem = sem[col].values[x]
         print (col_mean)
-        break
-
+        
         fig, ax = plt.subplots()
         ax.plot(x, col_mean, label='Mean', marker='o', markersize=0.001)
         ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2, label='SEM')
