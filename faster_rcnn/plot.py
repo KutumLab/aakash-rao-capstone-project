@@ -6,6 +6,9 @@ import json
 import numpy as np
 from math import sqrt
 from matplotlib import rc 
+
+
+# use times new roman
 rc('font',**{'family':'serif','serif':['Times New Roman']})
 
 def clean(model_name, inpath, outpath):
@@ -194,17 +197,17 @@ def plot(outpath, model_name):
         col_sem = sem[col].values[col_mean.index]
         print (col_mean)
 
-        fig, ax = plt.subplots(figsize=(5, 4))
+        fig, ax = plt.subplots(figsize=(4, 3))
         ax.plot(x, col_mean, label='Mean', marker='o', markersize=0.001, linewidth=1, color='#43766C')
         ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2, label='SEM',color='#43766C')
 
-        ax.set_xlabel('Iterations', fontsize=12, fontweight='bold')
+        ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
         ax.set_xlim(0, 18001)
         ax.set_xticks(np.arange(0, 18001, 3000), minor=False)
 
-        ax.set_ylabel(axes_titles[col], fontsize=12, fontweight='bold')
+        ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
 
-        ax.set_title(f'{model_name_dict[model_name]}\n{plot_col_titles[col]}' , fontsize=14, fontweight='bold')
+        ax.set_title(f'{plot_col_titles[col]}' , fontsize=12, fontweight='bold')
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         col_name = col.replace('/', '_')
 
