@@ -93,6 +93,17 @@ def clean(model_name, inpath, outpath):
 
     pass
 
+model_name_dict = {
+    "faster_rcnn_R_50_DC5_1x": "Faster R-CNN R50 with DC5 at 1x",
+    "faster_rcnn_R_50_FPN_1x": "Faster R-CNN R50 with FPN at 1x",
+    "faster_rcnn_R_50_C4_3x": "Faster R-CNN R50 with C4 at 3x",
+    "faster_rcnn_R_50_DC5_3x": "Faster R-CNN R50 with DC5 at 3x",
+    "faster_rcnn_R_50_FPN_3x": "Faster R-CNN R50 with FPN at 3x",
+    "faster_rcnn_R_101_C4_3x": "Faster R-CNN R101 with C4 at 3x",
+    "faster_rcnn_R_101_DC5_3x": "Faster R-CNN R101 with DC5 at 3x",
+    "faster_rcnn_R_101_FPN_3x": "Faster R-CNN R101 with FPN at 3x",
+    "faster_rcnn_X_101_32x8d_FPN_3x": "Faster R-CNN X101 with 32x8d FPN at 3x",
+}
 def plot(outpath, model_name):
     outpath = os.path.join(outpath, 'plots', model_name)
     csv_path = os.path.join(outpath, 'csv')
@@ -100,6 +111,7 @@ def plot(outpath, model_name):
     sem = pd.read_csv(os.path.join(csv_path, 'sem.csv'))
     figures_path = os.path.join(outpath, 'figures')
     os.makedirs(figures_path, exist_ok=True)
+
 
     for col in mean.columns:
         mean[col] = mean[col].astype(float)
@@ -122,7 +134,7 @@ def plot(outpath, model_name):
 
         ax.set_ylabel('Iteration')
         ax.set_xlabel(col)
-        ax.set_title(f'{model_name} {col}')
+        ax.set_title(f'{model_name_dict[model_name]} {col}')
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         col_name = col.replace('/', '_')
 
