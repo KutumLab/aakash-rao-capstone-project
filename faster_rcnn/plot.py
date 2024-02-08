@@ -199,7 +199,7 @@ def plot(outpath, model_name):
 
         ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
         ax.set_xlim(0, 18001)
-        ax.set_xticks(np.arange(0, 18001, 3000), minor=False)
+        ax.set_xticks(np.arange(0, 18001, 6000), minor=False)
 
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
 
