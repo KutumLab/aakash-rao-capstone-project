@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import json
 import numpy as np
-from numpy import sqrt
+from math import sqrt
 
 def clean(model_name, inpath, outpath):
     print (model_name)
