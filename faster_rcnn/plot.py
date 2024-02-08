@@ -139,6 +139,12 @@ def plot(outpath, model_name):
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         col_name = col.replace('/', '_')
 
+        if "AP" in col_name:
+            ax.set_ylim(0, 100)
+        elif "accuracy" in col_name or "negative" in col_name:
+            ax.set_ylim(0, 1)
+
+
         plt.tight_layout()
         plt.savefig(os.path.join(figures_path, f'{col_name}.png'), bbox_inches='tight', dpi=300)
 
