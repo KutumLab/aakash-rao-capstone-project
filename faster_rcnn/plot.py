@@ -14,6 +14,9 @@ def clean(model_name, inpath, outpath):
     outpath = os.path.join(outpath, 'plots', model_name)
     json_path = os.path.join(outpath, 'json')
     csv_path = os.path.join(outpath, 'csv')
+    os.makedirs(outpath, exist_ok=True)
+    os.makedirs(json_path, exist_ok=True)
+    os.makedirs(csv_path, exist_ok=True)
 
     print (fold_1)
     print (fold_2)
