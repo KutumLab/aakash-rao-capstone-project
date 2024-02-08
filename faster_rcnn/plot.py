@@ -122,7 +122,8 @@ def plot(outpath, model_name):
         ax.set_ylabel(col)
         ax.set_title(f'{model_name} {col}')
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
-        plt.savefig(os.path.join(figures_path, f'{col}.png'))
+        col_name = col.replace('/', '_')
+        plt.savefig(os.path.join(figures_path, f'{col_name}.png'))
 
 
         
