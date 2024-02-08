@@ -105,6 +105,73 @@ model_name_dict = {
     "faster_rcnn_R_101_FPN_3x": "Faster R-CNN R101 with FPN at 3x",
     "faster_rcnn_X_101_32x8d_FPN_3x": "Faster R-CNN X101 with 32x8d FPN at 3x",
 }
+plot_col_titles = {
+    "bbox/AP": "Average Precision at IoU 0.50:0.95",
+    "bbox/AP-nonTIL_stromal": "Average Precision at IoU 0.50:0.95 for non-TIL stromal",
+    "bbox/AP-other": "Average Precision at IoU 0.50:0.95 for other",
+    "bbox/AP-sTIL": "Average Precision at IoU 0.50:0.95 for sTIL",
+    "bbox/AP-tumor_any": "Average Precision at IoU 0.50:0.95 for tumor",
+    "bbox/AP50": "Average Precision at IoU 0.50",
+    "bbox/AP75": "Average Precision at IoU 0.75",
+    "bbox/APl": "Average Precision at IoU 0.50:0.95 for large",
+    "bbox/APm": "Average Precision at IoU 0.50:0.95 for medium",
+    "bbox/APs": "Average Precision at IoU 0.50:0.95 for small",
+    "data_time": "Data Time",
+    "eta_seconds": "ETA in seconds",
+    "fast_rcnn/cls_accuracy": "Classification Accuracy",
+    "fast_rcnn/false_negative": "False Negative",
+    "fast_rcnn/fg_cls_accuracy": "Foreground Classification Accuracy",
+    "iteration": "Iteration",
+    "loss_box_reg": "Loss for Box Regression",
+    "loss_cls": "Loss for Classification",
+    "loss_rpn_cls": "Loss for RPN Classification",
+    "loss_rpn_loc": "Loss for RPN Localization",
+    "lr": "Learning Rate",
+    "roi_head/num_bg_samples": "Number of Background Samples",
+    "roi_head/num_fg_samples": "Number of Foreground Samples",
+    "rpn/num_neg_anchors": "Number of Negative Anchors",
+    "rpn/num_pos_anchors": "Number of Positive Anchors",
+    "time": "Time",
+    "timetest": "Time Test",
+    "total_loss": "Total Loss",
+    "validation_loss": "Validation Loss",
+}
+
+axes_titles = {
+    "bbox/AP": "Average Precision ",
+    "bbox/AP-nonTIL_stromal": "Average Precision ",
+    "bbox/AP-other": "Average Precision ",
+    "bbox/AP-sTIL": "Average Precision ",
+    "bbox/AP-tumor_any": "Average Precision ",
+    "bbox/AP50": "Average Precision ",
+    "bbox/AP75": "Average Precision ",
+    "bbox/APl": "Average Precision ",
+    "bbox/APm": "Average Precision ",
+    "bbox/APs": "Average Precision ",
+    "data_time": "Data Time",
+    "eta_seconds": "ETA in seconds",
+    "fast_rcnn/cls_accuracy": "Accuracy",
+    "fast_rcnn/false_negative": "False Negative",
+    "fast_rcnn/fg_cls_accuracy": "Accuracy",
+    "iteration": "Iteration",
+    "loss_box_reg": "Loss",
+    "loss_cls": "Loss",
+    "loss_rpn_cls": "Los",
+    "loss_rpn_loc": "Loss",
+    "lr": "Learning Rate",
+    "roi_head/num_bg_samples": "Number",
+    "roi_head/num_fg_samples": "Number",
+    "rpn/num_neg_anchors": "Number",
+    "rpn/num_pos_anchors": "Number",
+    "time": "Time",
+    "timetest": "Time ",
+    "total_loss": "Total Loss",
+    "validation_loss": "Validation Loss",
+}
+
+
+
+
 def plot(outpath, model_name):
     outpath = os.path.join(outpath, 'plots', model_name)
     csv_path = os.path.join(outpath, 'csv')
@@ -112,8 +179,6 @@ def plot(outpath, model_name):
     sem = pd.read_csv(os.path.join(csv_path, 'sem.csv'))
     figures_path = os.path.join(outpath, 'figures')
     os.makedirs(figures_path, exist_ok=True)
-
-
     for col in mean.columns:
         mean[col] = mean[col].astype(float)
         sem[col] = sem[col].astype(float)
@@ -131,8 +196,8 @@ def plot(outpath, model_name):
         ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2, label='SEM')
 
         ax.set_ylabel('Iteration')
-        ax.set_xlabel(col)
-        ax.set_title(f'{model_name_dict[model_name]}\n{col}')
+        ax.set_xlabel(axes_titles[col])
+        ax.set_title(f'{model_name_dict[model_name]}\n{plot_col_titles[col]}')
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         col_name = col.replace('/', '_')
 
