@@ -204,8 +204,13 @@ def plot(outpath, model_name):
 
         if "AP" in col_name:
             ax.set_ylim(0, 100)
+
         elif "accuracy" in col_name or "negative" in col_name:
             ax.set_ylim(0, 1)
+
+        ax.set_xlim(0, 18001)
+        # set ticks
+        ax.set_xticks(np.arange(0, 18001, 2000))
 
 
         plt.tight_layout()
