@@ -35,50 +35,61 @@ BATCHSIZE=8
 BASE_WEIGHT_PATH=$BASE_PATH/faster_rcnn/bases
 #!/bin/bash
 
-# Create an array
-model_list=("faster_rcnn_X_101_32x8d_FPN_3x") #("faster_rcnn_R_50_C4_1x" "faster_rcnn_R_50_DC5_1x" "faster_rcnn_R_50_FPN_1x" "faster_rcnn_R_50_C4_3x" "faster_rcnn_R_50_DC5_3x" "faster_rcnn_R_50_FPN_3x" "faster_rcnn_R_101_C4_3x" "faster_rcnn_R_101_DC5_3x" "faster_rcnn_R_101_FPN_3x" "faster_rcnn_X_101_32x8d_FPN_3x")
+# # Create an array
+# model_list=("faster_rcnn_X_101_32x8d_FPN_3x") #("faster_rcnn_R_50_C4_1x" "faster_rcnn_R_50_DC5_1x" "faster_rcnn_R_50_FPN_1x" "faster_rcnn_R_50_C4_3x" "faster_rcnn_R_50_DC5_3x" "faster_rcnn_R_50_FPN_3x" "faster_rcnn_R_101_C4_3x" "faster_rcnn_R_101_DC5_3x" "faster_rcnn_R_101_FPN_3x" "faster_rcnn_X_101_32x8d_FPN_3x")
 
-# Loop through the array elements
-for model_name in "${model_list[@]}"
+# # Loop through the array elements
+# for model_name in "${model_list[@]}"
+# do
+#     CONFIG=COCO-Detection/"$model_name".yaml #Specify a config file which is used to source the model from detectron2's model zoo
+#     NAME="$model_name"_"$VERSION" #Specify a name for the model used for saving and logistics
+#     WEIGHT=$BASE_WEIGHT_PATH/${test_dict[$model_name]}
+#     echo $NAME
+#     echo $CONFIG
+#     echo $WEIGHT
+#     python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
+#         --data_path $DATA_PATH \
+#         --config_info $CONFIG \
+#         --max_iters $MAX_ITERS \
+#         --name $NAME \
+#         --fold 1 \
+#         --save_path $SAVE_PATH \
+#         --version $VERSION \
+#         --batch_size $BATCHSIZE \
+#         --weight_path $WEIGHT
+
+#     python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
+#         --data_path $DATA_PATH \
+#         --config_info $CONFIG \
+#         --max_iters $MAX_ITERS \
+#         --name $NAME \
+#         --fold 2 \
+#         --save_path $SAVE_PATH \
+#         --version $VERSION \
+#         --batch_size $BATCHSIZE \
+#         --weight_path $WEIGHT
+
+#     python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
+#         --data_path $DATA_PATH \
+#         --config_info $CONFIG \
+#         --max_iters $MAX_ITERS \
+#         --name $NAME \
+#         --fold 3 \
+#         --save_path $SAVE_PATH \
+#         --version $VERSION \
+#         --batch_size $BATCHSIZE \
+#         --weight_path $WEIGHT
+# done
+
+models=("faster_rcnn_R_50_C4_1x" "faster_rcnn_R_50_DC5_1x" "faster_rcnn_R_50_FPN_1x" "faster_rcnn_R_50_C4_3x" "faster_rcnn_R_50_DC5_3x" "faster_rcnn_R_50_FPN_3x" "faster_rcnn_R_101_C4_3x" "faster_rcnn_R_101_DC5_3x" "faster_rcnn_R_101_FPN_3x") # "faster_rcnn_X_101_32x8d_FPN_3x")
+for model_name in "${models[@]}"
 do
-    CONFIG=COCO-Detection/"$model_name".yaml #Specify a config file which is used to source the model from detectron2's model zoo
-    NAME="$model_name"_"$VERSION" #Specify a name for the model used for saving and logistics
-    WEIGHT=$BASE_WEIGHT_PATH/${test_dict[$model_name]}
-    echo $NAME
-    echo $CONFIG
-    echo $WEIGHT
-    python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
-        --data_path $DATA_PATH \
-        --config_info $CONFIG \
-        --max_iters $MAX_ITERS \
-        --name $NAME \
-        --fold 1 \
-        --save_path $SAVE_PATH \
-        --version $VERSION \
-        --batch_size $BATCHSIZE \
-        --weight_path $WEIGHT
+    save_path=$SAVE_PATH/plots
+    python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot.py \
+    --inpath $SAVE_PATH/detectron \
+    --model_name $model_name \
+    --output_path $SAVE_PATH \
 
-    python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
-        --data_path $DATA_PATH \
-        --config_info $CONFIG \
-        --max_iters $MAX_ITERS \
-        --name $NAME \
-        --fold 2 \
-        --save_path $SAVE_PATH \
-        --version $VERSION \
-        --batch_size $BATCHSIZE \
-        --weight_path $WEIGHT
-
-    python3 /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/train_faster_rcnn.py \
-        --data_path $DATA_PATH \
-        --config_info $CONFIG \
-        --max_iters $MAX_ITERS \
-        --name $NAME \
-        --fold 3 \
-        --save_path $SAVE_PATH \
-        --version $VERSION \
-        --batch_size $BATCHSIZE \
-        --weight_path $WEIGHT
 done
 
 
