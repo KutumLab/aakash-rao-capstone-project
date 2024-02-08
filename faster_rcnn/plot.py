@@ -64,6 +64,14 @@ def clean(model_name, inpath, outpath):
     print (df_2)
     print (df_3)
 
+    df_1.to_csv(os.path.join(csv_path, 'fold_1.csv'), index=False)
+    df_2.to_csv(os.path.join(csv_path, 'fold_2.csv'), index=False)
+    df_3.to_csv(os.path.join(csv_path, 'fold_3.csv'), index=False)
+
+    mean = (df_1 + df_2 + df_3) / 3
+    mean.to_csv(os.path.join(csv_path, 'mean.csv'), index=False)
+    print (mean)
+
 
     pass
 
