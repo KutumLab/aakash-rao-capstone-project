@@ -189,7 +189,7 @@ def plot(outpath, model_name):
         col_mean = mean[col].dropna()
         x = mean['iteration'].values[col_mean.index]
 
-        col_sem = sem[col].values[x]
+        col_sem = sem[col].values[col_mean.index]
         print (col_mean)
 
         fig, ax = plt.subplots(figsize=(5, 4))
