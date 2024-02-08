@@ -94,6 +94,7 @@ def clean(model_name, inpath, outpath):
     pass
 
 model_name_dict = {
+    "faster_rcnn_R_50_C4_1x": "Faster R-CNN R50 with C4 at 1x",
     "faster_rcnn_R_50_DC5_1x": "Faster R-CNN R50 with DC5 at 1x",
     "faster_rcnn_R_50_FPN_1x": "Faster R-CNN R50 with FPN at 1x",
     "faster_rcnn_R_50_C4_3x": "Faster R-CNN R50 with C4 at 3x",
