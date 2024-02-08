@@ -200,7 +200,7 @@ def plot(outpath, model_name):
         ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
         ax.set_xlim(0, 18001)
         ax.set_xticks(np.arange(0, 18001, 6000), list(map(str, np.arange(0, 18001, 6000))), fontsize=6)
-        ax.set_yticks(fontsize=6)
+        ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=6)
 
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
 
