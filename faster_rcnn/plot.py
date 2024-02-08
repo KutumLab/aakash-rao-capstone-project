@@ -200,7 +200,6 @@ def plot(outpath, model_name):
         ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
         ax.set_xlim(0, 18001)
         ax.set_xticks(np.arange(0, 18001, 6000), list(map(str, np.arange(0, 18001, 6000))), fontsize=6)
-        ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=6)
 
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
 
@@ -210,8 +209,10 @@ def plot(outpath, model_name):
 
         if "AP" in col_name:
             ax.set_ylim(0, 100)
+            ax.set_yticks(ticks=np.arange(0, 101, 10), labels=list(map(str, np.arange(0, 101, 10))), fontsize=6)
         elif "accuracy" in col_name or "negative" in col_name:
             ax.set_ylim(0, 1)
+            ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=6)
 
 
 
