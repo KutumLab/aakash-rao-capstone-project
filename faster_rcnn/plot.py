@@ -22,9 +22,9 @@ def clean(model_name, inpath, outpath):
     print (csv_path)
 
     # reading fold-wise json
-    fold_1_json = pd.read_json(os.path.join(json_path, f'metrics.json'))
-    fold_2_json = pd.read_json(os.path.join(json_path, f'metrics.json'))
-    fold_3_json = pd.read_json(os.path.join(json_path, f'metrics.json'))
+    fold_1_json = pd.read_json(os.path.join(fold_1, f'metrics.json'))
+    fold_2_json = pd.read_json(os.path.join(fold_2, f'metrics.json'))
+    fold_3_json = pd.read_json(os.path.join(fold_3, f'metrics.json'))
 
     # making a dataframe out of the json
     fold_1_df = pd.DataFrame(fold_1_json)
@@ -34,7 +34,7 @@ def clean(model_name, inpath, outpath):
     print (fold_1_df)
     print (fold_2_df)
     print (fold_3_df)
-    
+
 
     pass
 
