@@ -5,8 +5,22 @@ import matplotlib.pyplot as plt
 
 def clean(model_name, inpath, outpath):
     print (model_name)
-    print (inpath)
+    fold_1 = os.path.join(inpath, model_name, '_fold_1')
+    fold_2 = os.path.join(inpath, model_name, '_fold_2')
+    fold_3 = os.path.join(inpath, model_name, '_fold_3')
+
+    outpath = os.path.join(outpath, 'plots', model_name)
+    json_path = os.path.join(outpath, 'json')
+    csv_path = os.path.join(outpath, 'csv')
+
+    print (fold_1)
+    print (fold_2)
+    print (fold_3)
+
     print (outpath)
+    print (json_path)
+    print (csv_path)
+    
     pass
 
 if __name__ == '__main__':
