@@ -2,6 +2,7 @@ import os
 import argparse
 import pandas as pd
 import matplotlib.pyplot as plt
+import json
 
 def clean(model_name, inpath, outpath):
     print (model_name)
@@ -22,18 +23,18 @@ def clean(model_name, inpath, outpath):
     print (csv_path)
 
     # reading fold-wise json
-    fold_1_json = pd.read_json(os.path.join(fold_1, f'metrics.json'))
-    fold_2_json = pd.read_json(os.path.join(fold_2, f'metrics.json'))
-    fold_3_json = pd.read_json(os.path.join(fold_3, f'metrics.json'))
+    fold_1_json = json.load(open(os.path.join(fold_1, 'metrics.json')))
+    fold_2_json = json.load(open(os.path.join(fold_2, 'metrics.json')))
+    fold_3_json = json.load(open(os.path.join(fold_3, 'metrics.json')))
 
-    # making a dataframe out of the json
-    fold_1_df = pd.DataFrame(fold_1_json)
-    fold_2_df = pd.DataFrame(fold_2_json)
-    fold_3_df = pd.DataFrame(fold_3_json)
+    # converting json to CSV
+    fold_1_csv = pd.DataFrame(fold_1_json)
+    fold_2_csv = pd.DataFrame(fold_2_json)
+    fold_3_csv = pd.DataFrame(fold_3_json)
 
-    print (fold_1_df)
-    print (fold_2_df)
-    print (fold_3_df)
+    print (fold_1_csv)
+    print (fold_2_csv)
+    print (fold_3_csv)
 
 
     pass
