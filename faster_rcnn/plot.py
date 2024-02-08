@@ -119,9 +119,9 @@ def plot(outpath, model_name):
         fig, ax = plt.subplots()
         ax.plot(x, col_mean, label='Mean', marker='o')
         ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2, label='SEM')
-        
-        ax.set_xlabel('Epoch')
-        ax.set_ylabel(col)
+
+        ax.set_ylabel('Iteration')
+        ax.set_xlabel(col)
         ax.set_title(f'{model_name} {col}')
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         col_name = col.replace('/', '_')
