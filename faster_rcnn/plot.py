@@ -93,7 +93,8 @@ def clean(model_name, inpath, outpath):
 
     pass
 
-def plot(outpath):
+def plot(outpath, model_name):
+    outpath = os.path.join(outpath, 'plots', model_name)
     csv_path = os.path.join(outpath, 'csv')
     mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
     sem = pd.read_csv(os.path.join(csv_path, 'sem.csv'))
