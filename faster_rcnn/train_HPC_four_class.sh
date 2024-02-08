@@ -19,7 +19,7 @@ test_dict["faster_rcnn_R_50_FPN_3x"]="R50-FPN-3x.pkl"
 test_dict["faster_rcnn_R_101_C4_3x"]="R101-C4-3x.pkl"
 test_dict["faster_rcnn_R_101_DC5_3x"]="R101-DC5-3x.pkl"
 test_dict["faster_rcnn_R_101_FPN_3x"]="R101-FPN-3x.pkl"
-test_dict["faster_rcnn_X_101_32x8d_FPN_3x"]="X101-32x8d-FPN-3x.pkl"
+test_dict["faster_rcnn_X_101_32x8d_FPN_3x"]="X101-FPN.pkl"
 
 
 
@@ -36,7 +36,7 @@ BASE_WEIGHT_PATH=$BASE_PATH/faster_rcnn/bases
 #!/bin/bash
 
 # Create an array
-model_list=("faster_rcnn_R_50_C4_1x" "faster_rcnn_R_50_DC5_1x" "faster_rcnn_R_50_FPN_1x" "faster_rcnn_R_50_C4_3x" "faster_rcnn_R_50_DC5_3x" "faster_rcnn_R_50_FPN_3x" "faster_rcnn_R_101_C4_3x" "faster_rcnn_R_101_DC5_3x" "faster_rcnn_R_101_FPN_3x" "faster_rcnn_X_101_32x8d_FPN_3x")
+model_list=("faster_rcnn_X_101_32x8d_FPN_3x") #("faster_rcnn_R_50_C4_1x" "faster_rcnn_R_50_DC5_1x" "faster_rcnn_R_50_FPN_1x" "faster_rcnn_R_50_C4_3x" "faster_rcnn_R_50_DC5_3x" "faster_rcnn_R_50_FPN_3x" "faster_rcnn_R_101_C4_3x" "faster_rcnn_R_101_DC5_3x" "faster_rcnn_R_101_FPN_3x" "faster_rcnn_X_101_32x8d_FPN_3x")
 
 # Loop through the array elements
 for model_name in "${model_list[@]}"
