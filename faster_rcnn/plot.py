@@ -7,10 +7,6 @@ import numpy as np
 from math import sqrt
 from matplotlib import rc 
 
-
-# use times new roman
-rc('font',**{'family':'serif','serif':['Times New Roman']})
-
 def clean(model_name, inpath, outpath):
     print (model_name)
     fold_1 = os.path.join(inpath, f'{model_name}_four_class_fold_1')
