@@ -125,9 +125,9 @@ def plot(outpath, model_name):
         x = col_mean.index
         col_sem = sem[col].values[x]
         print (col_mean)
-        
+
         fig, ax = plt.subplots()
-        ax.plot(x, col_mean, label='Mean', marker='o', markersize=0.001)
+        ax.plot(x, col_mean, label='Mean', marker='o', markersize=0.001, linewidth=1)
         ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2, label='SEM')
 
         ax.set_ylabel('Iteration')
