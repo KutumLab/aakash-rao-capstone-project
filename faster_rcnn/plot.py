@@ -116,12 +116,14 @@ def plot(outpath, model_name):
         col_mean = np.delete(col_mean, zero_indices)
         col_sem = np.delete(col_sem, zero_indices)
         x = np.delete(x, zero_indices)
-        ax, fig = plt.subplots(figsize=(5, 5))
+
+
+        fig, ax = plt.subplots(figsize=(6, 5))
         ax.plot(x, col_mean, label=col)
         ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2)
         ax.set_xlabel('Epochs')
         ax.set_ylabel(col)
-        ax.legend()
+        ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         plt.savefig(os.path.join(figures_path, f'{col}.png'))
 
         
