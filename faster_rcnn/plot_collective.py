@@ -215,8 +215,8 @@ def plot(outpath, model_names):
             ax.set_ylim(0, 1)
             ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=6)
 
-
-        ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=6)
+        # text title for legend
+        ax.legend(bbox_to_anchor=(1.05, 1),  title="Faster R-CNN with", loc='upper left', fontsize=6)
             
 
         plt.tight_layout()
