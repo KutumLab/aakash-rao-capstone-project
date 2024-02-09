@@ -228,7 +228,6 @@ def plot(outpath, model_names):
 if __name__ == '__main__':
     argparseer = argparse.ArgumentParser()
     argparseer.add_argument('--inpath', type=str, default='../outputs/detectron')
-    argparseer.add_argument('--model_name', type=str, default='../data/plot.csv')
     argparseer.add_argument('--output_path', type=str, default='../data/plot.png')
     args = argparseer.parse_args()
     model_names = ["faster_rcnn_R_50_C4_1x", "faster_rcnn_R_50_DC5_1x", "faster_rcnn_R_50_FPN_1x", "faster_rcnn_R_50_C4_3x", "faster_rcnn_R_50_DC5_3x", "faster_rcnn_R_50_FPN_3x", "faster_rcnn_R_101_C4_3x", "faster_rcnn_R_101_DC5_3x", "faster_rcnn_R_101_FPN_3x"]

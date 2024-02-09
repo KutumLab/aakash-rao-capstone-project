@@ -49,5 +49,4 @@ BASE_WEIGHT_PATH=$BASE_PATH/faster_rcnn/bases
 
 python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot_collective.py \
     --inpath $SAVE_PATH/detectron \
-    --model_name $model_name \
     --output_path $SAVE_PATH \
