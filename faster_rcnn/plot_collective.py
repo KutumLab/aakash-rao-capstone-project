@@ -194,7 +194,7 @@ def plot(outpath, model_names):
 
             col_sem = sem[col].values[col_mean.index]
             print (col_mean)
-            ax.plot(x, col_mean, label={model_name_dict[model_name]}, marker='o', markersize=0.001, linewidth=1)
+            ax.plot(x, col_mean, label=f"{model_name_dict[model_name]}", marker='o', markersize=0.001, linewidth=1)
             ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2)
             pass
 
