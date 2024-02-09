@@ -95,16 +95,16 @@ def clean(model_name, inpath, outpath):
     pass
 
 model_name_dict = {
-    "faster_rcnn_R_50_C4_1x": "Faster R-CNN R50 with C4 at 1x",
-    "faster_rcnn_R_50_DC5_1x": "Faster R-CNN R50 with DC5 at 1x",
-    "faster_rcnn_R_50_FPN_1x": "Faster R-CNN R50 with FPN at 1x",
-    "faster_rcnn_R_50_C4_3x": "Faster R-CNN R50 with C4 at 3x",
-    "faster_rcnn_R_50_DC5_3x": "Faster R-CNN R50 with DC5 at 3x",
-    "faster_rcnn_R_50_FPN_3x": "Faster R-CNN R50 with FPN at 3x",
-    "faster_rcnn_R_101_C4_3x": "Faster R-CNN R101 with C4 at 3x",
-    "faster_rcnn_R_101_DC5_3x": "Faster R-CNN R101 with DC5 at 3x",
-    "faster_rcnn_R_101_FPN_3x": "Faster R-CNN R101 with FPN at 3x",
-    "faster_rcnn_X_101_32x8d_FPN_3x": "Faster R-CNN X101 with 32x8d FPN at 3x",
+    "faster_rcnn_R_50_C4_1x": "R50 with C4 at 1x",
+    "faster_rcnn_R_50_DC5_1x": "R50 with DC5 at 1x",
+    "faster_rcnn_R_50_FPN_1x": "R50 with FPN at 1x",
+    "faster_rcnn_R_50_C4_3x": "R50 with C4 at 3x",
+    "faster_rcnn_R_50_DC5_3x": "R50 with DC5 at 3x",
+    "faster_rcnn_R_50_FPN_3x": "R50 with FPN at 3x",
+    "faster_rcnn_R_101_C4_3x": "R101 with C4 at 3x",
+    "faster_rcnn_R_101_DC5_3x": "R101 with DC5 at 3x",
+    "faster_rcnn_R_101_FPN_3x": "R101 with FPN at 3x",
+    "faster_rcnn_X_101_32x8d_FPN_3x": "X101 with 32x8d FPN at 3x",
 }
 plot_col_titles = {
     "bbox/AP":  "AP at IoU 0.50:0.95",
@@ -194,8 +194,8 @@ def plot(outpath, model_names):
 
             col_sem = sem[col].values[col_mean.index]
             print (col_mean)
-            ax.plot(x, col_mean, label={model_name}, marker='o', markersize=0.001, linewidth=1)
-            ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2, label='SEM')
+            ax.plot(x, col_mean, label={model_name_dict[model_name]}, marker='o', markersize=0.001, linewidth=1)
+            ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2)
             pass
 
 
