@@ -175,8 +175,8 @@ axes_titles = {
 
 
 def plot(outpath, model_names):
-    outpath = os.path.join(outpath, 'plots', 'collective')
-    os.makedirs(outpath, exist_ok=True)
+    savepath = os.path.join(outpath, 'plots', 'collective')
+    os.makedirs(savepath, exist_ok=True)
     for col in col_list:
         fig, ax = plt.subplots(figsize=(4, 3))
         for model_name in model_names:
@@ -220,7 +220,7 @@ def plot(outpath, model_names):
             
 
         plt.tight_layout()
-        plt.savefig(os.path.join(outpath, f'{col_name}.png'), bbox_inches='tight', dpi=300)
+        plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=300)
 
 
         
