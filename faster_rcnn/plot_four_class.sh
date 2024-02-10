@@ -35,16 +35,16 @@ BATCHSIZE=8
 BASE_WEIGHT_PATH=$BASE_PATH/faster_rcnn/bases
 #!/bin/bash
 
-# models=("faster_rcnn_R_50_C4_1x" "faster_rcnn_R_50_DC5_1x" "faster_rcnn_R_50_FPN_1x" "faster_rcnn_R_50_C4_3x" "faster_rcnn_R_50_DC5_3x" "faster_rcnn_R_50_FPN_3x" "faster_rcnn_R_101_C4_3x" "faster_rcnn_R_101_DC5_3x" "faster_rcnn_R_101_FPN_3x") # "faster_rcnn_X_101_32x8d_FPN_3x")
-# for model_name in "${models[@]}"
-# do
-#     save_path=$SAVE_PATH/plots
-#     python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot.py \
-#     --inpath $SAVE_PATH/detectron \
-#     --model_name $model_name \
-#     --output_path $SAVE_PATH \
+models=("faster_rcnn_R_50_C4_1x" "faster_rcnn_R_50_DC5_1x" "faster_rcnn_R_50_FPN_1x" "faster_rcnn_R_50_C4_3x" "faster_rcnn_R_50_DC5_3x" "faster_rcnn_R_50_FPN_3x" "faster_rcnn_R_101_C4_3x" "faster_rcnn_R_101_DC5_3x" "faster_rcnn_R_101_FPN_3x" "faster_rcnn_X_101_32x8d_FPN_3x")
+for model_name in "${models[@]}"
+do
+    save_path=$SAVE_PATH/plots
+    python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot.py \
+    --inpath $SAVE_PATH/detectron \
+    --model_name $model_name \
+    --output_path $SAVE_PATH \
 
-# done
+done
 
 
 python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot_collective.py \
