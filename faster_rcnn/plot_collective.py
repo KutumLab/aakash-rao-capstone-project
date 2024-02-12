@@ -291,6 +291,18 @@ def plot_at_lowest_loss(outpath, model_names):
         plt.tight_layout()
         plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=300)
 
+    plt.close('all')
+
+    axd = plt.figure(layout='constrained').subplot_mosaic(
+        """
+        AABB
+        AABB
+        ABCD
+        CCCC
+        """
+    )
+    axd.savefig(os.path.join(savepath, 'collective.png'), bbox_inches='tight', dpi=300)
+    
 
         
     pass
