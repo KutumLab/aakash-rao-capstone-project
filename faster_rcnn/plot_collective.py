@@ -199,10 +199,7 @@ def plot(outpath, model_names):
             if "validation_loss" in col:
                 if "X_101" in model_name:
                     point_of_min_loss = np.argmin(col_mean)
-                    ax.annotate(f'{col_mean[point_of_min_loss]:.2f}', (x[point_of_min_loss], col_mean[point_of_min_loss]), textcoords="offset points", xytext=(0, 10), ha='center', fontsize=6)
-                else:
-                    point_of_min_loss = np.argmin(col_mean)
-                    ax.annotate(f'{col_mean[point_of_min_loss]:.2f}', (x[point_of_min_loss], col_mean[point_of_min_loss]), textcoords="offset points", xytext=(0, 10), ha='center', fontsize=6)
+                    ax.axvline(x[point_of_min_loss], color='r', linestyle='--', linewidth=0.25, label=f"Min Validation Loss: \n{model_name_dict[model_name]}")
             pass
 
 
