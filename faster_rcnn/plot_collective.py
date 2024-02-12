@@ -231,6 +231,6 @@ if __name__ == '__main__':
     argparseer.add_argument('--inpath', type=str, default='../outputs/detectron')
     argparseer.add_argument('--output_path', type=str, default='../data/plot.png')
     args = argparseer.parse_args()
-    model_names = ["faster_rcnn_R_50_C4_1x", "faster_rcnn_R_50_DC5_1x", "faster_rcnn_R_50_FPN_1x", "faster_rcnn_R_50_C4_3x", "faster_rcnn_R_50_DC5_3x", "faster_rcnn_R_50_FPN_3x", "faster_rcnn_R_101_C4_3x", "faster_rcnn_R_101_DC5_3x", "faster_rcnn_R_101_FPN_3x"]
+    model_names = ["faster_rcnn_R_50_C4_1x", "faster_rcnn_R_50_DC5_1x", "faster_rcnn_R_50_FPN_1x", "faster_rcnn_R_50_C4_3x", "faster_rcnn_R_50_DC5_3x", "faster_rcnn_R_50_FPN_3x", "faster_rcnn_R_101_C4_3x", "faster_rcnn_R_101_DC5_3x", "faster_rcnn_R_101_FPN_3x", "faster_rcnn_X_101_32x8d_FPN_3x"]
     # clean(args.model_name, args.inpath, args.output_path)
     plot(args.output_path, model_names)
