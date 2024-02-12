@@ -237,6 +237,7 @@ def plot_at_lowest_loss(outpath, model_names):
     os.makedirs(savepath, exist_ok=True)
     limit = 6959
     for col in col_list:
+        col_df = pd.DataFrame()
         fig, ax = plt.subplots(figsize=(4.5, 3))
         for model_name in model_names:
             csv_path = os.path.join(outpath, 'plots', model_name, 'csv')
@@ -260,6 +261,9 @@ def plot_at_lowest_loss(outpath, model_names):
             print (col_mean)
             ax.plot(x, col_mean, label=f"{model_name_dict[model_name]}", marker='o', markersize=0.001, linewidth=0.2)
             ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2)
+            col_df[f"{model_name}_mean"] = col_mean
+            col_df[f"{model_name}_sem"] = col_sem
+        col_df.to_csv(os.path.join(savepath, f'{col}.csv'), index=False)
 
 
         ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
