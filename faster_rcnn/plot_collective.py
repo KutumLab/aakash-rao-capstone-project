@@ -224,7 +224,7 @@ def plot(outpath, model_names):
             
 
         plt.tight_layout()
-        plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=100)
+        plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=300)
 
 
         
@@ -286,7 +286,7 @@ def plot_at_lowest_loss(outpath, model_names):
             
 
         plt.tight_layout()
-        plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=100)
+        plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=300)
         plt.close('all')
     pass
 
