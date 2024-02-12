@@ -297,8 +297,8 @@ def plot_at_lowest_loss(outpath, model_names):
         """
         AABB
         AABB
-        ABCD
-        CCCC
+        CCDD
+        EFGH
         """
     )
     axd.savefig(os.path.join(savepath, 'collective.png'), bbox_inches='tight', dpi=300)
@@ -306,6 +306,26 @@ def plot_at_lowest_loss(outpath, model_names):
 
         
     pass
+
+
+def plot_new(outpath, model_names):
+    savepath = os.path.join(outpath, 'plots', 'collective_new')
+    os.makedirs(savepath, exist_ok=True)
+
+    axd = plt.figure(layout='constrained').subplot_mosaic(
+        """
+        AABB
+        AABB
+        CCDD
+        EFGH
+        """
+    )
+    axd.savefig(os.path.join(savepath, 'collective.png'), bbox_inches='tight', dpi=300)
+    
+
+        
+    pass
+
 
 if __name__ == '__main__':
     argparseer = argparse.ArgumentParser()
@@ -315,4 +335,5 @@ if __name__ == '__main__':
     model_names = ["faster_rcnn_R_50_C4_1x", "faster_rcnn_R_50_DC5_1x", "faster_rcnn_R_50_FPN_1x", "faster_rcnn_R_50_C4_3x", "faster_rcnn_R_50_DC5_3x", "faster_rcnn_R_50_FPN_3x", "faster_rcnn_R_101_C4_3x", "faster_rcnn_R_101_DC5_3x", "faster_rcnn_R_101_FPN_3x", "faster_rcnn_X_101_32x8d_FPN_3x"]
     # clean(args.model_name, args.inpath, args.output_path)
     # plot(args.output_path, model_names)
-    plot_at_lowest_loss(args.output_path, model_names)
+    # plot_at_lowest_loss(args.output_path, model_names)
+    plot_new(args.output_path, model_names)
