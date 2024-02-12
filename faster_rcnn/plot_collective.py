@@ -178,7 +178,7 @@ def plot(outpath, model_names):
     savepath = os.path.join(outpath, 'plots', 'collective')
     os.makedirs(savepath, exist_ok=True)
     for col in col_list:
-        fig, ax = plt.subplots(figsize=(4.5, 3.5))
+        fig, ax = plt.subplots(figsize=(3, 3.5))
         for model_name in model_names:
             csv_path = os.path.join(outpath, 'plots', model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
@@ -237,7 +237,7 @@ def plot_at_lowest_loss(outpath, model_names):
     limit = 6959
     for col in col_list:
         col_df = pd.DataFrame()
-        fig, ax = plt.subplots(figsize=(4.5, 2.25))
+        fig, ax = plt.subplots(figsize=(3, 2.25))
         for model_name in model_names:
             csv_path = os.path.join(outpath, 'plots', model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
@@ -262,7 +262,7 @@ def plot_at_lowest_loss(outpath, model_names):
             ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2)
             col_df[f"{model_name}_mean"] = col_mean
             col_df[f"{model_name}_sem"] = col_sem
-        # col_df.to_csv(os.path.join(savepath, f"{col.replace('/', '_')}.csv"), index=False)
+        col_df.to_csv(os.path.join(savepath, f"{col.replace('/', '_')}.csv"), index=False)
 
 
         ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
@@ -289,6 +289,11 @@ def plot_at_lowest_loss(outpath, model_names):
         plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=300)
         plt.close('all')
     pass
+
+
+
+# custom plot
+
 
 
 
