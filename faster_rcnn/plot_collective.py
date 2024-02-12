@@ -265,11 +265,11 @@ def plot_at_lowest_loss(outpath, model_names):
         col_df.to_csv(os.path.join(savepath, f"{col.replace('/', '_')}.csv"), index=False)
 
 
-        ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
+        ax.set_xlabel('Iterations', fontsize=10)
         ax.set_xlim(0, limit+1)
         ax.set_xticks(np.arange(0, limit+1, limit//3), list(map(str, np.arange(0, limit+1, limit//3))), fontsize=8)
 
-        ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
+        ax.set_ylabel(axes_titles[col], fontsize=10)
 
         ax.set_title(f'{plot_col_titles[col]}' , fontsize=10, fontweight='bold')
         col_name = col.replace('/', '_')
