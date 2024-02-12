@@ -201,22 +201,22 @@ def plot(outpath, model_names):
 
         ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
         ax.set_xlim(0, 18001)
-        ax.set_xticks(np.arange(0, 18001, 6000), list(map(str, np.arange(0, 18001, 6000))), fontsize=6)
+        ax.set_xticks(np.arange(0, 18001, 6000), list(map(str, np.arange(0, 18001, 6000))), fontsize=10)
 
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
 
-        ax.set_title(f'{plot_col_titles[col]}' , fontsize=12, fontweight='bold')
+        ax.set_title(f'{plot_col_titles[col]}' , fontsize=10, fontweight='bold')
         col_name = col.replace('/', '_')
 
         if "AP" in col_name:
             ax.set_ylim(0, 100)
-            ax.set_yticks(ticks=np.arange(0, 101, 10), labels=list(map(str, np.arange(0, 101, 10))), fontsize=6)
+            ax.set_yticks(ticks=np.arange(0, 101, 10), labels=list(map(str, np.arange(0, 101, 10))), fontsize=10)
         elif "accuracy" in col_name or "negative" in col_name:
             ax.set_ylim(0, 1)
-            ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=6)
+            ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=10)
 
         # text title for legend
-        ax.legend(bbox_to_anchor=(1.05, 1),  title="Faster R-CNN with", loc='upper left', fontsize=6, title_fontsize=6, frameon=False)
+        ax.legend(bbox_to_anchor=(1.05, 1),  title="Faster R-CNN with", loc='upper left', fontsize=10, title_fontsize=10, frameon=False)
             
 
         plt.tight_layout()
