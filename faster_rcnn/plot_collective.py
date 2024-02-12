@@ -178,7 +178,7 @@ def plot(outpath, model_names):
     savepath = os.path.join(outpath, 'plots', 'collective')
     os.makedirs(savepath, exist_ok=True)
     for col in col_list:
-        fig, ax = plt.subplots(figsize=(5, 3))
+        fig, ax = plt.subplots(figsize=(4.5, 3))
         for model_name in model_names:
             csv_path = os.path.join(outpath, 'plots', model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
@@ -201,7 +201,7 @@ def plot(outpath, model_names):
 
         ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
         ax.set_xlim(0, 18001)
-        ax.set_xticks(np.arange(0, 18001, 6000), list(map(str, np.arange(0, 18001, 6000))), fontsize=10)
+        ax.set_xticks(np.arange(0, 18001, 6000), list(map(str, np.arange(0, 18001, 6000))), fontsize=8)
 
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
 
@@ -210,10 +210,10 @@ def plot(outpath, model_names):
 
         if "AP" in col_name:
             ax.set_ylim(0, 100)
-            ax.set_yticks(ticks=np.arange(0, 101, 10), labels=list(map(str, np.arange(0, 101, 10))), fontsize=10)
+            ax.set_yticks(ticks=np.arange(0, 101, 10), labels=list(map(str, np.arange(0, 101, 10))), fontsize=8)
         elif "accuracy" in col_name or "negative" in col_name:
             ax.set_ylim(0, 1)
-            ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=10)
+            ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=8)
 
         # text title for legend
         # insert custom line in the legend
