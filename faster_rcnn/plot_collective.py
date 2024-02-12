@@ -178,7 +178,7 @@ def plot(outpath, model_names):
     savepath = os.path.join(outpath, 'plots', 'collective')
     os.makedirs(savepath, exist_ok=True)
     for col in col_list:
-        fig, ax = plt.subplots(figsize=(4, 3))
+        fig, ax = plt.subplots(figsize=(5, 3))
         for model_name in model_names:
             csv_path = os.path.join(outpath, 'plots', model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
