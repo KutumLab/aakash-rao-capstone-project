@@ -199,7 +199,7 @@ def plot(outpath, model_names):
             if "validation_loss" in col:
                 if "X_101" in model_name:
                     point_of_min_loss = np.argmin(col_mean)
-                    ax.axvline(x[point_of_min_loss], color='r', linestyle='--', linewidth=0.25, label=f"Lowest Validation Loss for \n X 101 with FPN at 3x \n at {x[point_of_min_loss]}th iteration")
+                    ax.axvline(x[point_of_min_loss], color='r', linestyle='--', linewidth=0.25, label=f"Lowest Validation Loss for \n X 101 with FPN at 3x \n at {int(x[point_of_min_loss])}th iteration")
 
 
         ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
