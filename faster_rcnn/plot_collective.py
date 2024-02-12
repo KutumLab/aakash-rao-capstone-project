@@ -196,6 +196,13 @@ def plot(outpath, model_names):
             print (col_mean)
             ax.plot(x, col_mean, label=f"{model_name_dict[model_name]}", marker='o', markersize=0.001, linewidth=0.2)
             ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2)
+            if "validation_loss" in col:
+                if "X_101" in model_name:
+                    point_of_min_loss = np.argmin(col_mean)
+                    ax.annotate(f'{col_mean[point_of_min_loss]:.2f}', (x[point_of_min_loss], col_mean[point_of_min_loss]), textcoords="offset points", xytext=(0, 10), ha='center', fontsize=6)
+                else:
+                    point_of_min_loss = np.argmin(col_mean)
+                    ax.annotate(f'{col_mean[point_of_min_loss]:.2f}', (x[point_of_min_loss], col_mean[point_of_min_loss]), textcoords="offset points", xytext=(0, 10), ha='center', fontsize=6)
             pass
 
 
