@@ -197,7 +197,7 @@ def plot(outpath, model_names):
             if "validation_loss" in col:
                 if "X_101" in model_name:
                     point_of_min_loss = np.argmin(col_mean)
-                    ax.plot(x[point_of_min_loss], col_mean[point_of_min_loss], 'ro', markersize=1)
+                    ax.scatter(x[point_of_min_loss], col_mean[point_of_min_loss], color='r', s=1)
                     ax.axvline(x[point_of_min_loss], color='r', linestyle='--', linewidth=0.25, label=f"Min Validation Loss: \n{model_name_dict[model_name]}")
 
             pass
