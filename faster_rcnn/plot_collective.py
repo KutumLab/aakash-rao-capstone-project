@@ -263,7 +263,7 @@ def plot_at_lowest_loss(outpath, model_names):
             ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2)
             col_df[f"{model_name}_mean"] = col_mean
             col_df[f"{model_name}_sem"] = col_sem
-        col_df.to_csv(os.path.join(savepath, f'{col}.csv'), index=False)
+        col_df.to_csv(os.path.join(savepath, f"{col.replace('/', '_')}.csv"), index=False)
 
 
         ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
