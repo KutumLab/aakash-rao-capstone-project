@@ -231,6 +231,65 @@ def plot(outpath, model_names):
         
     pass
 
+
+def plot_at_lowest_loss(outpath, model_names):
+    savepath = os.path.join(outpath, 'plots', 'collective_at_lowest_loss')
+    os.makedirs(savepath, exist_ok=True)
+    for col in col_list:
+        fig, ax = plt.subplots(figsize=(4.5, 3))
+        for model_name in model_names:
+            csv_path = os.path.join(outpath, 'plots', model_name, 'csv')
+            mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
+            sem = pd.read_csv(os.path.join(csv_path, 'sem.csv'))
+            mean[col] = mean[col].astype(float)
+            sem[col] = sem[col].astype(float)
+
+            # only take the first 6959 iterations
+            mean = mean[:6959]
+            sem = sem[:6959]
+
+
+            col_mean = mean[col].values
+            col_sem = sem[col].values
+
+            col_mean = mean[col].dropna()
+            x = mean['iteration'].values[col_mean.index]
+
+            col_sem = sem[col].values[col_mean.index]
+            print (col_mean)
+            ax.plot(x, col_mean, label=f"{model_name_dict[model_name]}", marker='o', markersize=0.001, linewidth=0.2)
+            ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2)
+
+
+        ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
+        ax.set_xlim(0, 18001)
+        ax.set_xticks(np.arange(0, 18001, 6000), list(map(str, np.arange(0, 18001, 6000))), fontsize=8)
+
+        ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
+
+        ax.set_title(f'{plot_col_titles[col]}' , fontsize=10, fontweight='bold')
+        col_name = col.replace('/', '_')
+
+        if "AP" in col_name:
+            ax.set_ylim(0, 100)
+            ax.set_yticks(ticks=np.arange(0, 101, 10), labels=list(map(str, np.arange(0, 101, 10))), fontsize=8)
+        elif "accuracy" in col_name or "negative" in col_name:
+            ax.set_ylim(0, 1)
+            ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=8)
+
+        # text title for legend
+        # insert custom line in the legend
+        ax.legend().texts[0].set_text("Configuration")
+        ax.legend(bbox_to_anchor=(1.05, 1),  title="Configuration", loc='upper left', fontsize=6, title_fontsize=8, frameon=False)
+            
+
+        plt.tight_layout()
+        plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=300)
+
+
+        
+    pass
+
 if __name__ == '__main__':
     argparseer = argparse.ArgumentParser()
     argparseer.add_argument('--inpath', type=str, default='../outputs/detectron')
@@ -238,4 +297,4 @@ if __name__ == '__main__':
     args = argparseer.parse_args()
     model_names = ["faster_rcnn_R_50_C4_1x", "faster_rcnn_R_50_DC5_1x", "faster_rcnn_R_50_FPN_1x", "faster_rcnn_R_50_C4_3x", "faster_rcnn_R_50_DC5_3x", "faster_rcnn_R_50_FPN_3x", "faster_rcnn_R_101_C4_3x", "faster_rcnn_R_101_DC5_3x", "faster_rcnn_R_101_FPN_3x", "faster_rcnn_X_101_32x8d_FPN_3x"]
     # clean(args.model_name, args.inpath, args.output_path)
-    plot(args.output_path, model_names)
+    # plot(args.output_path, model_names)
