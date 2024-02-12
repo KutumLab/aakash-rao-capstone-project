@@ -95,16 +95,16 @@ def clean(model_name, inpath, outpath):
     pass
 
 model_name_dict = {
-    "faster_rcnn_R_50_C4_1x": "R50 with C4 at 1x",
-    "faster_rcnn_R_50_DC5_1x": "R50 with DC5 at 1x",
-    "faster_rcnn_R_50_FPN_1x": "R50 with FPN at 1x",
-    "faster_rcnn_R_50_C4_3x": "R50 with C4 at 3x",
-    "faster_rcnn_R_50_DC5_3x": "R50 with DC5 at 3x",
-    "faster_rcnn_R_50_FPN_3x": "R50 with FPN at 3x",
-    "faster_rcnn_R_101_C4_3x": "R101 with C4 at 3x",
-    "faster_rcnn_R_101_DC5_3x": "R101 with DC5 at 3x",
-    "faster_rcnn_R_101_FPN_3x": "R101 with FPN at 3x",
-    "faster_rcnn_X_101_32x8d_FPN_3x": "X101 with 32x8d FPN at 3x",
+    "faster_rcnn_R_50_C4_1x": "R50: C4 at 1x",
+    "faster_rcnn_R_50_DC5_1x": "R50: DC5 at 1x",
+    "faster_rcnn_R_50_FPN_1x": "R50: FPN at 1x",
+    "faster_rcnn_R_50_C4_3x": "R50: C4 at 3x",
+    "faster_rcnn_R_50_DC5_3x": "R50: DC5 at 3x",
+    "faster_rcnn_R_50_FPN_3x": "R50: FPN at 3x",
+    "faster_rcnn_R_101_C4_3x": "R101: C4 at 3x",
+    "faster_rcnn_R_101_DC5_3x": "R101: DC5 at 3x",
+    "faster_rcnn_R_101_FPN_3x": "R101: FPN at 3x",
+    "faster_rcnn_X_101_32x8d_FPN_3x": "X101: FPN at 3x",
 }
 plot_col_titles = {
     "bbox/AP":  "Average Precision at IoU 0.50:0.95",
@@ -216,7 +216,9 @@ def plot(outpath, model_names):
             ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=10)
 
         # text title for legend
-        ax.legend(bbox_to_anchor=(1.05, 1),  title="Faster R-CNN with", loc='upper left', fontsize=6, title_fontsize=8, frameon=False)
+        # insert custom line in the legend
+        ax.legend().texts[0].set_text("Configuration")
+        ax.legend(bbox_to_anchor=(1.05, 1),  title="Configuration", loc='upper left', fontsize=6, title_fontsize=8, frameon=False)
             
 
         plt.tight_layout()
