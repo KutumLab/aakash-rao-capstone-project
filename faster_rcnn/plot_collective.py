@@ -237,7 +237,7 @@ def plot_at_lowest_loss(outpath, model_names):
     limit = 6959
     for col in col_list:
         col_df = pd.DataFrame()
-        fig, ax = plt.subplots(figsize=(4.5, 3))
+        fig, ax = plt.subplots(figsize=(4.5, 2.25))
         for model_name in model_names:
             csv_path = os.path.join(outpath, 'plots', model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
@@ -282,9 +282,7 @@ def plot_at_lowest_loss(outpath, model_names):
             ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=8)
 
         # text title for legend
-        # insert custom line in the legend
-        ax.legend().texts[0].set_text("Configuration")
-        ax.legend(bbox_to_anchor=(1.05, 1),  title="Configuration", loc='upper left', fontsize=6, title_fontsize=8, frameon=False)
+        # ax.legend(bbox_to_anchor=(1.05, 1),  title="Configuration", loc='upper left', fontsize=6, title_fontsize=8, frameon=False)
             
 
         plt.tight_layout()
