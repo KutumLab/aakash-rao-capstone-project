@@ -178,7 +178,7 @@ def plot(outpath, model_names):
     savepath = os.path.join(outpath, 'plots', 'collective')
     os.makedirs(savepath, exist_ok=True)
     for col in col_list:
-        fig, ax = plt.subplots(figsize=(4.5, 3))
+        fig, ax = plt.subplots(figsize=(4.5, 3.5))
         for model_name in model_names:
             csv_path = os.path.join(outpath, 'plots', model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
@@ -220,12 +220,11 @@ def plot(outpath, model_names):
 
         # text title for legend
         # insert custom line in the legend
-        ax.legend().texts[0].set_text("Configuration")
-        ax.legend(bbox_to_anchor=(1.05, 1),  title="Configuration", loc='upper left', fontsize=6, title_fontsize=8, frameon=False)
+        # ax.legend(bbox_to_anchor=(1.05, 1),  title="Configuration", loc='upper left', fontsize=6, title_fontsize=8, frameon=False)
             
 
         plt.tight_layout()
-        plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=300)
+        plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=100)
 
 
         
@@ -289,7 +288,7 @@ def plot_at_lowest_loss(outpath, model_names):
             
 
         plt.tight_layout()
-        plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=300)
+        plt.savefig(os.path.join(savepath, f'{col_name}.png'), bbox_inches='tight', dpi=100)
         plt.close('all')
     pass
 
@@ -302,5 +301,5 @@ if __name__ == '__main__':
     args = argparseer.parse_args()
     model_names = ["faster_rcnn_R_50_C4_1x", "faster_rcnn_R_50_DC5_1x", "faster_rcnn_R_50_FPN_1x", "faster_rcnn_R_50_C4_3x", "faster_rcnn_R_50_DC5_3x", "faster_rcnn_R_50_FPN_3x", "faster_rcnn_R_101_C4_3x", "faster_rcnn_R_101_DC5_3x", "faster_rcnn_R_101_FPN_3x", "faster_rcnn_X_101_32x8d_FPN_3x"]
     # clean(args.model_name, args.inpath, args.output_path)
-    # plot(args.output_path, model_names)
+    plot(args.output_path, model_names)
     plot_at_lowest_loss(args.output_path, model_names)
