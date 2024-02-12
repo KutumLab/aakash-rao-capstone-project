@@ -235,6 +235,7 @@ def plot(outpath, model_names):
 def plot_at_lowest_loss(outpath, model_names):
     savepath = os.path.join(outpath, 'plots', 'collective_at_lowest_loss')
     os.makedirs(savepath, exist_ok=True)
+    limit = 6959
     for col in col_list:
         fig, ax = plt.subplots(figsize=(4.5, 3))
         for model_name in model_names:
@@ -245,8 +246,8 @@ def plot_at_lowest_loss(outpath, model_names):
             sem[col] = sem[col].astype(float)
 
             # only take the first 6959 iterations
-            mean = mean[:6959]
-            sem = sem[:6959]
+            mean = mean[:limit]
+            sem = sem[:limit]
 
 
             col_mean = mean[col].values
@@ -262,8 +263,8 @@ def plot_at_lowest_loss(outpath, model_names):
 
 
         ax.set_xlabel('Iterations', fontsize=10, fontweight='bold')
-        ax.set_xlim(0, 18001)
-        ax.set_xticks(np.arange(0, 18001, 6000), list(map(str, np.arange(0, 18001, 6000))), fontsize=8)
+        ax.set_xlim(0, limit+1)
+        ax.set_xticks(np.arange(0, limit+1, limit//3), list(map(str, np.arange(0, limit+1, limit//3))), fontsize=8)
 
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
 
