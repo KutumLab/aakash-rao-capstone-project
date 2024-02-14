@@ -24,10 +24,10 @@ SAVE_PERIOD=10
 SAVE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project/outputs/yolov5
 YAML_PATH=/storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs
 
-models=("yolov5s" "yolov5m" "yolov5l" "yolov5x")
+models=("yolov5s") # "yolov5m" "yolov5l" "yolov5x")
 for model_name in "${models[@]}"
 do
-    for FOLD in 0 1 2 3 4
+    for FOLD in 0 #1 2 3 4
     do
         NAME="$model_name"_"$VERSION" #Specify a name for the model used for saving and logistics
         WEIGHT=$BASE_WEIGHT_PATH/${test_dict[$model_name]}
