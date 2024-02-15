@@ -20,7 +20,7 @@ test_dict["faster_rcnn_R_50_FPN_3x"]="R50-FPN-3x.pkl"
 test_dict["faster_rcnn_R_101_C4_3x"]="R101-C4-3x.pkl"
 test_dict["faster_rcnn_R_101_DC5_3x"]="R101-DC5-3x.pkl"
 test_dict["faster_rcnn_R_101_FPN_3x"]="R101-FPN-3x.pkl"
-test_dict["faster_rcnn_X_101_32x8d_FPN_3x"]="X101-FPN-3x.pkl"
+test_dict["faster_rcnn_X_101_32x8d_FPN_3x"]="X101-FPN.pkl"
 
 
 
