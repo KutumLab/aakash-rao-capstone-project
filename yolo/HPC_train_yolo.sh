@@ -33,7 +33,7 @@ YAML_PATH=/storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs
 models=("yolov5s") #"yolov5m" "yolov5l" "yolov5x" "yolov5n6" "yolov5s6" "yolov5m6" "yolov5l6" "yolov5x6")
 for model_name in "${models[@]}"
 do
-    for FOLD in 1 2 3
+    for FOLD in 1 
     do
         NAME="$model_name"_"$VERSION" #Specify a name for the model used for saving and logistics
         WEIGHT=$BASE_WEIGHT_PATH/${test_dict[$model_name]}
