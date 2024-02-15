@@ -42,7 +42,7 @@ do
 
         echo $NAME
         echo $WEIGHT
-        python ./yolov5/train.py \
+        python /storage/bic/Aakash/aakash-rao-capstone-project/yolo/yolov5/train.py \
             --img $IMG_SIZE \
             --epochs $EPOCHS \
             --data $YAML_FOLD \
