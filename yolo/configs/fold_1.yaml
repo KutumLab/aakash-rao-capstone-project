@@ -1,5 +1,4 @@
 # Fold 1
-path: 
 train: /storage/bic/Aakash/aakash-rao-capstone-project/datasets/yolov5/fold_1/train/images  
 val: /storage/bic/Aakash/aakash-rao-capstone-project/datasets/yolov5/fold_1/val/images  
 test: /storage/bic/Aakash/aakash-rao-capstone-project/datasets/yolov5/test/images 
