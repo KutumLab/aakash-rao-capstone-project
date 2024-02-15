@@ -1,7 +1,8 @@
 # Fold 1
-train: /storage/bic/Aakash/aakash-rao-capstone-project/datasets/yolov5/fold_3/train/images  
-val: /storage/bic/Aakash/aakash-rao-capstone-project/datasets/yolov5/fold_3/val/images  
-test: /storage/bic/Aakash/aakash-rao-capstone-project/datasets/yolov5/test/images 
+path: /storage/bic/Aakash/aakash-rao-capstone-project/datasets/yolov5
+train: fold_3/train/images  
+val: fold_3/val/images  
+test: test/images 
 names:  
   0: 'nonTIL_stromal'
   1: 'sTIL'
