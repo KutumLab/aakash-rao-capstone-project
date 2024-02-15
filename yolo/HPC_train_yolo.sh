@@ -24,7 +24,7 @@ test_dict["yolov5x6"]="yolov5x6.pt"
 
 IMG_SIZE=640
 EPOCHS=200
-DEVICE=0
+DEVICE="gpu"
 BATCH_SIZE=16
 SAVE_PERIOD=10
 SAVE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project/outputs/yolov5
