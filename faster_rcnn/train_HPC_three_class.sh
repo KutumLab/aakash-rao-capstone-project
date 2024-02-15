@@ -4,6 +4,7 @@
 #PBS -e err_three_class.log
 #PBS -l ncpus=50
 #PBS -q gpu
+#PBS -l host=compute3
 
 
 eval "$(conda shell.bash hook)"
