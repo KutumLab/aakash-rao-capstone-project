@@ -28,7 +28,7 @@ DEVICE=0
 BATCH_SIZE=16
 SAVE_PERIOD=10
 SAVE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project/outputs/yolov5
-YAML_PATH=/storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs
+YAML_PATH=/storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs  
 
 models=("yolov5s" "yolov5m" "yolov5l" "yolov5x")
 for model_name in "${models[@]}"

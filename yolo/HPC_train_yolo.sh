@@ -22,35 +22,13 @@ test_dict["yolov5l6"]="yolov5l6.pt"
 test_dict["yolov5x6"]="yolov5x6.pt"
 
 
-IMG_SIZE=640
-EPOCHS=200
-DEVICE="cpu"
-BATCH_SIZE=16
-SAVE_PERIOD=10
-SAVE_PATH=/storage/bic/Aakash/aakash-rao-capstone-project/outputs/yolov5
-YAML_PATH=/storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs  
 
-models=("yolov5s") #"yolov5m" "yolov5l" "yolov5x" "yolov5n6" "yolov5s6" "yolov5m6" "yolov5l6" "yolov5x6")
-for model_name in "${models[@]}"
-do
-    for FOLD in 1 
-    do
-        NAME="$model_name"_"$VERSION" #Specify a name for the model used for saving and logistics
-        PROJECT=$SAVE_PATH/$NAME/fold_$FOLD
-        YAML_FOLD=$YAML_PATH/fold_$FOLD.yaml
-        echo $NAME
-        echo $PROJECT
-        echo $YAML_FOLD
-
-        python /storage/bic/Aakash/aakash-rao-capstone-project/yolo/yolov5/train.py \
-            --img $IMG_SIZE \
-            --epochs $EPOCHS \
-            --data $YAML_FOLD \
-            --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/$test_dict[$model_name] \
-            --device $DEVICE \
-            --batch-size $BATCH_SIZE \
-            --project $PROJECT \
-            --save-period $SAVE_PERIOD \
-            --name $model_name-fold_$FOLD
-    done
-done
+# yolov5n
+python /storage/bic/Aakash/aakash-rao-capstone-project/yolo/yolov5/train.py \
+    --img 640 \
+    --batch 16 \
+    --epochs 100 \
+    --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_1.yaml \
+    --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5n.pt \
+    --name yolov5n_fold_1\
+    --project /storage/bic/Aakash/aakash-rao-capstone-project/outputs/yolo/yolov5n_fold_1 
