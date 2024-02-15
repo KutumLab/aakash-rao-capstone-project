@@ -2,7 +2,7 @@
 #PBS -N Three_Class_Faster_RCNN
 #PBS -o out_three_class.log
 #PBS -e err_three_class.log
-#PBS -l ncpus=30
+#PBS -l ncpus=50
 #PBS -q gpu
 
 
@@ -38,15 +38,15 @@ MAX_ITERS=18000 #Since we want to train for about 200 epochs, we set the number 
 VERSION=three_class #Specify a version name for the model
 BATCHSIZE=8
 BASE_WEIGHT_PATH=$BASE_PATH/faster_rcnn/bases
-#!/bin/bash
+
+
 
 # Create an array
-model_list=("faster_rcnn_R_50_C4_1x" "faster_rcnn_R_50_DC5_1x" "faster_rcnn_R_50_FPN_1x" "faster_rcnn_R_50_C4_3x" "faster_rcnn_R_50_DC5_3x" "faster_rcnn_R_50_FPN_3x" "faster_rcnn_R_101_C4_3x" "faster_rcnn_R_101_DC5_3x" "faster_rcnn_R_101_FPN_3x" "faster_rcnn_X_101_32x8d_FPN_3x")
+model_list=("faster_rcnn_X_101_32x8d_FPN_3x") #("faster_rcnn_R_50_C4_1x" "faster_rcnn_R_50_DC5_1x" "faster_rcnn_R_50_FPN_1x" "faster_rcnn_R_50_C4_3x" "faster_rcnn_R_50_DC5_3x" "faster_rcnn_R_50_FPN_3x" "faster_rcnn_R_101_C4_3x" "faster_rcnn_R_101_DC5_3x" "faster_rcnn_R_101_FPN_3x" "faster_rcnn_X_101_32x8d_FPN_3x")
 
 # Loop through the array elements
 for model_name in "${model_list[@]}"
 do
-    # VARIABLE INFO "$model_name"_[DONE]
     CONFIG=COCO-Detection/"$model_name".yaml #Specify a config file which is used to source the model from detectron2's model zoo
     NAME="$model_name"_"$VERSION" #Specify a name for the model used for saving and logistics
     WEIGHT=$BASE_WEIGHT_PATH/${test_dict[$model_name]}

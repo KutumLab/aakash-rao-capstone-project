@@ -45,6 +45,7 @@ do
             --batch-size $BATCH_SIZE \
             --project $PROJECT \
             --save-period $SAVE_PERIOD \
-            --name yolov5x-fold_3 
+            --name yolov5x-fold_3 \
+            --mode setup
     done
 done
