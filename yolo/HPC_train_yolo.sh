@@ -24,11 +24,14 @@ test_dict["yolov5x6"]="yolov5x6.pt"
 
 
 # yolov5n
-python /storage/bic/Aakash/aakash-rao-capstone-project/yolo/yolov5/train.py \
-    --img 640 \
-    --batch 16 \
-    --epochs 100 \
-    --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_1.yaml \
-    --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5n.pt \
-    --name yolov5n_fold_1\
-    --project /storage/bic/Aakash/aakash-rao-capstone-project/outputs/yolo/yolov5n_fold_1 
+for FOLD in 1 2 3
+do
+    python /storage/bic/Aakash/aakash-rao-capstone-project/yolo/yolov5/train.py \
+        --img 640 \
+        --batch 16 \
+        --epochs 100 \
+        --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
+        --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5n.pt \
+        --name yolov5n_fold_$FOLD \
+        --project /storage/bic/Aakash/aakash-rao-capstone-project/outputs/yolo/ 
+done
