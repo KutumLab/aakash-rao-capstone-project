@@ -36,12 +36,12 @@ do
     for FOLD in 1 
     do
         NAME="$model_name"_"$VERSION" #Specify a name for the model used for saving and logistics
-        WEIGHT=$BASE_WEIGHT_PATH/${test_dict[$model_name]}
         PROJECT=$SAVE_PATH/$NAME/fold_$FOLD
         YAML_FOLD=$YAML_PATH/fold_$FOLD.yaml
-
         echo $NAME
-        echo $WEIGHT
+        echo $PROJECT
+        echo $YAML_FOLD
+
         python /storage/bic/Aakash/aakash-rao-capstone-project/yolo/yolov5/train.py \
             --img $IMG_SIZE \
             --epochs $EPOCHS \
@@ -51,6 +51,6 @@ do
             --batch-size $BATCH_SIZE \
             --project $PROJECT \
             --save-period $SAVE_PERIOD \
-            --name $model_name-fold_3 
+            --name $model_name-fold_$FOLD
     done
 done
