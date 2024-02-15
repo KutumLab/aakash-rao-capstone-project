@@ -35,7 +35,7 @@ do
         --batch $BATCH \
         --epochs $EPOCHS \
         --save-period $SAVEPERIOD \
-        --linear-lr \
+        --cos-lr \
         --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
         --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5n.pt \
         --name yolov5n_fold_$FOLD \
@@ -50,7 +50,7 @@ do
         --batch $BATCH \
         --epochs $EPOCHS \
         --save-period $SAVEPERIOD \
-        --linear-lr \
+        --cos-lr \
         --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
         --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5s.pt \
         --name yolov5s_fold_$FOLD \
@@ -65,7 +65,7 @@ do
         --batch $BATCH \
         --epochs $EPOCHS \
         --save-period $SAVEPERIOD \
-        --linear-lr \
+        --cos-lr \
         --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
         --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5m.pt \
         --name yolov5m_fold_$FOLD \
@@ -80,7 +80,7 @@ do
         --batch $BATCH \
         --epochs $EPOCHS \
         --save-period $SAVEPERIOD \
-        --linear-lr \
+        --cos-lr \
         --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
         --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5l.pt \
         --name yolov5l_fold_$FOLD \
@@ -95,7 +95,7 @@ do
         --batch $BATCH \
         --epochs $EPOCHS \
         --save-period $SAVEPERIOD \
-        --linear-lr \
+        --cos-lr \
         --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
         --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5x.pt \
         --name yolov5x_fold_$FOLD \
@@ -110,7 +110,7 @@ do
         --batch $BATCH \
         --epochs $EPOCHS \
         --save-period $SAVEPERIOD \
-        --linear-lr \
+        --cos-lr \
         --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
         --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5n6.pt \
         --name yolov5n6_fold_$FOLD \
@@ -125,7 +125,7 @@ do
         --batch $BATCH \
         --epochs $EPOCHS \
         --save-period $SAVEPERIOD \
-        --linear-lr \
+        --cos-lr \
         --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
         --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5s6.pt \
         --name yolov5s6_fold_$FOLD \
@@ -140,7 +140,7 @@ do
         --batch $BATCH \
         --epochs $EPOCHS \
         --save-period $SAVEPERIOD \
-        --linear-lr \
+        --cos-lr \
         --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
         --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5m6.pt \
         --name yolov5m6_fold_$FOLD \
@@ -155,7 +155,7 @@ do
         --batch $BATCH \
         --epochs $EPOCHS \
         --save-period $SAVEPERIOD \
-        --linear-lr \
+        --cos-lr \
         --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
         --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5l6.pt \
         --name yolov5l6_fold_$FOLD \
@@ -170,7 +170,7 @@ do
         --batch $BATCH \
         --epochs $EPOCHS \
         --save-period $SAVEPERIOD \
-        --linear-lr \
+        --cos-lr \
         --data /storage/bic/Aakash/aakash-rao-capstone-project/yolo/configs/fold_$FOLD.yaml \
         --weights /storage/bic/Aakash/aakash-rao-capstone-project/yolo/bases/yolov5x6.pt \
         --name yolov5x6_fold_$FOLD \
