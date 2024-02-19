@@ -47,6 +47,6 @@ do
 done
 
 
-python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot_collective.py \
-    --inpath $SAVE_PATH/detectron/four_class \
-    --output_path $SAVE_PATH \
+# python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot_collective.py \
+#     --inpath $SAVE_PATH/detectron/four_class \
+#     --output_path $SAVE_PATH \
