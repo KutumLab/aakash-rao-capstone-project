@@ -160,7 +160,7 @@ def plot(outpath, model_names):
 
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
         plt.suptitle(f'{plot_col_titles[col]}' , fontsize=14, fontweight='bold')
-        ax.set_title(f'{subtitles[col]}' , fontsize=8, fontweight='bold', style='italic')
+        # ax.set_title(f'{subtitles[col]}' , fontsize=8, fontweight='bold', style='italic')
         col_name = col.replace('/', '_')
 
         if "AP" in col_name:
