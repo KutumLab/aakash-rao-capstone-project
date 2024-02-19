@@ -137,7 +137,7 @@ plot_col_titles = {
     "total_loss": "Total Loss",
     "validation_loss": "Validation Loss",
 }
-col_list = "bbox/AP", "bbox/AP-nonTIL_stromal", "bbox/AP-other", "bbox/AP-sTIL", "bbox/AP-tumor_any", "bbox/AP50", "bbox/AP75", "bbox/APl", "bbox/APm", "bbox/APs", "data_time", "eta_seconds", "fast_rcnn/cls_accuracy", "fast_rcnn/false_negative", "fast_rcnn/fg_cls_accuracy", "iteration", "loss_box_reg", "loss_cls", "loss_rpn_cls", "loss_rpn_loc", "lr", "roi_head/num_bg_samples", "roi_head/num_fg_samples", "rpn/num_neg_anchors", "rpn/num_pos_anchors", "time", "timetest", "total_loss", "validation_loss"
+col_list = "bbox/AP", "bbox/AP50", "fast_rcnn/cls_accuracy",  "total_loss", "validation_loss"
 
 axes_titles = {
     "bbox/AP": "Average Precision ",
