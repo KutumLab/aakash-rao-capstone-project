@@ -188,7 +188,7 @@ def plot(outpath, model_name):
         col_sem = sem[col].values[col_mean.index]
         print (col_mean)
 
-        fig, ax = plt.subplots(figsize=(4, 3))
+        fig, ax = plt.subplots(figsize=(3, 3))
         ax.plot(x, col_mean, label='Mean', marker='o', markersize=0.001, linewidth=1, color='#43766C')
         ax.fill_between(x, col_mean - col_sem, col_mean + col_sem, alpha=0.2, label='SEM',color='#43766C')
 
@@ -209,7 +209,7 @@ def plot(outpath, model_name):
             ax.set_yticks(ticks=np.arange(0, 1.1, 0.1), labels=list(map(str, np.arange(0, 1.1, 0.1))), fontsize=6)
 
 
-        ax.legend(['Mean', 'Standard Error'],bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=6)
+        # ax.legend(['Mean', 'Standard Error'],bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=6)
             
 
         plt.tight_layout()
