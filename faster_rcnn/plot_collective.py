@@ -91,7 +91,7 @@ def clean(model_name, inpath, outpath):
     fold_2 = os.path.join(inpath, f'{model_name}_four_class_fold_2')
     fold_3 = os.path.join(inpath, f'{model_name}_four_class_fold_3')
 
-    outpath = os.path.join(outpath, 'plots', model_name)
+    outpath = os.path.join(outpath, 'plots', 'four_class', model_name)
     json_path = os.path.join(outpath, 'json')
     csv_path = os.path.join(outpath, 'csv')
     os.makedirs(outpath, exist_ok=True)
@@ -176,7 +176,7 @@ def plot(outpath, model_names):
     for col in col_list:
         fig, ax = plt.subplots(figsize=(3, 3.5))
         for model_name in model_names:
-            csv_path = os.path.join(outpath, 'plots', model_name, 'csv')
+            csv_path = os.path.join(outpath, 'plots', 'four_class', model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
             sem = pd.read_csv(os.path.join(csv_path, 'sem.csv'))
             mean[col] = mean[col].astype(float)
@@ -235,7 +235,7 @@ def plot_at_lowest_loss(outpath, model_names):
         col_df = pd.DataFrame()
         fig, ax = plt.subplots(figsize=(3, 2.25))
         for model_name in model_names:
-            csv_path = os.path.join(outpath, 'plots', model_name, 'csv')
+            csv_path = os.path.join(outpath, 'plots', 'four_class', model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
             sem = pd.read_csv(os.path.join(csv_path, 'sem.csv'))
             mean[col] = mean[col].astype(float)
