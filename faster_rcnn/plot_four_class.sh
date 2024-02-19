@@ -40,7 +40,7 @@ for model_name in "${models[@]}"
 do
     save_path=$SAVE_PATH/plots
     python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot.py \
-    --inpath $SAVE_PATH/detectron \
+    --inpath $SAVE_PATH/detectron/four_class \
     --model_name $model_name \
     --output_path $SAVE_PATH \
 
@@ -48,5 +48,5 @@ done
 
 
 python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot_collective.py \
-    --inpath $SAVE_PATH/detectron \
+    --inpath $SAVE_PATH/detectron/four_class \
     --output_path $SAVE_PATH \
