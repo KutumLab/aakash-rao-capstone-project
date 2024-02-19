@@ -85,13 +85,13 @@ axes_titles = {
 }
 
 
-def clean(model_name, inpath, outpath):
+def clean(model_name, inpath, outpath, version):
     print (model_name)
     fold_1 = os.path.join(inpath, f'{model_name}_four_class_fold_1')
     fold_2 = os.path.join(inpath, f'{model_name}_four_class_fold_2')
     fold_3 = os.path.join(inpath, f'{model_name}_four_class_fold_3')
 
-    outpath = os.path.join(outpath, 'plots', 'four_class', model_name)
+    outpath = os.path.join(outpath, 'plots', version, model_name)
     json_path = os.path.join(outpath, 'json')
     csv_path = os.path.join(outpath, 'csv')
     os.makedirs(outpath, exist_ok=True)
@@ -168,8 +168,8 @@ def clean(model_name, inpath, outpath):
 
 
 
-def plot(outpath, model_name):
-    outpath = os.path.join(outpath, 'plots', 'four_class', model_name)
+def plot(outpath, model_name, version):
+    outpath = os.path.join(outpath, 'plots', version, model_name)
     csv_path = os.path.join(outpath, 'csv')
     mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
     sem = pd.read_csv(os.path.join(csv_path, 'sem.csv'))
@@ -224,6 +224,7 @@ if __name__ == '__main__':
     argparseer.add_argument('--inpath', type=str, default='../outputs/detectron')
     argparseer.add_argument('--model_name', type=str, default='../data/plot.csv')
     argparseer.add_argument('--output_path', type=str, default='../data/plot.png')
+    argparseer.add_argument('--version', type=str, default='four_class')
     args = argparseer.parse_args()
-    clean(args.model_name, args.inpath, args.output_path)
-    plot(args.output_path, args.model_name)
+    clean(args.model_name, args.inpath, args.output_path, args.version)
+    plot(args.output_path, args.model_name, args.version)
