@@ -171,10 +171,10 @@ def clean(model_name, inpath, outpath):
 
 
 def plot(outpath, model_names):
-    savepath = os.path.join(outpath, 'plots', 'collective')
+    savepath = os.path.join(outpath, 'plots', 'four_class', 'collective')
     os.makedirs(savepath, exist_ok=True)
     for col in col_list:
-        fig, ax = plt.subplots(figsize=(3, 3.5))
+        fig, ax = plt.subplots(figsize=(5,3))
         for model_name in model_names:
             csv_path = os.path.join(outpath, 'plots', 'four_class', model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
@@ -216,7 +216,7 @@ def plot(outpath, model_names):
 
         # text title for legend
         # insert custom line in the legend
-        # ax.legend(bbox_to_anchor=(1.05, 1),  title="Configuration", loc='upper left', fontsize=6, title_fontsize=8, frameon=False)
+        ax.legend(bbox_to_anchor=(1.05, 1),  title="Configuration", loc='upper left', fontsize=6, title_fontsize=8, frameon=False)
             
 
         plt.tight_layout()
@@ -228,12 +228,12 @@ def plot(outpath, model_names):
 
 
 def plot_at_lowest_loss(outpath, model_names):
-    savepath = os.path.join(outpath, 'plots', 'collective_at_lowest_loss')
+    savepath = os.path.join(outpath, 'plots', 'four_class', 'collective_at_lowest_loss')
     os.makedirs(savepath, exist_ok=True)
     limit = 6959
     for col in col_list:
         col_df = pd.DataFrame()
-        fig, ax = plt.subplots(figsize=(3, 2.25))
+        fig, ax = plt.subplots(figsize=(5, 3))
         for model_name in model_names:
             csv_path = os.path.join(outpath, 'plots', 'four_class', model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
