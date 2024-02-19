@@ -254,7 +254,7 @@ if __name__ == '__main__':
     argparseer.add_argument('--output_path', type=str, default='../data/plot.png')
     argparseer.add_argument('--version', type=str, default='four_class')
     args = argparseer.parse_args()
-    model_names = ["faster_rcnn_R_50_C4_1x", "faster_rcnn_R_50_DC5_1x", "faster_rcnn_R_50_FPN_1x", "faster_rcnn_R_50_C4_3x", "faster_rcnn_R_50_DC5_3x", "faster_rcnn_R_50_FPN_3x", "faster_rcnn_R_101_C4_3x", "faster_rcnn_R_101_DC5_3x", "faster_rcnn_R_101_FPN_3x", "faster_rcnn_X_101_32x8d_FPN_3x"]
+    model_names = ["faster_rcnn_X_101_32x8d_FPN_3x"]
     clean(args.model_name, args.inpath, args.output_path, args.version)
     plot(args.output_path, model_names, args.version)
     plot_at_lowest_loss(args.output_path, model_names, args.version)
