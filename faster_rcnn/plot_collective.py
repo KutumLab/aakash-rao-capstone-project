@@ -22,67 +22,17 @@ model_name_dict = {
 }
 plot_col_titles = {
     "bbox/AP":  "Average Precision at IoU 0.50:0.95",
-    "bbox/AP-nonTIL_stromal": "Average Precision at IoU 0.50:0.95 for \nnon-TIL stromal",
-    "bbox/AP-other": "Average Precision at IoU 0.50:0.95 for \nother",
-    "bbox/AP-sTIL": "Average Precision at IoU 0.50:0.95 for \nsTIL",
-    "bbox/AP-tumor_any": "Average Precision at IoU 0.50:0.95 for \ntumor",
     "bbox/AP50": "Average Precision at IoU 0.50",
-    "bbox/AP75": "Average Precision at IoU 0.75",
-    "bbox/APl": "Average Precision at IoU 0.50:0.95 for \nlarge",
-    "bbox/APm": "Average Precision at IoU 0.50:0.95 for \nmedium",
-    "bbox/APs": "Average Precision at IoU 0.50:0.95 for \nsmall",
-    "data_time": "Data Time",
-    "eta_seconds": "ETA in seconds",
-    "fast_rcnn/cls_accuracy": "Classification Accuracy",
-    "fast_rcnn/false_negative": "False Negative",
-    "fast_rcnn/fg_cls_accuracy": "Foreground Classification Accuracy",
-    "iteration": "Iteration",
-    "loss_box_reg": "Loss for Box Regression",
-    "loss_cls": "Loss for Classification",
-    "loss_rpn_cls": "Loss for RPN Classification",
-    "loss_rpn_loc": "Loss for RPN Localization",
-    "lr": "Learning Rate",
-    "roi_head/num_bg_samples": "Number of Background Samples",
-    "roi_head/num_fg_samples": "Number of Foreground Samples",
-    "rpn/num_neg_anchors": "Number of Negative Anchors",
-    "rpn/num_pos_anchors": "Number of Positive Anchors",
-    "time": "Time",
-    "timetest": "Time Test",
     "total_loss": "Total Loss",
     "validation_loss": "Validation Loss",
 }
-col_list = ["bbox/AP", "bbox/AP50", "fast_rcnn/cls_accuracy",  "total_loss", "validation_loss"]
+col_list = ["bbox/AP", "bbox/AP50", "total_loss", "validation_loss"]
 
 axes_titles = {
-    "bbox/AP": "Average Precision ",
-    "bbox/AP-nonTIL_stromal": "Average Precision ",
-    "bbox/AP-other": "Average Precision ",
-    "bbox/AP-sTIL": "Average Precision ",
-    "bbox/AP-tumor_any": "Average Precision ",
-    "bbox/AP50": "Average Precision ",
-    "bbox/AP75": "Average Precision ",
-    "bbox/APl": "Average Precision ",
-    "bbox/APm": "Average Precision ",
-    "bbox/APs": "Average Precision ",
-    "data_time": "Data Time",
-    "eta_seconds": "ETA in seconds",
-    "fast_rcnn/cls_accuracy": "Accuracy",
-    "fast_rcnn/false_negative": "False Negative",
-    "fast_rcnn/fg_cls_accuracy": "Accuracy",
-    "iteration": "Iteration",
-    "loss_box_reg": "Loss",
-    "loss_cls": "Loss",
-    "loss_rpn_cls": "Los",
-    "loss_rpn_loc": "Loss",
-    "lr": "Learning Rate",
-    "roi_head/num_bg_samples": "Number",
-    "roi_head/num_fg_samples": "Number",
-    "rpn/num_neg_anchors": "Number",
-    "rpn/num_pos_anchors": "Number",
-    "time": "Time",
-    "timetest": "Time ",
-    "total_loss": "Total Loss",
-    "validation_loss": "Validation Loss",
+    "bbox/AP": "Average Precision (AP)",
+    "bbox/AP50": "Average Precision (AP)",
+    "total_loss": "Loss",
+    "validation_loss": "Loss",
 }
 
 def clean(model_name, inpath, outpath):
@@ -204,7 +154,7 @@ def plot(outpath, model_names):
 
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
 
-        ax.set_title(f'{plot_col_titles[col]}' , fontsize=10, fontweight='bold')
+        ax.set_title(f'{plot_col_titles[col]}' , fontsize=14, fontweight='bold')
         col_name = col.replace('/', '_')
 
         if "AP" in col_name:
@@ -267,7 +217,7 @@ def plot_at_lowest_loss(outpath, model_names):
 
         ax.set_ylabel(axes_titles[col], fontsize=10)
 
-        ax.set_title(f'{plot_col_titles[col]}' , fontsize=10, fontweight='bold')
+        ax.set_title(f'{plot_col_titles[col]}' , fontsize=14, fontweight='bold')
         col_name = col.replace('/', '_')
 
         if "AP" in col_name:
