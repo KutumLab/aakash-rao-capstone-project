@@ -159,8 +159,7 @@ def plot(outpath, model_names):
         ax.set_xticks(np.arange(0, 18001, 6000), list(map(str, np.arange(0, 18001, 6000))), fontsize=8)
 
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
-        plt.suptitle(f'{plot_col_titles[col]}' , fontsize=14, fontweight='bold')
-        # ax.set_title(f'{subtitles[col]}' , fontsize=8, fontweight='bold', style='italic')
+        ax.set_title(f'{plot_col_titles[col]}' , fontsize=14, fontweight='bold')
         col_name = col.replace('/', '_')
 
         if "AP" in col_name:
