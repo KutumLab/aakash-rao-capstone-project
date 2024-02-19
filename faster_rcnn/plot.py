@@ -87,9 +87,9 @@ axes_titles = {
 
 def clean(model_name, inpath, outpath, version):
     print (model_name)
-    fold_1 = os.path.join(inpath, f'{model_name}_four_class_fold_1')
-    fold_2 = os.path.join(inpath, f'{model_name}_four_class_fold_2')
-    fold_3 = os.path.join(inpath, f'{model_name}_four_class_fold_3')
+    fold_1 = os.path.join(inpath, f'{model_name}_{version}_fold_1')
+    fold_2 = os.path.join(inpath, f'{model_name}_{version}_fold_2')
+    fold_3 = os.path.join(inpath, f'{model_name}_{version}_fold_3')
 
     outpath = os.path.join(outpath, 'plots', version, model_name)
     json_path = os.path.join(outpath, 'json')
