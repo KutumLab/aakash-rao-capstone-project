@@ -57,14 +57,19 @@ BASE_WEIGHT_PATH=$BASE_PATH/faster_rcnn/bases
 
 VERSION=three_class
 models=("faster_rcnn_X_101_32x8d_FPN_3x")
-for model_name in "${models[@]}"
-do
-    save_path=$SAVE_PATH/plots
-    python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot.py \
-    --inpath $SAVE_PATH/detectron/$VERSION \
-    --model_name $model_name \
+# for model_name in "${models[@]}"
+# do
+#     save_path=$SAVE_PATH/plots
+#     python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot.py \
+#     --inpath $SAVE_PATH/detectron/$VERSION \
+#     --model_name $model_name \
+#     --output_path $SAVE_PATH \
+#     --version $VERSION
+
+
+# done
+
+
+python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot_collective.py \
+    --inpath $SAVE_PATH/detectron/three_class \
     --output_path $SAVE_PATH \
-    --version $VERSION
-
-
-done
