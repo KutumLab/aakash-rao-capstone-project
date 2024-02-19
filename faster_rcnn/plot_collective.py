@@ -26,6 +26,12 @@ plot_col_titles = {
     "total_loss": "Total Loss",
     "validation_loss": "Validation Loss",
 }
+subtitles = {
+    "bbox/AP":  "Average Precision at IoU thresholds of 0.50:0.95 across all models and folds",
+    "bbox/AP50": "Average Precision at IoU threshold of 0.50 across all models and folds",
+    "total_loss": "Total Loss over all iterations across all models and folds",
+    "validation_loss": "Validation Loss over all iterations across all models and folds",
+}
 col_list = ["bbox/AP", "bbox/AP50", "total_loss", "validation_loss"]
 
 axes_titles = {
@@ -153,8 +159,8 @@ def plot(outpath, model_names):
         ax.set_xticks(np.arange(0, 18001, 6000), list(map(str, np.arange(0, 18001, 6000))), fontsize=8)
 
         ax.set_ylabel(axes_titles[col], fontsize=10, fontweight='bold')
-
-        ax.set_title(f'{plot_col_titles[col]}' , fontsize=14, fontweight='bold')
+        plt.suptitle(f'{plot_col_titles[col]}' , fontsize=14, fontweight='bold')
+        ax.set_title(f'{subtitles[col]}' , fontsize=8)
         col_name = col.replace('/', '_')
 
         if "AP" in col_name:
