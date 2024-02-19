@@ -73,3 +73,4 @@ models=("faster_rcnn_X_101_32x8d_FPN_3x")
 python /storage/bic/Aakash/aakash-rao-capstone-project/faster_rcnn/plot_collective.py \
     --inpath $SAVE_PATH/detectron/three_class \
     --output_path $SAVE_PATH \
+    --version $VERSION

@@ -41,13 +41,13 @@ axes_titles = {
     "validation_loss": "Loss",
 }
 
-def clean(model_name, inpath, outpath):
+def clean(model_name, inpath, outpath, version):
     print (model_name)
-    fold_1 = os.path.join(inpath, f'{model_name}_four_class_fold_1')
-    fold_2 = os.path.join(inpath, f'{model_name}_four_class_fold_2')
-    fold_3 = os.path.join(inpath, f'{model_name}_four_class_fold_3')
+    fold_1 = os.path.join(inpath, f'{model_name}_{version}_fold_1')
+    fold_2 = os.path.join(inpath, f'{model_name}_{version}_fold_2')
+    fold_3 = os.path.join(inpath, f'{model_name}_{version}_fold_3')
 
-    outpath = os.path.join(outpath, 'plots', 'four_class', model_name)
+    outpath = os.path.join(outpath, 'plots', version, model_name)
     json_path = os.path.join(outpath, 'json')
     csv_path = os.path.join(outpath, 'csv')
     os.makedirs(outpath, exist_ok=True)
@@ -126,13 +126,13 @@ def clean(model_name, inpath, outpath):
 
 
 
-def plot(outpath, model_names):
-    savepath = os.path.join(outpath, 'plots', 'four_class', 'collective')
+def plot(outpath, model_names, version):
+    savepath = os.path.join(outpath, 'plots', version, 'collective')
     os.makedirs(savepath, exist_ok=True)
     for col in col_list:
         fig, ax = plt.subplots(figsize=(5,3))
         for model_name in model_names:
-            csv_path = os.path.join(outpath, 'plots', 'four_class', model_name, 'csv')
+            csv_path = os.path.join(outpath, 'plots', version, model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
             sem = pd.read_csv(os.path.join(csv_path, 'sem.csv'))
             mean[col] = mean[col].astype(float)
@@ -182,15 +182,15 @@ def plot(outpath, model_names):
     pass
 
 
-def plot_at_lowest_loss(outpath, model_names):
-    savepath = os.path.join(outpath, 'plots', 'four_class', 'collective_at_lowest_loss')
+def plot_at_lowest_loss(outpath, model_names, version):
+    savepath = os.path.join(outpath, 'plots', version, 'collective_at_lowest_loss')
     os.makedirs(savepath, exist_ok=True)
     limit = 6959
     for col in col_list:
         col_df = pd.DataFrame()
         fig, ax = plt.subplots(figsize=(5, 3))
         for model_name in model_names:
-            csv_path = os.path.join(outpath, 'plots', 'four_class', model_name, 'csv')
+            csv_path = os.path.join(outpath, 'plots', version, model_name, 'csv')
             mean = pd.read_csv(os.path.join(csv_path, 'mean.csv'))
             sem = pd.read_csv(os.path.join(csv_path, 'sem.csv'))
             mean[col] = mean[col].astype(float)
@@ -252,8 +252,9 @@ if __name__ == '__main__':
     argparseer = argparse.ArgumentParser()
     argparseer.add_argument('--inpath', type=str, default='../outputs/detectron')
     argparseer.add_argument('--output_path', type=str, default='../data/plot.png')
+    argparseer.add_argument('--version', type=str, default='four_class')
     args = argparseer.parse_args()
     model_names = ["faster_rcnn_R_50_C4_1x", "faster_rcnn_R_50_DC5_1x", "faster_rcnn_R_50_FPN_1x", "faster_rcnn_R_50_C4_3x", "faster_rcnn_R_50_DC5_3x", "faster_rcnn_R_50_FPN_3x", "faster_rcnn_R_101_C4_3x", "faster_rcnn_R_101_DC5_3x", "faster_rcnn_R_101_FPN_3x", "faster_rcnn_X_101_32x8d_FPN_3x"]
     # clean(args.model_name, args.inpath, args.output_path)
-    plot(args.output_path, model_names)
-    plot_at_lowest_loss(args.output_path, model_names)
+    plot(args.output_path, model_names, args.version)
+    plot_at_lowest_loss(args.output_path, model_names, args.version)
